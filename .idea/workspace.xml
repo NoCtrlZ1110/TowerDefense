@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
+    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/grass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/map/tileType.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tower/CONSTANT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tower/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tower/Screens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/META-INF/OOp.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/TowerDefense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tower/TowerDefense.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,11 +41,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Sq8YWZjZGVPGcMb7UFZ6vu1o0P" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Game" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -29,6 +57,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UET_CN1\TowerDefense\images" />
       <recent name="D:\UET_CN1\OOp\images" />
       <recent name="D:\UET_CN1\OOp\out" />
       <recent name="D:\UET_CN1\OOp\src\Tower" />
@@ -94,10 +123,26 @@
       <workItem from="1572353494426" duration="6634000" />
       <workItem from="1572519490078" duration="102000" />
       <workItem from="1572619412433" duration="7878000" />
+      <workItem from="1572631658036" duration="707000" />
+      <workItem from="1572672626593" duration="706000" />
+      <workItem from="1572676078393" duration="6118000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
