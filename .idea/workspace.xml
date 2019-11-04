@@ -2,29 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/grass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/map/tileType.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tower/CONSTANT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tower/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tower/Screens.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/map/roadPath.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/META-INF/OOp.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tower/TowerDefense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tower/TowerDefense.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/tileType.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/BaseObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/CONSTANT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/Screens.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Tower/TowerDefense.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/BaseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/Screens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tower/TowerDefense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,16 +69,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TowerDefense (1)">
-    <configuration name="TowerDefense (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tower.TowerDefense" />
+  <component name="RunManager" selected="Application.GameStage">
+    <configuration name="GameStage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TowerDefense.GameStage" />
       <module name="OOp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Tower.*" />
+          <option name="PATTERN" value="TowerDefense.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="OOp" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -98,8 +99,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TowerDefense (1)" />
+        <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.TowerDefense" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -125,7 +127,13 @@
       <workItem from="1572619412433" duration="7878000" />
       <workItem from="1572631658036" duration="707000" />
       <workItem from="1572672626593" duration="706000" />
-      <workItem from="1572676078393" duration="6118000" />
+      <workItem from="1572676078393" duration="6322000" />
+      <workItem from="1572684612898" duration="2123000" />
+      <workItem from="1572710100244" duration="5784000" />
+      <workItem from="1572801224812" duration="2704000" />
+      <workItem from="1572829856439" duration="4628000" />
+      <workItem from="1572850548146" duration="271000" />
+      <workItem from="1572854911723" duration="2439000" />
     </task>
     <servers />
   </component>
