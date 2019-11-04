@@ -43,24 +43,16 @@ public class GameField {
         GameEntity[][] tiled = new GameEntity[ROW_NUM][COL_NUM];
         for (int i = 0; i<ROW_NUM; i++)
             for (int j = 0; j<COL_NUM; j++) {
-                tiled[i][j] = new GameEntity(pathGrass);
-                if (getType(i, j) == 0) {
-                    tiled[i][j].setFitHeight(80);
-                    tiled[i][j].setFitWidth(80);
-                    tiled[i][j].setLocation(j * 80, i * 80);
-                    layout.getChildren().add(tiled[i][j]);
-                } else {
-                    tiled[i][j] = new GameEntity(pathRoad);
-
-                    tiled[i][j].setFitHeight(80);
-                    tiled[i][j].setFitWidth(80);
-                    tiled[i][j].setLocation(j * 80, i * 80);
-                    layout.getChildren().add(tiled[i][j]);
-
-                }
+                tiled[i][j] = new GameEntity(pathTile+getTileType(i,j)+".png");
+                tiled[i][j].setFitHeight(80);
+                tiled[i][j].setFitWidth(80);
+                tiled[i][j].setLocation(j * 80, i * 80);
+                layout.getChildren().add(tiled[i][j]);
             }
 
         Enemy minion = new Enemy(0,720,pathRedEnemy);
+        minion.setFitHeight(80);
+        minion.setFitWidth(80);
         //minion.setLocation(400,400);
 
 
@@ -74,17 +66,17 @@ public class GameField {
         PathTransition pathTransition = new PathTransition();
 
         //Setting the duration of the path transition
-        pathTransition.setDuration(Duration.millis(10000));
+        pathTransition.setDuration(Duration.millis(3.5*5100));
 
         //Setting the node for the transition
         pathTransition.setNode(minion);
 
         //Setting the path
         pathTransition.setPath(path);
-
-        //Setting the orientation of the path
-        pathTransition.setOrientation(PathTransition.OrientationType.
-                ORTHOGONAL_TO_TANGENT);
+//
+//        //Setting the orientation of the path
+//        pathTransition.setOrientation(PathTransition.OrientationType.
+//                ORTHOGONAL_TO_TANGENT);
 
         //Setting the cycle count for the transition
         pathTransition.setCycleCount(50);

@@ -8,6 +8,7 @@ import static TowerDefense.CONSTANT.*;
 
 public class Map {
     static int[][] map = new int[ROW_NUM][COL_NUM];
+    static int[][] tileType = new int[ROW_NUM][COL_NUM];
     static int[][] roadLocation = new int[15][2];
 
 
@@ -16,14 +17,15 @@ public class Map {
     public static void ImportMap()
     {
         getData(map, ROW_NUM, COL_NUM, pathMap);
+        getData(tileType,ROW_NUM, COL_NUM,pathTileType);
     }
     public static void ImportRoad()
     {
         getData(roadLocation, 15, 2, pathTransition);
     }
-    public static int getType(int x, int y)
+    public static String getTileType(int x, int y)
     {
-        return map[x][y];
+        return Integer.toString(tileType[x][y]);
     }
 
     public static void getData(int[][] arr, int height, int width, String path) {
