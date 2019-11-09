@@ -1,5 +1,6 @@
 package TowerDefense;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -8,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,9 +46,11 @@ public class GameField {
 
     }
 
+    public static Pane layout;
+
     public static void gameScreen(Stage stage) {
         stage.close();
-        Pane layout = new Pane();
+        layout = new Pane();
         GameEntity[][] tiled = new GameEntity[ROW_NUM][COL_NUM];
 
 
@@ -66,11 +70,6 @@ public class GameField {
         for (int i = 0; i < ROAD_NUM; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
-//            final Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent actionEvent) {
-//                }
-//            }));
         ArrayList<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
@@ -82,27 +81,35 @@ public class GameField {
         }
 //        minion.move(path);
 
-        KeyFrame[] keyFrames;
+        //KeyFrame[] keyFrames;
         Timeline timeline = new Timeline();
-        for (int i = 0; i<enemies.size(); i++)
-        {
+        for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i*800), event -> {
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800), event -> {
                 e.move(path);
             });
             timeline.getKeyFrames().add(moveEnemy);
         }
 
+        //Hiện thanh máu liên tục theo thời gian
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                enemies.forEach(Enemy::showHP);
+                if (enemies.get(0).getTranslateX() > 100) enemies.get(0).HP = 60;
+            }
+        };
 
-            //minion.setLocation(400,400);
+
+        //minion.setLocation(400,400);
 
 
 //        BaseObject grass = new BaseObject("file:images/grass.png");
 //        grass.setFitHeight(80);
 //        grass.setFitWidth(80);
 //        layout.getChildren().add(grass);
-
-            Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
+        timer.start();
+        Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         stage.setScene(gameScene);
         stage.centerOnScreen();
         timeline.play();

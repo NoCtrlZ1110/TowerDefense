@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="">
+    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/redminion.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/CONSTANT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/CONSTANT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,8 +97,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.TowerDefense" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -134,6 +141,7 @@
       <workItem from="1573284875291" duration="303000" />
       <workItem from="1573287269960" duration="1750000" />
       <workItem from="1573292563873" duration="4271000" />
+      <workItem from="1573303551380" duration="6361000" />
     </task>
     <servers />
   </component>
@@ -152,5 +160,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Thêm thanh máu cho enemy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thêm thanh máu cho enemy" />
   </component>
 </project>

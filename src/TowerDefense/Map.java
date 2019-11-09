@@ -14,24 +14,22 @@ public class Map {
 
     public Map() {
     }
-    public static void ImportMap()
-    {
+
+    public static void ImportMap() {
         getData(map, ROW_NUM, COL_NUM, pathMap);
-        getData(tileType,ROW_NUM, COL_NUM,pathTileType);
+        getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
-    public static void ImportRoad()
-    {
+
+    public static void ImportRoad() {
         getData(roadLocation, 15, 2, pathTransition);
-        for (int i = 0; i< 15; i++)
-                {System.out.print(roadLocation[i][0]-40+" ");
-        System.out.println(roadLocation[i][1]-40);}
+
     }
-    public static String getTileType(int x, int y)
-    {
+
+    public static String getTileType(int x, int y) {
         return Integer.toString(tileType[x][y]);
     }
-    public static String getMapType(int x, int y)
-    {
+
+    public static String getMapType(int x, int y) {
         return Integer.toString(map[x][y]);
     }
 

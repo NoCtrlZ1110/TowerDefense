@@ -25,5 +25,9 @@ public class GameEntity extends ImageView {
         setTranslateX(x);
         setTranslateY(y);
     }
+    public void showLocation()
+    {
+        System.out.println("x: "+ getTranslateX() + " y: " + getTranslateY());
+    }
 
 }
