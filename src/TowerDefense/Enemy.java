@@ -18,13 +18,12 @@ public class Enemy extends GameEntity {
         super(path);
         setLocation(x,y);
     }
-    public void move(Path path)
-    {
+    public void move(Path path) {
         //Creating a path transition
         PathTransition pathTransition = new PathTransition();
 
         //Setting the duration of the path transition
-        pathTransition.setDuration(Duration.millis(1000*51/speed));
+        pathTransition.setDuration(Duration.millis(1000 * 51 / speed));
 
         //Setting the node for the transition
         pathTransition.setNode(this);
@@ -40,13 +39,10 @@ public class Enemy extends GameEntity {
         //pathTransition.setCycleCount(50);
 
         //Setting auto reverse value to false
-        pathTransition.setAutoReverse(true);
+        pathTransition.setAutoReverse(false);
 
         //Playing the animation
         pathTransition.play();
-
-
-        //Creating a Group object
     }
 
 

@@ -12,6 +12,7 @@ import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static TowerDefense.CONSTANT.*;
@@ -49,10 +50,9 @@ public class GameField {
         GameEntity[][] tiled = new GameEntity[ROW_NUM][COL_NUM];
 
 
-
-        for (int i = 0; i<ROW_NUM; i++)
-            for (int j = 0; j<COL_NUM; j++) {
-                tiled[i][j] = new GameEntity(pathTile+getTileType(i,j)+".png");
+        for (int i = 0; i < ROW_NUM; i++)
+            for (int j = 0; j < COL_NUM; j++) {
+                tiled[i][j] = new GameEntity(pathTile + getTileType(i, j) + ".png");
                 tiled[i][j].setFitHeight(80);
                 tiled[i][j].setFitWidth(80);
                 tiled[i][j].setLocation(j * 80, i * 80);
@@ -60,32 +60,41 @@ public class GameField {
             }
 
 
-
         final Path path = new Path();
         //Creating the MoveTo path element
-        path.getElements().add(new MoveTo(0,760));
-        for (int i = 0; i<ROAD_NUM; i++)
-            path.getElements().add(new LineTo(roadLocation[i][0],roadLocation[i][1]));
+        path.getElements().add(new MoveTo(-80, 760));
+        for (int i = 0; i < ROAD_NUM; i++)
+            path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
-
-        //for (int i = 0; i<10; i++)
-        {
-
-            Enemy minion = new Enemy(0,720,pathRedEnemy);
-            minion.setFitHeight(80);
-            minion.setFitWidth(80);
-            minion.setSpeed(5);
 //            final Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), new EventHandler<ActionEvent>() {
 //                @Override
 //                public void handle(ActionEvent actionEvent) {
 //                }
 //            }));
-            minion.move(path);
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Enemy minion = new Enemy(-80, 720, pathRedEnemy);
+            minion.setFitHeight(80);
+            minion.setFitWidth(80);
+            minion.setSpeed(2);
+            enemies.add(minion);
             layout.getChildren().add(minion);
-
         }
-        //minion.setLocation(400,400);
+//        minion.move(path);
 
+        KeyFrame[] keyFrames;
+        Timeline timeline = new Timeline();
+        for (int i = 0; i<enemies.size(); i++)
+        {
+            Enemy e = enemies.get(i);
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i*1000), event -> {
+                e.move(path);
+            });
+            timeline.getKeyFrames().add(moveEnemy);
+        }
+
+
+            //minion.setLocation(400,400);
 
 
 //        BaseObject grass = new BaseObject("file:images/grass.png");
@@ -93,9 +102,10 @@ public class GameField {
 //        grass.setFitWidth(80);
 //        layout.getChildren().add(grass);
 
-        Scene gameScene = new Scene(layout, 1280,800); // 16 x 10; 80px per block
+            Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         stage.setScene(gameScene);
         stage.centerOnScreen();
+        timeline.play();
         stage.show();
     }
 

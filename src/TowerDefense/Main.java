@@ -1,3 +1,4 @@
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -59,7 +60,7 @@ public class Main extends Application {
                     new KeyFrame(Duration.ZERO, // set start position at 0
                             new KeyValue(circle.translateXProperty(), random() * 800),
                             new KeyValue(circle.translateYProperty(), random() * 600)),
-                    new KeyFrame(new Duration(40000), // set end position at 40s
+                    new KeyFrame(new Duration(4000), // set end position at 40s
                             new KeyValue(circle.translateXProperty(), random() * 800),
                             new KeyValue(circle.translateYProperty(), random() * 600)));
         }
