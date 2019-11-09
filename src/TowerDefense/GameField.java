@@ -1,12 +1,18 @@
 package TowerDefense;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Date;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.Map.*;
@@ -41,6 +47,9 @@ public class GameField {
         stage.close();
         Pane layout = new Pane();
         GameEntity[][] tiled = new GameEntity[ROW_NUM][COL_NUM];
+
+
+
         for (int i = 0; i<ROW_NUM; i++)
             for (int j = 0; j<COL_NUM; j++) {
                 tiled[i][j] = new GameEntity(pathTile+getTileType(i,j)+".png");
@@ -50,10 +59,6 @@ public class GameField {
                 layout.getChildren().add(tiled[i][j]);
             }
 
-        Enemy minion = new Enemy(0,720,pathRedEnemy);
-        minion.setFitHeight(80);
-        minion.setFitWidth(80);
-        //minion.setLocation(400,400);
 
 
         final Path path = new Path();
@@ -62,34 +67,24 @@ public class GameField {
         for (int i = 0; i<ROAD_NUM; i++)
             path.getElements().add(new LineTo(roadLocation[i][0],roadLocation[i][1]));
 
-        //Creating a path transition
-        PathTransition pathTransition = new PathTransition();
 
-        //Setting the duration of the path transition
-        pathTransition.setDuration(Duration.millis(3.5*5100));
+        //for (int i = 0; i<10; i++)
+        {
 
-        //Setting the node for the transition
-        pathTransition.setNode(minion);
+            Enemy minion = new Enemy(0,720,pathRedEnemy);
+            minion.setFitHeight(80);
+            minion.setFitWidth(80);
+            minion.setSpeed(5);
+//            final Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle(ActionEvent actionEvent) {
+//                }
+//            }));
+            minion.move(path);
+            layout.getChildren().add(minion);
 
-        //Setting the path
-        pathTransition.setPath(path);
-//
-//        //Setting the orientation of the path
-//        pathTransition.setOrientation(PathTransition.OrientationType.
-//                ORTHOGONAL_TO_TANGENT);
-
-        //Setting the cycle count for the transition
-        pathTransition.setCycleCount(50);
-
-        //Setting auto reverse value to false
-        pathTransition.setAutoReverse(true);
-
-        //Playing the animation
-        pathTransition.play();
-
-        //Creating a Group object
-
-
+        }
+        //minion.setLocation(400,400);
 
 
 
@@ -97,7 +92,7 @@ public class GameField {
 //        grass.setFitHeight(80);
 //        grass.setFitWidth(80);
 //        layout.getChildren().add(grass);
-        layout.getChildren().add(minion);
+
         Scene gameScene = new Scene(layout, 1280,800); // 16 x 10; 80px per block
         stage.setScene(gameScene);
         stage.centerOnScreen();

@@ -22,10 +22,17 @@ public class Map {
     public static void ImportRoad()
     {
         getData(roadLocation, 15, 2, pathTransition);
+        for (int i = 0; i< 15; i++)
+                {System.out.print(roadLocation[i][0]-40+" ");
+        System.out.println(roadLocation[i][1]-40);}
     }
     public static String getTileType(int x, int y)
     {
         return Integer.toString(tileType[x][y]);
+    }
+    public static String getMapType(int x, int y)
+    {
+        return Integer.toString(map[x][y]);
     }
 
     public static void getData(int[][] arr, int height, int width, String path) {
