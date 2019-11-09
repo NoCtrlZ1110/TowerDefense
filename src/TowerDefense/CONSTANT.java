@@ -5,7 +5,7 @@ public class CONSTANT {
     public static final String pathTileType = "map/tileType.txt";
     public static final String pathTile = "file:images/";
     public static final String pathRoad = "file:images/road.png";
-    public static final String pathRedEnemy = "file:images/penguin.png";
+    public static final String pathRedEnemy = "file:images/LoLminion.gif";
     public static final String pathTransition ="map/roadPath.txt";
 
     public static final int COL_NUM = 16;

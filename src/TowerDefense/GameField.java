@@ -74,8 +74,8 @@ public class GameField {
         ArrayList<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
-            minion.setFitHeight(80);
-            minion.setFitWidth(80);
+            minion.setFitHeight(70);
+            minion.setFitWidth(70);
             minion.setSpeed(2);
             enemies.add(minion);
             layout.getChildren().add(minion);
@@ -87,7 +87,7 @@ public class GameField {
         for (int i = 0; i<enemies.size(); i++)
         {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i*1000), event -> {
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i*800), event -> {
                 e.move(path);
             });
             timeline.getKeyFrames().add(moveEnemy);

@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/redminion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/CONSTANT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/CONSTANT.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +133,7 @@
       <workItem from="1573282438106" duration="112000" />
       <workItem from="1573284875291" duration="303000" />
       <workItem from="1573287269960" duration="1750000" />
-      <workItem from="1573292563873" duration="1842000" />
+      <workItem from="1573292563873" duration="4271000" />
     </task>
     <servers />
   </component>
