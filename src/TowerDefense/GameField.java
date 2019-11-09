@@ -96,7 +96,7 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                if (enemies.get(0).getTranslateX() > 100) enemies.get(0).HP = 60;
+
             }
         };
 
