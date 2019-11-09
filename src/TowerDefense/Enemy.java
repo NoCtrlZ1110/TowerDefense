@@ -28,7 +28,7 @@ public class Enemy extends GameEntity {
     {
         rectangle.setX(this.getTranslateX());
         rectangle.setY(this.getTranslateY()-10);
-        rectangle.setWidth(this.HP/10*5);
+        rectangle.setWidth(this.HP/10*6);
         rectangle.setHeight(5);
         rectangle.setFill(Color.DARKRED);
 
@@ -46,13 +46,11 @@ public class Enemy extends GameEntity {
 
         //Setting the path
         pathTransition.setPath(path);
-//
-//        //Setting the orientation of the path
-        pathTransition.setOrientation(PathTransition.OrientationType.
-                ORTHOGONAL_TO_TANGENT);
 
-        //Setting the cycle count for the transition
-        //pathTransition.setCycleCount(50);
+//        //Setting the orientation of the path
+//        pathTransition.setOrientation(PathTransition.OrientationType.
+//                ORTHOGONAL_TO_TANGENT);
+
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
 

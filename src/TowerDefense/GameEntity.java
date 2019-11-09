@@ -2,7 +2,7 @@ package TowerDefense;
 
 import javafx.scene.image.ImageView;
 
-public class GameEntity extends ImageView {
+public abstract class GameEntity extends ImageView {
     String path;
 
     public GameEntity(String path) {

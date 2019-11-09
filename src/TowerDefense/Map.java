@@ -1,8 +1,17 @@
 package TowerDefense;
 
+import javafx.scene.Cursor;
+
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.beans.EventHandler;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import static TowerDefense.GameField.*;
 
 import static TowerDefense.CONSTANT.*;
 
@@ -30,7 +39,7 @@ public class Map {
     }
 
     public static String getMapType(int x, int y) {
-        return Integer.toString(map[x][y]);
+        return Integer.toString(map[y][x]);
     }
 
     public static void getData(int[][] arr, int height, int width, String path) {
@@ -46,6 +55,41 @@ public class Map {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    // Kiểm tra xem vị trí được truyền vào có xây được tháp không (1 tháp chiếm 2x2)
+    // Nếu có trả về vị trí để xây tháp
+
+    public static Point TowerBuildLocation(MouseEvent event) {
+
+        Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
+        String s = getMapType(point.getX(), point.getY());
+
+        if (!layout.getChildren().contains(border)) layout.getChildren().add(border);
+        if (s.equals("2")) {
+
+            border.setX((point.getX()) * 80 + 33);
+            border.setY(point.getY() * 80 + 33);
+
+            return new Point((point.getX()) * 80, (point.getY()) * 80);
+        } else if (s.equals("3")) {
+            border.setX((point.getX() - 1) * 80 + 33);
+            border.setY(point.getY() * 80 + 33);
+            return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
+        } else if (s.equals("4")) {
+            border.setX((point.getX() - 1) * 80 + 33);
+            border.setY((point.getY() - 1) * 80 + 33);
+            return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
+        } else if (s.equals("5")) {
+            border.setX((point.getX()) * 80 + 33);
+            border.setY((point.getY() - 1) * 80 + 33);
+            return new Point(point.getX()  * 80, (point.getY()-1) * 80);
+        } else {
+            layout.getChildren().remove(border);
+            return null;
+            //gameScene.setCursor(Cursor.DEFAULT);
+        }
+
     }
 
 }

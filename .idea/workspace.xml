@@ -2,9 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
+      <change afterPath="$PROJECT_DIR$/images/lol_cursor_comparison.0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/love.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/imageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/tileType_txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/tileType_txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Main$MyTimer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Enemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +42,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Sq8YWZjZGVPGcMb7UFZ6vu1o0P" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -87,8 +108,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
-        <item itemvalue="Application.TowerDefense" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TowerDefense" />
       </list>
     </recent_temporary>
   </component>
@@ -131,7 +152,8 @@
       <workItem from="1573284875291" duration="303000" />
       <workItem from="1573287269960" duration="1750000" />
       <workItem from="1573292563873" duration="4271000" />
-      <workItem from="1573303551380" duration="6627000" />
+      <workItem from="1573303551380" duration="16155000" />
+      <workItem from="1573325555649" duration="6278000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm thanh máu cho enemy">
       <created>1573310276365</created>
@@ -160,6 +182,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Thêm thanh máu cho enemy" />
     <option name="LAST_COMMIT_MESSAGE" value="Thêm thanh máu cho enemy" />
   </component>
