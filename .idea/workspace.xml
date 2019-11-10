@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Tower.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Tower.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameStage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameTile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +47,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -140,7 +146,7 @@
       <workItem from="1573292563873" duration="4271000" />
       <workItem from="1573303551380" duration="16155000" />
       <workItem from="1573325555649" duration="7092000" />
-      <workItem from="1573362401685" duration="6145000" />
+      <workItem from="1573362401685" duration="9722000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm thanh máu cho enemy">
       <created>1573310276365</created>

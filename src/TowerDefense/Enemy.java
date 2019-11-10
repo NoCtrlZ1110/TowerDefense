@@ -24,6 +24,9 @@ public class Enemy extends GameEntity {
         setLocation(x,y);
         layout.getChildren().add(rectangle);
     }
+
+    // [Hàm hiển thị thanh máu] ---------
+
     public void showHP()
     {
         rectangle.setX(this.getTranslateX());
@@ -32,9 +35,14 @@ public class Enemy extends GameEntity {
         rectangle.setHeight(5);
         rectangle.setFill(Color.DARKRED);
 
+    //-------------------------------------
 
     }
+
+    // [Hàm di chuyển theo path được truyền vào]
+
     public void move(Path path) {
+
         //Creating a path transition
         PathTransition pathTransition = new PathTransition();
 
@@ -47,9 +55,8 @@ public class Enemy extends GameEntity {
         //Setting the path
         pathTransition.setPath(path);
 
-//        //Setting the orientation of the path
-//        pathTransition.setOrientation(PathTransition.OrientationType.
-//                ORTHOGONAL_TO_TANGENT);
+        //Setting the orientation of the path
+        //pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
@@ -58,6 +65,6 @@ public class Enemy extends GameEntity {
         //Playing the animation
         pathTransition.play();
     }
-
+    //-----------------------------
 
 }

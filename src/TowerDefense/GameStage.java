@@ -3,9 +3,9 @@ package TowerDefense;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import static TowerDefense.Map.ImportMap;
+import static TowerDefense.GameTile.ImportMap;
 import static TowerDefense.GameField.*;
-import static TowerDefense.Map.ImportRoad;
+import static TowerDefense.GameTile.ImportRoad;
 
 public class GameStage extends Application {
 

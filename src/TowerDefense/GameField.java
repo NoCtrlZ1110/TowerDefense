@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 import static TowerDefense.CONSTANT.*;
-import static TowerDefense.Map.*;
+import static TowerDefense.GameTile.*;
 
 public class GameField {
     static Rectangle border = new Rectangle(100, 100);
@@ -54,8 +54,8 @@ public class GameField {
         layout = new Pane();
         Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
 
+        // [Vẽ ra map] -------------------
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
-
 
         for (int i = 0; i < ROW_NUM; i++)
             for (int j = 0; j < COL_NUM; j++) {
@@ -65,16 +65,23 @@ public class GameField {
                 tiled[i][j].setLocation(j * 80, i * 80);
                 layout.getChildren().add(tiled[i][j]);
             }
+        //--------------------------------
 
+
+        // [Tạo đường đi cho lính] -------
 
         final Path path = new Path();
-        //Creating the MoveTo path element
         path.getElements().add(new MoveTo(-80, 760));
+
         for (int i = 0; i < ROAD_NUM; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
+        //-------------------------------
+
+        // [Tạo ra lính] ----------------
+
         ArrayList<Enemy> enemies = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
             minion.setFitHeight(70);
             minion.setFitWidth(70);
@@ -82,9 +89,10 @@ public class GameField {
             enemies.add(minion);
             layout.getChildren().add(minion);
         }
-//        minion.move(path);
 
-        //KeyFrame[] keyFrames;
+        //-----------------------------
+
+        // [Cho lính di chuyển theo path] ---
         Timeline timeline = new Timeline();
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
@@ -93,8 +101,9 @@ public class GameField {
             });
             timeline.getKeyFrames().add(moveEnemy);
         }
+        //-----------------------------
 
-        //Hiện thanh máu liên tục theo thời gian
+        // [Hiện thanh máu liên tục theo thời gian]
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -103,6 +112,8 @@ public class GameField {
             }
         };
 
+
+        // [Hiện khung chọn vị trí xây tháp] ---
 
         border.setStroke(Color.DARKRED);
         border.setStrokeWidth(3);
@@ -122,8 +133,11 @@ public class GameField {
             gameScene.setCursor(Cursor.DEFAULT);
         });
 
+        //-----------------------------
+
         ArrayList<Tower> towers = new ArrayList<>();
 
+        // [Click để xây tháp] --------
 
         layout.setOnMouseClicked(event ->
         {
@@ -140,16 +154,14 @@ public class GameField {
 
             }
 
-
-
         });
 
-        timer.start();
+        // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
-
+        // ------------------------
         stage.setScene(gameScene);
         stage.centerOnScreen();
-
+        timer.start();
         timeline.play();
         stage.show();
     }
