@@ -44,6 +44,10 @@ public class Map {
         else return "";
     }
 
+    public static void setMapType(int x, int y, int n) {
+        map[y][x] = n;
+    }
+
     public static void getData(int[][] arr, int height, int width, String path) {
         try {
             FileInputStream MapIn = new FileInputStream(path);
@@ -67,29 +71,20 @@ public class Map {
         Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
         String s = getMapType(point.getX(), point.getY());
 
-        if (!layout.getChildren().contains(border)) layout.getChildren().add(border);
-        if (s.equals("2")) {
-//
-//            border.setX((point.getX()) * 80 + 33);
-//            border.setY(point.getY() * 80 + 33);
+        // Điều kiện ở đây hơi khó hiểu nên không cần phải đọc đâu @@
 
+        if (!layout.getChildren().contains(border)) layout.getChildren().add(border);
+        if (s.equals("2") && !(getMapType(point.getX() + 1, point.getY()).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6"))) {
             return new Point((point.getX()) * 80, (point.getY()) * 80);
-        } else if (s.equals("3")) {
-//            border.setX((point.getX() - 1) * 80 + 33);
-//            border.setY(point.getY() * 80 + 33);
+        } else if (s.equals("3") && !((getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX() - 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6")))) {
             return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
-        } else if (s.equals("4")) {
-//            border.setX((point.getX() - 1) * 80 + 33);
-//            border.setY((point.getY() - 1) * 80 + 33);
+        } else if (s.equals("4") && !(getMapType(point.getX() - 1, point.getY() - 1).equals("6") || getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX(), point.getY() - 1).equals("6"))) {
             return new Point((point.getX() - 1) * 80, (point.getY() - 1) * 80);
-        } else if (s.equals("5")) {
-//            border.setX((point.getX()) * 80 + 33);
-//            border.setY((point.getY() - 1) * 80 + 33);
+        } else if (s.equals("5") && !(getMapType(point.getX(), point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6"))) {
             return new Point(point.getX() * 80, (point.getY() - 1) * 80);
         } else {
             layout.getChildren().remove(border);
             return null;
-            //gameScene.setCursor(Cursor.DEFAULT);
         }
 
     }

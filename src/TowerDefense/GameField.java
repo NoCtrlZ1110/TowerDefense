@@ -122,6 +122,8 @@ public class GameField {
             gameScene.setCursor(Cursor.DEFAULT);
         });
 
+        ArrayList<Tower> towers = new ArrayList<>();
+
 
         layout.setOnMouseClicked(event ->
         {
@@ -130,6 +132,12 @@ public class GameField {
             {
                 Tower tower = new Tower("file:images/Tower.png");
                 tower.showTower(location);
+                towers.add(tower);
+                setMapType(location.getX()/80,location.getY()/80,6);
+                setMapType(location.getX()/80,location.getY()/80+1,6);
+                setMapType(location.getX()/80+1,location.getY()/80,6);
+                setMapType(location.getX()/80+1,location.getY()/80+1,6);
+
             }
 
 
