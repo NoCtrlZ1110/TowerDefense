@@ -39,7 +39,9 @@ public class Map {
     }
 
     public static String getMapType(int x, int y) {
-        return Integer.toString(map[y][x]);
+        if (y < ROW_NUM && x < COL_NUM)
+            return Integer.toString(map[y][x]);
+        else return "";
     }
 
     public static void getData(int[][] arr, int height, int width, String path) {
@@ -67,23 +69,23 @@ public class Map {
 
         if (!layout.getChildren().contains(border)) layout.getChildren().add(border);
         if (s.equals("2")) {
-
-            border.setX((point.getX()) * 80 + 33);
-            border.setY(point.getY() * 80 + 33);
+//
+//            border.setX((point.getX()) * 80 + 33);
+//            border.setY(point.getY() * 80 + 33);
 
             return new Point((point.getX()) * 80, (point.getY()) * 80);
         } else if (s.equals("3")) {
-            border.setX((point.getX() - 1) * 80 + 33);
-            border.setY(point.getY() * 80 + 33);
+//            border.setX((point.getX() - 1) * 80 + 33);
+//            border.setY(point.getY() * 80 + 33);
             return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
         } else if (s.equals("4")) {
-            border.setX((point.getX() - 1) * 80 + 33);
-            border.setY((point.getY() - 1) * 80 + 33);
-            return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
+//            border.setX((point.getX() - 1) * 80 + 33);
+//            border.setY((point.getY() - 1) * 80 + 33);
+            return new Point((point.getX() - 1) * 80, (point.getY() - 1) * 80);
         } else if (s.equals("5")) {
-            border.setX((point.getX()) * 80 + 33);
-            border.setY((point.getY() - 1) * 80 + 33);
-            return new Point(point.getX()  * 80, (point.getY()-1) * 80);
+//            border.setX((point.getX()) * 80 + 33);
+//            border.setY((point.getY() - 1) * 80 + 33);
+            return new Point(point.getX() * 80, (point.getY() - 1) * 80);
         } else {
             layout.getChildren().remove(border);
             return null;

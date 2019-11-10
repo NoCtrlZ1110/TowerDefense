@@ -20,14 +20,22 @@ public abstract class GameEntity extends ImageView {
         this.path = path;
     }
 
-    public void setLocation(int x, int y)
-    {
+    public void setLocation(int x, int y) {
         setTranslateX(x);
         setTranslateY(y);
     }
-    public void showLocation()
+
+    public double GetX()
     {
-        System.out.println("x: "+ getTranslateX() + " y: " + getTranslateY());
+        return this.getTranslateX();
+    }
+
+    public double GetY()
+    {
+        return this.getTranslateY();
+    }
+    public void showLocation() {
+        System.out.println("x: " + getTranslateX() + " y: " + getTranslateY());
     }
 
 }

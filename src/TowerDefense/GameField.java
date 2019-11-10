@@ -20,6 +20,7 @@ import static TowerDefense.Map.*;
 
 public class GameField {
     static Rectangle border = new Rectangle(100, 100);
+
     public static void welcomeScreen(Stage stage) {
 
         imageObject power = new imageObject("file:images/start.png");
@@ -111,9 +112,28 @@ public class GameField {
 
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
-            if (location != null) gameScene.setCursor(Cursor.HAND);
+
+            if (location != null) {
+                gameScene.setCursor(Cursor.HAND);
+                border.setX(location.getX() + 33);
+                border.setY(location.getY() + 33);
+            }
             else
-                gameScene.setCursor(Cursor.DEFAULT);
+            gameScene.setCursor(Cursor.DEFAULT);
+        });
+
+
+        layout.setOnMouseClicked(event ->
+        {
+            Point location = TowerBuildLocation(event);
+            if (location != null)
+            {
+                Tower tower = new Tower("file:images/Tower.png");
+                tower.showTower(location);
+            }
+
+
+
         });
 
         timer.start();
