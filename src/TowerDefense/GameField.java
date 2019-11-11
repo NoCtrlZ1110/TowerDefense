@@ -52,6 +52,7 @@ public class GameField {
     public static void gameScreen(Stage stage) {
         stage.close();
         layout = new Pane();
+        ArrayList<Tower> towers = new ArrayList<>();
         Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
 
         // [Vẽ ra map] -------------------
@@ -128,29 +129,43 @@ public class GameField {
                 gameScene.setCursor(Cursor.HAND);
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
-            }
-            else
-            gameScene.setCursor(Cursor.DEFAULT);
+            } else
+                gameScene.setCursor(Cursor.DEFAULT);
+            Point point = new Point((int) event.getSceneX()/80, (int) event.getSceneY()/80);
+            System.out.println(point);
+            if (getMapType(point.getX(), point.getY()).equals("6"))
+                towers.forEach(t -> {
+                    System.out.println(point.getX() + " " + t.getPosition().getX() );
+                    if (Math.abs(point.getX()*80 - t.getPosition().getX())<=80 && Math.abs(point.getY()*80 - t.getPosition().getY())<=80)
+                        t.showRange();
+                    else
+                        if(layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
+
+
+                });
+            else  towers.forEach(t ->
+            {
+                if(layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
+            });
         });
 
         //-----------------------------
 
-        ArrayList<Tower> towers = new ArrayList<>();
 
         // [Click để xây tháp] --------
 
         layout.setOnMouseClicked(event ->
         {
             Point location = TowerBuildLocation(event);
-            if (location != null)
-            {
+            if (location != null) {
                 Tower tower = new Tower("file:images/Tower.png");
                 tower.showTower(location);
+//                tower.showRange();
                 towers.add(tower);
-                setMapType(location.getX()/80,location.getY()/80,6);
-                setMapType(location.getX()/80,location.getY()/80+1,6);
-                setMapType(location.getX()/80+1,location.getY()/80,6);
-                setMapType(location.getX()/80+1,location.getY()/80+1,6);
+                setMapType(location.getX() / 80, location.getY() / 80, 6);
+                setMapType(location.getX() / 80, location.getY() / 80 + 1, 6);
+                setMapType(location.getX() / 80 + 1, location.getY() / 80, 6);
+                setMapType(location.getX() / 80 + 1, location.getY() / 80 + 1, 6);
 
             }
 
