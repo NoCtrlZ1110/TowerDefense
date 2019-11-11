@@ -84,7 +84,6 @@ public class GameField {
 
         // [Tạo ra lính] ----------------
 
-
         for (int i = 0; i < 20; i++) {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
             minion.setFitHeight(70);
@@ -185,6 +184,7 @@ public class GameField {
                     removeTower();
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
+                    // upgrade có thể có giá
                 }
                 System.out.println("waiting for being sold...");
             }
@@ -218,8 +218,7 @@ public class GameField {
     public static void removeTower() {
         // Java ko có từ khoá pass, buồn :(
         // chưa nghĩ ra đặt cái gì vào argument :(
-        return;
     }
 
-    public void upgradeTower() { return; }
+    public void upgradeTower() { }
 }
