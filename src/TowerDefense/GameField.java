@@ -20,6 +20,9 @@ import static TowerDefense.GameTile.*;
 
 public class GameField {
     static Rectangle border = new Rectangle(100, 100);
+    static ArrayList<Tower> towers = new ArrayList<>();
+    static ArrayList<Enemy> enemies = new ArrayList<>();
+
 
     public static void welcomeScreen(Stage stage) {
 
@@ -52,7 +55,7 @@ public class GameField {
     public static void gameScreen(Stage stage) {
         stage.close();
         layout = new Pane();
-        ArrayList<Tower> towers = new ArrayList<>();
+
         Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
 
         // [Vẽ ra map] -------------------
@@ -81,7 +84,7 @@ public class GameField {
 
         // [Tạo ra lính] ----------------
 
-        ArrayList<Enemy> enemies = new ArrayList<>();
+
         for (int i = 0; i < 20; i++) {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
             minion.setFitHeight(70);
@@ -109,7 +112,7 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-
+                towers.forEach(Tower::findTarget);
             }
         };
 
@@ -131,21 +134,19 @@ public class GameField {
                 border.setY(location.getY() + 33);
             } else
                 gameScene.setCursor(Cursor.DEFAULT);
-            Point point = new Point((int) event.getSceneX()/80, (int) event.getSceneY()/80);
+            Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
             System.out.println(point);
             if (getMapType(point.getX(), point.getY()).equals("6"))
                 towers.forEach(t -> {
-                    System.out.println(point.getX() + " " + t.getPosition().getX() );
-                    if (Math.abs(point.getX()*80 - t.getPosition().getX())<=80 && Math.abs(point.getY()*80 - t.getPosition().getY())<=80)
+                    if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80)
                         t.showRange();
-                    else
-                        if(layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
+                    else if (layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
 
 
                 });
-            else  towers.forEach(t ->
+            else towers.forEach(t ->
             {
-                if(layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
+                if (layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
             });
         });
 
