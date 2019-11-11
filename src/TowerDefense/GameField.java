@@ -23,9 +23,10 @@ public class GameField {
     static ArrayList<Tower> towers = new ArrayList<>();
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
+    static int money;
+    static int hp;
 
     public static void welcomeScreen(Stage stage) {
-
         imageObject power = new imageObject("file:images/start.png");
         Pane pane = new Pane();
         Button startBtn = new Button(" Start ");
@@ -47,7 +48,6 @@ public class GameField {
         stage.setScene(new Scene(pane, 960, 540));
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.show();
-
     }
 
     public static Pane layout;
@@ -112,10 +112,9 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                towers.forEach(Tower::findTarget);
+                towers.forEach(Tower::shoot);
             }
         };
-
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
@@ -134,19 +133,19 @@ public class GameField {
                 border.setY(location.getY() + 33);
             } else
                 gameScene.setCursor(Cursor.DEFAULT);
+
             Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
             System.out.println(point);
             if (getMapType(point.getX(), point.getY()).equals("6"))
                 towers.forEach(t -> {
                     if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80)
                         t.showRange();
-                    else if (layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
-
-
+                    else if (layout.getChildren().contains(t.rangeCircle))
+                        layout.getChildren().remove(t.rangeCircle);
                 });
-            else towers.forEach(t ->
-            {
-                if (layout.getChildren().contains(t.rangeCircle)) layout.getChildren().remove(t.rangeCircle);
+            else towers.forEach(t -> {
+                if (layout.getChildren().contains(t.rangeCircle))
+                    layout.getChildren().remove(t.rangeCircle);
             });
         });
 
@@ -155,21 +154,40 @@ public class GameField {
 
         // [Click để xây tháp] --------
 
-        layout.setOnMouseClicked(event ->
-        {
+        layout.setOnMouseClicked(event -> {
+            // nếu vị trí click có tháp -> bán/upgrade
+            //                  ko có tháp -> mua
+
             Point location = TowerBuildLocation(event);
             if (location != null) {
-                Tower tower = new Tower("file:images/Tower.png");
-                tower.showTower(location);
-//                tower.showRange();
-                towers.add(tower);
-                setMapType(location.getX() / 80, location.getY() / 80, 6);
-                setMapType(location.getX() / 80, location.getY() / 80 + 1, 6);
-                setMapType(location.getX() / 80 + 1, location.getY() / 80, 6);
-                setMapType(location.getX() / 80 + 1, location.getY() / 80 + 1, 6);
+                placeTower(location);
+            } else {
+                // kiểm tra thêm có phải đường đi hay không nữa là chắc chắn là đã có tháp :v
+                // bán/upgrade tháp ở đây
+                // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
+                /*
+                // tìm tower đang ở vị trí này
+                Tower local_tower = null; // findTowerAt(location);
+                Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
+                for (Tower t: towers)
+                    if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80) {
+                        local_tower = t;
+                        break;
+                    }
+                */
+                System.out.println("clicked!");
+
+                boolean is_sell_chosen = true;
+                if (is_sell_chosen) {
+                    // bán: bán với giá = 100% giá mua (có lẽ chỉ 80% thôi)
+                    sellTower();
+                    removeTower();
+                } else {
+                    // upgrade: hiện dãy icon đại diện cho tháp
+                }
+                System.out.println("waiting for being sold...");
             }
-
         });
 
         // [Thêm icon cho game] ---
@@ -182,5 +200,26 @@ public class GameField {
         stage.show();
     }
 
+    public static void buyTower() { money -= 10; }
 
+    public static void sellTower() { money += 8; }
+
+    public static void placeTower(Point location) {
+        Tower tower = new Tower("file:images/Tower.png");
+        tower.showTower(location);
+        // tower.showRange();
+        towers.add(tower);
+        setMapType(location.getX() / 80, location.getY() / 80, 6);
+        setMapType(location.getX() / 80, location.getY() / 80 + 1, 6);
+        setMapType(location.getX() / 80 + 1, location.getY() / 80, 6);
+        setMapType(location.getX() / 80 + 1, location.getY() / 80 + 1, 6);
+    }
+
+    public static void removeTower() {
+        // Java ko có từ khoá pass, buồn :(
+        // chưa nghĩ ra đặt cái gì vào argument :(
+        return;
+    }
+
+    public void upgradeTower() { return; }
 }

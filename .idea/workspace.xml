@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Tower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Tower.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,7 +41,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

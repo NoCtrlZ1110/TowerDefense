@@ -13,6 +13,10 @@ public class Tower extends GameEntity {
     Point position;
     Line line = new Line();
 
+    public Tower(String path) {
+        super(path);
+    }
+
     public Point getPosition() {
         return position;
     }
@@ -32,6 +36,20 @@ public class Tower extends GameEntity {
         if (!layout.getChildren().contains(rangeCircle)) layout.getChildren().add(rangeCircle);
     }
 
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public void showTower(Point location) {
+        this.position = location;
+        this.setLocation(location.getX(), location.getY());
+        if (!layout.getChildren().contains(this)) layout.getChildren().add(this);
+    }
+
     public Enemy findTarget() {
         for (int i = 0; i < enemies.size(); i++) {
             Point e = new Point(enemies.get(i).getLocation().getX()+40,enemies.get(i).getLocation().getY()+40);
@@ -46,31 +64,20 @@ public class Tower extends GameEntity {
                 target = enemies.get(i);
                 return enemies.get(i);
             }
-
         }
         layout.getChildren().remove(line);
         target = null;
         return null;
-
     }
 
-    public int getRange() {
-        return range;
+    public void shoot() {
+        Enemy target = findTarget();
+        /*
+        Bullet b = new Bullet(1, range, 1,
+                position.getX(), position.getY(),
+                target.getTranslateX() + 40, target.getTranslateY() + 40
+        );
+        b.fly();
+        */
     }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
-    public Tower(String path) {
-        super(path);
-    }
-
-    public void showTower(Point location) {
-        this.position = location;
-        this.setLocation(location.getX(), location.getY());
-        if (!layout.getChildren().contains(this)) layout.getChildren().add(this);
-    }
-    //public Enemy findTarget()
-
 }

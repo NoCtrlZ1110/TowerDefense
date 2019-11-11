@@ -15,7 +15,6 @@ public abstract class GameEntity extends ImageView {
         this.path = path;
     }
 
-
     public void setPath(String path) {
         this.path = path;
     }
