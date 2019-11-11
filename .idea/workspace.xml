@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/GameField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Tower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOp/TowerDefense/Tower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +140,7 @@
       <workItem from="1573325555649" duration="7092000" />
       <workItem from="1573362401685" duration="12263000" />
       <workItem from="1573394160736" duration="2690000" />
-      <workItem from="1573483310078" duration="10465000" />
+      <workItem from="1573483310078" duration="13975000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm thanh máu cho enemy">
       <created>1573310276365</created>

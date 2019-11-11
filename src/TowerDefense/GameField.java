@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -43,10 +44,13 @@ public class GameField {
         //Welcome.setLocation(100,100);
         pane.getChildren().add(Welcome);
         pane.getChildren().add(startBtn);
-        stage.setTitle("Tower Defense 1.0");
+        stage.setTitle("Tower Defense 1.2");
         stage.setScene(new Scene(pane, 960, 540));
+        stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new Image("file:images/love.jpg"));
+        stage.setResizable(false);
         stage.show();
+
 
     }
 
@@ -57,6 +61,7 @@ public class GameField {
         layout = new Pane();
 
         Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
+
 
         // [Vẽ ra map] -------------------
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
@@ -89,7 +94,7 @@ public class GameField {
             Enemy minion = new Enemy(-80, 720, pathRedEnemy);
             minion.setFitHeight(70);
             minion.setFitWidth(70);
-            minion.setSpeed(2);
+            minion.setSpeed(1.2);
             enemies.add(minion);
             layout.getChildren().add(minion);
         }
@@ -135,7 +140,7 @@ public class GameField {
             } else
                 gameScene.setCursor(Cursor.DEFAULT);
             Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
-            System.out.println(point);
+            //System.out.println(point);
             if (getMapType(point.getX(), point.getY()).equals("6"))
                 towers.forEach(t -> {
                     if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80)
