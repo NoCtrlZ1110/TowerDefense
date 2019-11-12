@@ -77,7 +77,8 @@ public class Tower extends GameEntity {
                 position.getX(), position.getY(),
                 target.getTranslateX() + 40, target.getTranslateY() + 40
         );
-        b.fly();
+        b.move();
+        target.beShotBy(b);
         */
     }
 }

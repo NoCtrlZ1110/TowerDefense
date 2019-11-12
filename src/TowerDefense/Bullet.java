@@ -24,7 +24,7 @@ public class Bullet {
         return damage;
     }
 
-    public void fly() {
+    public void move() {
 
     }
 }

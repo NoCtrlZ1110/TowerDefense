@@ -71,7 +71,6 @@ public class GameField {
             }
         //--------------------------------
 
-
         // [Tạo đường đi cho lính] -------
 
         final Path path = new Path();
@@ -99,9 +98,7 @@ public class GameField {
         Timeline timeline = new Timeline();
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800), event -> {
-                e.move(path);
-            });
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800), event -> e.move(path));
             timeline.getKeyFrames().add(moveEnemy);
         }
         //-----------------------------
@@ -111,9 +108,11 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                towers.forEach(Tower::shoot);
+                towers.forEach(Tower::findTarget);
             }
         };
+        // [?] tại sao cái timer này ko gộp với timeline ở trên?
+        // => showHP gộp vào 1 hàm show duy nhất?
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
@@ -199,6 +198,8 @@ public class GameField {
         timeline.play();
         stage.show();
     }
+
+    // -------------------------
 
     public static void buyTower() { money -= 10; }
 

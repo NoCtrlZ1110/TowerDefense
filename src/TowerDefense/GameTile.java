@@ -38,12 +38,12 @@ public class GameTile {
     public GameTile() {
     }
 
-    public static void ImportMap() {
+    public static void importMap() {
         getData(map, ROW_NUM, COL_NUM, pathMap);
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
-    public static void ImportRoad() {
+    public static void importRoad() {
         getData(roadLocation, 15, 2, pathTransition);
 
     }
