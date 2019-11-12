@@ -37,7 +37,7 @@ public class GameTile {
     public GameTile() {
     }
 
-    public static void ImportMap() {
+    public static void importMap() {
         getData(map, ROW_NUM, COL_NUM, pathMap);
         getData(_map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
         for (int i = 0; i < ROW_NUM; i++)
@@ -49,7 +49,6 @@ public class GameTile {
 
     public static void ImportRoad() {
         getData(roadLocation, ROAD_NUM, 2, pathTransition);
-
     }
 
     public static String getTileType(int x, int y) {

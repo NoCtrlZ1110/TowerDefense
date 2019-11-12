@@ -77,7 +77,6 @@ public class GameField {
             }
         //--------------------------------
 
-
         // [Tạo đường đi cho lính] -------
 
         final Path path = new Path();
@@ -107,6 +106,8 @@ public class GameField {
                 towers.forEach(Tower::findTarget);
             }
         };
+        // [?] tại sao cái timer này ko gộp với timeline ở trên?
+        // => showHP gộp vào 1 hàm show duy nhất?
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
@@ -217,6 +218,7 @@ public class GameField {
 
         // layout.getChildren().remove(background);
     }
+    // -------------------------
 
     public static void buyTower() { money -= 10; }
 
