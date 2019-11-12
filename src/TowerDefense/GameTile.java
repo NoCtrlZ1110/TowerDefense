@@ -86,7 +86,7 @@ public class GameTile {
         }
     }
 
-    public static boolean isTowerPlacedAt() {
-
-    }
+//    public static boolean isTowerPlacedAt() {
+//
+//    }
 }
