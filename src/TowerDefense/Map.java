@@ -35,7 +35,7 @@ public class Map {
         map[y][x] = n;
     }
 
-    public boolean isTowerPlaced(int x, int y) {
+    public boolean isTowerPlacedAt(int x, int y) {
         return "6".equals(getType(x, y));
     }
 }

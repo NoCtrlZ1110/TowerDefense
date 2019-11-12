@@ -25,7 +25,7 @@ public class GameField {
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
     static int money;
-    static int hp;
+    static int hp = 100;
     private static boolean is_paused = false;
 
     public static Pane layout = new Pane();
