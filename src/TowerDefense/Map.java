@@ -30,4 +30,8 @@ public class Map {
     public void setType(int x, int y, int n) {
         map[y][x] = n;
     }
+
+    public boolean isTowerPlaced() {
+        return
+    }
 }

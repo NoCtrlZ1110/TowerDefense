@@ -83,8 +83,7 @@ public class GameTile {
     // Nếu có trả về vị trí để xây tháp
 
     public static Point TowerBuildLocation(MouseEvent event) {
-
-        Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
+        Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
         String s = getMapType(point.getX(), point.getY());
 
         // Điều kiện ở đây hơi khó hiểu nên không cần phải đọc đâu @@
@@ -93,13 +92,13 @@ public class GameTile {
             layout.getChildren().add(border);
 
         if (s.equals("2") && !(getMapType(point.getX() + 1, point.getY()).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6"))) {
-            return new Point((point.getX()) * 80, (point.getY()) * 80);
+            return new Point((point.getX()) * TILE_WIDTH, (point.getY()) * TILE_WIDTH);
         } else if (s.equals("3") && !((getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX() - 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6")))) {
-            return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
+            return new Point((point.getX() - 1) * TILE_WIDTH, (point.getY()) * TILE_WIDTH);
         } else if (s.equals("4") && !(getMapType(point.getX() - 1, point.getY() - 1).equals("6") || getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX(), point.getY() - 1).equals("6"))) {
-            return new Point((point.getX() - 1) * 80, (point.getY() - 1) * 80);
+            return new Point((point.getX() - 1) * TILE_WIDTH, (point.getY() - 1) * TILE_WIDTH);
         } else if (s.equals("5") && !(getMapType(point.getX(), point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6"))) {
-            return new Point(point.getX() * 80, (point.getY() - 1) * 80);
+            return new Point(point.getX() * TILE_WIDTH, (point.getY() - 1) * TILE_WIDTH);
         } else {
             layout.getChildren().remove(border);
             return null;

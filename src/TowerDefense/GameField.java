@@ -94,9 +94,7 @@ public class GameField {
         Timeline timeline = new Timeline();
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800), event -> {
-                e.move(path);
-            });
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800), event -> e.move(path));
             timeline.getKeyFrames().add(moveEnemy);
         }
         //-----------------------------
@@ -181,17 +179,17 @@ public class GameField {
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
                     // upgrade có thể có giá
+                    upgradeTower();
                 }
                 System.out.println("waiting for being sold...");
             }
         });
 
         imageObject pauseImage = new imageObject("file:images/pause.png");
+        pauseImage.scaleTo(70, 70);
         Button pauseBtn = new Button("");
         pauseBtn.setLayoutX(1200);
         pauseBtn.setLayoutY(50);
-        pauseImage.setFitWidth(70);
-        pauseImage.setFitHeight(70);
         pauseBtn.setMaxWidth(70);
         pauseBtn.setMaxHeight(70);
         pauseBtn.setGraphic(pauseImage);
@@ -240,7 +238,7 @@ public class GameField {
         // chưa nghĩ ra đặt cái gì vào argument :(
     }
 
-    public void upgradeTower() { }
+    public static void upgradeTower() { }
 
     public static void addEnemiesWave() {
         // [Tạo ra lính] ----------------
