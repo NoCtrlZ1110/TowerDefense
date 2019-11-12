@@ -20,8 +20,8 @@ public class Map {
         */
     }
 
-    public void copyFrom(int[][] m) {
-        for (int i = 0; i < )
+    public int[][] getCoreTable() {
+        return map;
     }
 
     public String getType(int x, int y) {

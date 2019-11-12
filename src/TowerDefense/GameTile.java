@@ -16,7 +16,7 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
-    // static Map map = new Map(ROW_NUM, COL_NUM);
+    static Map _map = new Map(ROW_NUM, COL_NUM);
     static int[][] map = new int[ROW_NUM][COL_NUM];
     /* Các loại giá trị của mảng map:
        0: không có gì
@@ -39,6 +39,11 @@ public class GameTile {
 
     public static void ImportMap() {
         getData(map, ROW_NUM, COL_NUM, pathMap);
+        getData(_map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
+        for (int i = 0; i < ROW_NUM; i++)
+            for (int j = 0; j < COL_NUM; j++)
+                System.out.print(map[i][j] != _map.getCoreTable()[i][j]);
+
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
@@ -71,7 +76,8 @@ public class GameTile {
                 String temp = sc.nextLine(); //doc dong mang trong file
                 //System.out.println(temp);
                 String[] items = temp.split(" "); //tach chuoi thanh cac phan tu chuoi
-                for (int j = 0; j < width; j++) arr[i][j] = Integer.parseInt(items[j]);
+                for (int j = 0; j < width; j++)
+                    arr[i][j] = Integer.parseInt(items[j]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
