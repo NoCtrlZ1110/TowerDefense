@@ -27,15 +27,14 @@ public class Enemy extends GameEntity {
 
     // [Hàm hiển thị thanh máu] ---------
 
-    public void showHP()
-    {
+    public void showHP() {
         rectangle.setX(this.getTranslateX());
         rectangle.setY(this.getTranslateY()-10);
         rectangle.setWidth(this.HP/10*6);
         rectangle.setHeight(5);
         rectangle.setFill(Color.DARKRED);
 
-    //-------------------------------------
+        //-------------------------------------
 
     }
 

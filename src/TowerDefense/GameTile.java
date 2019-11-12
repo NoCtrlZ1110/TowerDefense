@@ -32,7 +32,7 @@ public class GameTile {
     static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
-    static int[][] roadLocation = new int[15][2];
+    static int[][] roadLocation = new int[ROAD_NUM][2];
     // Mảng lưu trữ các vị trí cụ thể của đường đi (path)
 
     public GameTile() {
@@ -44,7 +44,7 @@ public class GameTile {
     }
 
     public static void ImportRoad() {
-        getData(roadLocation, 15, 2, pathTransition);
+        getData(roadLocation, ROAD_NUM, 2, pathTransition);
 
     }
 

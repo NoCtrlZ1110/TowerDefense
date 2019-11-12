@@ -7,12 +7,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -50,9 +49,11 @@ public class GameField {
         //Welcome.setLocation(100,100);
         pane.getChildren().add(Welcome);
         pane.getChildren().add(startBtn);
-        stage.setTitle("Tower Defense 1.0");
+        stage.setTitle("Tower Defense 1.2");
         stage.setScene(new Scene(pane, 960, 540));
+        stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new Image("file:images/love.jpg"));
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -60,7 +61,8 @@ public class GameField {
         stage.close();
         // layout = new Pane();
 
-        Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
+        // Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
+        Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         // [Vẽ ra map] -------------------
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
@@ -68,35 +70,24 @@ public class GameField {
         for (int i = 0; i < ROW_NUM; i++)
             for (int j = 0; j < COL_NUM; j++) {
                 tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
-                tiled[i][j].setFitHeight(80);
-                tiled[i][j].setFitWidth(80);
-                tiled[i][j].setLocation(j * 80, i * 80);
+                tiled[i][j].setFitHeight(TILE_WIDTH);
+                tiled[i][j].setFitWidth(TILE_WIDTH);
+                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
                 layout.getChildren().add(tiled[i][j]);
             }
-
         //--------------------------------
+
 
         // [Tạo đường đi cho lính] -------
 
         final Path path = new Path();
-        path.getElements().add(new MoveTo(-80, 760));
+        path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
 
         for (int i = 0; i < ROAD_NUM; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
         //-------------------------------
-
-        // [Tạo ra lính] ----------------
-
-        for (int i = 0; i < 20; i++) {
-            Enemy minion = new Enemy(-80, 720, pathRedEnemy);
-            minion.setFitHeight(70);
-            minion.setFitWidth(70);
-            minion.setSpeed(2);
-            enemies.add(minion);
-            layout.getChildren().add(minion);
-        }
-
+        addEnemiesWave();
         //-----------------------------
 
         // [Cho lính di chuyển theo path] ---
@@ -115,7 +106,7 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                towers.forEach(Tower::shoot);
+                towers.forEach(Tower::findTarget);
             }
         };
 
@@ -137,11 +128,12 @@ public class GameField {
             } else
                 gameScene.setCursor(Cursor.DEFAULT);
 
-            Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
-            System.out.println(point);
+            Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
+            //System.out.println(point);
             if (getMapType(point.getX(), point.getY()).equals("6"))
                 towers.forEach(t -> {
-                    if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80)
+                    if (Math.abs(point.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
+                            Math.abs(point.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH)
                         t.showRange();
                     else if (layout.getChildren().contains(t.rangeCircle))
                         layout.getChildren().remove(t.rangeCircle);
@@ -153,6 +145,7 @@ public class GameField {
         });
 
         //-----------------------------
+
 
         // [Click để xây tháp] --------
 
@@ -236,10 +229,10 @@ public class GameField {
         tower.showTower(location);
         // tower.showRange();
         towers.add(tower);
-        setMapType(location.getX() / 80, location.getY() / 80, 6);
-        setMapType(location.getX() / 80, location.getY() / 80 + 1, 6);
-        setMapType(location.getX() / 80 + 1, location.getY() / 80, 6);
-        setMapType(location.getX() / 80 + 1, location.getY() / 80 + 1, 6);
+        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
+        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
+        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
+        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
     }
 
     public static void removeTower() {
@@ -248,4 +241,17 @@ public class GameField {
     }
 
     public void upgradeTower() { }
+
+    public static void addEnemiesWave() {
+        // [Tạo ra lính] ----------------
+
+        for (int i = 0; i < 20; i++) {
+            Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
+            minion.setFitHeight(70);
+            minion.setFitWidth(70);
+            minion.setSpeed(1.2);
+            enemies.add(minion);
+            layout.getChildren().add(minion);
+        }
+    }
 }
