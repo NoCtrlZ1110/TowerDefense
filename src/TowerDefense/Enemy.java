@@ -10,10 +10,10 @@ import static TowerDefense.GameField.layout;
 public class Enemy extends GameEntity {
     double speed;
     double HP = 100;
+    Rectangle hp_bar = new Rectangle();
     public Enemy(String path) {
         super(path);
     }
-    Rectangle rectangle = new Rectangle();
 
     public void setSpeed(double speed) {
         this.speed = speed;
@@ -22,20 +22,19 @@ public class Enemy extends GameEntity {
     public Enemy(int x, int y, String path) {
         super(path);
         setLocation(x,y);
-        layout.getChildren().add(rectangle);
+        layout.getChildren().add(hp_bar);
     }
 
     // [Hàm hiển thị thanh máu] ---------
 
     public void showHP() {
-        rectangle.setX(this.getTranslateX());
-        rectangle.setY(this.getTranslateY()-10);
-        rectangle.setWidth(this.HP/10*6);
-        rectangle.setHeight(5);
-        rectangle.setFill(Color.DARKRED);
+        hp_bar.setX(this.getTranslateX());
+        hp_bar.setY(this.getTranslateY()-10);
+        hp_bar.setWidth(this.HP / 10 * 6);
+        hp_bar.setHeight(5);
+        hp_bar.setFill(Color.DARKRED);
 
         //-------------------------------------
-
     }
 
     // [Hàm di chuyển theo path được truyền vào]

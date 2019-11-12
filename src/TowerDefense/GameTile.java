@@ -16,9 +16,8 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
-    // static map = new Map(ROW_NUM, COL_NUM);
+    // static Map map = new Map(ROW_NUM, COL_NUM);
     static int[][] map = new int[ROW_NUM][COL_NUM];
-
     /* Các loại giá trị của mảng map:
        0: không có gì
        1: đường đi
