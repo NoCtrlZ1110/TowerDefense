@@ -64,6 +64,7 @@ public class GameField {
         // Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
+
         // [Vẽ ra map] -------------------
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
 

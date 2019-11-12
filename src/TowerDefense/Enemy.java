@@ -1,5 +1,6 @@
 package TowerDefense;
 
+import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
@@ -44,6 +45,8 @@ public class Enemy extends GameEntity {
         //Creating a path transition
         PathTransition pathTransition = new PathTransition();
 
+        //Điều chỉnh gia tốc lúc xuất phát và kết thúc.
+        pathTransition.setInterpolator(Interpolator.LINEAR);
         //Setting the duration of the path transition
         pathTransition.setDuration(Duration.millis(1000 * 51 / speed));
 
