@@ -48,7 +48,7 @@ public class GameField {
         stage.setScene(new Scene(pane, 960, 540));
         stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.show();
 
 
