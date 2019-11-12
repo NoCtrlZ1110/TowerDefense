@@ -7,6 +7,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -25,10 +27,14 @@ public class GameField {
 
     static int money;
     static int hp;
+    private static boolean is_paused = false;
+
+    public static Pane layout = new Pane();
+    public static Pane upperLayout = new Pane();
 
     public static void welcomeScreen(Stage stage) {
-        imageObject power = new imageObject("file:images/start.png");
         Pane pane = new Pane();
+        imageObject power = new imageObject("file:images/start.png");
         Button startBtn = new Button(" Start ");
         startBtn.setGraphic(power);
         startBtn.setLayoutX(90);
@@ -50,11 +56,9 @@ public class GameField {
         stage.show();
     }
 
-    public static Pane layout;
-
     public static void gameScreen(Stage stage) {
         stage.close();
-        layout = new Pane();
+        // layout = new Pane();
 
         Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
 
@@ -69,8 +73,8 @@ public class GameField {
                 tiled[i][j].setLocation(j * 80, i * 80);
                 layout.getChildren().add(tiled[i][j]);
             }
-        //--------------------------------
 
+        //--------------------------------
 
         // [Tạo đường đi cho lính] -------
 
@@ -150,7 +154,6 @@ public class GameField {
 
         //-----------------------------
 
-
         // [Click để xây tháp] --------
 
         layout.setOnMouseClicked(event -> {
@@ -190,6 +193,21 @@ public class GameField {
             }
         });
 
+        imageObject pauseImage = new imageObject("file:images/pause.png");
+        Button pauseBtn = new Button("");
+        pauseBtn.setLayoutX(1200);
+        pauseBtn.setLayoutY(50);
+        pauseImage.setFitWidth(70);
+        pauseImage.setFitHeight(70);
+        pauseBtn.setMaxWidth(70);
+        pauseBtn.setMaxHeight(70);
+        pauseBtn.setGraphic(pauseImage);
+        pauseBtn.setOnAction(event -> {
+            System.out.println("pause...");
+            pauseScreen(stage);
+        });
+        // layout.getChildren().add(pauseBtn);
+
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         // ------------------------
@@ -198,6 +216,15 @@ public class GameField {
         timer.start();
         timeline.play();
         stage.show();
+    }
+
+    public static void pauseScreen(Stage stage) {
+        upperLayout = new Pane();
+        // pausescreen on top
+        imageObject background = new imageObject("file:images/black_background.png");
+        upperLayout.getChildren().add(background);
+
+        // layout.getChildren().remove(background);
     }
 
     public static void buyTower() { money -= 10; }
