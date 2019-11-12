@@ -16,9 +16,8 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
-    // static map = new Map(ROW_NUM, COL_NUM);
+    static Map _map = new Map(ROW_NUM, COL_NUM);
     static int[][] map = new int[ROW_NUM][COL_NUM];
-
     /* Các loại giá trị của mảng map:
        0: không có gì
        1: đường đi
@@ -32,7 +31,7 @@ public class GameTile {
     static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
-    static int[][] roadLocation = new int[15][2];
+    static int[][] roadLocation = new int[ROAD_NUM][2];
     // Mảng lưu trữ các vị trí cụ thể của đường đi (path)
 
     public GameTile() {
@@ -40,12 +39,16 @@ public class GameTile {
 
     public static void importMap() {
         getData(map, ROW_NUM, COL_NUM, pathMap);
+        getData(_map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
+        for (int i = 0; i < ROW_NUM; i++)
+            for (int j = 0; j < COL_NUM; j++)
+                System.out.print(map[i][j] != _map.getCoreTable()[i][j]);
+
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
-    public static void importRoad() {
-        getData(roadLocation, 15, 2, pathTransition);
-
+    public static void ImportRoad() {
+        getData(roadLocation, ROAD_NUM, 2, pathTransition);
     }
 
     public static String getTileType(int x, int y) {
@@ -72,7 +75,8 @@ public class GameTile {
                 String temp = sc.nextLine(); //doc dong mang trong file
                 //System.out.println(temp);
                 String[] items = temp.split(" "); //tach chuoi thanh cac phan tu chuoi
-                for (int j = 0; j < width; j++) arr[i][j] = Integer.parseInt(items[j]);
+                for (int j = 0; j < width; j++)
+                    arr[i][j] = Integer.parseInt(items[j]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -83,8 +87,7 @@ public class GameTile {
     // Nếu có trả về vị trí để xây tháp
 
     public static Point TowerBuildLocation(MouseEvent event) {
-
-        Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
+        Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
         String s = getMapType(point.getX(), point.getY());
 
         // Điều kiện ở đây hơi khó hiểu nên không cần phải đọc đâu @@
@@ -93,13 +96,13 @@ public class GameTile {
             layout.getChildren().add(border);
 
         if (s.equals("2") && !(getMapType(point.getX() + 1, point.getY()).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6"))) {
-            return new Point((point.getX()) * 80, (point.getY()) * 80);
+            return new Point((point.getX()) * TILE_WIDTH, (point.getY()) * TILE_WIDTH);
         } else if (s.equals("3") && !((getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX() - 1, point.getY() + 1).equals("6") || getMapType(point.getX(), point.getY() + 1).equals("6")))) {
-            return new Point((point.getX() - 1) * 80, (point.getY()) * 80);
+            return new Point((point.getX() - 1) * TILE_WIDTH, (point.getY()) * TILE_WIDTH);
         } else if (s.equals("4") && !(getMapType(point.getX() - 1, point.getY() - 1).equals("6") || getMapType(point.getX() - 1, point.getY()).equals("6") || getMapType(point.getX(), point.getY() - 1).equals("6"))) {
-            return new Point((point.getX() - 1) * 80, (point.getY() - 1) * 80);
+            return new Point((point.getX() - 1) * TILE_WIDTH, (point.getY() - 1) * TILE_WIDTH);
         } else if (s.equals("5") && !(getMapType(point.getX(), point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() - 1).equals("6") || getMapType(point.getX() + 1, point.getY() + 1).equals("6"))) {
-            return new Point(point.getX() * 80, (point.getY() - 1) * 80);
+            return new Point(point.getX() * TILE_WIDTH, (point.getY() - 1) * TILE_WIDTH);
         } else {
             layout.getChildren().remove(border);
             return null;

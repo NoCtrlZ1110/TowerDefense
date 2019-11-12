@@ -20,6 +20,10 @@ public class Map {
         */
     }
 
+    public int[][] getCoreTable() {
+        return map;
+    }
+
     public String getType(int x, int y) {
         if (y < this.row_num && x < this.col_num)
             return Integer.toString(map[y][x]);
@@ -29,5 +33,9 @@ public class Map {
 
     public void setType(int x, int y, int n) {
         map[y][x] = n;
+    }
+
+    public boolean isTowerPlaced(int x, int y) {
+        return "6".equals(getType(x, y));
     }
 }

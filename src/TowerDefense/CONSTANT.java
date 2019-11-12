@@ -11,5 +11,7 @@ public class CONSTANT {
     public static final int COL_NUM = 16;
     public static final int ROW_NUM = 10;
     public static final int ROAD_NUM = 15;
+
+    public static final int TILE_WIDTH = 80;
 }
 
