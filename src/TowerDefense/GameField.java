@@ -29,13 +29,11 @@ public class GameField {
     private static boolean is_paused = false;
 
     public static Pane layout = new Pane();
-    public static Pane upperLayout = new Pane();
 
     public static void welcomeScreen(Stage stage) {
         Pane pane = new Pane();
         imageObject power = new imageObject("file:images/start.png");
-        Button startBtn = new Button(" Start ");
-        startBtn.setGraphic(power);
+        Button startBtn = new Button(" Start ", power);
         startBtn.setLayoutX(90);
         startBtn.setLayoutY(433);
         startBtn.setMinWidth(126);
@@ -46,14 +44,18 @@ public class GameField {
         });
 
         imageObject Welcome = new imageObject("file:images/Welcome_screen.png");
-        //Welcome.setLocation(100,100);
+        // Welcome.setLocation(100, 100);
         pane.getChildren().add(Welcome);
         pane.getChildren().add(startBtn);
         stage.setTitle("Tower Defense 1.2");
         stage.setScene(new Scene(pane, 960, 540));
         // stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMinWidth(960);
+        stage.setMaxWidth(960);
+        stage.setMinHeight(540);
+        stage.setMaxHeight(540);
         stage.show();
     }
 
@@ -63,19 +65,12 @@ public class GameField {
 
         // Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
+        stage.setMinWidth(TILE_WIDTH * COL_NUM);
+        stage.setMaxWidth(TILE_WIDTH * COL_NUM);
+        stage.setMinHeight(TILE_WIDTH * ROW_NUM);
+        stage.setMaxHeight(TILE_WIDTH * ROW_NUM);
 
-
-        // [Vẽ ra map] -------------------
-        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
-
-        for (int i = 0; i < ROW_NUM; i++)
-            for (int j = 0; j < COL_NUM; j++) {
-                tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
-                tiled[i][j].setFitHeight(TILE_WIDTH);
-                tiled[i][j].setFitWidth(TILE_WIDTH);
-                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
-                layout.getChildren().add(tiled[i][j]);
-            }
+        drawMap();
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
@@ -107,9 +102,6 @@ public class GameField {
                 towers.forEach(Tower::shoot);
             }
         };
-        // [?] tại sao cái timer này ko gộp với timeline ở trên?
-        // => showHP gộp vào 1 hàm show duy nhất?
-
         // [Hiện khung chọn vị trí xây tháp] ---
 
         border.setStroke(Color.DARKRED);
@@ -128,24 +120,22 @@ public class GameField {
             } else
                 gameScene.setCursor(Cursor.DEFAULT);
 
-            Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
-            //System.out.println(point);
-            if (getMapType(point.getX(), point.getY()).equals("6"))
+            Point point = new Point((int) event.getSceneX() / TILE_WIDTH,
+                    (int) event.getSceneY() / TILE_WIDTH);
+            // System.out.println(point);
+            if (isTowerPlaced(event))
                 towers.forEach(t -> {
                     if (Math.abs(point.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
                             Math.abs(point.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH)
                         t.showRange();
-                    else if (layout.getChildren().contains(t.rangeCircle))
-                        layout.getChildren().remove(t.rangeCircle);
+                    else
+                        t.removeRange();
                 });
-            else towers.forEach(t -> {
-                if (layout.getChildren().contains(t.rangeCircle))
-                    layout.getChildren().remove(t.rangeCircle);
-            });
+            else
+                towers.forEach(Tower::removeRange);
         });
 
         //-----------------------------
-
 
         // [Click để xây tháp] --------
 
@@ -155,49 +145,39 @@ public class GameField {
 
             Point location = TowerBuildLocation(event);
             if (location != null) {
-                placeTower(location);
-            } else {
-                // kiểm tra thêm có phải đường đi hay không nữa là chắc chắn là đã có tháp :v
+                // bonus: chọn loại tower
+                Tower tower = new Tower("file:images/Tower.png");
+                buyTower(tower);
+                placeTower(tower, location);
+            } else if (isTowerPlaced(event)) {
                 // bán/upgrade tháp ở đây
                 // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
-                /*
                 // tìm tower đang ở vị trí này
-                Tower local_tower = null; // findTowerAt(location);
-                Point point = new Point((int) event.getSceneX() / 80, (int) event.getSceneY() / 80);
-                for (Tower t: towers)
-                    if (Math.abs(point.getX() * 80 - t.getPosition().getX()) <= 80 && Math.abs(point.getY() * 80 - t.getPosition().getY()) <= 80) {
-                        local_tower = t;
-                        break;
-                    }
-                */
-                System.out.println("clicked!");
-
+                Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
                 boolean is_sell_chosen = true;
                 if (is_sell_chosen) {
                     // bán: bán với giá = 100% giá mua (có lẽ chỉ 80% thôi)
-                    sellTower();
-                    removeTower();
+                    sellTowerAt(point);
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
                     // upgrade có thể có giá
-                    upgradeTower();
+                    Tower local_tower = findTowerAt(point);
+                    upgradeTower(local_tower);
                 }
-                System.out.println("waiting for being sold...");
             }
         });
 
         imageObject pauseImage = new imageObject("file:images/pause.png");
         pauseImage.scaleTo(70, 70);
-        Button pauseBtn = new Button("");
+        Button pauseBtn = new Button("", pauseImage);
         pauseBtn.setLayoutX(1200);
         pauseBtn.setLayoutY(50);
         pauseBtn.setMaxWidth(70);
         pauseBtn.setMaxHeight(70);
-        pauseBtn.setGraphic(pauseImage);
         pauseBtn.setOnAction(event -> {
             System.out.println("pause...");
-            pauseScreen(stage);
+            // pauseScreen(stage);
         });
         // layout.getChildren().add(pauseBtn);
 
@@ -212,7 +192,7 @@ public class GameField {
     }
 
     public static void pauseScreen(Stage stage) {
-        upperLayout = new Pane();
+        Pane upperLayout = new Pane();
         // pausescreen on top
         imageObject background = new imageObject("file:images/black_background.png");
         upperLayout.getChildren().add(background);
@@ -221,12 +201,39 @@ public class GameField {
     }
     // -------------------------
 
-    public static void buyTower() { money -= 10; }
+    public static void drawMap() {
+        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
 
-    public static void sellTower() { money += 8; }
+        for (int i = 0; i < ROW_NUM; i++)
+            for (int j = 0; j < COL_NUM; j++) {
+                tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
+                tiled[i][j].scaleTo(TILE_WIDTH, TILE_WIDTH);
+                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
+                layout.getChildren().add(tiled[i][j]);
+            }
+    }
 
-    public static void placeTower(Point location) {
-        Tower tower = new Tower("file:images/Tower.png");
+    public static Tower findTowerAt(Point location) {
+        for (Tower t: towers)
+            if (Math.abs(location.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
+                    Math.abs(location.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH) {
+                return t;
+            }
+        return null;
+    }
+
+    public static void buyTower(Tower tower) {
+        money -= tower.getPrice();
+    }
+
+    public static void sellTowerAt(Point location) {
+        // BUG: findTowerAt đang dính lỗi (do xoá chưa triệt để)
+        Tower tower = findTowerAt(location);
+        money += (int)(tower.getPrice() * 0.8);
+        removeTowerAt(location);
+    }
+
+    public static void placeTower(Tower tower, Point location) {
         tower.showTower(location);
         // tower.showRange();
         towers.add(tower);
@@ -236,17 +243,26 @@ public class GameField {
         setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
     }
 
-    public static void removeTower() {
-        // Java ko có từ khoá pass, buồn :(
-        // chưa nghĩ ra đặt cái gì vào argument :(
+    public static void removeTowerAt(Point location) {
+        Tower tower = findTowerAt(location);
+        if (tower != null) {
+            tower.destroy();
+            towers.remove(tower);
+            // BUG: khôi phục trạng thái cũ trước khi đặt tháp
+            // setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 2);
+            // setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 3);
+            // setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 5);
+            // setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 4);
+        }
     }
 
-    public static void upgradeTower() { }
+    public static void upgradeTower(Tower tower) { }
 
     public static void addEnemiesWave() {
         // [Tạo ra lính] ----------------
         for (int i = 0; i < 20; i++) {
-            Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
+            // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
+            Enemy minion = new NormalEnemy(-TILE_WIDTH, 720);
             minion.setFitHeight(70);
             minion.setFitWidth(70);
             minion.setSpeed(1.2);

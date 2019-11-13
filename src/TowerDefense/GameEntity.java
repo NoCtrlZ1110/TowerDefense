@@ -3,20 +3,20 @@ package TowerDefense;
 import javafx.scene.image.ImageView;
 
 public abstract class GameEntity extends ImageView {
-    String path;
+    String imageUrl;
 
-    public GameEntity(String path) {
-        super(path);
+    public GameEntity(String imageUrl) {
+        super(imageUrl);
     }
 
-    public GameEntity(int x, int y, String path) {
+    public GameEntity(int x, int y, String imageUrl) {
         super.setTranslateX(x);
         super.setTranslateX(y);
-        this.path = path;
+        this.imageUrl = imageUrl;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setLocation(int x, int y) {
@@ -24,20 +24,17 @@ public abstract class GameEntity extends ImageView {
         setTranslateY(y);
     }
 
-    public double GetX()
-    {
+    public double GetX() {
         return this.getTranslateX();
     }
 
-    public double GetY()
-    {
+    public double GetY() {
         return this.getTranslateY();
     }
     public void showLocation() {
         System.out.println("x: " + getTranslateX() + " y: " + getTranslateY());
     }
     public Point getLocation() {
-        return new Point((int)getTranslateX(),(int)getTranslateY());
+        return new Point((int)getTranslateX(), (int)getTranslateY());
     }
-
 }

@@ -7,14 +7,19 @@ import javafx.scene.shape.Line;
 import static TowerDefense.GameField.*;
 
 public class Tower extends GameEntity {
-    Enemy target = null;
+    int price = 10;
+    Point position;
     int range = 200;
     Circle rangeCircle = new Circle();
-    Point position;
-    Line line = new Line();
+    private Line line = new Line();
+    private boolean is_destroyed = false;
 
-    public Tower(String path) {
-        super(path);
+    public Tower(String imageUrl) {
+        super(imageUrl);
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public Point getPosition() {
@@ -25,17 +30,6 @@ public class Tower extends GameEntity {
         this.position = position;
     }
 
-    public void showRange() {
-        rangeCircle.setRadius(range);
-        rangeCircle.setLayoutX(this.getTranslateX() + 80);
-        rangeCircle.setLayoutY(this.getTranslateY() + 80);
-        rangeCircle.setFill(Color.TRANSPARENT);
-        //rangeCircle.setOpacity(0.6);
-        rangeCircle.setStrokeWidth(3);
-        rangeCircle.setStroke(Color.CADETBLUE);
-        if (!layout.getChildren().contains(rangeCircle)) layout.getChildren().add(rangeCircle);
-    }
-
     public int getRange() {
         return range;
     }
@@ -44,17 +38,49 @@ public class Tower extends GameEntity {
         this.range = range;
     }
 
+    public void showRange() {
+        if (is_destroyed)
+            return;
+
+        rangeCircle.setRadius(range);
+        rangeCircle.setLayoutX(this.getTranslateX() + 80);
+        rangeCircle.setLayoutY(this.getTranslateY() + 80);
+        rangeCircle.setFill(Color.TRANSPARENT);
+        //rangeCircle.setOpacity(0.6);
+        rangeCircle.setStrokeWidth(3);
+        rangeCircle.setStroke(Color.CADETBLUE);
+
+        if (!layout.getChildren().contains(rangeCircle))
+            layout.getChildren().add(rangeCircle);
+    }
+
+    public void removeRange() {
+        if (layout.getChildren().contains(rangeCircle))
+            layout.getChildren().remove(rangeCircle);
+    }
+
     public void showTower(Point location) {
+        if (is_destroyed)
+            return;
+
         this.position = location;
         this.setLocation(location.getX(), location.getY());
         if (!layout.getChildren().contains(this))
             layout.getChildren().add(this);
     }
 
+    public void destroy() {
+        removeRange();
+        layout.getChildren().remove(line);
+        layout.getChildren().remove(this);
+        is_destroyed = true;
+    }
+
     public Enemy findTarget() {
         for (Enemy enemy: enemies) {
+            int tower_width = 160;
             Point e = new Point(enemy.getLocation().getX()+40,enemy.getLocation().getY()+40);
-            Point t = new Point(getPosition().getX()+80,getPosition().getY()+80);
+            Point t = new Point(getPosition().getX()+tower_width/2,getPosition().getY()+tower_width/2);
             if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
@@ -62,19 +88,21 @@ public class Tower extends GameEntity {
                 line.setEndY(e.getY());
                 if (!layout.getChildren().contains(line))
                     layout.getChildren().add(line);
-                target = enemy;
+
                 return enemy;
             }
         }
         layout.getChildren().remove(line);
-        target = null;
         return null;
     }
 
     public void shoot() {
-        target = findTarget();
+        if (is_destroyed)
+            return;
+
+        Enemy target = findTarget();
         if (target != null) {
-            Bullet b = new Bullet(range, 1, 1, position.getX(), position.getY(),
+            Bullet b = new Bullet(1, 1, position.getX(), position.getY(),
                     (int) target.getTranslateX() + 40, (int) target.getTranslateY() + 40
             );
             // b.move();
@@ -83,7 +111,6 @@ public class Tower extends GameEntity {
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);
-                target = null;
             }
         }
     }
