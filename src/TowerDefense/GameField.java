@@ -51,7 +51,7 @@ public class GameField {
         pane.getChildren().add(startBtn);
         stage.setTitle("Tower Defense 1.2");
         stage.setScene(new Scene(pane, 960, 540));
-        stage.initStyle(StageStyle.UTILITY);
+        // stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setResizable(false);
         stage.show();
@@ -104,7 +104,7 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                towers.forEach(Tower::findTarget);
+                towers.forEach(Tower::shoot);
             }
         };
         // [?] tại sao cái timer này ko gộp với timeline ở trên?
@@ -245,7 +245,6 @@ public class GameField {
 
     public static void addEnemiesWave() {
         // [Tạo ra lính] ----------------
-
         for (int i = 0; i < 20; i++) {
             Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
             minion.setFitHeight(70);

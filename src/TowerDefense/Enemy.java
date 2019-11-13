@@ -9,22 +9,31 @@ import javafx.util.Duration;
 import static TowerDefense.GameField.layout;
 
 public class Enemy extends GameEntity {
-    double speed;
-    double hp = 100;
-    Rectangle hp_bar = new Rectangle();
+    protected double speed;
+    protected double hp = 100;
+    protected int killed_bonus = 10;
+    protected Rectangle hp_bar = new Rectangle();
 
     public Enemy(String path) {
         super(path);
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
     }
 
     public Enemy(int x, int y, String path) {
         super(path);
         setLocation(x, y);
         layout.getChildren().add(hp_bar);
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public boolean is_dead() {
+        return (hp <= 0);
+    }
+
+    public int getKilledBonus() {
+        return (is_dead() ? killed_bonus : 0);
     }
 
     // [Hàm hiển thị thanh máu] ---------
@@ -39,7 +48,6 @@ public class Enemy extends GameEntity {
     }
 
     // [Hàm di chuyển theo path được truyền vào]
-
     public void move(Path path) {
 
         //Creating a path transition
@@ -66,11 +74,13 @@ public class Enemy extends GameEntity {
         //Playing the animation
         pathTransition.play();
     }
+
     //-----------------------------
 
     public void beShotBy(Bullet b) {
         decreaseHP(b.getDamage());
-        if (hp < 0)
+        showHP();
+        if (hp <= 0)
             disappear();
     }
 
@@ -79,6 +89,6 @@ public class Enemy extends GameEntity {
     }
 
     private void disappear() {
-
+        layout.getChildren().remove(this);
     }
 }

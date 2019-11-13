@@ -47,22 +47,23 @@ public class Tower extends GameEntity {
     public void showTower(Point location) {
         this.position = location;
         this.setLocation(location.getX(), location.getY());
-        if (!layout.getChildren().contains(this)) layout.getChildren().add(this);
+        if (!layout.getChildren().contains(this))
+            layout.getChildren().add(this);
     }
 
     public Enemy findTarget() {
-        for (int i = 0; i < enemies.size(); i++) {
-            Point e = new Point(enemies.get(i).getLocation().getX()+40,enemies.get(i).getLocation().getY()+40);
+        for (Enemy enemy: enemies) {
+            Point e = new Point(enemy.getLocation().getX()+40,enemy.getLocation().getY()+40);
             Point t = new Point(getPosition().getX()+80,getPosition().getY()+80);
-            if (t.getDistance(e) <= range)
-            {
+            if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
                 line.setStartY(t.getY());
                 line.setEndY(e.getY());
-                if (!layout.getChildren().contains(line)) layout.getChildren().add(line);
-                target = enemies.get(i);
-                return enemies.get(i);
+                if (!layout.getChildren().contains(line))
+                    layout.getChildren().add(line);
+                target = enemy;
+                return enemy;
             }
         }
         layout.getChildren().remove(line);
@@ -71,14 +72,19 @@ public class Tower extends GameEntity {
     }
 
     public void shoot() {
-        Enemy target = findTarget();
-        /*
-        Bullet b = new Bullet(1, range, 1,
-                position.getX(), position.getY(),
-                target.getTranslateX() + 40, target.getTranslateY() + 40
-        );
-        b.move();
-        target.beShotBy(b);
-        */
+        target = findTarget();
+        if (target != null) {
+            Bullet b = new Bullet(range, 1, 1, position.getX(), position.getY(),
+                    (int) target.getTranslateX() + 40, (int) target.getTranslateY() + 40
+            );
+            // b.move();
+            target.beShotBy(b);
+            if (target.is_dead()) {
+                money += target.getKilledBonus();
+                System.out.println("new money = " + money);
+                enemies.remove(target);
+                target = null;
+            }
+        }
     }
 }
