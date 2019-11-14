@@ -11,16 +11,15 @@ import static TowerDefense.GameField.layout;
 public class Enemy extends GameEntity {
     protected double speed;
     protected double hp = 100;
-    protected final double defense_point = 0;
     protected int killed_bonus = 10;
     protected Rectangle hp_bar = new Rectangle();
 
-    public Enemy(String imageUrl) {
-        super(imageUrl);
+    public Enemy(String path) {
+        super(path);
     }
 
-    public Enemy(int x, int y, String imageUrl) {
-        super(imageUrl);
+    public Enemy(int x, int y, String path) {
+        super(path);
         setLocation(x, y);
         layout.getChildren().add(hp_bar);
     }
@@ -37,16 +36,20 @@ public class Enemy extends GameEntity {
         return (is_dead() ? killed_bonus : 0);
     }
 
+    // [Hàm hiển thị thanh máu] ---------
+
     public void showHP() {
         hp_bar.setX(this.getTranslateX());
         hp_bar.setY(this.getTranslateY()-10);
         hp_bar.setWidth(this.hp / 10*6);
         hp_bar.setHeight(5);
         hp_bar.setFill(Color.DARKRED);
+        //-------------------------------------
     }
 
     // [Hàm di chuyển theo path được truyền vào]
     public void move(Path path) {
+
         //Creating a path transition
         PathTransition pathTransition = new PathTransition();
 
@@ -67,9 +70,12 @@ public class Enemy extends GameEntity {
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
 
+
         //Playing the animation
         pathTransition.play();
     }
+
+    //-----------------------------
 
     public void beShotBy(Bullet b) {
         decreaseHP(b.getDamage());
@@ -79,7 +85,7 @@ public class Enemy extends GameEntity {
     }
 
     private void decreaseHP(double amount) {
-        hp -= Math.max(amount - defense_point, 0);
+        hp -= amount;
     }
 
     private void disappear() {

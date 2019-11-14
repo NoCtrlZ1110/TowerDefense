@@ -23,7 +23,6 @@ public class GameTile {
 
     public static void importMap() {
         getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
-        map.backup();
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
@@ -63,8 +62,9 @@ public class GameTile {
     // Nếu có trả về vị trí để xây tháp
 
     public static Point TowerBuildLocation(MouseEvent event) {
-        int point_x = (int) event.getSceneX() / TILE_WIDTH;
-        int point_y = (int) event.getSceneY() / TILE_WIDTH;
+        Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
+        int point_x = point.getX();
+        int point_y = point.getY();
         String s = map.getType(point_x, point_y);
 
         // Điều kiện ở đây hơi khó hiểu nên không cần phải đọc đâu @@
@@ -85,19 +85,9 @@ public class GameTile {
             return null;
         }
     }
-
-    public static boolean isTowerPlaced(MouseEvent event) {
-        int point_x = (int) event.getSceneX() / TILE_WIDTH;
-        int point_y = (int) event.getSceneY() / TILE_WIDTH;
-        return map.isTowerPlacedAt(point_x, point_y);
+    /*
+    public static boolean isTowerPlacedAt() {
+        return true;
     }
-
-    public static void resetMap(int x, int y) {
-        map.reset(x, y);
-    }
-
-    public static Point getLocationFromMouseEvent(MouseEvent event) {
-        return new Point((int) event.getSceneX() / TILE_WIDTH,
-                (int) event.getSceneY() / TILE_WIDTH);
-    }
+    */
 }
