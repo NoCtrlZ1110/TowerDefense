@@ -38,21 +38,4 @@ public class Map {
     public boolean isTowerPlacedAt(int x, int y) {
         return "6".equals(getType(x, y));
     }
-
-    public void reset(int x, int y) {
-        map[y][x] = original_map[y][x];
-        map[y + 1][x] = original_map[y + 1][x];
-        map[y][x + 1] = original_map[y][x + 1];
-        map[y + 1][x + 1] = original_map[y + 1][x + 1];
-    }
-
-    public void backup() {
-        if (original_map == null) {
-            original_map = new int[this.row_num][this.col_num];
-
-            for (int i = 0; i < this.row_num; i++) {
-                System.arraycopy(map[i], 0, original_map[i],0, this.col_num);
-            }
-        }
-    }
 }
