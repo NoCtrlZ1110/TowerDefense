@@ -24,17 +24,17 @@ public abstract class GameEntity extends ImageView {
         setTranslateY(y);
     }
 
-    public double GetX() {
-        return this.getTranslateX();
+    public Point getLocation() {
+        return new Point((int)getTranslateX(), (int)getTranslateY());
     }
 
-    public double GetY() {
-        return this.getTranslateY();
-    }
     public void showLocation() {
         System.out.println("x: " + getTranslateX() + " y: " + getTranslateY());
     }
-    public Point getLocation() {
-        return new Point((int)getTranslateX(), (int)getTranslateY());
+    public double GetX() {
+        return this.getTranslateX();
+    }
+    public double GetY() {
+        return this.getTranslateY();
     }
 }

@@ -42,6 +42,13 @@ public class Map {
         return "6".equals(getType(x, y));
     }
 
+    public void reset(int x, int y) {
+        setType(x, y, original_map[y][x]);
+        setType(x, y + 1, original_map[y + 1][x]);
+        setType(x + 1, y, original_map[y][x + 1]);
+        setType(x + 1, y + 1, original_map[y + 1][x + 1]);
+    }
+
     public void backup() {
         if (original_map == null) {
             original_map = new int[this.row_num][this.col_num];

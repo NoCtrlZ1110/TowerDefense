@@ -35,11 +35,9 @@ public class GameTile {
         return Integer.toString(tileType[x][y]);
     }
 
-    /*
     public static String getMapType(int x, int y) {
         return map.getType(x, y);
     }
-    */
 
     public static void setMapType(int x, int y, int n) {
         map.setType(x, y, n);
@@ -94,7 +92,12 @@ public class GameTile {
         return map.isTowerPlacedAt(point_x, point_y);
     }
 
-    public void restoreMap(int x, int y) {
+    public static void resetMap(int x, int y) {
+        map.reset(x, y);
+    }
 
+    public static Point getLocationFromMouseEvent(MouseEvent event) {
+        return new Point((int) event.getSceneX() / TILE_WIDTH,
+                (int) event.getSceneY() / TILE_WIDTH);
     }
 }

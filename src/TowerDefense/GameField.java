@@ -114,10 +114,15 @@ public class GameField {
             Point location = TowerBuildLocation(event);
 
             if (location != null) {
+                System.out.println(location.getX() + " " + location.getY());
                 gameScene.setCursor(Cursor.HAND);
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
-            } else
+            }
+            /*else if (isTowerPlaced(event))
+                gameScene.setCursor(Cursor.HAND);
+            */
+            else
                 gameScene.setCursor(Cursor.DEFAULT);
 
             Point point = new Point((int) event.getSceneX() / TILE_WIDTH,
@@ -154,10 +159,10 @@ public class GameField {
                 // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
                 // tìm tower đang ở vị trí này
-                Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
+                Point point = getLocationFromMouseEvent(event);
                 boolean is_sell_chosen = true;
                 if (is_sell_chosen) {
-                    // bán: bán với giá = 100% giá mua (có lẽ chỉ 80% thôi)
+                    // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
                     sellTowerAt(point);
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
@@ -222,41 +227,29 @@ public class GameField {
         return null;
     }
 
-    public static void buyTower(Tower tower) {
+    public static void buyTower(Tower tower) { // , Point location) {
         money -= tower.getPrice();
     }
 
     public static void sellTowerAt(Point location) {
-        // BUG: findTowerAt đang dính lỗi (do xoá chưa triệt để)
-        Tower tower = findTowerAt(location);
-        money += (int)(tower.getPrice() * 0.8);
-        removeTowerAt(location);
-    }
-
-    public static void placeTower(Tower tower, Point location) {
-        tower.showTower(location);
-        // tower.showRange();
-        towers.add(tower);
-        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
-        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
-        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
-        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
-    }
-
-    public static void removeTowerAt(Point location) {
         Tower tower = findTowerAt(location);
         if (tower != null) {
+            money += (int)(tower.getPrice() * 0.8);
             tower.destroy();
             towers.remove(tower);
-            // BUG: khôi phục trạng thái cũ trước khi đặt tháp
-            // setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 2);
-            // setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 3);
-            // setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 5);
-            // setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 4);
         }
     }
 
-    public static void upgradeTower(Tower tower) { }
+    public static void placeTower(Tower tower, Point location) {
+        tower.placeAt(location);
+        // tower.showTower(); // đã show trong placeAt
+        // tower.showRange();
+        towers.add(tower);
+    }
+
+    public static void upgradeTower(Tower tower) {
+        System.out.println("I'm waiting for you...");
+    }
 
     public static void addEnemiesWave() {
         // [Tạo ra lính] ----------------

@@ -4,7 +4,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
+import static TowerDefense.CONSTANT.TILE_WIDTH;
 import static TowerDefense.GameField.*;
+import static TowerDefense.GameTile.resetMap;
+import static TowerDefense.GameTile.setMapType;
 
 public class Tower extends GameEntity {
     int price = 10;
@@ -59,21 +62,40 @@ public class Tower extends GameEntity {
             layout.getChildren().remove(rangeCircle);
     }
 
-    public void showTower(Point location) {
-        if (is_destroyed)
-            return;
-
+    public void placeAt(Point location) {
         this.position = location;
         this.setLocation(location.getX(), location.getY());
+        this.is_destroyed = false;
+
+        // getMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH)); -> 2
+        // getMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1)); -> 5
+        // getMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH)); -> 4
+        // getMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1)); -> 3
+
+        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
+        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
+        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
+        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
+
+        showTower();
+    }
+
+    public void showTower() {
+        if (this.is_destroyed) {
+            layout.getChildren().remove(this);
+            return;
+        }
         if (!layout.getChildren().contains(this))
             layout.getChildren().add(this);
     }
 
     public void destroy() {
+        // khôi phục trạng thái cũ trước khi đặt tháp
+        resetMap(this.position.getX() / TILE_WIDTH, this.position.getY() / TILE_WIDTH);
         removeRange();
         layout.getChildren().remove(line);
         layout.getChildren().remove(this);
-        is_destroyed = true;
+        this.is_destroyed = true;
     }
 
     public Enemy findTarget() {
