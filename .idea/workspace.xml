@@ -30,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="bullet" />
+        <entry key="$PROJECT_DIR$" value="back-end" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -102,8 +102,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.TowerDefense" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.Main" />
       </list>
@@ -172,6 +172,23 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -181,10 +198,29 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Thêm thanh máu cho enemy" />
     <option name="LAST_COMMIT_MESSAGE" value="Thêm thanh máu cho enemy" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/TowerDefense/GameField.java</url>
+          <line>102</line>
+          <properties class="TowerDefense.GameField" method="gameScreen">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
