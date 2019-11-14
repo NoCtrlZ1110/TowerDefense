@@ -1,7 +1,10 @@
 package TowerDefense;
 
+import sun.text.resources.cldr.ia.FormatData_ia;
+
 public class Map {
     private int[][] map;
+    private int[][] original_map = null;
     private int row_num;
     private int col_num;
 
