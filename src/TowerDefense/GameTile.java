@@ -85,9 +85,16 @@ public class GameTile {
             return null;
         }
     }
-    /*
-    public static boolean isTowerPlacedAt() {
-        return true;
+
+    public static boolean isTowerPlaced(Point point) {
+        return map.isTowerPlacedAt(point.getX(), point.getY());
     }
-    */
+
+    public static void resetMap(int x, int y) {
+        map.reset(x, y);
+    }
+
+    public static Point getLocationFromMouseEvent(MouseEvent event) {
+        return new Point((int) event.getSceneX() / TILE_WIDTH,
+                (int) event.getSceneY() / TILE_WIDTH);
 }
