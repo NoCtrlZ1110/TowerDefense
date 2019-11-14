@@ -13,5 +13,6 @@ public class CONSTANT {
     public static final int ROAD_NUM = 15;
 
     public static final int TILE_WIDTH = 80;
+    public static final int PREPARE_TIME = 12;
 }
 
