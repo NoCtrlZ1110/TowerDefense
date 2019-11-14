@@ -43,10 +43,21 @@ public class Map {
     }
 
     public void reset(int x, int y) {
+        System.out.println(y + " " + x);
+        System.out.println(map[y][x] + " " + original_map[y][x]);
+        System.out.println(map[y + 1][x] + " " + original_map[y + 1][x]);
+        System.out.println(map[y][x + 1] + " " + original_map[y][x + 1]);
+        System.out.println(map[y + 1][x + 1] + " " + original_map[y + 1][x + 1]);
+
         setType(x, y, original_map[y][x]);
         setType(x, y + 1, original_map[y + 1][x]);
         setType(x + 1, y, original_map[y][x + 1]);
         setType(x + 1, y + 1, original_map[y + 1][x + 1]);
+
+        System.out.println("-> " + map[y][x]);
+        System.out.println("-> " + map[y + 1][x]);
+        System.out.println("-> " + map[y][x + 1]);
+        System.out.println("-> " + map[y + 1][x + 1]);
     }
 
     public void backup() {
@@ -54,7 +65,7 @@ public class Map {
             original_map = new int[this.row_num][this.col_num];
 
             for (int i = 0; i < this.row_num; i++) {
-                System.arraycopy(map[i], 0,original_map[i],0, this.col_num);
+                System.arraycopy(map[i], 0, original_map[i],0, this.col_num);
             }
         }
     }

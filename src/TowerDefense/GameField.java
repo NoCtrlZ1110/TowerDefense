@@ -14,13 +14,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import javax.naming.TimeLimitExceededException;
 import java.util.ArrayList;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
 
 public class GameField {
-    static Rectangle border = new Rectangle(100, 100);
+    static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     static ArrayList<Tower> towers = new ArrayList<>();
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
@@ -112,23 +113,21 @@ public class GameField {
 
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
+            Point point = getLocationFromMouseEvent(event);
 
             if (location != null) {
-                System.out.println(location.getX() + " " + location.getY());
+                // System.out.println(location.getX() + " " + location.getY());
                 gameScene.setCursor(Cursor.HAND);
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
-            }
-            /*else if (isTowerPlaced(event))
+            } else if (isTowerPlaced(point)) {
                 gameScene.setCursor(Cursor.HAND);
-            */
-            else
+            }
+            else {
                 gameScene.setCursor(Cursor.DEFAULT);
-
-            Point point = new Point((int) event.getSceneX() / TILE_WIDTH,
-                    (int) event.getSceneY() / TILE_WIDTH);
+            }
             // System.out.println(point);
-            if (isTowerPlaced(event))
+            if (isTowerPlaced(point))
                 towers.forEach(t -> {
                     if (Math.abs(point.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
                             Math.abs(point.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH)
@@ -140,35 +139,34 @@ public class GameField {
                 towers.forEach(Tower::removeRange);
         });
 
-        //-----------------------------
-
-        // [Click để xây tháp] --------
-
         layout.setOnMouseClicked(event -> {
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
 
             Point location = TowerBuildLocation(event);
+            System.out.println("clicked " + location);
             if (location != null) {
+                border.setX(location.getX() + 33);
+                border.setY(location.getY() + 33);
                 // bonus: chọn loại tower
                 Tower tower = new Tower("file:images/Tower.png");
                 buyTower(tower);
                 placeTower(tower, location);
-            } else if (isTowerPlaced(event)) {
+            } else if (isTowerPlaced(getLocationFromMouseEvent(event))) {
                 // bán/upgrade tháp ở đây
                 // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
                 // tìm tower đang ở vị trí này
-                Point point = getLocationFromMouseEvent(event);
+                int x = (int)event.getSceneX();
+                int y = (int)event.getSceneY();
                 boolean is_sell_chosen = true;
                 if (is_sell_chosen) {
                     // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                    sellTowerAt(point);
+                    sellTowerAt(x, y);
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
                     // upgrade có thể có giá
-                    Tower local_tower = findTowerAt(point);
-                    upgradeTower(local_tower);
+                    upgradeTowerAt(x, y);
                 }
             }
         });
@@ -218,12 +216,12 @@ public class GameField {
             }
     }
 
-    public static Tower findTowerAt(Point location) {
-        for (Tower t: towers)
-            if (Math.abs(location.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
-                    Math.abs(location.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH) {
+    public static Tower findTowerAt(int x, int y) {
+        for (Tower t: towers) {
+            if (t.isXYInTower(x, y)) {
                 return t;
             }
+        }
         return null;
     }
 
@@ -231,12 +229,12 @@ public class GameField {
         money -= tower.getPrice();
     }
 
-    public static void sellTowerAt(Point location) {
-        Tower tower = findTowerAt(location);
+    public static void sellTowerAt(int x, int y) {
+        Tower tower = findTowerAt(x, y);
         if (tower != null) {
             money += (int)(tower.getPrice() * 0.8);
-            tower.destroy();
             towers.remove(tower);
+            tower.destroy();
         }
     }
 
@@ -247,7 +245,7 @@ public class GameField {
         towers.add(tower);
     }
 
-    public static void upgradeTower(Tower tower) {
+    public static void upgradeTowerAt(int x, int y) {
         System.out.println("I'm waiting for you...");
     }
 

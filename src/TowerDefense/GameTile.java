@@ -86,10 +86,8 @@ public class GameTile {
         }
     }
 
-    public static boolean isTowerPlaced(MouseEvent event) {
-        int point_x = (int) event.getSceneX() / TILE_WIDTH;
-        int point_y = (int) event.getSceneY() / TILE_WIDTH;
-        return map.isTowerPlacedAt(point_x, point_y);
+    public static boolean isTowerPlaced(Point point) {
+        return map.isTowerPlacedAt(point.getX(), point.getY());
     }
 
     public static void resetMap(int x, int y) {

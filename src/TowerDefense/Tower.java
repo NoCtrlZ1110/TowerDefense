@@ -46,8 +46,8 @@ public class Tower extends GameEntity {
             return;
 
         rangeCircle.setRadius(range);
-        rangeCircle.setLayoutX(this.getTranslateX() + 80);
-        rangeCircle.setLayoutY(this.getTranslateY() + 80);
+        rangeCircle.setLayoutX(this.getTranslateX() + TILE_WIDTH);
+        rangeCircle.setLayoutY(this.getTranslateY() + TILE_WIDTH);
         rangeCircle.setFill(Color.TRANSPARENT);
         //rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
@@ -100,8 +100,8 @@ public class Tower extends GameEntity {
 
     public Enemy findTarget() {
         for (Enemy enemy: enemies) {
-            int tower_width = 160;
-            Point e = new Point(enemy.getLocation().getX()+40,enemy.getLocation().getY()+40);
+            int tower_width = 2*TILE_WIDTH;
+            Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             Point t = new Point(getPosition().getX()+tower_width/2,getPosition().getY()+tower_width/2);
             if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
@@ -135,5 +135,10 @@ public class Tower extends GameEntity {
                 enemies.remove(target);
             }
         }
+    }
+
+    public boolean isXYInTower(int x, int y) {
+        return (0 <= x - position.getX() && x - position.getX() <= 2*TILE_WIDTH &&
+                0 <= y - position.getY() && y - position.getY() <= 2*TILE_WIDTH);
     }
 }
