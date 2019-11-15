@@ -283,12 +283,13 @@ public class GameField {
             new KeyFrame(Duration.millis(0), event -> {
                 buildingSound();
                 imageObject building = new imageObject("file:images/building2.gif");
-                building.scaleTo(80,80);
-                building.setLocation(location.getX()+40,location.getY()+40);
+                building.scaleTo(80, 80);
+                building.setLocation(location.getX()+40, location.getY()+40);
                 layout.getChildren().add(building);
-            }), new KeyFrame(Duration.millis(1800), event -> {
+
                 tower.placeAt(location);
-                // tower.showTower(); // đã show trong placeAt
+            }), new KeyFrame(Duration.millis(1800), event -> {
+                tower.showTower();
                 // tower.showRange();
                 towers.add(tower);
             })

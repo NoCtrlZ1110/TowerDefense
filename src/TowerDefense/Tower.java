@@ -76,8 +76,6 @@ public class Tower extends GameEntity {
         setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
         setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
         setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
-
-        showTower();
     }
 
     public void showTower() {
