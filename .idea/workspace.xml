@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36ec656a-0eec-43ea-a658-24cfa2683470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/bullet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

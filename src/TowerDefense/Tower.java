@@ -30,9 +30,11 @@ public class Tower extends GameEntity {
     }
 
     public void setPosition(Point position) {
+        if (is_destroyed)
+            return;
+
         this.position = position;
         this.setLocation(position.getX(), position.getY());
-        this.is_destroyed = false;
 
         // getMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH)); -> 2
         // getMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH + 1)); -> 5
@@ -113,13 +115,15 @@ public class Tower extends GameEntity {
 
         Enemy target = findTarget();
         if (target != null) {
+            /*
             Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(target.getLocation().getX()+TILE_WIDTH/2,target.getLocation().getY()+TILE_WIDTH/2);
-
             Bullet b = new Bullet(1, 1, t.getX(), t.getY(), e.getX(), e.getY());
+            */
+            Bullet b = new Bullet(1, 1, this, target);
             b.beShot();
-            target.beShotBy(b);
-            if (target.isDead()) {
+            // target.beShotBy(b);
+            if (target.isDead()) { // b.getTarget().isDead()
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);

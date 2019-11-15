@@ -10,8 +10,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-import static TowerDefense.CONSTANT.TILE_WIDTH;
-import static TowerDefense.CONSTANT.pathBullet;
+import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.layout;
 import static TowerDefense.Sound.buildingSound;
 
@@ -22,6 +21,8 @@ public class Bullet extends GameEntity {
     private int start_y;
     private int dest_x;
     private int dest_y;
+
+    private Enemy target = null;
 
     private Path path;
 
@@ -35,12 +36,22 @@ public class Bullet extends GameEntity {
         this.dest_y = dest_y;
 
         createPath();
+        rotate();
+    }
 
-        setLocation(start_x, start_y);
-        double angle = Math.atan((start_y - dest_y) / (start_x - dest_x - 1e-9));
-        Rotate rotate = new Rotate(angle, start_x, start_y);
-        this.getTransforms().add(rotate);
-        layout.getChildren().add(this);
+    public Bullet(int speed, int damage, Tower source, Enemy target) {
+        super(pathBullet);
+        this.speed = speed;
+        this.damage = damage;
+        this.start_x = source.getPosition().getX() + TOWER_WIDTH/2;
+        this.start_y = source.getPosition().getY() + TOWER_WIDTH/2;
+        this.dest_x = target.getLocation().getX() + TILE_WIDTH/2;
+        this.dest_y = target.getLocation().getY() + TILE_WIDTH/2;
+
+        this.target = target;
+
+        createPath();
+        rotate();
     }
 
     public int getDamage() {
@@ -51,6 +62,15 @@ public class Bullet extends GameEntity {
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
         path.getElements().add(new LineTo(dest_x, dest_y));
+    }
+
+    private void rotate() {
+        // BUG: hiện đang không quay được
+        setLocation(start_x, start_y);
+        double angle = Math.atan((start_y - dest_y) / (start_x - dest_x - 1e-9));
+        Rotate rotate = new Rotate(angle, start_x, start_y);
+        this.getTransforms().add(rotate);
+        layout.getChildren().add(this);
     }
 
     public void move() {
@@ -81,8 +101,12 @@ public class Bullet extends GameEntity {
     public void beShot() {
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
+                // BUG: hiện di chuyển bị để lại vết đạn
                 move();
             }), new KeyFrame(Duration.millis(500), event -> {
+                if (target != null)
+                    target.beShotBy(this);
+
                 disappear();
             })
         );
