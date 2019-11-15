@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-import static TowerDefense.CONSTANT.TILE_WIDTH;
+import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.resetMap;
 import static TowerDefense.GameTile.setMapType;
@@ -31,14 +31,18 @@ public class Tower extends GameEntity {
 
     public void setPosition(Point position) {
         this.position = position;
-    }
+        this.setLocation(position.getX(), position.getY());
+        this.is_destroyed = false;
 
-    public int getRange() {
-        return range;
-    }
+        // getMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH)); -> 2
+        // getMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH + 1)); -> 5
+        // getMapType(position.getX() / TILE_WIDTH + 1, position.getY() / TILE_WIDTH)); -> 4
+        // getMapType(position.getX() / TILE_WIDTH + 1, position.getY() / TILE_WIDTH + 1)); -> 3
 
-    public void setRange(int range) {
-        this.range = range;
+        setMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH, 6);
+        setMapType(position.getX() / TILE_WIDTH, position.getY() / TILE_WIDTH + 1, 6);
+        setMapType(position.getX() / TILE_WIDTH + 1, position.getY() / TILE_WIDTH, 6);
+        setMapType(position.getX() / TILE_WIDTH + 1, position.getY() / TILE_WIDTH + 1, 6);
     }
 
     public void showRange() {
@@ -63,19 +67,7 @@ public class Tower extends GameEntity {
     }
 
     public void placeAt(Point location) {
-        this.position = location;
-        this.setLocation(location.getX(), location.getY());
-        this.is_destroyed = false;
-
-        // getMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH)); -> 2
-        // getMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1)); -> 5
-        // getMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH)); -> 4
-        // getMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1)); -> 3
-
-        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
-        setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
-        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
-        setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
+        setPosition(location);
     }
 
     public void showTower() {
@@ -97,10 +89,9 @@ public class Tower extends GameEntity {
     }
 
     public Enemy findTarget() {
+        Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
         for (Enemy enemy: enemies) {
-            int tower_width = 2*TILE_WIDTH;
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
-            Point t = new Point(getPosition().getX()+tower_width/2,getPosition().getY()+tower_width/2);
             if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
@@ -122,12 +113,13 @@ public class Tower extends GameEntity {
 
         Enemy target = findTarget();
         if (target != null) {
-            Bullet b = new Bullet(1, 1, position.getX(), position.getY(),
-                    (int) target.getTranslateX() + 40, (int) target.getTranslateY() + 40
-            );
-            // b.move();
+            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
+            Point e = new Point(target.getLocation().getX()+TILE_WIDTH/2,target.getLocation().getY()+TILE_WIDTH/2);
+
+            Bullet b = new Bullet(1, 1, t.getX(), t.getY(), e.getX(), e.getY());
+            b.beShot();
             target.beShotBy(b);
-            if (target.is_dead()) {
+            if (target.isDead()) {
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);
@@ -136,7 +128,7 @@ public class Tower extends GameEntity {
     }
 
     public boolean isXYInTower(int x, int y) {
-        return (0 <= x - position.getX() && x - position.getX() <= 2*TILE_WIDTH &&
-                0 <= y - position.getY() && y - position.getY() <= 2*TILE_WIDTH);
+        return (0 <= x - position.getX() && x - position.getX() <= TOWER_WIDTH &&
+                0 <= y - position.getY() && y - position.getY() <= TOWER_WIDTH);
     }
 }

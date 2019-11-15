@@ -95,7 +95,6 @@ public class GameField {
 
         timeline.play();
         playWelcomeMusic();
-
     }
 
     public static void gameScreen(Stage stage) {
@@ -272,33 +271,38 @@ public class GameField {
     public static void sellTowerAt(int x, int y) {
         Tower tower = findTowerAt(x, y);
         if (tower != null) {
-            money += (int)(tower.getPrice() * 0.8);
+            money += (int)(tower.getPrice() * SELL_RATE);
             towers.remove(tower);
             tower.destroy();
         }
     }
 
     public static void placeTower(Tower tower, Point location) {
+        imageObject building = new imageObject("file:images/building2.gif");
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
                 buildingSound();
-                imageObject building = new imageObject("file:images/building2.gif");
-                building.scaleTo(80, 80);
-                building.setLocation(location.getX()+40, location.getY()+40);
+                building.scaleTo(TILE_WIDTH, TILE_WIDTH);
+                building.setLocation(location.getX()+TILE_WIDTH/2, location.getY()+TILE_WIDTH/2);
                 layout.getChildren().add(building);
 
-                tower.placeAt(location);
+                tower.setPosition(location);
             }), new KeyFrame(Duration.millis(1800), event -> {
                 tower.showTower();
                 // tower.showRange();
                 towers.add(tower);
+                layout.getChildren().remove(building);
             })
         );
         timeline.play();
     }
 
     public static void upgradeTowerAt(int x, int y) {
-        System.out.println("I'm waiting for you...");
+        Tower tower = findTowerAt(x, y);
+        if (tower != null) {
+            // money -= ...;
+            System.out.println("I'm waiting for you...");
+        }
     }
 
     public static void addEnemiesWave() {

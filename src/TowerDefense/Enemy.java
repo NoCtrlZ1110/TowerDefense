@@ -29,12 +29,12 @@ public class Enemy extends GameEntity {
         this.speed = speed;
     }
 
-    public boolean is_dead() {
+    public boolean isDead() {
         return (hp <= 0);
     }
 
     public int getKilledBonus() {
-        return (is_dead() ? killed_bonus : 0);
+        return (isDead() ? killed_bonus : 0);
     }
 
     public void showHP() {

@@ -7,12 +7,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static TowerDefense.GameField.*;
-
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
     static Map map = new Map(ROW_NUM, COL_NUM);
-    static int[][] tileType = new int[ROW_NUM][COL_NUM];
+    private static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
     static int[][] roadLocation = new int[ROAD_NUM][2];
@@ -43,14 +42,14 @@ public class GameTile {
         map.setType(x, y, n);
     }
 
-    public static void getData(int[][] arr, int height, int width, String path) {
+    public static void getData(int[][] arr, int height, int width, String fileDir) {
         try {
-            FileInputStream MapIn = new FileInputStream(path);
+            FileInputStream MapIn = new FileInputStream(fileDir);
             Scanner sc = new Scanner(MapIn);
             for (int i = 0; i < height; i++) {
-                String temp = sc.nextLine(); //doc dong mang trong file
+                String temp = sc.nextLine(); // doc dong mang trong file
                 //System.out.println(temp);
-                String[] items = temp.split(" "); //tach chuoi thanh cac phan tu chuoi
+                String[] items = temp.split(" "); // tach chuoi thanh cac phan tu chuoi
                 for (int j = 0; j < width; j++)
                     arr[i][j] = Integer.parseInt(items[j]);
             }
