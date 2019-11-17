@@ -11,9 +11,11 @@ import static TowerDefense.GameField.layout;
 public class Enemy extends GameEntity {
     protected double speed;
     protected double hp = 100;
-    protected final double defense_point = 0;
+    protected double defense_point = 0;
     protected int killed_bonus = 10;
+    protected int harm_point = 1;
     protected Rectangle hp_bar = new Rectangle();
+    private boolean is_destroyed = false;
 
     public Enemy(String imageUrl) {
         super(imageUrl);
@@ -80,6 +82,22 @@ public class Enemy extends GameEntity {
 
     private void decreaseHP(double amount) {
         hp -= Math.max(amount - defense_point, 0);
+    }
+
+    public boolean isReachedEndPoint() {
+        Point last_point = GameTile.getEndPointOfRoad();
+        int enemy_width = 70;
+        return (GetX() + (enemy_width>>1) == last_point.getX() && GetY() + (enemy_width>>1) == last_point.getY());
+    }
+
+    public void harm() {
+        if (!is_destroyed && isReachedEndPoint()) {
+            is_destroyed = true; // tránh "gây hại" nhiều lần
+            GameField.decreaseHP(harm_point * 1.0);
+            // note: có thể nhân với hệ số < 1
+
+            System.out.println("ouch!");
+        }
     }
 
     private void disappear() {

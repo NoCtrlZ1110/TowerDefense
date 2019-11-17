@@ -30,6 +30,10 @@ public class GameTile {
         getData(roadLocation, ROAD_NUM, 2, pathTransition);
     }
 
+    public static Point getEndPointOfRoad() {
+        return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
+    }
+
     public static String getTileType(int x, int y) {
         return Integer.toString(tileType[x][y]);
     }
@@ -94,7 +98,7 @@ public class GameTile {
     }
 
     public static Point getLocationFromMouseEvent(MouseEvent event) {
-        return new Point((int) event.getSceneX() / TILE_WIDTH,
-                (int) event.getSceneY() / TILE_WIDTH);
+        return new Point((int)(event.getSceneX() / TILE_WIDTH),
+                (int)(event.getSceneY() / TILE_WIDTH));
     }
 }

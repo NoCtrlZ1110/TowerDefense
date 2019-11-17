@@ -68,10 +68,6 @@ public class Tower extends GameEntity {
             layout.getChildren().remove(rangeCircle);
     }
 
-    public void placeAt(Point location) {
-        setPosition(location);
-    }
-
     public void showTower() {
         if (this.is_destroyed) {
             layout.getChildren().remove(this);
@@ -131,8 +127,15 @@ public class Tower extends GameEntity {
         }
     }
 
-    public boolean isXYInTower(int x, int y) {
+    public boolean isInTower(int x, int y) {
         return (0 <= x - position.getX() && x - position.getX() <= TOWER_WIDTH &&
                 0 <= y - position.getY() && y - position.getY() <= TOWER_WIDTH);
     }
+    /*
+    public boolean isInTower(Point p) {
+        // p.getX() = x - x % (TOWER_WIDTH / 2)
+        return (Math.abs(p.getX() - position.getX()) <= TOWER_WIDTH / 2 &&
+                Math.abs(p.getY() - position.getY()) <= TOWER_WIDTH / 2);
+    }
+    */
 }

@@ -22,50 +22,44 @@ public class Sound {
     private static MediaPlayer supercellPlayer = new MediaPlayer(supercellSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
 
-
     public static void playWelcomeMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(200), event -> {
-                    supercellPlayer.play();
-                }), new KeyFrame(Duration.millis(1800), event -> {
-            welcomePlayer.play();
-            welcomePlayer.setCycleCount(Animation.INDEFINITE);
-
-        }));
+            new KeyFrame(Duration.millis(200), event -> {
+                supercellPlayer.play();
+            }), new KeyFrame(Duration.millis(1800), event -> {
+                welcomePlayer.play();
+                welcomePlayer.setCycleCount(Animation.INDEFINITE);
+            }));
         timeline.play();
-
     }
 
     public static void pauseWelcomeMusic() {
 
-//        welcomePlayer.pause();
+        // welcomePlayer.pause();
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(2),
-                        new KeyValue(welcomePlayer.volumeProperty(), 0)));
+            new KeyFrame(Duration.seconds(2),
+            new KeyValue(welcomePlayer.volumeProperty(), 0)));
         timeline.play();
-
     }
 
     public static void buildingSound() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> {
-                    MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
+            new KeyFrame(Duration.millis(0), event -> {
+                MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
 
-                    buildingSoundPlayer.play();
+                buildingSoundPlayer.play();
 
-                }), new KeyFrame(Duration.millis(1800), event -> {
-            MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
-            buildingFinishSoundPlayer.play();
-
-        }));
+            }), new KeyFrame(Duration.millis(1800), event -> {
+                MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
+                buildingFinishSoundPlayer.play();
+            }));
         timeline.play();
     }
 
     public static void clickSound() {
         MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
         buttonClickSoundPlayer.play();
-
     }
 
     static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
@@ -75,15 +69,13 @@ public class Sound {
         MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
         MediaPlayer minionSpawn = new MediaPlayer(minion);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event ->
-                        minionSpawn.play()), new KeyFrame(Duration.millis(1800), event ->
-        {
-            combatMusicPlayer.play();
-            combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
-        }
-        ));
+            new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
+            new KeyFrame(Duration.millis(1800), event -> {
+                combatMusicPlayer.play();
+                combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
+            })
+        );
         timeline.play();
-
     }
 
     static Media prepareMusic = new Media(new File("sound/fem_talk.mp3").toURI().toString());
@@ -91,13 +83,9 @@ public class Sound {
     public static void prepareMusic() {
         MediaPlayer prepareMusicPlayer = new MediaPlayer(prepareMusic);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event ->
-                        prepareMusicPlayer.play()), new KeyFrame(Duration.seconds(PREPARE_TIME), event ->
-                prepareMusicPlayer.stop()
-        ));
+            new KeyFrame(Duration.millis(0), event -> prepareMusicPlayer.play()),
+            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> prepareMusicPlayer.stop())
+        );
         timeline.play();
-
     }
-
-
 }

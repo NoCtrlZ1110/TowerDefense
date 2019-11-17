@@ -5,16 +5,12 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import javax.naming.TimeLimitExceededException;
 import java.util.ArrayList;
 
 import static TowerDefense.CONSTANT.*;
@@ -26,7 +22,7 @@ public class GameField {
     static ArrayList<Tower> towers = new ArrayList<>();
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
-    static int money;
+    static int money = 100;
     static int hp = 100;
     private static boolean is_paused = false;
 
@@ -127,8 +123,8 @@ public class GameField {
         // [Cho lính di chuyển theo path] ---
         Timeline timeline = new Timeline();
 
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0),event -> prepareMusic()));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME-2),event -> combatMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME-2), event -> combatMusic()));
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
             KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME*1000), event -> e.move(path));
@@ -140,7 +136,10 @@ public class GameField {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                enemies.forEach(Enemy::showHP);
+                enemies.forEach(e -> {
+                    e.showHP();
+                    e.harm();
+                });
                 towers.forEach(Tower::shoot);
             }
         };
@@ -170,8 +169,7 @@ public class GameField {
             // System.out.println(point);
             if (isTowerPlaced(point))
                 towers.forEach(t -> {
-                    if (Math.abs(point.getX() * TILE_WIDTH - t.getPosition().getX()) <= TILE_WIDTH &&
-                            Math.abs(point.getY() * TILE_WIDTH - t.getPosition().getY()) <= TILE_WIDTH)
+                    if (t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
                         t.showRange();
                     else
                         t.removeRange();
@@ -253,9 +251,16 @@ public class GameField {
             }
     }
 
+    public static void decreaseHP(double amount) {
+        hp -= amount;
+        if (hp <= 0) {
+            System.out.println("Game over!");
+        }
+    }
+
     public static Tower findTowerAt(int x, int y) {
         for (Tower t: towers) {
-            if (t.isXYInTower(x, y)) {
+            if (t.isInTower(x, y)) {
                 return t;
             }
         }
@@ -264,8 +269,10 @@ public class GameField {
 
     public static void buyTowerAt(Point location) {
         Tower tower = new Tower("file:images/Tower.png");
-        money -= tower.getPrice();
-        placeTower(tower, location);
+        if (money >= tower.getPrice()) {
+            money -= tower.getPrice();
+            placeTower(tower, location);
+        }
     }
 
     public static void sellTowerAt(int x, int y) {
