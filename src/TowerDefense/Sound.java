@@ -13,13 +13,15 @@ import java.io.File;
 import static TowerDefense.CONSTANT.PREPARE_TIME;
 
 public class Sound {
-    private static Media welcomeMusic = new Media(new File("sound/welcome.mp3").toURI().toString());
+    private static Media welcomeMusic = new Media(new File("sound/combat_plan.mp3").toURI().toString());
     private static Media supercellSound = new Media(new File("sound/supercell.mp3").toURI().toString());
+    private static Media loadingSound = new Media(new File("sound/loading.mp3").toURI().toString());
     private static Media buildingSound = new Media(new File("sound/building_construct.mp3").toURI().toString());
     private static Media buildingFinishSound = new Media(new File("sound/building_finished.mp3").toURI().toString());
     private static Media buttonClickSound = new Media(new File("sound/button_click.mp3").toURI().toString());
 
     private static MediaPlayer supercellPlayer = new MediaPlayer(supercellSound);
+    private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
 
 
@@ -27,6 +29,8 @@ public class Sound {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(200), event -> {
                     supercellPlayer.play();
+                }),new KeyFrame(Duration.millis(1800), event -> {
+                    loadingPlayer.play();
                 }), new KeyFrame(Duration.millis(1800), event -> {
             welcomePlayer.play();
             welcomePlayer.setCycleCount(Animation.INDEFINITE);

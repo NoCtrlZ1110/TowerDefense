@@ -55,7 +55,7 @@ public class GameField {
                 new KeyFrame(Duration.seconds(4), event -> {
                     welcomScr.setOpacity(0);
                     pane.getChildren().add(welcomScr);
-                    FadeTransition ft = new FadeTransition(Duration.millis(3000), welcomScr);
+                    FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
                     ft.setFromValue(0);
                     ft.setToValue(1);
                     ft.play();
@@ -286,16 +286,16 @@ public class GameField {
                     building.scaleTo(80,80);
                     building.setLocation(location.getX()+40,location.getY()+40);
                     layout.getChildren().add(building);
-                }), new KeyFrame(Duration.millis(1800), event ->
-                {
-                    Tower tower = new Tower("file:images/Tower.png");
-                    tower.showTower(location);
-                    // tower.showRange();
-                    towers.add(tower);
                     setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
                     setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
                     setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
                     setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
+                }), new KeyFrame(Duration.millis(1800), event ->
+                {
+                    Tower tower = new Tower("file:images/Tower.png");
+                    towers.add(tower);
+                    tower.showTower(location);
+                    // tower.showRange();
                 }));
         timeline.play();
 
