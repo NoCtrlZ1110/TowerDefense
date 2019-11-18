@@ -7,14 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
@@ -52,7 +51,7 @@ public class GameField {
 
         }
         ),
-                new KeyFrame(Duration.seconds(4), event -> {
+                new KeyFrame(Duration.seconds(2), event -> {
                     welcomScr.setOpacity(0);
                     pane.getChildren().add(welcomScr);
                     FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
@@ -62,7 +61,7 @@ public class GameField {
                 }
                 ),
 
-                new KeyFrame(Duration.seconds(7), event -> {
+                new KeyFrame(Duration.seconds(3), event -> {
                     imageObject startBtn = new imageObject("file:images/startBtn.png");
                     startBtn.setLocation(73, 437);
                     startBtn.scaleTo(184, 56);
@@ -110,6 +109,11 @@ public class GameField {
 
 
         // [Vẽ ra map] -------------------
+
+        imageObject background = new imageObject("file:images/back.png");
+        background.setLocation(0, 0);
+        background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
+        layout.getChildren().add(background);
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
 
         for (int i = 0; i < ROW_NUM; i++)
@@ -137,11 +141,12 @@ public class GameField {
         // [Cho lính di chuyển theo path] ---
         Timeline timeline = new Timeline();
 
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0),event -> prepareMusic()));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME-2),event -> combatMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME - 2), event -> combatMusic()));
+
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME*1000), event -> e.move(path));
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
             timeline.getKeyFrames().add(moveEnemy);
         }
         //-----------------------------
@@ -151,15 +156,26 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(Enemy::showHP);
-                towers.forEach(Tower::shoot);
+
+//                towers.forEach(Tower::shoot);
             }
         };
+
+
+
+        Timeline shootTimeLine = new Timeline(new KeyFrame(Duration.millis(20), event -> {
+
+            towers.forEach(Tower::shoot);
+        }));
+        shootTimeLine.setCycleCount(Animation.INDEFINITE);
+        shootTimeLine.play();
+
         // [?] tại sao cái timer này ko gộp với timeline ở trên?
         // => showHP gộp vào 1 hàm show duy nhất?
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
-        border.setStroke(Color.DARKRED);
+        border.setStroke(Color.WHITESMOKE);
         border.setStrokeWidth(3);
         border.setFill(Color.TRANSPARENT);
         border.setArcWidth(20.0);
@@ -189,6 +205,7 @@ public class GameField {
                 if (layout.getChildren().contains(t.rangeCircle))
                     layout.getChildren().remove(t.rangeCircle);
             });
+            location = null; // giải phóng bộ nhớ
         });
 
         //-----------------------------
@@ -279,24 +296,26 @@ public class GameField {
 
     public static void placeTower(Point location) {
 
+        imageObject building = new imageObject("file:images/white_building.gif");
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(0), event -> {
                     buildingSound();
-                    imageObject building = new imageObject("file:images/building2.gif");
-                    building.scaleTo(80,80);
-                    building.setLocation(location.getX()+40,location.getY()+40);
+                    building.scaleTo(80, 80);
+                    building.setLocation(location.getX() + 40, location.getY() + 40);
                     layout.getChildren().add(building);
                     setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
                     setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
                     setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
                     setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
                 }), new KeyFrame(Duration.millis(1800), event ->
-                {
-                    Tower tower = new Tower("file:images/Tower.png");
-                    towers.add(tower);
-                    tower.showTower(location);
-                    // tower.showRange();
-                }));
+        {
+            layout.getChildren().remove(building);
+            Tower tower = new Tower("file:images/Archer_Tower17.png");
+            tower.setScale(TILE_WIDTH * 2, TILE_WIDTH * 2);
+            towers.add(tower);
+            tower.showTower(location);
+            // tower.showRange();
+        }));
         timeline.play();
 
 

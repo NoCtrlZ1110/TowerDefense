@@ -19,7 +19,11 @@ public class Sound {
     private static Media buildingSound = new Media(new File("sound/building_construct.mp3").toURI().toString());
     private static Media buildingFinishSound = new Media(new File("sound/building_finished.mp3").toURI().toString());
     private static Media buttonClickSound = new Media(new File("sound/button_click.mp3").toURI().toString());
+    private static Media archerSound = new Media(new File("sound/arrow_hit.mp3").toURI().toString());
+    private static Media prepareMusic = new Media(new File("sound/fem_talk.mp3").toURI().toString());
 
+
+    private static MediaPlayer prepareMusicPlayer = new MediaPlayer(prepareMusic);
     private static MediaPlayer supercellPlayer = new MediaPlayer(supercellSound);
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
@@ -31,7 +35,7 @@ public class Sound {
                     supercellPlayer.play();
                 }),new KeyFrame(Duration.millis(1800), event -> {
                     loadingPlayer.play();
-                }), new KeyFrame(Duration.millis(1800), event -> {
+                }), new KeyFrame(Duration.millis(4300), event -> {
             welcomePlayer.play();
             welcomePlayer.setCycleCount(Animation.INDEFINITE);
 
@@ -66,8 +70,8 @@ public class Sound {
         timeline.play();
     }
 
+    static MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
     public static void clickSound() {
-        MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
         buttonClickSoundPlayer.play();
 
     }
@@ -75,9 +79,9 @@ public class Sound {
     static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
     static Media minion = new Media(new File("sound/Minions have spawned.mp3").toURI().toString());
 
+    static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
+    static MediaPlayer minionSpawn = new MediaPlayer(minion);
     public static void combatMusic() {
-        MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
-        MediaPlayer minionSpawn = new MediaPlayer(minion);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(0), event ->
                         minionSpawn.play()), new KeyFrame(Duration.millis(1800), event ->
@@ -90,10 +94,15 @@ public class Sound {
 
     }
 
-    static Media prepareMusic = new Media(new File("sound/fem_talk.mp3").toURI().toString());
+//    public static void archerSound()
+//    {
+//        MediaPlayer archerSoundPlayer = new MediaPlayer(archerSound);
+//        archerSoundPlayer.setVolume(0.4);
+//        archerSoundPlayer.play();
+//        archerSoundPlayer = null;
+//    }
 
     public static void prepareMusic() {
-        MediaPlayer prepareMusicPlayer = new MediaPlayer(prepareMusic);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(0), event ->
                         prepareMusicPlayer.play()), new KeyFrame(Duration.seconds(PREPARE_TIME), event ->
@@ -102,6 +111,7 @@ public class Sound {
         timeline.play();
 
     }
+
 
 
 }

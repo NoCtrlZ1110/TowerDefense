@@ -32,7 +32,7 @@ public class Tower extends GameEntity {
         rangeCircle.setFill(Color.TRANSPARENT);
         //rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
-        rangeCircle.setStroke(Color.CADETBLUE);
+        rangeCircle.setStroke(Color.ALICEBLUE);
         if (!layout.getChildren().contains(rangeCircle)) layout.getChildren().add(rangeCircle);
     }
 
@@ -65,6 +65,8 @@ public class Tower extends GameEntity {
                 target = enemy;
                 return enemy;
             }
+            e = null;
+            t = null;
         }
         layout.getChildren().remove(line);
         target = null;
@@ -74,12 +76,14 @@ public class Tower extends GameEntity {
     public void shoot() {
         target = findTarget();
         if (target != null) {
+
             Bullet b = new Bullet(range, 1, 1, position.getX(), position.getY(),
                     (int) target.getTranslateX() + 40, (int) target.getTranslateY() + 40
             );
             // b.move();
             target.beShotBy(b);
             if (target.is_dead()) {
+                target.deleteHPbar();
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);
