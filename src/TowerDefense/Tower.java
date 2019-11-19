@@ -53,8 +53,8 @@ public class Tower extends GameEntity {
             return;
 
         rangeCircle.setRadius(range);
-        rangeCircle.setLayoutX(this.getTranslateX() + 80);
-        rangeCircle.setLayoutY(this.getTranslateY() + 80);
+        rangeCircle.setLayoutX(this.getTranslateX() + TOWER_WIDTH / 2);
+        rangeCircle.setLayoutY(this.getTranslateY() + TOWER_WIDTH / 2);
         rangeCircle.setFill(Color.TRANSPARENT);
         //rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
