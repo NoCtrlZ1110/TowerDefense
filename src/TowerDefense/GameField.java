@@ -192,8 +192,6 @@ public class GameField {
                 });
             else
                 towers.forEach(Tower::removeRange);
-        
-            location = null; // giải phóng bộ nhớ
         });
 
         layout.setOnMouseClicked(event -> {
@@ -315,6 +313,8 @@ public class GameField {
                 setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
                 setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
                 setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
+                
+                tower.setPosition(location);
             }), new KeyFrame(Duration.millis(1800), event -> {
                 layout.getChildren().remove(building);
                 tower.showTower();
