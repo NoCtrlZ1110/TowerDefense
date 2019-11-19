@@ -23,7 +23,7 @@ public class GameField {
     static ArrayList<Tower> towers = new ArrayList<>();
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
-    static int money = 100;
+    static int money = 1000;
     static int hp = 100;
     private static boolean is_paused = false;
 
@@ -79,15 +79,15 @@ public class GameField {
             })
         );
 
-        stage.setTitle("Tower Defense 1.2");
+        stage.setTitle("Tower Defense 1.5");
 
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setResizable(true);
-        stage.setMinWidth(960);
-        stage.setMaxWidth(960);
-        stage.setMinHeight(540);
-        stage.setMaxHeight(540);
+//        stage.setMinWidth(960);
+//        stage.setMaxWidth(960);
+//        stage.setMinHeight(540);
+//        stage.setMaxHeight(540);
         stage.show();
 
         timeline.play();
@@ -101,10 +101,10 @@ public class GameField {
 
         // Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-        stage.setMinWidth(TILE_WIDTH * COL_NUM);
-        stage.setMaxWidth(TILE_WIDTH * COL_NUM);
-        stage.setMinHeight(TILE_WIDTH * ROW_NUM);
-        stage.setMaxHeight(TILE_WIDTH * ROW_NUM);
+//        stage.setMinWidth(TILE_WIDTH * COL_NUM);
+//        stage.setMaxWidth(TILE_WIDTH * COL_NUM);
+//        stage.setMinHeight(TILE_WIDTH * ROW_NUM);
+//        stage.setMaxHeight(TILE_WIDTH * ROW_NUM);
 
         // [Vẽ ra map] -------------------
 
@@ -195,6 +195,7 @@ public class GameField {
         });
 
         layout.setOnMouseClicked(event -> {
+
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
 
@@ -203,6 +204,7 @@ public class GameField {
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
                 // mua: hiện dãy icon đại diện cho tháp
+                System.out.println("clicked");
                 // => chọn loại tower (thêm tham số, có thể là string)
                 buyTowerAt(location);
             } else if (isTowerPlaced(getLocationFromMouseEvent(event))) {
@@ -322,6 +324,7 @@ public class GameField {
                 towers.add(tower);
             }
         ));
+        timeline.play();
     }
 
     public static void upgradeTowerAt(int x, int y) {

@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/TowerDefense.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/5_.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/Main$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor$Delta.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/GameEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/GameStage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/PauseScreen.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574154468691</updated>
-      <workItem from="1574154470406" duration="322000" />
+      <workItem from="1574154470406" duration="1163000" />
     </task>
     <servers />
   </component>
