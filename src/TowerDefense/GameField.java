@@ -320,8 +320,9 @@ public class GameField {
                 tower.showTower();
                 // tower.showRange();
                 towers.add(tower);
-            }
-        ));
+            })
+        );
+        timeline.play();
     }
 
     public static void upgradeTowerAt(int x, int y) {
