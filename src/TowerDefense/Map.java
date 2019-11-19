@@ -2,6 +2,7 @@ package TowerDefense;
 
 public class Map {
     private int[][] map;
+    private int[][] original_map = null;
     private int row_num;
     private int col_num;
 

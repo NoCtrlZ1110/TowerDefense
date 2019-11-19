@@ -7,12 +7,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static TowerDefense.GameField.*;
-
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
     static Map map = new Map(ROW_NUM, COL_NUM);
-    static int[][] tileType = new int[ROW_NUM][COL_NUM];
+    private static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
     static int[][] roadLocation = new int[ROAD_NUM][2];
@@ -23,11 +22,16 @@ public class GameTile {
 
     public static void importMap() {
         getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
+        map.backup();
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
     public static void importRoad() {
         getData(roadLocation, ROAD_NUM, 2, pathTransition);
+    }
+
+    public static Point getEndPointOfRoad() {
+        return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
     }
 
     public static String getTileType(int x, int y) {
@@ -42,14 +46,14 @@ public class GameTile {
         map.setType(x, y, n);
     }
 
-    public static void getData(int[][] arr, int height, int width, String path) {
+    public static void getData(int[][] arr, int height, int width, String fileDir) {
         try {
-            FileInputStream MapIn = new FileInputStream(path);
+            FileInputStream MapIn = new FileInputStream(fileDir);
             Scanner sc = new Scanner(MapIn);
             for (int i = 0; i < height; i++) {
-                String temp = sc.nextLine(); //doc dong mang trong file
+                String temp = sc.nextLine(); // doc dong mang trong file
                 //System.out.println(temp);
-                String[] items = temp.split(" "); //tach chuoi thanh cac phan tu chuoi
+                String[] items = temp.split(" "); // tach chuoi thanh cac phan tu chuoi
                 for (int j = 0; j < width; j++)
                     arr[i][j] = Integer.parseInt(items[j]);
             }
@@ -62,9 +66,8 @@ public class GameTile {
     // Nếu có trả về vị trí để xây tháp
 
     public static Point TowerBuildLocation(MouseEvent event) {
-        Point point = new Point((int) event.getSceneX() / TILE_WIDTH, (int) event.getSceneY() / TILE_WIDTH);
-        int point_x = point.getX();
-        int point_y = point.getY();
+        int point_x = (int) event.getSceneX() / TILE_WIDTH;
+        int point_y = (int) event.getSceneY() / TILE_WIDTH;
         String s = map.getType(point_x, point_y);
 
         // Điều kiện ở đây hơi khó hiểu nên không cần phải đọc đâu @@
@@ -90,4 +93,8 @@ public class GameTile {
         return true;
     }
     */
+    public static Point getLocationFromMouseEvent(MouseEvent event) {
+        return new Point((int)(event.getSceneX() / TILE_WIDTH),
+                (int)(event.getSceneY() / TILE_WIDTH));
+    }
 }

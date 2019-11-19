@@ -10,52 +10,52 @@ import static TowerDefense.GameField.layout;
 public class Enemy extends GameEntity {
     protected double speed;
     protected double hp = 100;
+    protected double defense_point = 0;
     protected int killed_bonus = 10;
+    protected int harm_point = 1;
     protected Rectangle hp_bar = new Rectangle();
     protected Rectangle hp_max = new Rectangle();
     private PathTransition pathTransition = new PathTransition();
+    private boolean is_destroyed = false;
 
-    public Enemy(String path) {
-        super(path);
+    public Enemy(String imageUrl) {
+        super(imageUrl);
     }
 
-    public Enemy(int x, int y, String path) {
-        super(path);
+    public Enemy(int x, int y, String imageUrl) {
+        super(imageUrl);
         setLocation(x, y);
         layout.getChildren().add(hp_max);
         layout.getChildren().add(hp_bar);
         hp_max.setWidth(60);
         hp_max.setHeight(5);
         hp_max.setFill(Color.ALICEBLUE);
+
         hp_bar.setHeight(5);
         hp_bar.setFill(Color.DARKRED);
-
     }
 
     public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public boolean is_dead() {
+    public boolean isDead() {
         return (hp <= 0);
     }
 
     public int getKilledBonus() {
-        return (is_dead() ? killed_bonus : 0);
+        return (isDead() ? killed_bonus : 0);
     }
 
-    // [Hàm hiển thị thanh máu] ---------
-
     public void showHP() {
-
         hp_max.setX(this.getTranslateX());
         hp_max.setY(this.getTranslateY()-10);
 
         hp_bar.setX(this.getTranslateX());
         hp_bar.setY(this.getTranslateY()-10);
         hp_bar.setWidth(this.hp / 10*6);
-
-        //-------------------------------------
+        hp_bar.setHeight(5);
+        hp_bar.setFill(Color.DARKRED);
     }
     public void deleteHPbar()
     {
@@ -67,8 +67,6 @@ public class Enemy extends GameEntity {
 
     // [Hàm di chuyển theo path được truyền vào]
     public void move(Path path) {
-
-
         //Điều chỉnh gia tốc lúc xuất phát và kết thúc.
         pathTransition.setInterpolator(Interpolator.LINEAR);
         //Setting the duration of the path transition
@@ -86,12 +84,9 @@ public class Enemy extends GameEntity {
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
 
-
         //Playing the animation
         pathTransition.play();
     }
-
-    //-----------------------------
 
     public void beShotBy(Bullet b) {
 
@@ -103,7 +98,23 @@ public class Enemy extends GameEntity {
     }
 
     private void decreaseHP(double amount) {
-        hp -= amount;
+        hp -= Math.max(amount - defense_point, 0);
+    }
+
+    public boolean isReachedEndPoint() {
+        Point last_point = GameTile.getEndPointOfRoad();
+        int enemy_width = 70;
+        return (GetX() + (enemy_width>>1) == last_point.getX() && GetY() + (enemy_width>>1) == last_point.getY());
+    }
+
+    public void harm() {
+        if (!is_destroyed && isReachedEndPoint()) {
+            is_destroyed = true; // tránh "gây hại" nhiều lần
+            GameField.decreaseHP(harm_point * 1.0);
+            // note: có thể nhân với hệ số < 1
+
+            System.out.println("ouch!");
+        }
     }
 
     private void disappear() {

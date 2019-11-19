@@ -28,52 +28,46 @@ public class Sound {
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
 
-
     public static void playWelcomeMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(200), event -> {
-                    supercellPlayer.play();
-                }),new KeyFrame(Duration.millis(1800), event -> {
-                    loadingPlayer.play();
-                }), new KeyFrame(Duration.millis(4300), event -> {
-            welcomePlayer.play();
-            welcomePlayer.setCycleCount(Animation.INDEFINITE);
-
+            new KeyFrame(Duration.millis(200), event -> {
+                supercellPlayer.play();
+            }),new KeyFrame(Duration.millis(1800), event -> {
+                loadingPlayer.play();
+            }), new KeyFrame(Duration.millis(4300), event -> {
+                welcomePlayer.play();
+                welcomePlayer.setCycleCount(Animation.INDEFINITE);
         }));
         timeline.play();
-
     }
 
     public static void pauseWelcomeMusic() {
 
-//        welcomePlayer.pause();
+        // welcomePlayer.pause();
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(2),
-                        new KeyValue(welcomePlayer.volumeProperty(), 0)));
+            new KeyFrame(Duration.seconds(2),
+            new KeyValue(welcomePlayer.volumeProperty(), 0)));
         timeline.play();
-
     }
 
     public static void buildingSound() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> {
-                    MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
+            new KeyFrame(Duration.millis(0), event -> {
+                MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
 
-                    buildingSoundPlayer.play();
+                buildingSoundPlayer.play();
 
-                }), new KeyFrame(Duration.millis(1800), event -> {
-            MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
-            buildingFinishSoundPlayer.play();
-
-        }));
+            }), new KeyFrame(Duration.millis(1800), event -> {
+                MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
+                buildingFinishSoundPlayer.play();
+            }));
         timeline.play();
     }
 
     static MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
     public static void clickSound() {
         buttonClickSoundPlayer.play();
-
     }
 
     static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
@@ -83,15 +77,13 @@ public class Sound {
     static MediaPlayer minionSpawn = new MediaPlayer(minion);
     public static void combatMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event ->
-                        minionSpawn.play()), new KeyFrame(Duration.millis(1800), event ->
-        {
-            combatMusicPlayer.play();
-            combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
-        }
-        ));
+            new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
+            new KeyFrame(Duration.millis(1800), event -> {
+                combatMusicPlayer.play();
+                combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
+            })
+        );
         timeline.play();
-
     }
 
 //    public static void archerSound()
@@ -104,14 +96,9 @@ public class Sound {
 
     public static void prepareMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event ->
-                        prepareMusicPlayer.play()), new KeyFrame(Duration.seconds(PREPARE_TIME), event ->
-                prepareMusicPlayer.stop()
-        ));
+            new KeyFrame(Duration.millis(0), event -> prepareMusicPlayer.play()),
+            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> prepareMusicPlayer.stop())
+        );
         timeline.play();
-
     }
-
-
-
 }
