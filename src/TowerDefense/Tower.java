@@ -19,6 +19,7 @@ public class Tower extends GameEntity {
 
     public Tower(String imageUrl) {
         super(imageUrl);
+        setScale(TOWER_WIDTH, TOWER_WIDTH);
     }
 
     public int getPrice() {
@@ -52,12 +53,12 @@ public class Tower extends GameEntity {
             return;
 
         rangeCircle.setRadius(range);
-        rangeCircle.setLayoutX(this.getTranslateX() + TILE_WIDTH);
-        rangeCircle.setLayoutY(this.getTranslateY() + TILE_WIDTH);
+        rangeCircle.setLayoutX(this.getTranslateX() + TOWER_WIDTH / 2);
+        rangeCircle.setLayoutY(this.getTranslateY() + TOWER_WIDTH / 2);
         rangeCircle.setFill(Color.TRANSPARENT);
         //rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
-        rangeCircle.setStroke(Color.CADETBLUE);
+        rangeCircle.setStroke(Color.ALICEBLUE);
 
         if (!layout.getChildren().contains(rangeCircle))
             layout.getChildren().add(rangeCircle);
@@ -100,6 +101,8 @@ public class Tower extends GameEntity {
 
                 return enemy;
             }
+            e = null;
+            t = null;
         }
         layout.getChildren().remove(line);
         return null;
@@ -120,6 +123,8 @@ public class Tower extends GameEntity {
             b.beShot();
             // target.beShotBy(b);
             if (target.isDead()) { // b.getTarget().isDead()
+                target.deleteHPbar();
+
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);

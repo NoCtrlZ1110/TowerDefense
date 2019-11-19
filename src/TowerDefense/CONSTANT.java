@@ -20,3 +20,4 @@ public class CONSTANT {
 
     public static final double SELL_RATE = 0.8;
 }
+
