@@ -4,39 +4,68 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.scene.Cursor;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
 
+//import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.PREPARE_TIME;
 
 public class Sound {
+    static boolean isMuted = false;
+
     private static Media welcomeMusic = new Media(new File("sound/combat_plan.mp3").toURI().toString());
     private static Media supercellSound = new Media(new File("sound/supercell.mp3").toURI().toString());
     private static Media loadingSound = new Media(new File("sound/loading.mp3").toURI().toString());
     private static Media buildingSound = new Media(new File("sound/building_construct.mp3").toURI().toString());
     private static Media buildingFinishSound = new Media(new File("sound/building_finished.mp3").toURI().toString());
     private static Media buttonClickSound = new Media(new File("sound/button_click.mp3").toURI().toString());
-    private static Media archerSound = new Media(new File("sound/arrow_hit.mp3").toURI().toString());
+    //    private static Media archerSound = new Media(new File("sound/arrow_hit.mp3").toURI().toString());
     private static Media prepareMusic = new Media(new File("sound/fem_talk.mp3").toURI().toString());
+    private static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
+    private static Media minion = new Media(new File("sound/Minions have spawned.mp3").toURI().toString());
 
-
+    private static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
+    private static MediaPlayer minionSpawn = new MediaPlayer(minion);
+    private static MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
     private static MediaPlayer prepareMusicPlayer = new MediaPlayer(prepareMusic);
-    private static MediaPlayer supercellPlayer = new MediaPlayer(supercellSound);
+    private static MediaPlayer superCellPlayer = new MediaPlayer(supercellSound);
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
 
+    public static void mute() {
+        combatMusicPlayer.setVolume(0);
+        minionSpawn.setVolume(0);
+        buttonClickSoundPlayer.setVolume(0);
+        prepareMusicPlayer.setVolume(0);
+        superCellPlayer.setVolume(0);
+        loadingPlayer.setVolume(0);
+        welcomePlayer.setVolume(0);
+    }
+
+    public static void unMute() {
+        combatMusicPlayer.setVolume(1);
+        minionSpawn.setVolume(1);
+        buttonClickSoundPlayer.setVolume(1);
+        prepareMusicPlayer.setVolume(1);
+        superCellPlayer.setVolume(1);
+        loadingPlayer.setVolume(1);
+        welcomePlayer.setVolume(1);
+    }
+
     public static void playWelcomeMusic() {
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(200), event -> {
-                supercellPlayer.play();
-            }),new KeyFrame(Duration.millis(1800), event -> {
-                loadingPlayer.play();
-            }), new KeyFrame(Duration.millis(4300), event -> {
-                welcomePlayer.play();
-                welcomePlayer.setCycleCount(Animation.INDEFINITE);
+                new KeyFrame(Duration.millis(200), event -> {
+                    superCellPlayer.play();
+                }), new KeyFrame(Duration.millis(1800), event -> {
+            loadingPlayer.play();
+        }), new KeyFrame(Duration.millis(4300), event -> {
+            welcomePlayer.play();
+            welcomePlayer.setCycleCount(Animation.INDEFINITE);
         }));
         timeline.play();
     }
@@ -46,42 +75,39 @@ public class Sound {
         // welcomePlayer.pause();
 
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(2),
-            new KeyValue(welcomePlayer.volumeProperty(), 0)));
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(welcomePlayer.volumeProperty(), 0)),new KeyFrame(Duration.seconds(2),e -> welcomePlayer.stop()));
         timeline.play();
     }
 
     public static void buildingSound() {
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> {
-                MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
+                new KeyFrame(Duration.millis(0), event -> {
+                    MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
+                    if (isMuted) buildingSoundPlayer.setVolume(0);
+                    buildingSoundPlayer.play();
 
-                buildingSoundPlayer.play();
-
-            }), new KeyFrame(Duration.millis(1800), event -> {
-                MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
-                buildingFinishSoundPlayer.play();
-            }));
+                }), new KeyFrame(Duration.millis(1800), event -> {
+            MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
+            if (isMuted) buildingFinishSoundPlayer.setVolume(0);
+            buildingFinishSoundPlayer.play();
+        }));
         timeline.play();
     }
 
-    static MediaPlayer buttonClickSoundPlayer = new MediaPlayer(buttonClickSound);
+
     public static void clickSound() {
         buttonClickSoundPlayer.play();
     }
 
-    static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
-    static Media minion = new Media(new File("sound/Minions have spawned.mp3").toURI().toString());
 
-    static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
-    static MediaPlayer minionSpawn = new MediaPlayer(minion);
     public static void combatMusic() {
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
-            new KeyFrame(Duration.millis(1800), event -> {
-                combatMusicPlayer.play();
-                combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
-            })
+                new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
+                new KeyFrame(Duration.millis(1800), event -> {
+                    combatMusicPlayer.play();
+                    combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
+                })
         );
         timeline.play();
     }
@@ -96,9 +122,46 @@ public class Sound {
 
     public static void prepareMusic() {
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> prepareMusicPlayer.play()),
-            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> prepareMusicPlayer.stop())
+                new KeyFrame(Duration.millis(0), event -> prepareMusicPlayer.play()),
+                new KeyFrame(Duration.seconds(PREPARE_TIME), event -> prepareMusicPlayer.stop())
         );
         timeline.play();
+    }
+
+
+    private static imageObject muteBtn = new imageObject("file:images/mute.png");
+    private static imageObject speakerBtn = new imageObject("file:images/speaker.png");
+
+    static void showMuteBtn(Pane layout) {
+        muteBtn.setLocation((int) layout.getWidth() - 70, 30);
+        speakerBtn.setLocation((int) layout.getWidth() - 70, 30);
+        muteBtn.scaleTo(40, 40);
+        speakerBtn.scaleTo(40, 40);
+
+        if (!layout.getChildren().contains(muteBtn)) layout.getChildren().add(muteBtn);
+        if (!layout.getChildren().contains(speakerBtn)) layout.getChildren().add(speakerBtn);
+        if (isMuted) {
+            muteBtn.setVisible(true);
+            speakerBtn.setVisible(false);
+        } else {
+            muteBtn.setVisible(false);
+            speakerBtn.setVisible(true);
+        }
+        muteBtn.setOnMouseEntered( event -> layout.setCursor(Cursor.HAND));
+        muteBtn.setOnMouseExited( event -> layout.setCursor(Cursor.DEFAULT));
+        speakerBtn.setOnMouseEntered( event -> layout.setCursor(Cursor.HAND));
+        speakerBtn.setOnMouseExited( event -> layout.setCursor(Cursor.DEFAULT));
+        muteBtn.setOnMouseClicked(event -> {
+            isMuted = false;
+            unMute();
+            showMuteBtn(layout);
+        });
+        speakerBtn.setOnMouseClicked(event -> {
+            isMuted = true;
+            mute();
+            showMuteBtn(layout);
+        });
+
+
     }
 }

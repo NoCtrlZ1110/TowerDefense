@@ -62,6 +62,8 @@ public class GameField {
                 startBtn.scaleTo(184, 56);
                 startBtn.setOpacity(0);
                 pane.getChildren().add(startBtn);
+                showMuteBtn(pane);
+
                 startBtn.setOnMouseEntered(event1 -> {
                     startBtn.setOpacity(1);
                     scene.setCursor(Cursor.HAND);
@@ -168,19 +170,23 @@ public class GameField {
         border.setArcWidth(20.0);
         border.setArcHeight(20.0);
 
+        showMuteBtn(layout);
+
+
+
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
             Point point = getLocationFromMouseEvent(event);
 
             if (location != null) {
-                gameScene.setCursor(Cursor.HAND);
+                layout.setCursor(Cursor.HAND);
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
             } else if (isTowerPlaced(point)) {
-                gameScene.setCursor(Cursor.HAND);
+                layout.setCursor(Cursor.HAND);
             }
             else {
-                gameScene.setCursor(Cursor.DEFAULT);
+                layout.setCursor(Cursor.DEFAULT);
             }
             // System.out.println(point);
             if (isTowerPlaced(point))
@@ -237,6 +243,7 @@ public class GameField {
             // pauseScreen(stage);
         });
         // layout.getChildren().add(pauseBtn);
+
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));

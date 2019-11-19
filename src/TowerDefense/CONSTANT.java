@@ -19,5 +19,8 @@ public class CONSTANT {
     public static final int PREPARE_TIME = 12;
 
     public static final double SELL_RATE = 0.8;
+
+
+
 }
 
