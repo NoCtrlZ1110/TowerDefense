@@ -192,8 +192,6 @@ public class GameField {
                 });
             else
                 towers.forEach(Tower::removeRange);
-        
-            location = null; // giải phóng bộ nhớ
         });
 
         layout.setOnMouseClicked(event -> {
