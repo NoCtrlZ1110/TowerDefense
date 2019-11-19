@@ -90,6 +90,7 @@ public class Tower extends GameEntity {
     public Enemy findTarget() {
         Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
         for (Enemy enemy: enemies) {
+            Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
