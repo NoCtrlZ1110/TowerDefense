@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36ec656a-0eec-43ea-a658-24cfa2683470" name="Default Changelist" comment="">
+    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Roadside.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/roadPath.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/roadPath.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,6 +106,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.GameStage" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.TowerDefense" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
@@ -117,7 +126,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="36ec656a-0eec-43ea-a658-24cfa2683470" name="Default Changelist" comment="" />
+      <changelist id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
       <created>1572279812205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

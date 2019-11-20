@@ -1,4 +1,5 @@
 package TowerDefense;
+
 public class Point {
     private int x;
     private int y;
@@ -28,9 +29,9 @@ public class Point {
     public String toString() {
         return "Point["+getX()+","+getY()+"]";
     }
-    public double getDistance (Point p2)
-    {
-        return Math.sqrt((this.getX()-p2.getX())*(this.getX()-p2.getX())+(this.getY()-p2.getY())*(this.getY()-p2.getY()));
+
+    public double getDistance(Point p2) {
+        return Math.hypot(this.getX()-p2.getX(), this.getY()-p2.getY());
     }
 }
 

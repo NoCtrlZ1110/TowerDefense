@@ -11,8 +11,10 @@ import static TowerDefense.GameTile.setMapType;
 
 public class Tower extends GameEntity {
     int price = 10;
-    Point position;
     int range = 200;
+    double shooting_speed = 1;
+    double shooting_damage = 1;
+    Point position;
     Circle rangeCircle = new Circle();
     private Line line = new Line();
     private boolean is_destroyed = false;
@@ -88,8 +90,8 @@ public class Tower extends GameEntity {
     }
 
     public Enemy findTarget() {
-        Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
         for (Enemy enemy: enemies) {
+            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
@@ -101,8 +103,6 @@ public class Tower extends GameEntity {
 
                 return enemy;
             }
-            e = null;
-            t = null;
         }
         layout.getChildren().remove(line);
         return null;
@@ -119,12 +119,11 @@ public class Tower extends GameEntity {
             Point e = new Point(target.getLocation().getX()+TILE_WIDTH/2,target.getLocation().getY()+TILE_WIDTH/2);
             Bullet b = new Bullet(1, 1, t.getX(), t.getY(), e.getX(), e.getY());
             */
-            Bullet b = new Bullet(1, 1, this, target);
+            Bullet b = new Bullet(shooting_speed, shooting_damage, this, target);
             b.beShot();
             // target.beShotBy(b);
             if (target.isDead()) { // b.getTarget().isDead()
-                target.deleteHPbar();
-
+                // target.deleteHPbar(); // đưa vào class Enemy
                 money += target.getKilledBonus();
                 System.out.println("new money = " + money);
                 enemies.remove(target);

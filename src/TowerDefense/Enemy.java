@@ -7,6 +7,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import static TowerDefense.GameField.layout;
+
 public class Enemy extends GameEntity {
     protected double speed;
     protected double hp = 100;
@@ -57,8 +58,8 @@ public class Enemy extends GameEntity {
         hp_bar.setHeight(5);
         hp_bar.setFill(Color.DARKRED);
     }
-    public void deleteHPbar()
-    {
+
+    public void deleteHPbar() {
         hp_bar.setVisible(false);
         hp_bar = null;
         hp_max.setVisible(false);
@@ -89,12 +90,12 @@ public class Enemy extends GameEntity {
     }
 
     public void beShotBy(Bullet b) {
-
-
         decreaseHP(b.getDamage());
         showHP();
-        if (hp <= 0)
+        if (isDead()) {
+            deleteHPbar();
             disappear();
+        }
     }
 
     private void decreaseHP(double amount) {
@@ -107,14 +108,16 @@ public class Enemy extends GameEntity {
         return (GetX() + (enemy_width>>1) == last_point.getX() && GetY() + (enemy_width>>1) == last_point.getY());
     }
 
-    public void harm() {
+    public boolean harm() {
         if (!is_destroyed && isReachedEndPoint()) {
             is_destroyed = true; // tránh "gây hại" nhiều lần
             GameField.decreaseHP(harm_point * 1.0);
             // note: có thể nhân với hệ số < 1
 
             System.out.println("ouch!");
+            return true;
         }
+        return false;
     }
 
     private void disappear() {

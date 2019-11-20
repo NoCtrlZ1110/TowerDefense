@@ -106,13 +106,10 @@ public class GameField {
         stage.setMinHeight(TILE_WIDTH * ROW_NUM);
         stage.setMaxHeight(TILE_WIDTH * ROW_NUM);
 
-        // [Vẽ ra map] -------------------
-
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         layout.getChildren().add(background);
-        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
 
         drawMap();
         //--------------------------------
@@ -199,26 +196,29 @@ public class GameField {
             //                  ko có tháp -> mua
 
             Point location = TowerBuildLocation(event);
+
             if (location != null) {
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
                 // mua: hiện dãy icon đại diện cho tháp
                 // => chọn loại tower (thêm tham số, có thể là string)
-                buyTowerAt(location);
+                Roadside r = new Roadside(location.getX(), location.getY());
+                r.buyTower("");
             } else if (isTowerPlaced(getLocationFromMouseEvent(event))) {
                 // bán/upgrade tháp ở đây
                 // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
                 int x = (int)event.getSceneX();
                 int y = (int)event.getSceneY();
+                Roadside r = new Roadside(x, y);
                 boolean is_sell_chosen = true;
                 if (is_sell_chosen) {
                     // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                    sellTowerAt(x, y);
+                    r.sellPlacedTower();
                 } else {
                     // upgrade: hiện dãy icon đại diện cho tháp
                     // upgrade có thể có giá
-                    upgradeTowerAt(x, y);
+                    r.upgradePlacedTower();
                 }
             }
         });
@@ -269,67 +269,9 @@ public class GameField {
 
     public static void decreaseHP(double amount) {
         hp -= amount;
+        System.out.println("new hp = " + hp);
         if (hp <= 0) {
             System.out.println("Game over!");
-        }
-    }
-
-    public static Tower findTowerAt(int x, int y) {
-        for (Tower t: towers) {
-            if (t.isInTower(x, y)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public static void buyTowerAt(Point location) {
-        // Tower tower = new Tower("file:images/Tower.png");
-        Tower tower = new Tower("file:images/Archer_Tower17.png");
-        if (money >= tower.getPrice()) {
-            money -= tower.getPrice();
-            placeTower(tower, location);
-        }
-    }
-
-    public static void sellTowerAt(int x, int y) {
-        Tower tower = findTowerAt(x, y);
-        if (tower != null) {
-            money += (int)(tower.getPrice() * SELL_RATE);
-            towers.remove(tower);
-            tower.destroy();
-        }
-    }
-
-    public static void placeTower(Tower tower, Point location) {
-        imageObject building = new imageObject("file:images/white_building.gif");
-        Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> {
-                buildingSound();
-                building.scaleTo(TILE_WIDTH, TILE_WIDTH);
-                building.setLocation(location.getX()+TILE_WIDTH/2, location.getY()+TILE_WIDTH/2);
-                layout.getChildren().add(building);
-                setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
-                setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
-                setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
-                setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
-                
-                tower.setPosition(location);
-            }), new KeyFrame(Duration.millis(1800), event -> {
-                layout.getChildren().remove(building);
-                tower.showTower();
-                // tower.showRange();
-                towers.add(tower);
-            })
-        );
-        timeline.play();
-    }
-
-    public static void upgradeTowerAt(int x, int y) {
-        Tower tower = findTowerAt(x, y);
-        if (tower != null) {
-            // money -= ...;
-            System.out.println("I'm waiting for you...");
         }
     }
 
