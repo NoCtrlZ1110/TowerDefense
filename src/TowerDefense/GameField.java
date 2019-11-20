@@ -23,7 +23,7 @@ public class GameField {
     static ArrayList<Tower> towers = new ArrayList<>();
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
-    static int money = 100;
+    private static int money = 100;
     static int hp = 100;
     private static boolean is_paused = false;
 
@@ -273,6 +273,25 @@ public class GameField {
         if (hp <= 0) {
             System.out.println("Game over!");
         }
+    }
+
+    public static int getMoney() {
+        return money;
+    }
+
+    public static void increaseMoney(int amount) {
+        money += amount;
+        displayMoneyBox();
+    }
+
+    public static void decreaseMoney(int amount) {
+        money -= amount;
+        displayMoneyBox();
+    }
+
+    private static void displayMoneyBox() {
+        System.out.println("new money = " + money);
+        // effect + thay đổi GUI ở đây
     }
 
     public static void addEnemiesWave() {

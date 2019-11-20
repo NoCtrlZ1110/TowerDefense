@@ -124,8 +124,7 @@ public class Tower extends GameEntity {
             // target.beShotBy(b);
             if (target.isDead()) { // b.getTarget().isDead()
                 // target.deleteHPbar(); // đưa vào class Enemy
-                money += target.getKilledBonus();
-                System.out.println("new money = " + money);
+                increaseMoney(target.getKilledBonus());
                 enemies.remove(target);
             }
         }

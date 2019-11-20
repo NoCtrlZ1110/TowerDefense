@@ -6,7 +6,6 @@ import javafx.util.Duration;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
-import static TowerDefense.GameTile.map;
 import static TowerDefense.Sound.buildingSound;
 
 public class Roadside {
@@ -44,9 +43,8 @@ public class Roadside {
             tower = new Tower("file:images/Archer_Tower17.png");
         }
 
-        if (money >= tower.getPrice()) {
-            money -= tower.getPrice();
-            System.out.println("new money = " + money);
+        if (getMoney() >= tower.getPrice()) {
+            decreaseMoney(tower.getPrice());
             placeTower(tower);
         }
     }
@@ -54,8 +52,7 @@ public class Roadside {
     public void sellPlacedTower() {
         Tower tower = getPlacedTower();
         if (tower != null) {
-            money += (int)(tower.getPrice() * SELL_RATE);
-            System.out.println("new money = " + money);
+            increaseMoney((int)(tower.getPrice() * SELL_RATE));
             towers.remove(tower);
             tower.destroy();
         }
@@ -84,7 +81,7 @@ public class Roadside {
     public void upgradePlacedTower() {
         Tower tower = getPlacedTower();
         if (tower != null) {
-            // money -= ...;
+            // decreaseMoney(...);
             System.out.println("I'm waiting for you...");
         }
     }
