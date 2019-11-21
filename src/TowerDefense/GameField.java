@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
+import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
 public class GameField {
@@ -38,47 +39,62 @@ public class GameField {
         welcomScr.scaleTo(960, 540);
 
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> {
-                imageObject blackScr = new imageObject("file:images/black.png");
-                blackScr.scaleTo(960, 540);
-                pane.getChildren().add(blackScr);
-            }),
-            new KeyFrame(Duration.millis(850), event -> {
-                imageObject logoScr = new imageObject("file:images/logo.png");
-                logoScr.scaleTo(960, 540);
-                pane.getChildren().add(logoScr);
-            }),
-            new KeyFrame(Duration.seconds(2), event -> {
-                welcomScr.setOpacity(0);
-                pane.getChildren().add(welcomScr);
-                FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
-            }),
-            new KeyFrame(Duration.seconds(3), event -> {
-                imageObject startBtn = new imageObject("file:images/startBtn.png");
-                startBtn.setLocation(73, 437);
-                startBtn.scaleTo(184, 56);
-                startBtn.setOpacity(0);
-                pane.getChildren().add(startBtn);
-                showMuteBtn(pane);
+                new KeyFrame(Duration.millis(0), event -> {
+                    imageObject blackScr = new imageObject("file:images/black.png");
+                    blackScr.scaleTo(960, 540);
+                    pane.getChildren().add(blackScr);
+                }),
+                new KeyFrame(Duration.millis(850), event -> {
+                    imageObject logoScr = new imageObject("file:images/logo.png");
+                    logoScr.scaleTo(960, 540);
+                    pane.getChildren().add(logoScr);
+                    //showMuteBtn(pane);
+                }),
+                new KeyFrame(Duration.seconds(2), event -> {
+                    welcomScr.setOpacity(0);
+                    muteBtn.setOpacity(0);
+                    speakerBtn.setOpacity(0);
+                    pane.getChildren().add(welcomScr);
 
-                startBtn.setOnMouseEntered(event1 -> {
-                    startBtn.setOpacity(1);
-                    scene.setCursor(Cursor.HAND);
-                });
+                    FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
+                    FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
+                    FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
 
-                startBtn.setOnMouseExited(event1 -> {
+                    ft.setFromValue(0);
+                    ft.setToValue(1);
+                    ft.play();
+                    ft2.setFromValue(0);
+                    ft2.setToValue(1);
+                    ft2.play();
+                    ft3.setFromValue(0);
+                    ft3.setToValue(1);
+                    ft3.play();
+                    showMuteBtn(pane);
+                }),
+                new KeyFrame(Duration.seconds(3), event -> {
+                    imageObject startBtn = new imageObject("file:images/startBtn.png");
+                    startBtn.setLocation(73, 437);
+                    startBtn.scaleTo(184, 56);
                     startBtn.setOpacity(0);
-                    scene.setCursor(Cursor.DEFAULT);
-                });
+                    pane.getChildren().add(startBtn);
+                    showMuteBtn(pane);
 
-                startBtn.setOnMouseClicked(event1 -> {
-                    clickSound();
-                    gameScreen(stage);
-                });
-            })
+
+                    startBtn.setOnMouseEntered(event1 -> {
+                        startBtn.setOpacity(1);
+                        scene.setCursor(Cursor.HAND);
+                    });
+
+                    startBtn.setOnMouseExited(event1 -> {
+                        startBtn.setOpacity(0);
+                        scene.setCursor(Cursor.DEFAULT);
+                    });
+
+                    startBtn.setOnMouseClicked(event1 -> {
+                        clickSound();
+                        gameScreen(stage);
+                    });
+                })
         );
 
         stage.setTitle("Tower Defense 1.5");
@@ -86,10 +102,6 @@ public class GameField {
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setResizable(true);
-//        stage.setMinWidth(960);
-//        stage.setMaxWidth(960);
-//        stage.setMinHeight(540);
-//        stage.setMaxHeight(540);
         stage.show();
 
         timeline.play();
@@ -99,14 +111,7 @@ public class GameField {
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
-        // layout = new Pane();
-
-        // Scene gameScene = new Scene(layout, 1280, 800); // 16 x 10; 80px per block
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-//        stage.setMinWidth(TILE_WIDTH * COL_NUM);
-//        stage.setMaxWidth(TILE_WIDTH * COL_NUM);
-//        stage.setMinHeight(TILE_WIDTH * ROW_NUM);
-//        stage.setMaxHeight(TILE_WIDTH * ROW_NUM);
 
         // [Vẽ ra map] -------------------
 
@@ -135,11 +140,11 @@ public class GameField {
         Timeline timeline = new Timeline();
 
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME-2), event -> combatMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME - 2), event -> combatMusic()));
 
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME*1000), event -> e.move(path));
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
             timeline.getKeyFrames().add(moveEnemy);
         }
         //-----------------------------
@@ -153,6 +158,8 @@ public class GameField {
                     e.harm();
                 });
                 // towers.forEach(Tower::shoot);
+                if (!selling) layout.getChildren().remove(using_shovel);
+                coin.setText(Integer.toString(money));
             }
         };
 
@@ -173,10 +180,19 @@ public class GameField {
         showMuteBtn(layout);
 
 
-
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
             Point point = getLocationFromMouseEvent(event);
+
+            if (selling) {
+                if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
+                using_shovel.setLocation((int)event.getSceneX()-5,(int) event.getSceneY()-82);
+            }
+            else
+            {
+                layout.getChildren().remove(using_shovel);
+
+            }
 
             if (location != null) {
                 layout.setCursor(Cursor.HAND);
@@ -184,14 +200,13 @@ public class GameField {
                 border.setY(location.getY() + 33);
             } else if (isTowerPlaced(point)) {
                 layout.setCursor(Cursor.HAND);
-            }
-            else {
+            } else {
                 layout.setCursor(Cursor.DEFAULT);
             }
             // System.out.println(point);
             if (isTowerPlaced(point))
                 towers.forEach(t -> {
-                    if (t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
+                    if (t.isInTower((int) event.getSceneX(), (int) event.getSceneY()))
                         t.showRange();
                     else
                         t.removeRange();
@@ -210,25 +225,34 @@ public class GameField {
                 border.setX(location.getX() + 33);
                 border.setY(location.getY() + 33);
                 // mua: hiện dãy icon đại diện cho tháp
-                System.out.println("clicked");
+//                System.out.println("clicked");
                 // => chọn loại tower (thêm tham số, có thể là string)
-                buyTowerAt(location);
-            } else if (isTowerPlaced(getLocationFromMouseEvent(event))) {
-                // bán/upgrade tháp ở đây
-                // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
+                if (!selling) buyTowerAt(location);
+                selling = false;
+            } else
+            {
+                Point checkingPoint = getLocationFromMouseEvent(event);
+                if (isTowerPlaced(checkingPoint)) {
+                    // bán/upgrade tháp ở đây
+                    // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
-                int x = (int)event.getSceneX();
-                int y = (int)event.getSceneY();
-                boolean is_sell_chosen = true;
-                if (is_sell_chosen) {
-                    // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                    sellTowerAt(x, y);
-                } else {
-                    // upgrade: hiện dãy icon đại diện cho tháp
-                    // upgrade có thể có giá
-                    upgradeTowerAt(x, y);
-                }
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
+                    // boolean is_sell_chosen = true;// --->>> tôi sử dụng biến selling nhé :>
+                    if (selling) {
+                        // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
+                        sellTowerAt(x, y);
+                        selling = false;
+                    } else {
+
+                        // upgrade: hiện dãy icon đại diện cho tháp
+                        // upgrade có thể có giá
+                        upgradeTowerAt(x, y);
+                    }
+                } else if (isRoadPlaced(checkingPoint)) selling = false;
             }
+
+
         });
 
         imageObject pauseImage = new imageObject("file:images/pause.png");
@@ -247,6 +271,10 @@ public class GameField {
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
+        // ------------------------
+
+        showShopBar();
+
         // ------------------------
         stage.setScene(gameScene);
         stage.centerOnScreen();
@@ -284,7 +312,7 @@ public class GameField {
     }
 
     public static Tower findTowerAt(int x, int y) {
-        for (Tower t: towers) {
+        for (Tower t : towers) {
             if (t.isInTower(x, y)) {
                 return t;
             }
@@ -304,7 +332,7 @@ public class GameField {
     public static void sellTowerAt(int x, int y) {
         Tower tower = findTowerAt(x, y);
         if (tower != null) {
-            money += (int)(tower.getPrice() * SELL_RATE);
+            money += (int) (tower.getPrice() * SELL_RATE);
             towers.remove(tower);
             tower.destroy();
         }
@@ -313,23 +341,23 @@ public class GameField {
     public static void placeTower(Tower tower, Point location) {
         imageObject building = new imageObject("file:images/white_building.gif");
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> {
-                buildingSound();
-                building.scaleTo(TILE_WIDTH, TILE_WIDTH);
-                building.setLocation(location.getX()+TILE_WIDTH/2, location.getY()+TILE_WIDTH/2);
-                layout.getChildren().add(building);
-                setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
-                setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
-                setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
-                setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
-                
-                tower.setPosition(location);
-            }), new KeyFrame(Duration.millis(1800), event -> {
-                layout.getChildren().remove(building);
-                tower.showTower();
-                // tower.showRange();
-                towers.add(tower);
-            }
+                new KeyFrame(Duration.millis(0), event -> {
+                    buildingSound();
+                    building.scaleTo(TILE_WIDTH, TILE_WIDTH);
+                    building.setLocation(location.getX() + TILE_WIDTH / 2, location.getY() + TILE_WIDTH / 2);
+                    layout.getChildren().add(building);
+                    setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH, 6);
+                    setMapType(location.getX() / TILE_WIDTH, location.getY() / TILE_WIDTH + 1, 6);
+                    setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH, 6);
+                    setMapType(location.getX() / TILE_WIDTH + 1, location.getY() / TILE_WIDTH + 1, 6);
+
+                    tower.setPosition(location);
+                }), new KeyFrame(Duration.millis(1800), event -> {
+            layout.getChildren().remove(building);
+            tower.showTower();
+            // tower.showRange();
+            towers.add(tower);
+        }
         ));
         timeline.play();
     }
@@ -338,7 +366,7 @@ public class GameField {
         Tower tower = findTowerAt(x, y);
         if (tower != null) {
             // money -= ...;
-            System.out.println("I'm waiting for you...");
+//            System.out.println("I'm waiting for you...");
         }
     }
 

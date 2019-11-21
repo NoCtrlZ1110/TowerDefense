@@ -2,11 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/mute.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/speaker.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Linh tinh/Card.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Linh tinh/shopBar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/TowerType1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/TowerType2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/TowerType3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shopBar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shovel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shovel_noback.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/tileType_txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/tileType_txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,6 +27,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,6 +46,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/towerDefense-Version2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -70,6 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1574154468691</updated>
       <workItem from="1574154470406" duration="1163000" />
+      <workItem from="1574226971050" duration="16324000" />
     </task>
     <servers />
   </component>
@@ -79,6 +101,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:D:/UET_CN1/TowerDefense/src/TowerDefense" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -87,6 +134,11 @@
           </value>
         </entry>
       </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
