@@ -6,6 +6,12 @@ public class CONSTANT {
     public static final String pathTile = "file:images/";
     public static final String pathRoad = "file:images/road.png";
     public static final String pathRedEnemy = "file:images/LoLminion.gif";
+    public static final String pathTankerEnemy = "file:images/bat.png";
+    public static final String pathSmallerEnemy = "file:images/penguin.png";
+    public static final String pathBossEnemy = "file:images/boss.png";
+    public static final String pathNormalTower = "file:images/Archer_Tower17.png";
+    public static final String pathSniperTower = "file:images/bean.png";
+    public static final String pathMachineGunTower = "file:images/Archer_Tower17.png";
     public static final String pathBullet = "file:images/bullet.png";
     public static final String pathTransition ="map/roadPath.txt";
 

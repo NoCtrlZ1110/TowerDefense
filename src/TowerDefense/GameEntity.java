@@ -19,10 +19,9 @@ public abstract class GameEntity extends ImageView {
         this.imageUrl = imageUrl;
     }
 
-    public void setScale(int x, int y)
-    {
-        this.setFitHeight(x);
-        this.setFitWidth(y);
+    public void scaleTo(int new_width, int new_height) {
+        setFitWidth(new_width);
+        setFitHeight(new_height);
     }
 
     public void setLocation(int x, int y) {

@@ -2,10 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
+      <change afterPath="$PROJECT_DIR$/images/bat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/boss.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/coin1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/Cartoon-Enemy-Pack-01-2D-Monster-Character-Pack.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/IMGBIN_2d-computer-graphics-asset-video-game-artist-game-engine-png_5fw5AwpE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/IMGBIN_monster-cartoon-executioner-2-video-game-sprite-2d-computer-graphics-png_SAYsQUsQ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/IMGBIN_sprite-2d-computer-graphics-tile-based-video-game-tower-defense-png_EEb0cYaS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/bat.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/boss.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/cartoon-animation-sprite-cartoon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/cartoon-animation-sprite-cartoon.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/coin1.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/coin2.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/coin3.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/devil-monster-enemy-game-character-animation.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xcf/kisspng-cartoon-animation-sprite-cartoon-hand-painted-flying-saucer-5ae9aab386d1b1.3343601715252630275522.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/BossEnemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/SmallerEnemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/TankerEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Roadside.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Roadside.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/imageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/imageObject.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,5 +239,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Thêm thanh máu cho enemy" />
     <option name="LAST_COMMIT_MESSAGE" value="Thêm thanh máu cho enemy" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/NoCtrlZ1110_TowerDefense$GameStage.ic" NAME="GameStage Coverage Results" MODIFIED="1574326686973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>TowerDefense.*</FILTER>
+    </SUITE>
   </component>
 </project>

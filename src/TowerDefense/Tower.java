@@ -21,7 +21,17 @@ public class Tower extends GameEntity {
 
     public Tower(String imageUrl) {
         super(imageUrl);
-        setScale(TOWER_WIDTH, TOWER_WIDTH);
+        scaleTo(TOWER_WIDTH, TOWER_WIDTH);
+    }
+
+    protected Tower(String imageUrl, int range, double shooting_speed, double shooting_damage, int price) {
+        super(imageUrl);
+        scaleTo(TOWER_WIDTH, TOWER_WIDTH);
+
+        this.range = range;
+        this.shooting_speed = shooting_speed;
+        this.shooting_damage = shooting_damage;
+        this.price = price;
     }
 
     public int getPrice() {
@@ -93,7 +103,7 @@ public class Tower extends GameEntity {
         for (Enemy enemy: enemies) {
             Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
-            if (t.getDistance(e) <= range) {
+            if (enemy.isAppeared() && t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
                 line.setStartY(t.getY());

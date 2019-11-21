@@ -24,10 +24,12 @@ public class GameField {
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
     private static int money = 100;
-    static int hp = 100;
+    private static int hp = 100;
     private static boolean is_paused = false;
 
     public static Pane layout = new Pane();
+
+    // thêm property stage: Stage
 
     public static void welcomeScreen(Stage stage) {
         Pane pane = new Pane();
@@ -180,15 +182,14 @@ public class GameField {
                 gameScene.setCursor(Cursor.DEFAULT);
             }
             // System.out.println(point);
-            if (isTowerPlaced(point))
-                towers.forEach(t -> {
-                    if (t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
-                        t.showRange();
-                    else
-                        t.removeRange();
-                });
-            else
-                towers.forEach(Tower::removeRange);
+
+            towers.forEach(t -> {
+                // if (isTowerPlaced(point) && t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
+                if (t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
+                    t.showRange();
+                else
+                    t.removeRange();
+            });
         });
 
         layout.setOnMouseClicked(event -> {
@@ -255,6 +256,10 @@ public class GameField {
         // layout.getChildren().remove(background);
     }
 
+    public static void showGameOverScreen() {
+        System.out.println("Game over!");
+    }
+
     public static void drawMap() {
         imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
 
@@ -269,10 +274,15 @@ public class GameField {
 
     public static void decreaseHP(double amount) {
         hp -= amount;
-        System.out.println("new hp = " + hp);
+        displayHPBox();
         if (hp <= 0) {
-            System.out.println("Game over!");
+            showGameOverScreen();
         }
+    }
+
+    private static void displayHPBox() {
+        System.out.println("new hp = " + hp);
+        // effect + thay đổi GUI ở đây
     }
 
     public static int getMoney() {
@@ -298,10 +308,15 @@ public class GameField {
         // [Tạo ra lính] ----------------
         for (int i = 0; i < 20; i++) {
             // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
-            Enemy minion = new NormalEnemy(-TILE_WIDTH, 720);
-            minion.setFitHeight(70);
-            minion.setFitWidth(70);
-            minion.setSpeed(1.2);
+            Enemy minion;
+            if (i % 3 == 0)
+                minion = new NormalEnemy(-TILE_WIDTH, 720);
+            else if (i % 3 == 1)
+                minion = new SmallerEnemy(-TILE_WIDTH, 720);
+            else
+                minion = new TankerEnemy(-TILE_WIDTH, 720);
+            // minion.scaleTo(70, 70);
+            // minion.setSpeed(1.2);
             enemies.add(minion);
             layout.getChildren().add(minion);
         }
