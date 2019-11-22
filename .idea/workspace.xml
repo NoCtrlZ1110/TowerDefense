@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="" />
+    <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +98,7 @@
       <updated>1574154468691</updated>
       <workItem from="1574154470406" duration="1163000" />
       <workItem from="1574226971050" duration="16324000" />
-      <workItem from="1574432472244" duration="1924000" />
+      <workItem from="1574432472244" duration="6267000" />
     </task>
     <servers />
   </component>

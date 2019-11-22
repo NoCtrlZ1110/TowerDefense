@@ -185,7 +185,7 @@ public class GameField {
 
             if (selling) {
                 if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
-                using_shovel.setLocation((int)event.getSceneX()-5,(int) event.getSceneY()-82);
+                using_shovel.setLocation((int) event.getSceneX() - 5, (int) event.getSceneY() - 82);
             } else {
                 layout.getChildren().remove(using_shovel);
             }
@@ -202,7 +202,7 @@ public class GameField {
             // System.out.println(point);
             towers.forEach(t -> {
                 // if (isTowerPlaced(point) && t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
-                if (t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
+                if (t.isInTower((int) event.getSceneX(), (int) event.getSceneY()))
                     t.showRange();
                 else
                     t.removeRange();
@@ -223,12 +223,21 @@ public class GameField {
                 if (!selling) {
                     System.out.println("build too!");
                     Roadside r = new Roadside(location.getX(), location.getY());
-                    if (currentItem == 1)
+                    if (currentItem == 1) {
                         r.buyTower("normal");
-                    else if (currentItem == 2)
+                        currentItem = 0;
+                        selectedItem.setVisible(false);
+                    } else if (currentItem == 2) {
                         r.buyTower("sniper");
-                    else if (currentItem == 3)
+                        currentItem = 0;
+                        selectedItem.setVisible(false);
+
+                    } else if (currentItem == 3) {
                         r.buyTower("machinegun");
+                        currentItem = 0;
+                        selectedItem.setVisible(false);
+
+                    }
                 }
                 selling = false;
             } else {
@@ -237,8 +246,8 @@ public class GameField {
                     // bán/upgrade tháp ở đây
                     // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
 
-                    int x = (int)event.getSceneX();
-                    int y = (int)event.getSceneY();
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
                     Roadside r = new Roadside(x, y);
                     if (selling) {
                         // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
