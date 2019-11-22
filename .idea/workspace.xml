@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor$Delta.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/PauseScreen.class" beforeDir="false" />
-    </list>
+    <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +94,7 @@
       <updated>1574154468691</updated>
       <workItem from="1574154470406" duration="1163000" />
       <workItem from="1574226971050" duration="16324000" />
-      <workItem from="1574432472244" duration="1239000" />
+      <workItem from="1574432472244" duration="1924000" />
     </task>
     <servers />
   </component>
