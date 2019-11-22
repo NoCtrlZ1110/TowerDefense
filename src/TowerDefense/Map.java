@@ -40,6 +40,10 @@ public class Map {
         return "6".equals(getType(x, y));
     }
 
+    public boolean isRoadPlacedAt(int x, int y) {
+        return "1".equals(getType(x, y));
+    }
+
     public void reset(int x, int y) {
         map[y][x] = original_map[y][x];
         map[y + 1][x] = original_map[y + 1][x];

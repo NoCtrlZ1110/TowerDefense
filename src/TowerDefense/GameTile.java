@@ -93,6 +93,10 @@ public class GameTile {
         return map.isTowerPlacedAt(point.getX(), point.getY());
     }
 
+    public static boolean isRoadPlaced(Point point) {
+        return map.isRoadPlacedAt(point.getX(), point.getY());
+    }
+
     public static void resetMap(int x, int y) {
         map.reset(x, y);
     }

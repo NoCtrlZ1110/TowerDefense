@@ -129,8 +129,8 @@ public class Sound {
     }
 
 
-    private static imageObject muteBtn = new imageObject("file:images/mute.png");
-    private static imageObject speakerBtn = new imageObject("file:images/speaker.png");
+    static imageObject muteBtn = new imageObject("file:images/mute.png");
+    static imageObject speakerBtn = new imageObject("file:images/speaker.png");
 
     static void showMuteBtn(Pane layout) {
         muteBtn.setLocation((int) layout.getWidth() - 70, 30);
@@ -141,9 +141,11 @@ public class Sound {
         if (!layout.getChildren().contains(muteBtn)) layout.getChildren().add(muteBtn);
         if (!layout.getChildren().contains(speakerBtn)) layout.getChildren().add(speakerBtn);
         if (isMuted) {
+            mute();
             muteBtn.setVisible(true);
             speakerBtn.setVisible(false);
         } else {
+            unMute();
             muteBtn.setVisible(false);
             speakerBtn.setVisible(true);
         }
