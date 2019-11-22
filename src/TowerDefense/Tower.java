@@ -11,15 +11,27 @@ import static TowerDefense.GameTile.setMapType;
 
 public class Tower extends GameEntity {
     int price = 10;
-    Point position;
     int range = 200;
+    double shooting_speed = 1;
+    double shooting_damage = 1;
+    Point position;
     Circle rangeCircle = new Circle();
     private Line line = new Line();
     private boolean is_destroyed = false;
 
     public Tower(String imageUrl) {
         super(imageUrl);
-        setScale(TOWER_WIDTH, TOWER_WIDTH);
+        scaleTo(TOWER_WIDTH, TOWER_WIDTH);
+    }
+
+    protected Tower(String imageUrl, int range, double shooting_speed, double shooting_damage, int price) {
+        super(imageUrl);
+        scaleTo(TOWER_WIDTH, TOWER_WIDTH);
+
+        this.range = range;
+        this.shooting_speed = shooting_speed;
+        this.shooting_damage = shooting_damage;
+        this.price = price;
     }
 
     public int getPrice() {
@@ -91,7 +103,7 @@ public class Tower extends GameEntity {
         for (Enemy enemy: enemies) {
             Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
-            if (t.getDistance(e) <= range) {
+            if (enemy.isAppeared() && t.getDistance(e) <= range) {
                 line.setStartX(t.getX());
                 line.setEndX(e.getX());
                 line.setStartY(t.getY());
@@ -101,8 +113,6 @@ public class Tower extends GameEntity {
 
                 return enemy;
             }
-            e = null;
-            t = null;
         }
         layout.getChildren().remove(line);
         return null;
@@ -119,14 +129,12 @@ public class Tower extends GameEntity {
             Point e = new Point(target.getLocation().getX()+TILE_WIDTH/2,target.getLocation().getY()+TILE_WIDTH/2);
             Bullet b = new Bullet(1, 1, t.getX(), t.getY(), e.getX(), e.getY());
             */
-            Bullet b = new Bullet(1, 1, this, target);
+            Bullet b = new Bullet(shooting_speed, shooting_damage, this, target);
             b.beShot();
             // target.beShotBy(b);
             if (target.isDead()) { // b.getTarget().isDead()
-                target.deleteHPbar();
-
-                money += target.getKilledBonus();
-                System.out.println("new money = " + money);
+                // target.deleteHPbar(); // đưa vào class Enemy
+                increaseMoney(target.getKilledBonus());
                 enemies.remove(target);
             }
         }
