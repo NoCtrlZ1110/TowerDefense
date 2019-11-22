@@ -2,25 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/Card.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/shopBar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/TowerType1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/TowerType2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/TowerType3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/shopBar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/shovel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/shovel_noback.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/Bar.psd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/shopBar.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/tileType_txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/tileType_txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor$Delta.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main$Anchor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/PauseScreen.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +40,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/towerDefense-Version2" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -60,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.GameStage">
     <configuration name="GameStage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TowerDefense.GameStage" />
       <module name="TowerDefense" />
@@ -104,13 +100,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
+      <changelist id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="" />
       <created>1572279812205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574154468691</updated>
       <workItem from="1574154470406" duration="1163000" />
       <workItem from="1574226971050" duration="16324000" />
+      <workItem from="1574432472244" duration="1239000" />
     </task>
     <servers />
   </component>
@@ -145,6 +142,23 @@
             </State>
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..back-end" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -153,11 +167,6 @@
           </value>
         </entry>
       </map>
-    </option>
-    <option name="OPEN_TABS">
-      <set>
-        <option value="1" />
-      </set>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
