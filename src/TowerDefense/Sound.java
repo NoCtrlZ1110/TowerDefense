@@ -76,7 +76,7 @@ public class Sound {
 
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(2),
-                        new KeyValue(welcomePlayer.volumeProperty(), 0)),new KeyFrame(Duration.seconds(2),e -> welcomePlayer.stop()));
+                        new KeyValue(welcomePlayer.volumeProperty(), 0)), new KeyFrame(Duration.seconds(2), e -> welcomePlayer.stop()));
         timeline.play();
     }
 
@@ -131,12 +131,15 @@ public class Sound {
 
     static imageObject muteBtn = new imageObject("file:images/mute.png");
     static imageObject speakerBtn = new imageObject("file:images/speaker.png");
+    static imageObject playBtn = new imageObject("file:images/play.png");
 
     static void showMuteBtn(Pane layout) {
         muteBtn.setLocation((int) layout.getWidth() - 70, 30);
         speakerBtn.setLocation((int) layout.getWidth() - 70, 30);
+        playBtn.setLocation((int) layout.getWidth() - 120, 30);
         muteBtn.scaleTo(40, 40);
         speakerBtn.scaleTo(40, 40);
+        playBtn.scaleTo(40, 40);
 
         if (!layout.getChildren().contains(muteBtn)) layout.getChildren().add(muteBtn);
         if (!layout.getChildren().contains(speakerBtn)) layout.getChildren().add(speakerBtn);
@@ -149,10 +152,13 @@ public class Sound {
             muteBtn.setVisible(false);
             speakerBtn.setVisible(true);
         }
-        muteBtn.setOnMouseEntered( event -> layout.setCursor(Cursor.HAND));
-        muteBtn.setOnMouseExited( event -> layout.setCursor(Cursor.DEFAULT));
-        speakerBtn.setOnMouseEntered( event -> layout.setCursor(Cursor.HAND));
-        speakerBtn.setOnMouseExited( event -> layout.setCursor(Cursor.DEFAULT));
+        muteBtn.setOnMouseEntered(event -> muteBtn.setCursor(Cursor.HAND));
+        muteBtn.setOnMouseExited(event -> muteBtn.setCursor(Cursor.DEFAULT));
+        speakerBtn.setOnMouseEntered(event -> speakerBtn.setCursor(Cursor.HAND));
+        speakerBtn.setOnMouseExited(event -> speakerBtn.setCursor(Cursor.DEFAULT));
+        playBtn.setOnMouseEntered(event -> speakerBtn.setCursor(Cursor.HAND));
+        playBtn.setOnMouseExited(event -> speakerBtn.setCursor(Cursor.DEFAULT));
+
         muteBtn.setOnMouseClicked(event -> {
             isMuted = false;
             unMute();

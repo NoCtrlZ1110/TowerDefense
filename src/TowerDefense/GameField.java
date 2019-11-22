@@ -110,22 +110,22 @@ public class GameField {
         playWelcomeMusic();
     }
 
+    final static Path path = new Path();
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
-        imageObject background = new imageObject("file:images/back.png");
+        imageObject background = new imageObject("file:images/back2.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         layout.getChildren().add(background);
 
-        drawMap();
+        //drawMap();
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
 
-        final Path path = new Path();
         path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
 
         for (int i = 0; i < ROAD_NUM; i++)
@@ -136,16 +136,7 @@ public class GameField {
         //-----------------------------
 
         // [Cho lính di chuyển theo path] ---
-        Timeline timeline = new Timeline();
 
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME - 2), event -> combatMusic()));
-
-        for (int i = 0; i < enemies.size(); i++) {
-            Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
-            timeline.getKeyFrames().add(moveEnemy);
-        }
         //-----------------------------
 
         // [Hiện thanh máu liên tục theo thời gian]
@@ -159,6 +150,8 @@ public class GameField {
                 // towers.forEach(Tower::shoot);
                 if (!selling) layout.getChildren().remove(using_shovel);
                 coin.setText(Integer.toString(money));
+                if (currentItem == 0)
+                    layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
             }
         };
 
@@ -182,6 +175,25 @@ public class GameField {
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
             Point point = getLocationFromMouseEvent(event);
+
+            if (currentItem == 0) {
+                layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
+            } else if (currentItem == 1) {
+                if (!layout.getChildren().contains(placingTower1))
+                    layout.getChildren().add(placingTower1);
+                placingTower1.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+
+            } else if (currentItem == 2) {
+                if (!layout.getChildren().contains(placingTower2))
+                    layout.getChildren().add(placingTower2);
+                placingTower2.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+
+            } else if (currentItem == 3) {
+                if (!layout.getChildren().contains(placingTower3))
+                    layout.getChildren().add(placingTower3);
+                placingTower3.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+
+            }
 
             if (selling) {
                 if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
@@ -289,7 +301,7 @@ public class GameField {
         stage.setScene(gameScene);
         stage.centerOnScreen();
         timer.start();
-        timeline.play();
+
         stage.show();
     }
 
@@ -365,6 +377,22 @@ public class GameField {
             // minion.setSpeed(1.2);
             enemies.add(minion);
             layout.getChildren().add(minion);
+            moveEnemies();
         }
+    }
+
+    public static void moveEnemies()
+    {
+        Timeline timeline = new Timeline();
+
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME - 2), event -> combatMusic()));
+
+        for (int i = 0; i < enemies.size(); i++) {
+            Enemy e = enemies.get(i);
+            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
+            timeline.getKeyFrames().add(moveEnemy);
+        }
+        timeline.play();
     }
 }

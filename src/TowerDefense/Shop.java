@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import static TowerDefense.CONSTANT.pathNormalTower;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.*;
 
@@ -26,8 +27,13 @@ public class Shop {
     private static imageObject shopBar = new imageObject("file:images/shopBar.png");
     private static imageObject towerType1 = new imageObject("file:images/TowerType1.png");
     private static imageObject towerType2 = new imageObject("file:images/TowerType2.png");
-    private static imageObject towerType3 = new imageObject("file:images/TowerType3.png");
     private static imageObject shovel = new imageObject("file:images/shovel.png");
+    private static imageObject towerType3 = new imageObject("file:images/TowerType3.png");
+
+
+    static imageObject placingTower1 = new imageObject(pathNormalTower);
+    static imageObject placingTower2 = new imageObject(pathNormalTower);
+    static imageObject placingTower3 = new imageObject(pathNormalTower);
     static imageObject using_shovel = new imageObject("file:images/shovel_noback.png");
 
     public static void showShopBar() {
@@ -50,7 +56,7 @@ public class Shop {
         towerType3.scaleTo(67, 90);
         shovel.scaleTo(70, 70);
         shovel.setLocation((int) shopBar.getTranslateX() + 13, (int) shopBar.getTranslateY() + 398);
-        coin.setTranslateX(shopBar.getTranslateX() + 27);
+        coin.setTranslateX(shopBar.getTranslateX() + 33);
         coin.setTranslateY(shopBar.getTranslateY() + 69);
         // coin.setMinWidth(70-27);
         // coin.setMaxWidth(70-27);
@@ -96,6 +102,8 @@ public class Shop {
         shovel.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         shovel.setOnMouseClicked(event -> {
             selling = true;
+            using_shovel.setLocation((int) shovel.getTranslateX() + 30, (int) shovel.getTranslateY() - 40);
+            if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
         }
         );
     }
