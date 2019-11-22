@@ -186,11 +186,8 @@ public class GameField {
             if (selling) {
                 if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
                 using_shovel.setLocation((int)event.getSceneX()-5,(int) event.getSceneY()-82);
-            }
-            else
-            {
+            } else {
                 layout.getChildren().remove(using_shovel);
-
             }
 
             if (location != null) {
@@ -224,9 +221,14 @@ public class GameField {
                 // mua: hiện dãy icon đại diện cho tháp
                 // => chọn loại tower (thêm tham số, có thể là string)
                 if (!selling) {
-                    buyTowerAt(location);
+                    System.out.println("build too!");
                     Roadside r = new Roadside(location.getX(), location.getY());
-                    r.buyTower("");
+                    if (currentItem == 1)
+                        r.buyTower("normal");
+                    else if (currentItem == 2)
+                        r.buyTower("sniper");
+                    else if (currentItem == 3)
+                        r.buyTower("machinegun");
                 }
                 selling = false;
             } else {
@@ -334,7 +336,7 @@ public class GameField {
         displayMoneyBox();
     }
 
-    private static void displayMoneyBox() {
+    public static void displayMoneyBox() {
         System.out.println("new money = " + money);
         // effect + thay đổi GUI ở đây
     }

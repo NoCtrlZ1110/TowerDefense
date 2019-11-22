@@ -17,7 +17,7 @@ public class Shop {
 
     static Pane shopPane = new Pane();
 
-    static Label coin = new Label(Integer.toString(money));
+    static Label coin = new Label(Integer.toString(getMoney()));
 
     static imageObject shopBar = new imageObject("file:images/shopBar.png");
     static imageObject towerType1 = new imageObject("file:images/TowerType1.png");
@@ -40,9 +40,11 @@ public class Shop {
         shovel.setLocation((int) shopBar.getTranslateX() + 13, (int) shopBar.getTranslateY() + 398);
         coin.setTranslateX(shopBar.getTranslateX() + 27);
         coin.setTranslateY(shopBar.getTranslateY() + 69);
+        // coin.setMinWidth(70-27);
+        // coin.setMaxWidth(70-27);
         coin.setAlignment(Pos.CENTER);
         coin.setFont(new Font("Aerial",13));
-        shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel,coin);
+        shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin);
         layout.getChildren().add(shopPane);
         handleClickItem();
     }
@@ -52,7 +54,6 @@ public class Shop {
         towerType1.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType1.setOnMouseClicked(event -> {
             currentItem = 1;
-            //TODO => Xây loại tháp 1
             System.out.println("Building Tower 1");
         });
 
@@ -60,7 +61,6 @@ public class Shop {
         towerType2.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType2.setOnMouseClicked(event -> {
             currentItem = 2;
-            //TODO => Xây loại tháp 2
             System.out.println("Building Tower 2");
         });
 
@@ -68,7 +68,6 @@ public class Shop {
         towerType3.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType3.setOnMouseClicked(event -> {
             currentItem = 3;
-            //TODO => Xây loại tháp 3
             System.out.println("Building Tower 3");
         });
 
@@ -76,10 +75,8 @@ public class Shop {
         shovel.setOnMouseEntered(event -> shopPane.setCursor(Cursor.HAND));
         shovel.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         shovel.setOnMouseClicked(event -> {
-                    selling = true;
-                }
+            selling = true;
+        }
         );
-
-
     }
 }

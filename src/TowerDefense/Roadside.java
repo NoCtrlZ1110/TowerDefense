@@ -38,6 +38,8 @@ public class Roadside {
             tower = new NormalTower();
         else if (tower_type.equals("sniper"))
             tower = new SniperTower();
+        else if (tower_type.equals("machinegun"))
+            tower = new MachineGunTower();
         else {
             // Tower tower = new Tower("file:images/Tower.png");
             tower = new Tower("file:images/Archer_Tower17.png");
@@ -82,7 +84,7 @@ public class Roadside {
         Tower tower = getPlacedTower();
         if (tower != null) {
             // decreaseMoney(...);
-            System.out.println("I'm waiting for you...");
+            System.out.println("waiting for updating...");
         }
     }
 }
