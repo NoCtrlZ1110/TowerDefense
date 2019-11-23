@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-import static TowerDefense.CONSTANT.pathNormalTower;
+import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.*;
 
@@ -32,8 +32,8 @@ public class Shop {
 
 
     static imageObject placingTower1 = new imageObject(pathNormalTower);
-    static imageObject placingTower2 = new imageObject(pathNormalTower);
-    static imageObject placingTower3 = new imageObject(pathNormalTower);
+    static imageObject placingTower2 = new imageObject(pathSniperTower);
+    static imageObject placingTower3 = new imageObject(pathMachineGunTower);
     static imageObject using_shovel = new imageObject("file:images/shovel_noback.png");
 
     public static void showShopBar() {
@@ -44,6 +44,7 @@ public class Shop {
         selectedItem.setLayoutX(shopBar.getTranslateX() + 32);
         selectedItem.setArcHeight(5);
         selectedItem.setArcWidth(5);
+
 
         layout.getChildren().add(shopBar);
         shopBar.setLocation(20, 30);
@@ -74,6 +75,9 @@ public class Shop {
             currentItem = 1;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 97);
+            if (!layout.getChildren().contains(placingTower1))
+                layout.getChildren().add(placingTower1);
+            placingTower1.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 150);
             System.out.println("Building Tower 1");
         });
 
@@ -83,7 +87,9 @@ public class Shop {
             currentItem = 2;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 197);
-
+            if (!layout.getChildren().contains(placingTower2))
+                layout.getChildren().add(placingTower2);
+            placingTower2.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 250);
             System.out.println("Building Tower 2");
         });
 
@@ -93,7 +99,9 @@ public class Shop {
             currentItem = 3;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 297);
-
+            if (!layout.getChildren().contains(placingTower3))
+                layout.getChildren().add(placingTower3);
+            placingTower3.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 350);
             System.out.println("Building Tower 3");
         });
 
