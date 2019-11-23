@@ -9,13 +9,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.io.File;
+import java.io.FileInputStream;
+
+import static TowerDefense.CONSTANT.PATH_FONT;
 import static TowerDefense.CONSTANT.pathNormalTower;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.*;
 
 public class Shop {
-
-
     static Rectangle selectedItem = new Rectangle(70, 94);
     static int currentItem = 0;
     static boolean selling = false;
@@ -29,7 +31,6 @@ public class Shop {
     private static imageObject towerType2 = new imageObject("file:images/TowerType2.png");
     private static imageObject shovel = new imageObject("file:images/shovel.png");
     private static imageObject towerType3 = new imageObject("file:images/TowerType3.png");
-
 
     static imageObject placingTower1 = new imageObject(pathNormalTower);
     static imageObject placingTower2 = new imageObject(pathNormalTower);
@@ -56,12 +57,14 @@ public class Shop {
         towerType3.scaleTo(67, 90);
         shovel.scaleTo(70, 70);
         shovel.setLocation((int) shopBar.getTranslateX() + 13, (int) shopBar.getTranslateY() + 398);
+
         coin.setTranslateX(shopBar.getTranslateX() + 33);
         coin.setTranslateY(shopBar.getTranslateY() + 69);
         // coin.setMinWidth(70-27);
         // coin.setMaxWidth(70-27);
         coin.setAlignment(Pos.CENTER);
-        coin.setFont(new Font("Aerial",13));
+        // final Font AERIAL_FONT = new Font(PATH_FONT, 13);
+        coin.setFont(new Font("Aerial Regular", 13));
         shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin, selectedItem);
         layout.getChildren().add(shopPane);
         handleClickItem();
@@ -104,7 +107,6 @@ public class Shop {
             selling = true;
             using_shovel.setLocation((int) shovel.getTranslateX() + 30, (int) shovel.getTranslateY() - 40);
             if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
-        }
-        );
+        });
     }
 }

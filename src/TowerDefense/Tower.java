@@ -100,22 +100,29 @@ public class Tower extends GameEntity {
     }
 
     public Enemy findTarget() {
+        Enemy _target = null;
+        double min_distance = range;
         for (Enemy enemy: enemies) {
             Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
-            if (enemy.isAppeared() && t.getDistance(e) <= range) {
-                line.setStartX(t.getX());
-                line.setEndX(e.getX());
-                line.setStartY(t.getY());
-                line.setEndY(e.getY());
-                if (!layout.getChildren().contains(line))
-                    layout.getChildren().add(line);
-
-                return enemy;
+            if (enemy.isAlive() && t.getDistance(e) <= min_distance) {
+                _target = enemy;
+                min_distance = t.getDistance(e);
             }
         }
-        layout.getChildren().remove(line);
-        return null;
+        if (_target != null) {
+            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
+            Point e = new Point(_target.getLocation().getX()+TILE_WIDTH/2,_target.getLocation().getY()+TILE_WIDTH/2);
+            line.setStartX(t.getX());
+            line.setEndX(e.getX());
+            line.setStartY(t.getY());
+            line.setEndY(e.getY());
+            if (!layout.getChildren().contains(line))
+                layout.getChildren().add(line);
+        } else
+            layout.getChildren().remove(line);
+
+        return _target;
     }
 
     public void shoot() {

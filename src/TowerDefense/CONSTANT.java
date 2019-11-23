@@ -13,7 +13,8 @@ public class CONSTANT {
     public static final String pathSniperTower = "file:images/bean.gif";
     public static final String pathMachineGunTower = "file:images/Archer_Tower17.png";
     public static final String pathBullet = "file:images/bullet.png";
-    public static final String pathTransition ="map/roadPath.txt";
+    public static final String pathTransition = "map/roadPath.txt";
+    public static final String PATH_FONT = "file:font/Aerial.ttf";
 
     public static final int COL_NUM = 16;
     public static final int ROW_NUM = 10;

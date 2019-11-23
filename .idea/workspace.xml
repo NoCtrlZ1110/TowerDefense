@@ -1,56 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/16180b_10bc255b1b23418283f9dded5d699c88.jpg_srb_p_1277_959_75_22_0.50_1.20_0 (1).00_jpg_srb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/5__.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/5___.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/16180b_10bc255b1b23418283f9dded5d699c88.jpg_srb_p_1277_959_75_22_0.50_1.20_0 (1).00_jpg_srb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/16180b_10bc255b1b23418283f9dded5d699c88.jpg_srb_p_1277_959_75_22_0.50_1.20_0.00_jpg_srb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Linh tinh/dat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/back2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/14.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/17.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/18.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/19.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/5_.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/backup_tiles/5__.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tesst.png" afterDir="false" />
+    <list default="true" id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="Thêm thanh máu cho enemy">
+      <change afterPath="$PROJECT_DIR$/.idea/NoCtrlZ1110-TowerDefense.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/font/Aerial.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Linh tinh/back.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/back.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/backup_tiles/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/backup_tiles/9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OOp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OOp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TowerDefense.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefense.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/CONSTANT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TowerDefense/TowerDefense/Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,28 +25,50 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="NoCtrlZ1110-TowerDefense" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="back-end" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1TpQHP0NLpOIlSRlcIKUyk4nc7J" />
+  <component name="ProjectId" id="1Sq8YWZjZGVPGcMb7UFZ6vu1o0P" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/towerDefense-Version2" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/TowerDefense/temp.java" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/TowerDefense/temp.java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UET_CN1\TowerDefense\images" />
+      <recent name="D:\UET_CN1\OOp\images" />
+      <recent name="D:\UET_CN1\OOp\out" />
+      <recent name="D:\UET_CN1\OOp\src\Tower" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -96,7 +85,7 @@
   <component name="RunManager" selected="Application.GameStage">
     <configuration name="GameStage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TowerDefense.GameStage" />
-      <module name="TowerDefense" />
+      <module name="OOp" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="TowerDefense.*" />
@@ -121,14 +110,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.GameStage" />
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.TowerDefense" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
+        <item itemvalue="Application.TowerDefense" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GameStage" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -137,15 +125,56 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eb199fff-dd5e-4b84-9826-8efae1e2c7e7" name="Default Changelist" comment="" />
+      <changelist id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
       <created>1572279812205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1574154468691</updated>
-      <workItem from="1574154470406" duration="1163000" />
-      <workItem from="1574226971050" duration="16324000" />
-      <workItem from="1574432472244" duration="13829000" />
+      <updated>1572279812205</updated>
+      <workItem from="1572279814721" duration="27000" />
+      <workItem from="1572279854819" duration="845000" />
+      <workItem from="1572280716589" duration="27000" />
+      <workItem from="1572281071907" duration="793000" />
+      <workItem from="1572326098487" duration="854000" />
+      <workItem from="1572331988368" duration="245000" />
+      <workItem from="1572337095970" duration="4504000" />
+      <workItem from="1572353494426" duration="6634000" />
+      <workItem from="1572519490078" duration="102000" />
+      <workItem from="1572619412433" duration="7878000" />
+      <workItem from="1572631658036" duration="707000" />
+      <workItem from="1572672626593" duration="706000" />
+      <workItem from="1572676078393" duration="6322000" />
+      <workItem from="1572684612898" duration="2123000" />
+      <workItem from="1572710100244" duration="5784000" />
+      <workItem from="1572801224812" duration="2704000" />
+      <workItem from="1572829856439" duration="4628000" />
+      <workItem from="1572850548146" duration="271000" />
+      <workItem from="1572854911723" duration="3250000" />
+      <workItem from="1572876282013" duration="7379000" />
+      <workItem from="1572926079834" duration="3272000" />
+      <workItem from="1572941021328" duration="332000" />
+      <workItem from="1572941368330" duration="13000" />
+      <workItem from="1572946531215" duration="453000" />
+      <workItem from="1573271483604" duration="6762000" />
+      <workItem from="1573282438106" duration="112000" />
+      <workItem from="1573284875291" duration="303000" />
+      <workItem from="1573287269960" duration="1750000" />
+      <workItem from="1573292563873" duration="4271000" />
+      <workItem from="1573303551380" duration="16155000" />
+      <workItem from="1573325555649" duration="7092000" />
+      <workItem from="1573362401685" duration="12263000" />
+      <workItem from="1573394160736" duration="2690000" />
+      <workItem from="1573483310078" duration="13975000" />
+      <workItem from="1573541691337" duration="582000" />
+      <workItem from="1573545903902" duration="3361000" />
     </task>
+    <task id="LOCAL-00001" summary="Thêm thanh máu cho enemy">
+      <created>1573310276365</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573310276365</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,37 +186,12 @@
         <entry key="1">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="structure">
-                    <value>
-                      <list>
-                        <option value="dir:D:/UET_CN1/TowerDefense/src/TowerDefense" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-        <entry key="2">
-          <value>
-            <State>
               <option name="FILTERS">
                 <map>
                   <entry key="range">
                     <value>
                       <list>
-                        <option value="HEAD..back-end" />
+                        <option value="HEAD..master" />
                       </list>
                     </value>
                   </entry>
@@ -205,13 +209,15 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NoCtrlZ1110_TowerDefense$GameStage.ic" NAME="GameStage Coverage Results" MODIFIED="1574326686973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>TowerDefense.*</FILTER>
-    </SUITE>
+    <MESSAGE value="Thêm thanh máu cho enemy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thêm thanh máu cho enemy" />
   </component>
 </project>

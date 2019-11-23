@@ -133,9 +133,6 @@ public class GameField {
 
         //-------------------------------
         addEnemiesWave();
-        //-----------------------------
-
-        // [Cho lính di chuyển theo path] ---
 
         //-----------------------------
 
@@ -171,7 +168,6 @@ public class GameField {
 
         showMuteBtn(layout);
 
-
         layout.setOnMouseMoved(event -> {
             Point location = TowerBuildLocation(event);
             Point point = getLocationFromMouseEvent(event);
@@ -192,7 +188,6 @@ public class GameField {
                 if (!layout.getChildren().contains(placingTower3))
                     layout.getChildren().add(placingTower3);
                 placingTower3.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-
             }
 
             if (selling) {
@@ -233,7 +228,6 @@ public class GameField {
                 // mua: hiện dãy icon đại diện cho tháp
                 // => chọn loại tower (thêm tham số, có thể là string)
                 if (!selling) {
-                    System.out.println("build too!");
                     Roadside r = new Roadside(location.getX(), location.getY());
                     if (currentItem == 1) {
                         r.buyTower("normal");

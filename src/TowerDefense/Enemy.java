@@ -64,7 +64,7 @@ public class Enemy extends GameEntity {
         this.speed = speed;
     }
 
-    public boolean isAppeared() {
+    public boolean isAlive() {
         return (hp > 0 && !is_destroyed);
     }
 
@@ -77,6 +77,9 @@ public class Enemy extends GameEntity {
     }
 
     public void showHP() {
+        if (is_destroyed)
+            return;
+
         hp_max_bar.setX(this.getTranslateX());
         hp_max_bar.setY(this.getTranslateY()-10);
 
@@ -87,7 +90,7 @@ public class Enemy extends GameEntity {
         hp_bar.setFill(Color.DARKRED);
     }
 
-    public void deleteHPbar() {
+    private void deleteHPbar() {
         // hp_bar.setVisible(false);
         layout.getChildren().remove(hp_bar);
         hp_bar = null;
@@ -123,8 +126,7 @@ public class Enemy extends GameEntity {
         decreaseHP(b.getDamage());
         showHP();
         if (isDead()) {
-            deleteHPbar();
-            disappear();
+            destroy();
         }
     }
 
@@ -140,7 +142,7 @@ public class Enemy extends GameEntity {
 
     public boolean harm() {
         if (!is_destroyed && isReachedEndPoint()) {
-            disappear(); // tránh "gây hại" nhiều lần
+            destroy(); // tránh "gây hại" nhiều lần
             GameField.decreaseHP(harm_point * 1.0);
             // note: có thể nhân với hệ số < 1
 
@@ -150,8 +152,9 @@ public class Enemy extends GameEntity {
         return false;
     }
 
-    private void disappear() {
-        is_destroyed = true;
+    private void destroy() {
+        deleteHPbar();
         layout.getChildren().remove(this);
+        this.is_destroyed = true;
     }
 }

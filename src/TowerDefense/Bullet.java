@@ -4,10 +4,7 @@ import javafx.animation.*;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-
-import java.sql.Time;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.layout;
@@ -38,7 +35,7 @@ public class Bullet extends GameEntity {
         this.target = target;
 
         createPath();
-        rotate();
+        layout.getChildren().add(this);
     }
 
     public double getDamage() {
@@ -49,13 +46,6 @@ public class Bullet extends GameEntity {
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
         path.getElements().add(new LineTo(dest_x, dest_y));
-    }
-
-    private void rotate() {
-        setLocation(start_x, start_y - (int)(getFitHeight() / 2));
-        double angle = (start_x > dest_x ? Math.PI : 0) + Math.atan((start_y - dest_y) / (start_x - dest_x - 1e-9));
-        this.getTransforms().add(new Rotate(Math.toDegrees(angle)));
-        layout.getChildren().add(this);
     }
 
     private void move() {
@@ -74,7 +64,7 @@ public class Bullet extends GameEntity {
         pathTransition.setPath(path);
 
         //Setting the orientation of the path
-        //pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
@@ -84,20 +74,22 @@ public class Bullet extends GameEntity {
     }
 
     public void beShot() {
-        if (target != null)
-            target.beShotBy(this);
-
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
-                // BUG: hiện di chuyển bị để lại vết đạn
+                // BUG: di chuyển vẫn bị để lại vết đạn
                 move();
             }),
-            new KeyFrame(Duration.millis(MAX_TIME), event -> disappear())
+            new KeyFrame(Duration.millis(MAX_TIME), event -> {
+                if (target != null)
+                    target.beShotBy(this);
+
+                destroy();
+            })
         );
         timeline.play();
     }
 
-    public void disappear() {
+    public void destroy() {
         layout.getChildren().remove(this);
     }
 }
