@@ -104,12 +104,12 @@ public class Tower extends GameEntity {
             Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (enemy.isAppeared() && t.getDistance(e) <= range) {
-                line.setStartX(t.getX());
-                line.setEndX(e.getX());
-                line.setStartY(t.getY());
-                line.setEndY(e.getY());
-                if (!layout.getChildren().contains(line))
-                    layout.getChildren().add(line);
+//                line.setStartX(t.getX());
+//                line.setEndX(e.getX());
+//                line.setStartY(t.getY());
+//                line.setEndY(e.getY());
+//                if (!layout.getChildren().contains(line))
+//                    layout.getChildren().add(line);
 
                 return enemy;
             }

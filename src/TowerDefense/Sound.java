@@ -18,7 +18,7 @@ import static TowerDefense.CONSTANT.PREPARE_TIME;
 public class Sound {
     static boolean isMuted = false;
 
-    private static Media welcomeMusic = new Media(new File("sound/combat_plan.mp3").toURI().toString());
+    private static Media welcomeMusic = new Media(new File("sound/PvZintro.mp3").toURI().toString());
     private static Media supercellSound = new Media(new File("sound/supercell.mp3").toURI().toString());
     private static Media loadingSound = new Media(new File("sound/loading.mp3").toURI().toString());
     private static Media buildingSound = new Media(new File("sound/building_construct.mp3").toURI().toString());

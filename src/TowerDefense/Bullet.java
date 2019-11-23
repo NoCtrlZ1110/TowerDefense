@@ -13,7 +13,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.layout;
 
 public class Bullet extends GameEntity {
-    private static final double MAX_TIME = 80;
+    private static final double MAX_TIME = 150;
 
     private double speed;
     private double damage;
@@ -32,8 +32,8 @@ public class Bullet extends GameEntity {
         this.damage = damage;
         this.start_x = source.getPosition().getX() + TOWER_WIDTH/2;
         this.start_y = source.getPosition().getY() + TOWER_WIDTH/2;
-        this.dest_x = target.getLocation().getX() + TILE_WIDTH/2;
-        this.dest_y = target.getLocation().getY() + TILE_WIDTH/2;
+        this.dest_x = target.getLocation().getX() + TILE_WIDTH/2 + 20;
+        this.dest_y = target.getLocation().getY() + TILE_WIDTH/2 ;
 
         this.target = target;
 
@@ -52,9 +52,9 @@ public class Bullet extends GameEntity {
     }
 
     private void rotate() {
-        setLocation(start_x, start_y - (int)(getFitHeight() / 2));
-        double angle = (start_x > dest_x ? Math.PI : 0) + Math.atan((start_y - dest_y) / (start_x - dest_x - 1e-9));
-        this.getTransforms().add(new Rotate(Math.toDegrees(angle)));
+//        setLocation(start_x, start_y - (int)(getFitHeight() / 2));
+//        double angle = (start_x > dest_x ? Math.PI : 0) + Math.atan((start_y - dest_y) / (start_x - dest_x - 1e-9));
+//        this.getTransforms().add(new Rotate(Math.toDegrees(angle)));
         layout.getChildren().add(this);
     }
 
@@ -74,7 +74,7 @@ public class Bullet extends GameEntity {
         pathTransition.setPath(path);
 
         //Setting the orientation of the path
-        //pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 
         //Setting auto reverse value to false
         pathTransition.setAutoReverse(false);
