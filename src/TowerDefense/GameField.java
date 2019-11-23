@@ -158,7 +158,6 @@ public class GameField {
                 });
                 // towers.forEach(Tower::shoot);
                 if (!selling) layout.getChildren().remove(using_shovel);
-                coin.setText(Integer.toString(money));
             }
         };
 
@@ -338,7 +337,7 @@ public class GameField {
 
     public static void displayMoneyBox() {
         System.out.println("new money = " + money);
-        // effect + thay đổi GUI ở đây
+        coin.setText(Integer.toString(money));
     }
 
     public static void addEnemiesWave() {
@@ -357,5 +356,8 @@ public class GameField {
             enemies.add(minion);
             layout.getChildren().add(minion);
         }
+        Enemy boss = new BossEnemy(-TILE_WIDTH, 720);
+        enemies.add(boss);
+        layout.getChildren().add(boss);
     }
 }
