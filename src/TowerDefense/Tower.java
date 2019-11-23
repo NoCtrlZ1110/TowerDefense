@@ -10,28 +10,35 @@ import static TowerDefense.GameTile.resetMap;
 import static TowerDefense.GameTile.setMapType;
 
 public class Tower extends GameEntity {
-    int price = 10;
-    int range = 200;
-    double shooting_speed = 1;
-    double shooting_damage = 1;
-    Point position;
-    Circle rangeCircle = new Circle();
+    private int price = 10;
+    private int range = 200;
+    private double shootingSpeed = 1;
+    private double shootingDamage = 1;
+    private Point position;
+    private Circle rangeCircle = new Circle();
     private Line line = new Line();
-    private boolean is_destroyed = false;
 
     public Tower(String imageUrl) {
         super(imageUrl);
         scaleTo(TOWER_WIDTH, TOWER_WIDTH);
     }
 
-    protected Tower(String imageUrl, int range, double shooting_speed, double shooting_damage, int price) {
+    protected Tower(String imageUrl, int range, double shootingSpeed, double shootingDamage, int price) {
         super(imageUrl);
         scaleTo(TOWER_WIDTH, TOWER_WIDTH);
 
         this.range = range;
-        this.shooting_speed = shooting_speed;
-        this.shooting_damage = shooting_damage;
+        this.shootingSpeed = shootingSpeed;
+        this.shootingDamage = shootingDamage;
         this.price = price;
+    }
+
+    public double getShootingSpeed() {
+        return shootingSpeed;
+    }
+
+    public double getShootingDamage() {
+        return shootingDamage;
     }
 
     public int getPrice() {
@@ -68,7 +75,7 @@ public class Tower extends GameEntity {
         rangeCircle.setLayoutX(this.getTranslateX() + TOWER_WIDTH / 2);
         rangeCircle.setLayoutY(this.getTranslateY() + TOWER_WIDTH / 2);
         rangeCircle.setFill(Color.TRANSPARENT);
-        //rangeCircle.setOpacity(0.6);
+        // rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
         rangeCircle.setStroke(Color.ALICEBLUE);
 
@@ -95,15 +102,14 @@ public class Tower extends GameEntity {
         resetMap(this.position.getX() / TILE_WIDTH, this.position.getY() / TILE_WIDTH);
         removeRange();
         layout.getChildren().remove(line);
-        layout.getChildren().remove(this);
-        this.is_destroyed = true;
+        super.destroy();
     }
 
     public Enemy findTarget() {
         Enemy _target = null;
         double min_distance = range;
         for (Enemy enemy: enemies) {
-            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
+            Point t = new Point(position.getX()+TOWER_WIDTH/2,position.getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (enemy.isAlive() && t.getDistance(e) <= min_distance) {
                 _target = enemy;
@@ -111,7 +117,7 @@ public class Tower extends GameEntity {
             }
         }
         if (_target != null) {
-            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
+            Point t = new Point(position.getX()+TOWER_WIDTH/2,position.getY()+TOWER_WIDTH/2);
             Point e = new Point(_target.getLocation().getX()+TILE_WIDTH/2,_target.getLocation().getY()+TILE_WIDTH/2);
             line.setStartX(t.getX());
             line.setEndX(e.getX());
@@ -131,19 +137,8 @@ public class Tower extends GameEntity {
 
         Enemy target = findTarget();
         if (target != null) {
-            /*
-            Point t = new Point(getPosition().getX()+TOWER_WIDTH/2,getPosition().getY()+TOWER_WIDTH/2);
-            Point e = new Point(target.getLocation().getX()+TILE_WIDTH/2,target.getLocation().getY()+TILE_WIDTH/2);
-            Bullet b = new Bullet(1, 1, t.getX(), t.getY(), e.getX(), e.getY());
-            */
-            Bullet b = new Bullet(shooting_speed, shooting_damage, this, target);
+            Bullet b = new Bullet(this, target);
             b.beShot();
-            // target.beShotBy(b);
-            if (target.isDead()) { // b.getTarget().isDead()
-                // target.deleteHPbar(); // đưa vào class Enemy
-                increaseMoney(target.getKilledBonus());
-                enemies.remove(target);
-            }
         }
     }
 

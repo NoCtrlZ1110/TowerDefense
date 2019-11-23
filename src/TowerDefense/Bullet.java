@@ -7,45 +7,42 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import static TowerDefense.CONSTANT.*;
-import static TowerDefense.GameField.layout;
+import static TowerDefense.GameField.*;
 
 public class Bullet extends GameEntity {
     private static final double MAX_TIME = 80;
 
     private double speed;
     private double damage;
-    private int start_x;
-    private int start_y;
-    private int dest_x;
-    private int dest_y;
-
+    private Tower source;
     private Enemy target;
 
     private Path path;
 
-    public Bullet(double speed, double damage, Tower source, Enemy target) {
+    public Bullet(Tower source, Enemy target) {
         super(pathBullet);
-        this.speed = speed;
-        this.damage = damage;
-        this.start_x = source.getPosition().getX() + TOWER_WIDTH/2;
-        this.start_y = source.getPosition().getY() + TOWER_WIDTH/2;
-        this.dest_x = target.getLocation().getX() + TILE_WIDTH/2;
-        this.dest_y = target.getLocation().getY() + TILE_WIDTH/2;
-
+        this.source = source;
         this.target = target;
+        this.speed = source.getShootingSpeed();
+        this.damage = source.getShootingDamage();
 
         createPath();
         layout.getChildren().add(this);
     }
 
-    public double getDamage() {
-        return damage;
-    }
-
     private void createPath() {
+        int start_x = source.getPosition().getX() + TOWER_WIDTH/2;
+        int start_y = source.getPosition().getY() + TOWER_WIDTH/2;
+        int dest_x = target.getLocation().getX() + TILE_WIDTH/2;
+        int dest_y = target.getLocation().getY() + TILE_WIDTH/2;
+
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
         path.getElements().add(new LineTo(dest_x, dest_y));
+    }
+
+    public double getDamage() {
+        return damage;
     }
 
     private void move() {
@@ -87,9 +84,5 @@ public class Bullet extends GameEntity {
             })
         );
         timeline.play();
-    }
-
-    public void destroy() {
-        layout.getChildren().remove(this);
     }
 }

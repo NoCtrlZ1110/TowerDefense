@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import static TowerDefense.GameField.layout;
+
+import static TowerDefense.GameField.*;
 
 public class Enemy extends GameEntity {
     private double speed;
@@ -18,37 +19,32 @@ public class Enemy extends GameEntity {
     private Rectangle hp_bar = new Rectangle();
     private Rectangle hp_max_bar = new Rectangle();
     private PathTransition pathTransition = new PathTransition();
-    private boolean is_destroyed = false;
 
     public Enemy(String imageUrl) {
         super(imageUrl);
+        initHpBar();
     }
 
     public Enemy(int x, int y, String imageUrl) {
         super(imageUrl);
         setLocation(x, y);
-
-        layout.getChildren().add(hp_max_bar);
-        layout.getChildren().add(hp_bar);
-        hp_max_bar.setWidth(60);
-        hp_max_bar.setHeight(5);
-        hp_max_bar.setFill(Color.ALICEBLUE);
-
-        hp_bar.setWidth(60);
-        hp_bar.setHeight(5);
-        hp_bar.setFill(Color.DARKRED);
+        initHpBar();
     }
 
     protected Enemy(int x, int y, String imageUrl, double speed, double hp_max, double defense_point, int killed_bonus, int harm_point) {
         super(imageUrl);
         setLocation(x, y);
+        initHpBar();
+
         this.speed = speed;
         this.hp_max = hp_max;
         this.hp = hp_max;
         this.defense_point = defense_point;
         this.killed_bonus = killed_bonus;
         this.harm_point = harm_point;
+    }
 
+    private void initHpBar() {
         layout.getChildren().add(hp_max_bar);
         layout.getChildren().add(hp_bar);
         hp_max_bar.setWidth(60);
@@ -90,7 +86,7 @@ public class Enemy extends GameEntity {
         hp_bar.setFill(Color.DARKRED);
     }
 
-    private void deleteHPbar() {
+    private void deleteHpBar() {
         // hp_bar.setVisible(false);
         layout.getChildren().remove(hp_bar);
         hp_bar = null;
@@ -123,10 +119,16 @@ public class Enemy extends GameEntity {
     }
 
     public void beShotBy(Bullet b) {
-        decreaseHP(b.getDamage());
-        showHP();
-        if (isDead()) {
-            destroy();
+        if (!isDead()) {
+            decreaseHP(b.getDamage());
+            showHP();
+            if (isDead()) {
+                increaseMoney(getKilledBonus());
+                // cho increaseMoney ra ngoài Tower.shoot thì không tăng tiền,
+                // còn cho ra ngoài Bullet.beShot thì tăng tiền nhiều lần @@
+                destroy();
+                enemies.remove(this);
+            }
         }
     }
 
@@ -143,8 +145,7 @@ public class Enemy extends GameEntity {
     public boolean harm() {
         if (!is_destroyed && isReachedEndPoint()) {
             destroy(); // tránh "gây hại" nhiều lần
-            GameField.decreaseHP(harm_point * 1.0);
-            // note: có thể nhân với hệ số < 1
+            GameField.decreaseHP(harm_point * (hp / hp_max));
 
             System.out.println("ouch!");
             return true;
@@ -152,9 +153,8 @@ public class Enemy extends GameEntity {
         return false;
     }
 
-    private void destroy() {
-        deleteHPbar();
-        layout.getChildren().remove(this);
-        this.is_destroyed = true;
+    public void destroy() {
+        deleteHpBar();
+        super.destroy();
     }
 }

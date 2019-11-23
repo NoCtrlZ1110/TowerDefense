@@ -41,62 +41,61 @@ public class GameField {
         welcomScr.scaleTo(960, 540);
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> {
-                    imageObject blackScr = new imageObject("file:images/black.png");
-                    blackScr.scaleTo(960, 540);
-                    pane.getChildren().add(blackScr);
-                }),
-                new KeyFrame(Duration.millis(850), event -> {
-                    imageObject logoScr = new imageObject("file:images/logo.png");
-                    logoScr.scaleTo(960, 540);
-                    pane.getChildren().add(logoScr);
-                    //showMuteBtn(pane);
-                }),
-                new KeyFrame(Duration.seconds(2), event -> {
-                    welcomScr.setOpacity(0);
-                    muteBtn.setOpacity(0);
-                    speakerBtn.setOpacity(0);
-                    pane.getChildren().add(welcomScr);
+            new KeyFrame(Duration.millis(0), event -> {
+                imageObject blackScr = new imageObject("file:images/black.png");
+                blackScr.scaleTo(960, 540);
+                pane.getChildren().add(blackScr);
+            }),
+            new KeyFrame(Duration.millis(850), event -> {
+                imageObject logoScr = new imageObject("file:images/logo.png");
+                logoScr.scaleTo(960, 540);
+                pane.getChildren().add(logoScr);
+                //showMuteBtn(pane);
+            }),
+            new KeyFrame(Duration.seconds(2), event -> {
+                welcomScr.setOpacity(0);
+                muteBtn.setOpacity(0);
+                speakerBtn.setOpacity(0);
+                pane.getChildren().add(welcomScr);
 
-                    FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
-                    FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
-                    FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
+                FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
+                FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
+                FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
 
-                    ft.setFromValue(0);
-                    ft.setToValue(1);
-                    ft.play();
-                    ft2.setFromValue(0);
-                    ft2.setToValue(1);
-                    ft2.play();
-                    ft3.setFromValue(0);
-                    ft3.setToValue(1);
-                    ft3.play();
-                    showMuteBtn(pane);
-                }),
-                new KeyFrame(Duration.seconds(3), event -> {
-                    imageObject startBtn = new imageObject("file:images/startBtn.png");
-                    startBtn.setLocation(73, 437);
-                    startBtn.scaleTo(184, 56);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
+                ft2.setFromValue(0);
+                ft2.setToValue(1);
+                ft2.play();
+                ft3.setFromValue(0);
+                ft3.setToValue(1);
+                ft3.play();
+                showMuteBtn(pane);
+            }),
+            new KeyFrame(Duration.seconds(3), event -> {
+                imageObject startBtn = new imageObject("file:images/startBtn.png");
+                startBtn.setLocation(73, 437);
+                startBtn.scaleTo(184, 56);
+                startBtn.setOpacity(0);
+                pane.getChildren().add(startBtn);
+                showMuteBtn(pane);
+
+                startBtn.setOnMouseEntered(event1 -> {
+                    startBtn.setOpacity(1);
+                    scene.setCursor(Cursor.HAND);
+                });
+
+                startBtn.setOnMouseExited(event1 -> {
                     startBtn.setOpacity(0);
-                    pane.getChildren().add(startBtn);
-                    showMuteBtn(pane);
+                    scene.setCursor(Cursor.DEFAULT);
+                });
 
-
-                    startBtn.setOnMouseEntered(event1 -> {
-                        startBtn.setOpacity(1);
-                        scene.setCursor(Cursor.HAND);
-                    });
-
-                    startBtn.setOnMouseExited(event1 -> {
-                        startBtn.setOpacity(0);
-                        scene.setCursor(Cursor.DEFAULT);
-                    });
-
-                    startBtn.setOnMouseClicked(event1 -> {
-                        clickSound();
-                        gameScreen(stage);
-                    });
-                })
+                startBtn.setOnMouseClicked(event1 -> {
+                    clickSound();
+                    gameScreen(stage);
+                });
+            })
         );
 
         stage.setTitle("Tower Defense 1.5");
@@ -217,7 +216,6 @@ public class GameField {
         });
 
         layout.setOnMouseClicked(event -> {
-
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
 
@@ -237,12 +235,10 @@ public class GameField {
                         r.buyTower("sniper");
                         currentItem = 0;
                         selectedItem.setVisible(false);
-
                     } else if (currentItem == 3) {
                         r.buyTower("machinegun");
                         currentItem = 0;
                         selectedItem.setVisible(false);
-
                     }
                 }
                 selling = false;
@@ -268,7 +264,6 @@ public class GameField {
                 } else if (isRoadPlaced(checkingPoint))
                     selling = false;
             }
-
         });
 
         imageObject pauseImage = new imageObject("file:images/pause.png");
@@ -306,6 +301,10 @@ public class GameField {
         upperLayout.getChildren().add(background);
 
         // layout.getChildren().remove(background);
+    }
+
+    public static void showCompletedScreen() {
+        System.out.println("You have cleared this map!");
     }
 
     public static void showGameOverScreen() {

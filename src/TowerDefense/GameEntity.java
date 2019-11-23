@@ -1,9 +1,11 @@
 package TowerDefense;
 
+import static TowerDefense.GameField.layout;
 import javafx.scene.image.ImageView;
 
 public abstract class GameEntity extends ImageView {
     String imageUrl;
+    protected boolean is_destroyed = false;
 
     public GameEntity(String imageUrl) {
         super(imageUrl);
@@ -41,5 +43,10 @@ public abstract class GameEntity extends ImageView {
     }
     public double GetY() {
         return this.getTranslateY();
+    }
+
+    public void destroy() {
+        layout.getChildren().remove(this);
+        this.is_destroyed = true;
     }
 }
