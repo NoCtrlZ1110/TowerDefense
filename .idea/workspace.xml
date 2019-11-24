@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/NoCtrlZ1110-TowerDefense.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NoCtrlZ1110-TowerDefense.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Linh tinh/back.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/back.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/bullet.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/bullet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/road.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/road.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TowerDefense.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefense.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,7 +81,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
+      <changelist id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="" />
       <created>1572279812205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -136,6 +139,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>

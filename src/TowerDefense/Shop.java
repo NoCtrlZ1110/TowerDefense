@@ -27,8 +27,8 @@ public class Shop {
     private static imageObject shopBar = new imageObject("file:images/shopBar.png");
     private static imageObject towerType1 = new imageObject("file:images/TowerType1.png");
     private static imageObject towerType2 = new imageObject("file:images/TowerType2.png");
-    private static imageObject shovel = new imageObject("file:images/shovel.png");
     private static imageObject towerType3 = new imageObject("file:images/TowerType3.png");
+    private static imageObject shovel = new imageObject("file:images/shovel.png");
 
     static imageObject placingTower1 = new imageObject(pathNormalTower);
     static imageObject placingTower2 = new imageObject(pathSniperTower);
@@ -43,7 +43,6 @@ public class Shop {
         selectedItem.setLayoutX(shopBar.getTranslateX() + 32);
         selectedItem.setArcHeight(5);
         selectedItem.setArcWidth(5);
-
 
         layout.getChildren().add(shopBar);
         shopBar.setLocation(20, 30);
@@ -78,6 +77,8 @@ public class Shop {
             selectedItem.setLayoutY(shopBar.getTranslateY() + 97);
             if (!layout.getChildren().contains(placingTower1))
                 layout.getChildren().add(placingTower1);
+            layout.getChildren().remove(placingTower2);
+            layout.getChildren().remove(placingTower3);
             placingTower1.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 150);
             System.out.println("Building Tower 1");
         });
@@ -90,6 +91,8 @@ public class Shop {
             selectedItem.setLayoutY(shopBar.getTranslateY() + 197);
             if (!layout.getChildren().contains(placingTower2))
                 layout.getChildren().add(placingTower2);
+            layout.getChildren().remove(placingTower1);
+            layout.getChildren().remove(placingTower3);
             placingTower2.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 250);
             System.out.println("Building Tower 2");
         });
@@ -102,6 +105,8 @@ public class Shop {
             selectedItem.setLayoutY(shopBar.getTranslateY() + 297);
             if (!layout.getChildren().contains(placingTower3))
                 layout.getChildren().add(placingTower3);
+            layout.getChildren().remove(placingTower1);
+            layout.getChildren().remove(placingTower2);
             placingTower3.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 350);
             System.out.println("Building Tower 3");
         });
