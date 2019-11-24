@@ -121,9 +121,9 @@ public class GameField {
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         imageObject background = new imageObject("file:images/back.png");
-        road.setOpacity(0);
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
+        road.setOpacity(0);
         layout.getChildren().addAll(background, road);
 
         //drawMap();
@@ -151,7 +151,7 @@ public class GameField {
                 });
                 // towers.forEach(Tower::shoot);
                 if (!selling) layout.getChildren().remove(using_shovel);
-                coin.setText(Integer.toString(money));
+                // coin.setText(Integer.toString(money)); // đã update coin mỗi khi biến động money
                 if (currentItem == 0)
                     layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
             }

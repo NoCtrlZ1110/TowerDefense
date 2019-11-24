@@ -22,6 +22,7 @@ public class CONSTANT {
 
     public static final int TILE_WIDTH = 80;
     public static final int TOWER_WIDTH = TILE_WIDTH * 2;
+    public static final int ENEMY_WIDTH = 70;
     public static final int BORDER_WIDTH = 100;
     public static final int PREPARE_TIME = 12;
 
