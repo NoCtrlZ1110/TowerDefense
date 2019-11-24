@@ -60,7 +60,7 @@ public class Enemy extends GameEntity {
         this.speed = speed;
     }
 
-    public boolean isAlive() {
+    public boolean exists() {
         return (hp > 0 && !is_destroyed);
     }
 
@@ -119,7 +119,7 @@ public class Enemy extends GameEntity {
     }
 
     public void beShotBy(Bullet b) {
-        if (!isDead()) {
+        if (exists()) { // trường hợp enemy ra khỏi map lúc chưa chết (chỉ bị destroy)
             decreaseHP(b.getDamage());
             showHP();
             if (isDead()) {
@@ -156,5 +156,12 @@ public class Enemy extends GameEntity {
     public void destroy() {
         deleteHpBar();
         super.destroy();
+    }
+
+    public String toString() {
+        return String.format(
+            "Enemy[speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f,x=%d,y=%d",
+            speed, defense_point, killed_bonus, hp, hp_max, getLocation().getX(), getLocation().getY()
+        );
     }
 }

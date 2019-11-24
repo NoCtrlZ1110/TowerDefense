@@ -11,7 +11,10 @@ import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static TowerDefense.CONSTANT.*;
@@ -390,5 +393,33 @@ public class GameField {
             timeline.getKeyFrames().add(moveEnemy);
         }
         timeline.play();
+    }
+
+    private static void saveGame() {
+        if (is_paused) {
+            try {
+                FileWriter fo = new FileWriter("save.txt");
+                fo.write("MAP: <map directory>\n");
+                fo.write("ENEMIES: <all exists enemies' properties, using toString>\n");
+                fo.write("TOWERS: <all exists towers' properties, using toString>\n");
+                fo.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void loadGame() {
+        try {
+            File file = new File("save.txt");
+            Scanner fi = new Scanner(file);
+
+            while (fi.hasNextLine()) {
+                String line = fi.nextLine() + "\n";
+                // code xử lí ở đây
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

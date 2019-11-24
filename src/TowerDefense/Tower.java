@@ -111,7 +111,7 @@ public class Tower extends GameEntity {
         for (Enemy enemy: enemies) {
             Point t = new Point(position.getX()+TOWER_WIDTH/2,position.getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
-            if (enemy.isAlive() && t.getDistance(e) <= min_distance) {
+            if (enemy.exists() && t.getDistance(e) <= min_distance) {
                 _target = enemy;
                 min_distance = t.getDistance(e);
             }
@@ -153,4 +153,11 @@ public class Tower extends GameEntity {
                 Math.abs(p.getY() - position.getY()) <= TOWER_WIDTH / 2);
     }
     */
+
+    public String toString() {
+        return String.format(
+                "Tower[price=%d,range=%d,shootingSpeed=%f,shootingDamage=%f,x=%d,y=%d",
+                price, range, shootingSpeed, shootingDamage, position.getX(), position.getY()
+        );
+    }
 }
