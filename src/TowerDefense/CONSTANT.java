@@ -9,9 +9,9 @@ public class CONSTANT {
     public static final String pathTankerEnemy = "file:images/bat.png";
     public static final String pathSmallerEnemy = "file:images/penguin.png";
     public static final String pathBossEnemy = "file:images/boss.png";
-    public static final String pathNormalTower = "file:images/Archer_Tower17.png";
-    public static final String pathSniperTower = "file:images/bean.gif";
-    public static final String pathMachineGunTower = "file:images/Archer_Tower17.png";
+    public static final String pathNormalTower = "file:images/Tower1.png";
+    public static final String pathSniperTower = "file:images/Tower2.png";
+    public static final String pathMachineGunTower = "file:images/Tower3.png";
     public static final String pathBullet = "file:images/bullet.png";
     public static final String pathTransition = "map/roadPath.txt";
     public static final String PATH_FONT = "file:font/Aerial.ttf";

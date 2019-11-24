@@ -113,15 +113,18 @@ public class GameField {
     }
 
     final static Path path = new Path();
+    final static imageObject road = new imageObject("file:images/road.png");
+
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
-        imageObject background = new imageObject("file:images/back2.png");
+        imageObject background = new imageObject("file:images/back.png");
+        road.setOpacity(0);
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-        layout.getChildren().add(background);
+        layout.getChildren().addAll(background, road);
 
         //drawMap();
         //--------------------------------
@@ -385,6 +388,8 @@ public class GameField {
         Timeline timeline = new Timeline();
 
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME - 2), event -> combatMusic()));
 
         for (int i = 0; i < enemies.size(); i++) {
