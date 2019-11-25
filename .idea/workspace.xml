@@ -3,6 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/pause.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/pause.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sound/PvZintro.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sound/PvZintro.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,61 +78,18 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="960427e3-d5d2-4e08-a050-54a0bfbddec7" name="Default Changelist" comment="" />
+      <changelist id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="" />
       <created>1572279812205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-<<<<<<< Updated upstream
-      <updated>1572279812205</updated>
-      <workItem from="1572279814721" duration="27000" />
-      <workItem from="1572279854819" duration="845000" />
-      <workItem from="1572280716589" duration="27000" />
-      <workItem from="1572281071907" duration="793000" />
-      <workItem from="1572326098487" duration="854000" />
-      <workItem from="1572331988368" duration="245000" />
-      <workItem from="1572337095970" duration="4504000" />
-      <workItem from="1572353494426" duration="6634000" />
-      <workItem from="1572519490078" duration="102000" />
-      <workItem from="1572619412433" duration="7878000" />
-      <workItem from="1572631658036" duration="707000" />
-      <workItem from="1572672626593" duration="706000" />
-      <workItem from="1572676078393" duration="6322000" />
-      <workItem from="1572684612898" duration="2123000" />
-      <workItem from="1572710100244" duration="5784000" />
-      <workItem from="1572801224812" duration="2704000" />
-      <workItem from="1572829856439" duration="4628000" />
-      <workItem from="1572850548146" duration="271000" />
-      <workItem from="1572854911723" duration="3250000" />
-      <workItem from="1572876282013" duration="7379000" />
-      <workItem from="1572926079834" duration="3272000" />
-      <workItem from="1572941021328" duration="332000" />
-      <workItem from="1572941368330" duration="13000" />
-      <workItem from="1572946531215" duration="453000" />
-      <workItem from="1573271483604" duration="6762000" />
-      <workItem from="1573282438106" duration="112000" />
-      <workItem from="1573284875291" duration="303000" />
-      <workItem from="1573287269960" duration="1750000" />
-      <workItem from="1573292563873" duration="4271000" />
-      <workItem from="1573303551380" duration="16155000" />
-      <workItem from="1573325555649" duration="7092000" />
-      <workItem from="1573362401685" duration="12263000" />
-      <workItem from="1573394160736" duration="2690000" />
-      <workItem from="1573483310078" duration="13975000" />
-      <workItem from="1573541691337" duration="582000" />
-      <workItem from="1573545903902" duration="3361000" />
-    </task>
-    <task id="LOCAL-00001" summary="Thêm thanh máu cho enemy">
-      <created>1573310276365</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1573310276365</updated>
-=======
       <updated>1574494575615</updated>
       <workItem from="1574494576895" duration="5235000" />
       <workItem from="1574521878283" duration="6842000" />
       <workItem from="1574530102739" duration="1513000" />
->>>>>>> Stashed changes
+      <workItem from="1574664834530" duration="406000" />
+      <workItem from="1574669438731" duration="53000" />
+      <workItem from="1574677756019" duration="1613000" />
+      <workItem from="1574686300257" duration="10158000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -133,6 +100,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
