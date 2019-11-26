@@ -123,8 +123,8 @@ public class Tower extends GameEntity {
             line.setEndX(e.getX());
             line.setStartY(t.getY());
             line.setEndY(e.getY());
-            if (!layout.getChildren().contains(line))
-                layout.getChildren().add(line);
+//            if (!layout.getChildren().contains(line))
+//                layout.getChildren().add(line);
         } else
             layout.getChildren().remove(line);
 

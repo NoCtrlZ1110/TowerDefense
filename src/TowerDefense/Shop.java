@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 import java.io.FileInputStream;
+
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.*;
@@ -75,11 +76,11 @@ public class Shop {
             currentItem = 1;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 97);
-            if (!layout.getChildren().contains(placingTower1))
+            if (isStarted && !layout.getChildren().contains(placingTower1))
                 layout.getChildren().add(placingTower1);
             layout.getChildren().remove(placingTower2);
             layout.getChildren().remove(placingTower3);
-            placingTower1.setLocation((int)shopBar.getTranslateX() + 40,(int)shopBar.getTranslateY() + 150);
+            placingTower1.setLocation((int)shopBar.getTranslateX() + 40, (int)shopBar.getTranslateY() + 150);
             System.out.println("Building Tower 1");
         });
 
@@ -89,7 +90,7 @@ public class Shop {
             currentItem = 2;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 197);
-            if (!layout.getChildren().contains(placingTower2))
+            if (isStarted &&!layout.getChildren().contains(placingTower2))
                 layout.getChildren().add(placingTower2);
             layout.getChildren().remove(placingTower1);
             layout.getChildren().remove(placingTower3);
@@ -103,7 +104,7 @@ public class Shop {
             currentItem = 3;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 297);
-            if (!layout.getChildren().contains(placingTower3))
+            if (isStarted &&!layout.getChildren().contains(placingTower3))
                 layout.getChildren().add(placingTower3);
             layout.getChildren().remove(placingTower1);
             layout.getChildren().remove(placingTower2);

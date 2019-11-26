@@ -117,6 +117,14 @@ public class Enemy extends GameEntity {
         //Playing the animation
         pathTransition.play();
     }
+    public void pauseMoving()
+    {
+        pathTransition.pause();
+    }
+    public void resumeMoving()
+    {
+        pathTransition.play();
+    }
 
     public void beShotBy(Bullet b) {
         if (exists()) { // trường hợp enemy ra khỏi map lúc chưa chết (chỉ bị destroy)
