@@ -1,3 +1,4 @@
+/*
 package TowerDefense;
 
 import javafx.animation.Interpolator;
@@ -8,24 +9,36 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import static TowerDefense.GameField.*;
-
-public class Enemy extends GameCharacter {
+public abstract class Enemy extends GameEntity {
     private double speed;
+    private double hp = 100;
     private double defense_point = 0;
     private int killed_bonus = 10;
     private int harm_point = 1;
+    private double hp_max;
+    private Rectangle hp_bar = new Rectangle();
+    private Rectangle hp_max_bar = new Rectangle();
     private PathTransition pathTransition = new PathTransition();
+
+    public Enemy(String imageUrl) {
+        super(imageUrl);
+        initHpBar();
+    }
 
     public Enemy(int x, int y, String imageUrl) {
         super(imageUrl);
         setLocation(x, y);
+        initHpBar();
     }
 
     protected Enemy(int x, int y, String imageUrl, double speed, double hp_max, double defense_point, int killed_bonus, int harm_point) {
-        super(imageUrl, hp_max, 60, 5);
+        super(imageUrl);
         setLocation(x, y);
+        initHpBar();
 
         this.speed = speed;
+        this.hp_max = hp_max;
+        this.hp = hp_max;
         this.defense_point = defense_point;
         this.killed_bonus = killed_bonus;
         this.harm_point = harm_point;
@@ -35,13 +48,46 @@ public class Enemy extends GameCharacter {
         return (hp > 0 && !is_destroyed);
     }
 
+    public boolean isDead() {
+        return (hp <= 0);
+    }
+
     public int getKilledBonus() {
         return (isDead() ? killed_bonus : 0);
     }
 
+    private void initHpBar() {
+        layout.getChildren().add(hp_max_bar);
+        layout.getChildren().add(hp_bar);
+        hp_max_bar.setWidth(60);
+        hp_max_bar.setHeight(5);
+        hp_max_bar.setFill(Color.ALICEBLUE);
+
+        hp_bar.setWidth(60);
+        hp_bar.setHeight(5);
+        hp_bar.setFill(Color.DARKRED);
+    }
+
     public void displayHpBar() {
-        setHpBarXY(this.getTranslateX(), this.getTranslateY()-10);
-        super.displayHpBar();
+        if (is_destroyed)
+            return;
+
+        hp_max_bar.setX(this.getTranslateX());
+        hp_max_bar.setY(this.getTranslateY()-10);
+
+        hp_bar.setX(this.getTranslateX());
+        hp_bar.setY(this.getTranslateY()-10);
+        hp_bar.setWidth(hp_max_bar.getWidth() * (this.hp / this.hp_max));
+        hp_bar.setFill(Color.DARKRED);
+    }
+
+    private void deleteHpBar() {
+        // hp_bar.setVisible(false);
+        layout.getChildren().remove(hp_bar);
+        hp_bar = null;
+        // hp_max_bar.setVisible(false);
+        layout.getChildren().remove(hp_max_bar);
+        hp_max_bar = null;
     }
 
     // [Hàm di chuyển theo path được truyền vào]
@@ -89,7 +135,7 @@ public class Enemy extends GameCharacter {
         }
     }
 
-    public void decreaseHP(double amount) {
+    private void decreaseHP(double amount) {
         hp -= Math.max(amount - defense_point, 0);
     }
 
@@ -112,6 +158,11 @@ public class Enemy extends GameCharacter {
         return false;
     }
 
+    public void destroy() {
+        deleteHpBar();
+        super.destroy();
+    }
+
     public String toString() {
         return String.format(
                 "Enemy[speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f,x=%d,y=%d",
@@ -119,3 +170,4 @@ public class Enemy extends GameCharacter {
         );
     }
 }
+*/

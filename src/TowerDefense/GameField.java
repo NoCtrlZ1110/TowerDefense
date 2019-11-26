@@ -3,7 +3,6 @@ package TowerDefense;
 import javafx.animation.*;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,7 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
@@ -29,11 +27,13 @@ public class GameField {
     static ArrayList<Enemy> enemies = new ArrayList<>();
 
     private static int money = 100;
-    private static int hp = 100;
-    private static boolean is_paused = false;
+    private static final double hp_max = 100;
+    private static GameCharacter user;
+    private static boolean isPaused = false;
+    public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
-    public static boolean isStarted = false;
+
     // thêm property stage: Stage
 
     public static void welcomeScreen(Stage stage) {
@@ -45,61 +45,61 @@ public class GameField {
         welcomScr.scaleTo(960, 540);
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> {
-                    imageObject blackScr = new imageObject("file:images/black.png");
-                    blackScr.scaleTo(960, 540);
-                    pane.getChildren().add(blackScr);
-                }),
-                new KeyFrame(Duration.millis(850), event -> {
-                    imageObject logoScr = new imageObject("file:images/logo.png");
-                    logoScr.scaleTo(960, 540);
-                    pane.getChildren().add(logoScr);
-                    //showMuteBtn(pane);
-                }),
-                new KeyFrame(Duration.seconds(2), event -> {
-                    welcomScr.setOpacity(0);
-                    muteBtn.setOpacity(0);
-                    speakerBtn.setOpacity(0);
-                    pane.getChildren().add(welcomScr);
+            new KeyFrame(Duration.millis(0), event -> {
+                imageObject blackScr = new imageObject("file:images/black.png");
+                blackScr.scaleTo(960, 540);
+                pane.getChildren().add(blackScr);
+            }),
+            new KeyFrame(Duration.millis(850), event -> {
+                imageObject logoScr = new imageObject("file:images/logo.png");
+                logoScr.scaleTo(960, 540);
+                pane.getChildren().add(logoScr);
+                //showMuteBtn(pane);
+            }),
+            new KeyFrame(Duration.seconds(2), event -> {
+                welcomScr.setOpacity(0);
+                muteBtn.setOpacity(0);
+                speakerBtn.setOpacity(0);
+                pane.getChildren().add(welcomScr);
 
-                    FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
-                    FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
-                    FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
+                FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
+                FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
+                FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
 
-                    ft.setFromValue(0);
-                    ft.setToValue(1);
-                    ft.play();
-                    ft2.setFromValue(0);
-                    ft2.setToValue(1);
-                    ft2.play();
-                    ft3.setFromValue(0);
-                    ft3.setToValue(1);
-                    ft3.play();
-                    showMuteBtn(pane);
-                }),
-                new KeyFrame(Duration.seconds(3), event -> {
-                    imageObject startBtn = new imageObject("file:images/startBtn.png");
-                    startBtn.setLocation(73, 437);
-                    startBtn.scaleTo(184, 56);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
+                ft2.setFromValue(0);
+                ft2.setToValue(1);
+                ft2.play();
+                ft3.setFromValue(0);
+                ft3.setToValue(1);
+                ft3.play();
+                showMuteBtn(pane);
+            }),
+            new KeyFrame(Duration.seconds(3), event -> {
+                imageObject startBtn = new imageObject("file:images/startBtn.png");
+                startBtn.setLocation(73, 437);
+                startBtn.scaleTo(184, 56);
+                startBtn.setOpacity(0);
+                pane.getChildren().add(startBtn);
+                showMuteBtn(pane);
+
+                startBtn.setOnMouseEntered(event1 -> {
+                    startBtn.setOpacity(1);
+                    scene.setCursor(Cursor.HAND);
+                });
+
+                startBtn.setOnMouseExited(event1 -> {
                     startBtn.setOpacity(0);
-                    pane.getChildren().add(startBtn);
-                    showMuteBtn(pane);
+                    scene.setCursor(Cursor.DEFAULT);
+                });
 
-                    startBtn.setOnMouseEntered(event1 -> {
-                        startBtn.setOpacity(1);
-                        scene.setCursor(Cursor.HAND);
-                    });
-
-                    startBtn.setOnMouseExited(event1 -> {
-                        startBtn.setOpacity(0);
-                        scene.setCursor(Cursor.DEFAULT);
-                    });
-
-                    startBtn.setOnMouseClicked(event1 -> {
-                        clickSound();
-                        gameScreen(stage);
-                    });
-                })
+                startBtn.setOnMouseClicked(event1 -> {
+                    clickSound();
+                    gameScreen(stage);
+                });
+            })
         );
 
         stage.setTitle("Tower Defense 1.5");
@@ -129,7 +129,9 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        //drawMap();
+        user = new GameCharacter(hp_max, 200, 10, 190, 50);
+        user.displayHpBar();
+        // drawMap();
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
@@ -149,7 +151,7 @@ public class GameField {
             @Override
             public void handle(long now) {
                 enemies.forEach(e -> {
-                    e.showHP();
+                    e.displayHpBar();
                     e.harm();
                 });
                 // towers.forEach(Tower::shoot);
@@ -280,22 +282,6 @@ public class GameField {
             }
         });
 
-        imageObject pauseImage = new imageObject("file:images/pause.png");
-        pauseImage.scaleTo(70, 70);
-        Button pauseBtn = new Button("", pauseImage);
-        pauseBtn.setLayoutX(1200);
-        pauseBtn.setLayoutY(50);
-        pauseBtn.setMaxWidth(50);
-        pauseBtn.setMaxHeight(50);
-        pauseBtn.setMinWidth(50);
-        pauseBtn.setMinHeight(50);
-        pauseBtn.setOnAction(event -> {
-            System.out.println("pause...");
-            pauseScreen(shootTimeLine, timer);
-        });
-        layout.getChildren().add(pauseBtn);
-
-
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         // ------------------------
@@ -310,25 +296,13 @@ public class GameField {
         stage.show();
     }
 
-    public static void pauseScreen(Timeline shootTimeLine, AnimationTimer timer) {
-        // BUG: Timeline không pause được, nhưng AnimationTimer thì có
-        shootTimeLine.pause();
-        timer.stop();
-
-        // pausescreen on top
-        imageObject background = new imageObject("file:images/black_background.png");
-        background.setLocation(0, 0);
-        background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-        layout.getChildren().add(background);
-
-        // layout.getChildren().remove(background);
-    }
-
     public static void showCompletedScreen() {
+        // pauseGame();
         System.out.println("You have cleared this map!");
     }
 
     public static void showGameOverScreen() {
+        pauseGame();
         System.out.println("Game over!");
     }
 
@@ -344,17 +318,13 @@ public class GameField {
             }
     }
 
-    public static void decreaseHP(double amount) {
-        hp -= amount;
-        displayHPBox();
-        if (hp <= 0) {
+    public static void decreaseUserHP(double amount) {
+        // hp -= amount;
+        user.decreaseHP(amount);
+        user.displayHpBar();
+        if (user.isDead()) {
             showGameOverScreen();
         }
-    }
-
-    private static void displayHPBox() {
-        System.out.println("new hp = " + hp);
-        // effect + thay đổi GUI ở đây
     }
 
     public static int getMoney() {
@@ -401,7 +371,6 @@ public class GameField {
 
     static Timeline moveEnemyTimeline = new Timeline();
 
-
     public static void moveEnemies() {
         moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
         moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
@@ -416,7 +385,7 @@ public class GameField {
     }
 
     private static void saveGame() {
-        if (is_paused) {
+        if (isPaused) {
             try {
                 FileWriter fo = new FileWriter("save.txt");
                 fo.write("MAP: <map directory>\n");
@@ -444,18 +413,20 @@ public class GameField {
     }
 
     public static void pauseGame() {
+        isPaused = true;
+
         gameScreenMusicTimeline.pause();
         shootTimeLine.pause();
         moveEnemyTimeline.pause();
-        enemies.forEach(enemy -> enemy.pauseMoving());
+        enemies.forEach(Enemy::pauseMoving);
     }
 
     public static void resumeGame() {
+        isPaused = false;
+
         shootTimeLine.play();
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED) gameScreenMusicTimeline.play();
         if (moveEnemyTimeline.getStatus() != Animation.Status.STOPPED) moveEnemyTimeline.play();
-        enemies.forEach(enemy -> enemy.resumeMoving());
+        enemies.forEach(Enemy::resumeMoving);
     }
-
-
 }

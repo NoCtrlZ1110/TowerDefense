@@ -5,18 +5,18 @@ import javafx.scene.image.ImageView;
 
 public abstract class GameEntity extends ImageView {
     String imageUrl;
-    protected boolean is_destroyed;
+    protected boolean is_destroyed = false;
+
+    public GameEntity() {}
 
     public GameEntity(String imageUrl) {
         super(imageUrl);
-        is_destroyed = false;
     }
 
     public GameEntity(int x, int y, String imageUrl) {
         super.setTranslateX(x);
         super.setTranslateX(y);
         this.imageUrl = imageUrl;
-        is_destroyed = false;
     }
 
     public void setImageUrl(String imageUrl) {

@@ -54,8 +54,8 @@ public class Shop {
         towerType2.scaleTo(67, 90);
         towerType3.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 300);
         towerType3.scaleTo(67, 90);
-        shovel.scaleTo(70, 70);
         shovel.setLocation((int) shopBar.getTranslateX() + 13, (int) shopBar.getTranslateY() + 398);
+        shovel.scaleTo(70, 70);
 
         coin.setTranslateX(shopBar.getTranslateX() + 33);
         coin.setTranslateY(shopBar.getTranslateY() + 69);

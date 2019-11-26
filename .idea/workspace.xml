@@ -2,23 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/GameCharacter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/OldEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/pause.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/pause.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound/PvZintro.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sound/PvZintro.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/roadPath.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map/roadPath.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,6 +37,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
