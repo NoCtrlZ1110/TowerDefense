@@ -32,6 +32,7 @@ public class GameField {
     private static boolean is_paused = false;
 
     public static Pane layout = new Pane();
+    static Timeline timeline;
 
     // thêm property stage: Stage
 
@@ -277,13 +278,15 @@ public class GameField {
         Button pauseBtn = new Button("", pauseImage);
         pauseBtn.setLayoutX(1200);
         pauseBtn.setLayoutY(50);
-        pauseBtn.setMaxWidth(70);
-        pauseBtn.setMaxHeight(70);
+        pauseBtn.setMaxWidth(50);
+        pauseBtn.setMaxHeight(50);
+        pauseBtn.setMinWidth(50);
+        pauseBtn.setMinHeight(50);
         pauseBtn.setOnAction(event -> {
             System.out.println("pause...");
-            // pauseScreen(stage);
+            pauseScreen(shootTimeLine, timer);
         });
-        // layout.getChildren().add(pauseBtn);
+        layout.getChildren().add(pauseBtn);
 
 
         // [Thêm icon cho game] ---
@@ -300,11 +303,17 @@ public class GameField {
         stage.show();
     }
 
-    public static void pauseScreen(Stage stage) {
-        Pane upperLayout = new Pane();
+    public static void pauseScreen(Timeline shootTimeLine, AnimationTimer timer) {
+        // BUG: Timeline không pause được, nhưng AnimationTimer thì có
+        timeline.pause();
+        shootTimeLine.pause();
+        timer.stop();
+
         // pausescreen on top
         imageObject background = new imageObject("file:images/black_background.png");
-        upperLayout.getChildren().add(background);
+        background.setLocation(0, 0);
+        background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
+        layout.getChildren().add(background);
 
         // layout.getChildren().remove(background);
     }
@@ -385,7 +394,7 @@ public class GameField {
     }
 
     public static void moveEnemies() {
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
 
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), event -> prepareMusic()));
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
