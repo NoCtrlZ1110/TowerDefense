@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 import static TowerDefense.GameField.*;
 
-public class Enemy extends GameCharacter {
+public abstract class Enemy extends GameCharacter {
     private double speed;
     private double defense_point = 0;
     private int killed_bonus = 10;
@@ -37,6 +37,10 @@ public class Enemy extends GameCharacter {
 
     public int getKilledBonus() {
         return (isDead() ? killed_bonus : 0);
+    }
+
+    public void decreaseHP(double amount) {
+        hp -= Math.max(amount - defense_point, 0);
     }
 
     public void displayHpBar() {
@@ -84,13 +88,9 @@ public class Enemy extends GameCharacter {
                 // cho increaseMoney ra ngoài Tower.shoot thì không tăng tiền,
                 // còn cho ra ngoài Bullet.beShot thì tăng tiền nhiều lần @@
                 destroy();
-                enemies.remove(this);
+                GameField.removeEnemy(this);
             }
         }
-    }
-
-    public void decreaseHP(double amount) {
-        hp -= Math.max(amount - defense_point, 0);
     }
 
     public boolean isReachedEndPoint() {
@@ -105,8 +105,7 @@ public class Enemy extends GameCharacter {
         if (!is_destroyed && isReachedEndPoint()) {
             destroy(); // tránh "gây hại" nhiều lần
             GameField.decreaseUserHP(harm_point * (hp / hp_max));
-
-            System.out.println("ouch!");
+            // System.out.println("ouch!");
             return true;
         }
         return false;

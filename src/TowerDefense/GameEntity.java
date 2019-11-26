@@ -40,9 +40,11 @@ public abstract class GameEntity extends ImageView {
     public void showLocation() {
         System.out.println("x: " + getTranslateX() + " y: " + getTranslateY());
     }
+
     public double GetX() {
         return this.getTranslateX();
     }
+
     public double GetY() {
         return this.getTranslateY();
     }

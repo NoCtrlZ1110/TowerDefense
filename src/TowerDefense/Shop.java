@@ -70,9 +70,11 @@ public class Shop {
     }
 
     private static void handleClickItem() {
-        towerType1.setOnMouseEntered(event -> shopPane.setCursor(Cursor.HAND));
+        towerType1.setOnMouseEntered(event -> shopPane.setCursor(isPaused ? Cursor.DEFAULT : Cursor.HAND));
         towerType1.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType1.setOnMouseClicked(event -> {
+            if (isPaused) return;
+
             currentItem = 1;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 97);
@@ -84,9 +86,11 @@ public class Shop {
             System.out.println("Building Tower 1");
         });
 
-        towerType2.setOnMouseEntered(event -> shopPane.setCursor(Cursor.HAND));
+        towerType2.setOnMouseEntered(event -> shopPane.setCursor(isPaused ? Cursor.DEFAULT : Cursor.HAND));
         towerType2.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType2.setOnMouseClicked(event -> {
+            if (isPaused) return;
+
             currentItem = 2;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 197);
@@ -98,9 +102,11 @@ public class Shop {
             System.out.println("Building Tower 2");
         });
 
-        towerType3.setOnMouseEntered(event -> shopPane.setCursor(Cursor.HAND));
+        towerType3.setOnMouseEntered(event -> shopPane.setCursor(isPaused ? Cursor.DEFAULT : Cursor.HAND));
         towerType3.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType3.setOnMouseClicked(event -> {
+            if (isPaused) return;
+
             currentItem = 3;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 297);
@@ -113,9 +119,11 @@ public class Shop {
         });
 
         // Remove tower
-        shovel.setOnMouseEntered(event -> shopPane.setCursor(Cursor.HAND));
+        shovel.setOnMouseEntered(event -> shopPane.setCursor(isPaused ? Cursor.DEFAULT : Cursor.HAND));
         shovel.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         shovel.setOnMouseClicked(event -> {
+            if (isPaused) return;
+
             selling = true;
             using_shovel.setLocation((int) shovel.getTranslateX() + 30, (int) shovel.getTranslateY() - 40);
             if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);

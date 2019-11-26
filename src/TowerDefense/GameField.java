@@ -23,13 +23,13 @@ import static TowerDefense.Sound.*;
 
 public class GameField {
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
-    static ArrayList<Tower> towers = new ArrayList<>();
-    static ArrayList<Enemy> enemies = new ArrayList<>();
+    private static ArrayList<Tower> towers = new ArrayList<>();
+    private static EnemiesWave enemies_wave;
 
     private static int money = 100;
-    private static final double hp_max = 100;
+    private static final double HP_MAX = 100;
     private static GameCharacter user;
-    private static boolean isPaused = false;
+    public static boolean isPaused = false;
     public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
@@ -129,7 +129,7 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        user = new GameCharacter(hp_max, 200, 10, 190, 50);
+        user = new GameCharacter(HP_MAX, 200, 10, 190, 50);
         user.displayHpBar();
         // drawMap();
         //--------------------------------
@@ -142,7 +142,8 @@ public class GameField {
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
         //-------------------------------
-        addEnemiesWave();
+        // addEnemiesWave();
+        enemies_wave = new EnemiesWave();
 
         //-----------------------------
 
@@ -150,7 +151,7 @@ public class GameField {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                enemies.forEach(e -> {
+                enemies_wave.enemies.forEach(e -> {
                     e.displayHpBar();
                     e.harm();
                 });
@@ -182,7 +183,7 @@ public class GameField {
         showPauseBtn();
 
         layout.setOnMouseMoved(event -> {
-            if (isStarted) {
+            if (isStarted && !isPaused) {
                 Point location = TowerBuildLocation(event);
                 Point point = getLocationFromMouseEvent(event);
 
@@ -234,51 +235,52 @@ public class GameField {
         layout.setOnMouseClicked(event -> {
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
-
-            Point location = TowerBuildLocation(event);
-            if (location != null) {
-                border.setX(location.getX() + 33);
-                border.setY(location.getY() + 33);
-                // mua: hiện dãy icon đại diện cho tháp
-                // => chọn loại tower (thêm tham số, có thể là string)
-                if (!selling) {
-                    Roadside r = new Roadside(location.getX(), location.getY());
-                    if (currentItem == 1) {
-                        r.buyTower("normal");
-                        currentItem = 0;
-                        selectedItem.setVisible(false);
-                    } else if (currentItem == 2) {
-                        r.buyTower("sniper");
-                        currentItem = 0;
-                        selectedItem.setVisible(false);
-                    } else if (currentItem == 3) {
-                        r.buyTower("machinegun");
-                        currentItem = 0;
-                        selectedItem.setVisible(false);
+            if (!isPaused) {
+                Point location = TowerBuildLocation(event);
+                if (location != null) {
+                    border.setX(location.getX() + 33);
+                    border.setY(location.getY() + 33);
+                    // mua: hiện dãy icon đại diện cho tháp
+                    // => chọn loại tower (thêm tham số, có thể là string)
+                    if (!selling) {
+                        Roadside r = new Roadside(location.getX(), location.getY());
+                        if (currentItem == 1) {
+                            r.buyTower("normal");
+                            currentItem = 0;
+                            selectedItem.setVisible(false);
+                        } else if (currentItem == 2) {
+                            r.buyTower("sniper");
+                            currentItem = 0;
+                            selectedItem.setVisible(false);
+                        } else if (currentItem == 3) {
+                            r.buyTower("machinegun");
+                            currentItem = 0;
+                            selectedItem.setVisible(false);
+                        }
                     }
-                }
-                selling = false;
-            } else {
-                Point checkingPoint = getLocationFromMouseEvent(event);
-                if (isTowerPlaced(checkingPoint)) {
-                    // bán/upgrade tháp ở đây
-                    // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
-
-                    int x = (int) event.getSceneX();
-                    int y = (int) event.getSceneY();
-                    Roadside r = new Roadside(x, y);
-                    if (selling) {
-                        // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                        r.sellPlacedTower();
-                        selling = false;
-                    } else {
-                        // upgrade: hiện dãy icon đại diện cho tháp
-                        // upgrade có thể có giá
-                        r.upgradePlacedTower();
-                        selling = false;
-                    }
-                } else if (isRoadPlaced(checkingPoint))
                     selling = false;
+                } else {
+                    Point checkingPoint = getLocationFromMouseEvent(event);
+                    if (isTowerPlaced(checkingPoint)) {
+                        // bán/upgrade tháp ở đây
+                        // hiệu ứng sẽ là click -> 1 menu ở dưới hiện lên, có upgrade và bán
+
+                        int x = (int) event.getSceneX();
+                        int y = (int) event.getSceneY();
+                        Roadside r = new Roadside(x, y);
+                        if (selling) {
+                            // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
+                            r.sellPlacedTower();
+                            selling = false;
+                        } else {
+                            // upgrade: hiện dãy icon đại diện cho tháp
+                            // upgrade có thể có giá
+                            r.upgradePlacedTower();
+                            selling = false;
+                        }
+                    } else if (isRoadPlaced(checkingPoint))
+                        selling = false;
+                }
             }
         });
 
@@ -318,6 +320,27 @@ public class GameField {
             }
     }
 
+    public static ArrayList<Tower> getTowers() {
+        return towers;
+    }
+
+    public static void addTower(Tower tower) {
+        towers.add(tower);
+    }
+
+    public static void removeTower(Tower tower) {
+        towers.remove(tower);
+    }
+
+    public static ArrayList<Enemy> getEnemies() {
+        return enemies_wave.enemies;
+    }
+
+    public static void removeEnemy(Enemy enemy) {
+        // enemies.remove(enemy);
+        enemies_wave.removeEnemy(enemy);
+    }
+
     public static void decreaseUserHP(double amount) {
         // hp -= amount;
         user.decreaseHP(amount);
@@ -344,44 +367,6 @@ public class GameField {
     public static void displayMoneyBox() {
         System.out.println("new money = " + money);
         coin.setText(Integer.toString(money));
-    }
-
-    public static void addEnemiesWave() {
-        // [Tạo ra lính] ----------------
-        for (int i = 0; i < 20; i++) {
-            // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
-            Enemy minion;
-            if (i % 3 == 0)
-                minion = new NormalEnemy(-TILE_WIDTH, 720);
-            else if (i % 3 == 1)
-                minion = new SmallerEnemy(-TILE_WIDTH, 720);
-            else
-                minion = new TankerEnemy(-TILE_WIDTH, 720);
-            // minion.scaleTo(70, 70);
-            // minion.setSpeed(1.2);
-            enemies.add(minion);
-            layout.getChildren().add(minion);
-        }
-        Enemy boss = new BossEnemy(-TILE_WIDTH, 720);
-        enemies.add(boss);
-        layout.getChildren().add(boss);
-
-        moveEnemies();
-    }
-
-    static Timeline moveEnemyTimeline = new Timeline();
-
-    public static void moveEnemies() {
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
-
-        for (int i = 0; i < enemies.size(); i++) {
-            Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
-            moveEnemyTimeline.getKeyFrames().add(moveEnemy);
-        }
-        moveEnemyTimeline.play();
     }
 
     private static void saveGame() {
@@ -417,16 +402,15 @@ public class GameField {
 
         gameScreenMusicTimeline.pause();
         shootTimeLine.pause();
-        moveEnemyTimeline.pause();
-        enemies.forEach(Enemy::pauseMoving);
+        enemies_wave.pause();
     }
 
     public static void resumeGame() {
         isPaused = false;
 
         shootTimeLine.play();
-        if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED) gameScreenMusicTimeline.play();
-        if (moveEnemyTimeline.getStatus() != Animation.Status.STOPPED) moveEnemyTimeline.play();
-        enemies.forEach(Enemy::resumeMoving);
+        if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
+            gameScreenMusicTimeline.play();
+        enemies_wave.resume();
     }
 }

@@ -14,7 +14,7 @@ public class Tower extends GameEntity {
     private int range = 200;
     private double shootingSpeed = 1;
     private double shootingDamage = 1;
-    private Point position;
+    private Point position = null;
     private Circle rangeCircle = new Circle();
     private Line line = new Line();
 
@@ -53,6 +53,8 @@ public class Tower extends GameEntity {
         if (is_destroyed)
             return;
 
+        // khôi phục trạng thái cũ trước khi đặt tháp
+        // if (this.position != null) resetMap(this.position.getX() / TILE_WIDTH, this.position.getY() / TILE_WIDTH);
         this.position = position;
         this.setLocation(position.getX(), position.getY());
 
@@ -72,8 +74,8 @@ public class Tower extends GameEntity {
             return;
 
         rangeCircle.setRadius(range);
-        rangeCircle.setLayoutX(this.getTranslateX() + TOWER_WIDTH / 2);
-        rangeCircle.setLayoutY(this.getTranslateY() + TOWER_WIDTH / 2);
+        rangeCircle.setLayoutX(this.getTranslateX() + TOWER_WIDTH / 2.0);
+        rangeCircle.setLayoutY(this.getTranslateY() + TOWER_WIDTH / 2.0);
         rangeCircle.setFill(Color.TRANSPARENT);
         // rangeCircle.setOpacity(0.6);
         rangeCircle.setStrokeWidth(3);
@@ -84,12 +86,11 @@ public class Tower extends GameEntity {
     }
 
     public void removeRange() {
-        if (layout.getChildren().contains(rangeCircle))
-            layout.getChildren().remove(rangeCircle);
+        layout.getChildren().remove(rangeCircle);
     }
 
     public void showTower() {
-        if (this.is_destroyed) {
+        if (is_destroyed) {
             layout.getChildren().remove(this);
             return;
         }
@@ -108,7 +109,7 @@ public class Tower extends GameEntity {
     public Enemy findTarget() {
         Enemy _target = null;
         double min_distance = range;
-        for (Enemy enemy: enemies) {
+        for (Enemy enemy: GameField.getEnemies()) {
             Point t = new Point(position.getX()+TOWER_WIDTH/2,position.getY()+TOWER_WIDTH/2);
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (enemy.exists() && t.getDistance(e) <= min_distance) {

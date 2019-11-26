@@ -54,6 +54,10 @@ public class GameCharacter extends GameEntity {
         return (hp <= 0);
     }
 
+    public void decreaseHP(double amount) {
+        hp -= amount;
+    }
+
     private void initHpBar() {
         hp_max_bar = new Rectangle();
         hp_bar = new Rectangle();
@@ -71,7 +75,7 @@ public class GameCharacter extends GameEntity {
     }
 
     public void displayHpBar() {
-        if (is_destroyed)
+        if (this.is_destroyed)
             return;
 
         hp_max_bar.setX(this.hp_bar_x);
@@ -91,10 +95,6 @@ public class GameCharacter extends GameEntity {
         // hp_max_bar.setVisible(false);
         layout.getChildren().remove(hp_max_bar);
         hp_max_bar = null;
-    }
-
-    public void decreaseHP(double amount) {
-        hp -= amount;
     }
 
     public void destroy() {

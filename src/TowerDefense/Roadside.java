@@ -24,7 +24,7 @@ public class Roadside {
     */
 
     public Tower getPlacedTower() {
-        for (Tower t: towers) {
+        for (Tower t: GameField.getTowers()) {
             if (t.isInTower(x, y)) {
                 return t;
             }
@@ -55,7 +55,7 @@ public class Roadside {
         Tower tower = getPlacedTower();
         if (tower != null) {
             increaseMoney((int)(tower.getPrice() * SELL_RATE));
-            towers.remove(tower);
+            GameField.removeTower(tower);
             tower.destroy();
         }
     }
@@ -74,7 +74,7 @@ public class Roadside {
                 layout.getChildren().remove(building);
                 tower.showTower();
                 // tower.showRange();
-                towers.add(tower);
+                GameField.addTower(tower);
             })
         );
         timeline.play();
