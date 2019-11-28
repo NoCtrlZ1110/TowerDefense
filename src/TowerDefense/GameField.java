@@ -25,7 +25,7 @@ public class GameField {
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
     private static ArrayList<Enemy> enemies = new ArrayList<>();
-    private static EnemiesWaves enemies_waves;
+    private static GameWaves game_waves;
 
     private static int money = 100;
     private static final double HP_MAX = 100;
@@ -146,25 +146,7 @@ public class GameField {
         runEnemiesWaves();
 
         //-----------------------------
-        /*
-        // [Hiện thanh máu liên tục theo thời gian]
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                enemies_wave.enemies.forEach(e -> {
-                    e.displayHpBar();
-                    e.harm();
-                });
-                // towers.forEach(Tower::shoot);
-                if (!selling) layout.getChildren().remove(using_shovel);
-                // coin.setText(Integer.toString(money)); // đã update coin mỗi khi biến động money
-                if (currentItem == 0)
-                    layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
-            }
-        };
-        */
         // [Shoot timeline]
-
         shootTimeLine = new Timeline(new KeyFrame(Duration.millis(20), event -> {
             towers.forEach(Tower::shoot);
         }));
@@ -299,7 +281,7 @@ public class GameField {
     }
 
     public static void showCompletedScreen() {
-        // pauseGame();
+        pauseGame(); // đề phòng các timer vẫn chạy, dễ sinh lỗi do running_wave = null
         System.out.println("You have cleared this map!");
     }
 
@@ -333,12 +315,12 @@ public class GameField {
     }
 
     public static ArrayList<Enemy> getEnemies() {
-        enemies = enemies_waves.getRunningWaveEnemies();
-        return enemies_waves.getRunningWaveEnemies();
+        enemies = game_waves.getRunningWaveEnemies();
+        return game_waves.getRunningWaveEnemies();
     }
 
     public static void removeEnemy(Enemy enemy) {
-        enemies_waves.removeEnemy(enemy);
+        game_waves.removeEnemy(enemy);
     }
 
     public static void decreaseUserHP(double amount) {
@@ -401,7 +383,7 @@ public class GameField {
 
         gameScreenMusicTimeline.pause();
         shootTimeLine.pause();
-        enemies_waves.pause();
+        game_waves.pause();
     }
 
     public static void resumeGame() {
@@ -410,30 +392,14 @@ public class GameField {
         shootTimeLine.play();
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
             gameScreenMusicTimeline.play();
-        enemies_waves.resume();
+        game_waves.resume();
     }
 
     public static void runEnemiesWaves() {
-        /*
-        EnemiesWave[] waves = {
-            new EnemiesWave(10, "normal"),
-            // new EnemiesWave(10, "smaller"),
-            // new EnemiesWave(15, "normal", "smaller"),
-        };
-        for (EnemiesWave wave: waves) {
-            enemies_wave = wave;
-            if (user.isDead()) {
-                return;
-            }
-            // delay ít giây
-        }
-        // BUG: showComplete trước khi clear map
-        */
-        enemies_waves = new EnemiesWaves();
-        enemies_waves.addEnemiesWave(10, "normal");
-        // enemies_waves.addEnemiesWave(10, "smaller");
-        // enemies_waves.addEnemiesWave(15, "normal", "smaller");
-        enemies_waves.start();
-        // showCompletedScreen();
+        game_waves = new GameWaves();
+        game_waves.addEnemiesWave(10, "normal");
+        game_waves.addEnemiesWave(10, "smaller");
+        game_waves.addEnemiesWave(15, "normal", "smaller");
+        game_waves.start();
     }
 }

@@ -1,31 +1,32 @@
-/*
 package TowerDefense;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import static TowerDefense.CONSTANT.PREPARE_TIME;
 import static TowerDefense.CONSTANT.TILE_WIDTH;
 import static TowerDefense.GameField.layout;
-import static TowerDefense.GameField.road;
 import static TowerDefense.GameField.path;
-import static TowerDefense.GameField.isStarted;
 
 public class EnemiesWave {
-    public ArrayList<Enemy> enemies;
-    private Timeline moveEnemyTimeline = new Timeline();
-    private int totalEnemies;
-    private int countCreatedEnemies;
+    private int total_ms_before;
+    private ArrayList<Enemy> enemies;
+    private int countWaveTotalEnemies;
+    private int countWaveCreatedEnemies;
+    private Timeline waveTimeline = new Timeline();
 
-    public EnemiesWave(int total_enemies, String... enemy_type) {
-        countCreatedEnemies = 0;
-        totalEnemies = total_enemies;
+    public EnemiesWave(int pre_sec_delay, int total_enemies, String... enemy_type) {
+        total_ms_before = pre_sec_delay * 1000;
+        addEnemies(total_enemies, enemy_type);
+    }
+
+    private void addEnemies(int total_enemies, String... enemy_type) {
+        countWaveCreatedEnemies = 0;
+        countWaveTotalEnemies = total_enemies;
         enemies = new ArrayList<>();
 
         Random randomizer = new Random();
@@ -36,14 +37,14 @@ public class EnemiesWave {
                 break;
             }
 
-        for (int i = 1; i <= totalEnemies; i++) {
+        for (int i = 1; i <= total_enemies; i++) {
             // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
             Enemy minion;
             while (true) {
                 int idx = randomizer.nextInt(enemy_type.length);
                 boolean is_boss_type = enemy_type[idx].equals("boss");
                 // if ((i == total_enemies && is_boss_type) || (i < total_enemies && !is_boss_type)) {
-                if (!has_boss_type || (i == totalEnemies) == is_boss_type) {
+                if (!has_boss_type || (i == total_enemies) == is_boss_type) {
                     minion = Enemy.generateEnemyByType(enemy_type[idx], -TILE_WIDTH, 720);
                     break;
                 }
@@ -53,43 +54,52 @@ public class EnemiesWave {
             enemies.add(minion);
             layout.getChildren().add(minion);
 
-            countCreatedEnemies++;
+            countWaveCreatedEnemies++;
         }
-
-        moveEnemies();
+        // System.out.println(total_enemies + " " + total_waves + " " + enemies);
+        addTimelineEvents();
     }
 
-    private void moveEnemies() {
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        moveEnemyTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
-
+    private void addTimelineEvents() {
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
-            moveEnemyTimeline.getKeyFrames().add(moveEnemy);
+            KeyFrame moveEnemy = new KeyFrame(
+                Duration.millis(total_ms_before + i * 800),
+                event -> e.move(path)
+            );
+            waveTimeline.getKeyFrames().add(moveEnemy);
         }
-        moveEnemyTimeline.play();
     }
 
-    public double getWaveRate() {
-        return countCreatedEnemies / totalEnemies;
+    public boolean isFinished() {
+        return enemies.size() == 0;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 
     public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
     }
 
+    public double getWaveRate() {
+        return countWaveCreatedEnemies / (countWaveTotalEnemies * 1.0);
+    }
+
+    public void start() {
+        waveTimeline.play();
+    }
+
     public void pause() {
-        moveEnemyTimeline.pause();
+        waveTimeline.pause();
         enemies.forEach(Enemy::pauseMoving);
     }
 
     public void resume() {
-        if (moveEnemyTimeline.getStatus() != Animation.Status.STOPPED)
-            moveEnemyTimeline.play();
+        if (waveTimeline.getStatus() != Animation.Status.STOPPED)
+            waveTimeline.play();
 
         enemies.forEach(Enemy::resumeMoving);
     }
 }
-*/

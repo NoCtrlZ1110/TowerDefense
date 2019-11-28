@@ -16,8 +16,8 @@ public class GameCharacter extends GameEntity {
     protected double hp_max;
     private double hp_bar_width = 0;
     private double hp_bar_height = 0;
-    private double hp_bar_x = -1;
-    private double hp_bar_y = -1;
+    private double hp_bar_x = -100;
+    private double hp_bar_y = -100;
     private Rectangle hp_bar = new Rectangle();
     private Rectangle hp_max_bar = new Rectangle();
 

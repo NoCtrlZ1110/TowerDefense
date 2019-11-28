@@ -88,7 +88,6 @@ public abstract class Enemy extends GameCharacter {
                 // cho increaseMoney ra ngoài Tower.shoot thì không tăng tiền,
                 // còn cho ra ngoài Bullet.beShot thì tăng tiền nhiều lần @@
                 destroy();
-                GameField.removeEnemy(this);
             }
         }
     }
@@ -109,6 +108,11 @@ public abstract class Enemy extends GameCharacter {
             return true;
         }
         return false;
+    }
+
+    public void destroy() {
+        GameField.removeEnemy(this);
+        super.destroy();
     }
 
     public String toString() {
