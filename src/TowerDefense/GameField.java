@@ -142,8 +142,7 @@ public class GameField {
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
         //-------------------------------
-        // addEnemiesWave();
-        enemies_wave = new EnemiesWave();
+        addEnemiesWaves();
 
         //-----------------------------
 
@@ -235,7 +234,7 @@ public class GameField {
         layout.setOnMouseClicked(event -> {
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
-            if (!isPaused) {
+            if (!isPaused) { // isStarted &&
                 Point location = TowerBuildLocation(event);
                 if (location != null) {
                     border.setX(location.getX() + 33);
@@ -294,6 +293,7 @@ public class GameField {
         stage.setScene(gameScene);
         stage.centerOnScreen();
         timer.start();
+        runEnemiesWaves();
 
         stage.show();
     }
@@ -337,12 +337,10 @@ public class GameField {
     }
 
     public static void removeEnemy(Enemy enemy) {
-        // enemies.remove(enemy);
         enemies_wave.removeEnemy(enemy);
     }
 
     public static void decreaseUserHP(double amount) {
-        // hp -= amount;
         user.decreaseHP(amount);
         user.displayHpBar();
         if (user.isDead()) {
@@ -365,7 +363,7 @@ public class GameField {
     }
 
     public static void displayMoneyBox() {
-        System.out.println("new money = " + money);
+        // System.out.println("new money = " + money);
         coin.setText(Integer.toString(money));
     }
 
@@ -412,5 +410,35 @@ public class GameField {
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
             gameScreenMusicTimeline.play();
         enemies_wave.resume();
+    }
+
+    private static EnemiesWave[] waves;
+
+    public static void addEnemiesWaves() {
+        waves = new EnemiesWave[]{
+            new EnemiesWave(10, "normal"),
+            new EnemiesWave(15, "normal", "smaller"),
+            new EnemiesWave(10, "smaller"),
+        };
+    }
+
+    public static void runEnemiesWaves() {
+        for (EnemiesWave wave: waves) {
+            enemies_wave = wave;
+            enemies_wave.start();
+            if (user.isDead()) {
+                return;
+            }
+            // delay ít giây
+        }
+
+        /*
+        EnemiesWaves enemies_waves = new EnemiesWaves(
+            new EnemiesWave(10, "normal"),
+            new EnemiesWave(15, "normal", "smaller"),
+            new EnemiesWave(10, "smaller")
+        );
+        */
+        showCompletedScreen();
     }
 }

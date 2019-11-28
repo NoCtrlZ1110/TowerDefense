@@ -114,7 +114,8 @@ public class Tower extends GameEntity {
             Point e = new Point(enemy.getLocation().getX()+TILE_WIDTH/2,enemy.getLocation().getY()+TILE_WIDTH/2);
             if (enemy.exists() && t.getDistance(e) <= min_distance) {
                 _target = enemy;
-                min_distance = t.getDistance(e);
+                break;
+                // min_distance = t.getDistance(e);
             }
         }
         if (_target != null) {

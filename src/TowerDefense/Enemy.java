@@ -117,4 +117,19 @@ public abstract class Enemy extends GameCharacter {
                 speed, defense_point, killed_bonus, hp, hp_max, getLocation().getX(), getLocation().getY()
         );
     }
+
+    public static Enemy generateEnemyByType(String enemy_type, int x, int y) {
+        switch (enemy_type.toLowerCase()) {
+            case "normal":
+                return new NormalEnemy(x, y);
+            case "smaller":
+                return new SmallerEnemy(x, y);
+            case "tanker":
+                return new TankerEnemy(x, y);
+            case "boss":
+                return new BossEnemy(x, y);
+            default:
+                return null;
+        }
+    }
 }
