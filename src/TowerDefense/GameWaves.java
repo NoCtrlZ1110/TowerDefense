@@ -1,3 +1,7 @@
+/*
+- Giống y hệt GamesWaves_LinkedList nhưng quản lý các EnemiesWave bằng ArrayList
+- Không rõ bên nào tốn mem hơn
+*/
 package TowerDefense;
 
 import javafx.animation.*;
@@ -15,6 +19,7 @@ public class GameWaves {
     private static int total_waves = 0;
     private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>();
+    private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave;
     private Timeline wavesTimeline = new Timeline();
     private AnimationTimer timer;
@@ -35,16 +40,19 @@ public class GameWaves {
                 BUG: Hình fire (bullet) và 1 thanh HP xuất hiện ở góc trên trái (0, 0) khi bắn,
                 bug chỉ xảy ra với wave != wave cuối
                 */
-                if (running_wave.isFinished()) {
+                if (GameField.isGameOver()) {
+                    complete();
+                } else if (isWaveFinished()) {
                     running_wave_id++;
                     if (running_wave_id < waves.size()) {
                         System.out.println("next wave!");
                         running_wave = waves.get(running_wave_id);
+                        running_wave_enemies = running_wave.getEnemies();
                         running_wave.start();
                     } else
                         complete();
                 } else {
-                    running_wave.getEnemies().forEach(e -> {
+                    running_wave_enemies.forEach(e -> {
                         e.displayHpBar();
                         e.harm();
                     });
@@ -67,7 +75,11 @@ public class GameWaves {
     }
 
     public ArrayList<Enemy> getRunningWaveEnemies() {
-        return running_wave.getEnemies();
+        return running_wave_enemies;
+    }
+
+    private boolean isWaveFinished() {
+        return running_wave_enemies.size() == 0;
     }
 
     public void removeEnemy(Enemy enemy) {
@@ -75,13 +87,14 @@ public class GameWaves {
     }
 
     public void showWavesBar() {
-        // TODO: vẽ WavesBar ở đây, gọi hàm getWaveRate() để tính tỉ lệ hoàn thành wave
+        // TODO: vẽ WavesBar ở đây, gọi hàm running_wave.getWaveRate() để tính tỉ lệ hoàn thành wave
     }
 
     public void start() {
         System.out.println("start...");
         running_wave_id = 0;
         running_wave = waves.get(running_wave_id);
+        running_wave_enemies = running_wave.getEnemies();
 
         setTimer();
         wavesTimeline.play();
@@ -95,7 +108,9 @@ public class GameWaves {
     }
 
     public void resume() {
-        wavesTimeline.play();
+        if (wavesTimeline.getStatus() != Animation.Status.STOPPED)
+            wavesTimeline.play();
+
         running_wave.resume();
     }
 

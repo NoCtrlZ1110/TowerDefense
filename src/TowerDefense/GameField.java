@@ -24,7 +24,6 @@ import static TowerDefense.Sound.*;
 public class GameField {
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
-    private static ArrayList<Enemy> enemies = new ArrayList<>();
     private static GameWaves game_waves;
 
     private static int money = 100;
@@ -36,83 +35,6 @@ public class GameField {
     public static Pane layout = new Pane();
 
     // thêm property stage: Stage
-
-    public static void welcomeScreen(Stage stage) {
-        Pane pane = new Pane();
-
-        Scene scene = new Scene(pane, 960, 540);
-
-        imageObject welcomScr = new imageObject("file:images/welcome1.png");
-        welcomScr.scaleTo(960, 540);
-
-        Timeline timeline = new Timeline(
-            new KeyFrame(Duration.millis(0), event -> {
-                imageObject blackScr = new imageObject("file:images/black.png");
-                blackScr.scaleTo(960, 540);
-                pane.getChildren().add(blackScr);
-            }),
-            new KeyFrame(Duration.millis(850), event -> {
-                imageObject logoScr = new imageObject("file:images/logo.png");
-                logoScr.scaleTo(960, 540);
-                pane.getChildren().add(logoScr);
-                //showMuteBtn(pane);
-            }),
-            new KeyFrame(Duration.seconds(2), event -> {
-                welcomScr.setOpacity(0);
-                muteBtn.setOpacity(0);
-                speakerBtn.setOpacity(0);
-                pane.getChildren().add(welcomScr);
-
-                FadeTransition ft = new FadeTransition(Duration.millis(2000), welcomScr);
-                FadeTransition ft2 = new FadeTransition(Duration.millis(2000), muteBtn);
-                FadeTransition ft3 = new FadeTransition(Duration.millis(2000), speakerBtn);
-
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
-                ft2.setFromValue(0);
-                ft2.setToValue(1);
-                ft2.play();
-                ft3.setFromValue(0);
-                ft3.setToValue(1);
-                ft3.play();
-                showMuteBtn(pane);
-            }),
-            new KeyFrame(Duration.seconds(3), event -> {
-                imageObject startBtn = new imageObject("file:images/startBtn.png");
-                startBtn.setLocation(73, 437);
-                startBtn.scaleTo(184, 56);
-                startBtn.setOpacity(0);
-                pane.getChildren().add(startBtn);
-                showMuteBtn(pane);
-
-                startBtn.setOnMouseEntered(event1 -> {
-                    startBtn.setOpacity(1);
-                    scene.setCursor(Cursor.HAND);
-                });
-
-                startBtn.setOnMouseExited(event1 -> {
-                    startBtn.setOpacity(0);
-                    scene.setCursor(Cursor.DEFAULT);
-                });
-
-                startBtn.setOnMouseClicked(event1 -> {
-                    clickSound();
-                    gameScreen(stage);
-                });
-            })
-        );
-
-        stage.setTitle("Tower Defense 1.5");
-
-        stage.setScene(scene);
-        stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setResizable(true);
-        stage.show();
-
-        timeline.play();
-        playWelcomeMusic();
-    }
 
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
@@ -266,17 +188,13 @@ public class GameField {
             }
         });
 
+        // ------------------------
+        showShopBar();
+        // ------------------------
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
-        // ------------------------
-
-        showShopBar();
-
-        // ------------------------
         stage.setScene(gameScene);
         stage.centerOnScreen();
-        // timer.start();
-
         stage.show();
     }
 
@@ -315,7 +233,6 @@ public class GameField {
     }
 
     public static ArrayList<Enemy> getEnemies() {
-        enemies = game_waves.getRunningWaveEnemies();
         return game_waves.getRunningWaveEnemies();
     }
 
@@ -329,6 +246,10 @@ public class GameField {
         if (user.isDead()) {
             showGameOverScreen();
         }
+    }
+
+    public static boolean isGameOver() {
+        return user.isDead();
     }
 
     public static int getMoney() {
@@ -389,9 +310,9 @@ public class GameField {
     public static void resumeGame() {
         isPaused = false;
 
-        shootTimeLine.play();
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
             gameScreenMusicTimeline.play();
+        shootTimeLine.play();
         game_waves.resume();
     }
 
