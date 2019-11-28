@@ -51,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GameStage">
+  <component name="RunManager">
     <configuration name="GameStage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TowerDefense.GameStage" />
       <module name="OOp" />
@@ -65,17 +65,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="TowerDefense" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GameStage" />
       </list>
     </recent_temporary>
   </component>
@@ -96,6 +89,10 @@
       <workItem from="1574669438731" duration="53000" />
       <workItem from="1574677756019" duration="1613000" />
       <workItem from="1574686300257" duration="10158000" />
+      <workItem from="1574873841013" duration="649000" />
+      <workItem from="1574953951853" duration="502000" />
+      <workItem from="1574954458207" duration="800000" />
+      <workItem from="1574958142709" duration="2732000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
