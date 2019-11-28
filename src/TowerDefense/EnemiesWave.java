@@ -1,3 +1,4 @@
+/*
 package TowerDefense;
 
 import javafx.animation.Animation;
@@ -18,11 +19,13 @@ import static TowerDefense.GameField.isStarted;
 
 public class EnemiesWave {
     public ArrayList<Enemy> enemies;
-    public Timeline moveEnemyTimeline = new Timeline();
+    private Timeline moveEnemyTimeline = new Timeline();
+    private int totalEnemies;
     private int countCreatedEnemies;
 
     public EnemiesWave(int total_enemies, String... enemy_type) {
         countCreatedEnemies = 0;
+        totalEnemies = total_enemies;
         enemies = new ArrayList<>();
 
         Random randomizer = new Random();
@@ -33,14 +36,14 @@ public class EnemiesWave {
                 break;
             }
 
-        for (int i = 1; i <= total_enemies; i++) {
+        for (int i = 1; i <= totalEnemies; i++) {
             // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
             Enemy minion;
             while (true) {
                 int idx = randomizer.nextInt(enemy_type.length);
                 boolean is_boss_type = enemy_type[idx].equals("boss");
                 // if ((i == total_enemies && is_boss_type) || (i < total_enemies && !is_boss_type)) {
-                if (!has_boss_type || (i == total_enemies) == is_boss_type) {
+                if (!has_boss_type || (i == totalEnemies) == is_boss_type) {
                     minion = Enemy.generateEnemyByType(enemy_type[idx], -TILE_WIDTH, 720);
                     break;
                 }
@@ -66,20 +69,15 @@ public class EnemiesWave {
             KeyFrame moveEnemy = new KeyFrame(Duration.millis(i * 800 + PREPARE_TIME * 1000), event -> e.move(path));
             moveEnemyTimeline.getKeyFrames().add(moveEnemy);
         }
+        moveEnemyTimeline.play();
     }
 
-    private void setTimer() {}
-
     public double getWaveRate() {
-        return countCreatedEnemies / 20.0;
+        return countCreatedEnemies / totalEnemies;
     }
 
     public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
-    }
-
-    public void start() {
-        moveEnemyTimeline.play();
     }
 
     public void pause() {
@@ -94,3 +92,4 @@ public class EnemiesWave {
         enemies.forEach(Enemy::resumeMoving);
     }
 }
+*/

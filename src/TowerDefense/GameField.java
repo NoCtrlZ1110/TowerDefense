@@ -24,7 +24,8 @@ import static TowerDefense.Sound.*;
 public class GameField {
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
-    private static EnemiesWave enemies_wave;
+    private static ArrayList<Enemy> enemies = new ArrayList<>();
+    private static EnemiesWaves enemies_waves;
 
     private static int money = 100;
     private static final double HP_MAX = 100;
@@ -142,10 +143,10 @@ public class GameField {
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
         //-------------------------------
-        addEnemiesWaves();
+        runEnemiesWaves();
 
         //-----------------------------
-
+        /*
         // [Hiện thanh máu liên tục theo thời gian]
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -161,7 +162,7 @@ public class GameField {
                     layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
             }
         };
-
+        */
         // [Shoot timeline]
 
         shootTimeLine = new Timeline(new KeyFrame(Duration.millis(20), event -> {
@@ -292,8 +293,7 @@ public class GameField {
         // ------------------------
         stage.setScene(gameScene);
         stage.centerOnScreen();
-        timer.start();
-        runEnemiesWaves();
+        // timer.start();
 
         stage.show();
     }
@@ -333,11 +333,12 @@ public class GameField {
     }
 
     public static ArrayList<Enemy> getEnemies() {
-        return enemies_wave.enemies;
+        enemies = enemies_waves.getRunningWaveEnemies();
+        return enemies_waves.getRunningWaveEnemies();
     }
 
     public static void removeEnemy(Enemy enemy) {
-        enemies_wave.removeEnemy(enemy);
+        enemies_waves.removeEnemy(enemy);
     }
 
     public static void decreaseUserHP(double amount) {
@@ -400,7 +401,7 @@ public class GameField {
 
         gameScreenMusicTimeline.pause();
         shootTimeLine.pause();
-        enemies_wave.pause();
+        enemies_waves.pause();
     }
 
     public static void resumeGame() {
@@ -409,36 +410,30 @@ public class GameField {
         shootTimeLine.play();
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
             gameScreenMusicTimeline.play();
-        enemies_wave.resume();
-    }
-
-    private static EnemiesWave[] waves;
-
-    public static void addEnemiesWaves() {
-        waves = new EnemiesWave[]{
-            new EnemiesWave(10, "normal"),
-            new EnemiesWave(15, "normal", "smaller"),
-            new EnemiesWave(10, "smaller"),
-        };
+        enemies_waves.resume();
     }
 
     public static void runEnemiesWaves() {
+        /*
+        EnemiesWave[] waves = {
+            new EnemiesWave(10, "normal"),
+            // new EnemiesWave(10, "smaller"),
+            // new EnemiesWave(15, "normal", "smaller"),
+        };
         for (EnemiesWave wave: waves) {
             enemies_wave = wave;
-            enemies_wave.start();
             if (user.isDead()) {
                 return;
             }
             // delay ít giây
         }
-
-        /*
-        EnemiesWaves enemies_waves = new EnemiesWaves(
-            new EnemiesWave(10, "normal"),
-            new EnemiesWave(15, "normal", "smaller"),
-            new EnemiesWave(10, "smaller")
-        );
+        // BUG: showComplete trước khi clear map
         */
-        showCompletedScreen();
+        enemies_waves = new EnemiesWaves();
+        enemies_waves.addEnemiesWave(10, "normal");
+        // enemies_waves.addEnemiesWave(10, "smaller");
+        // enemies_waves.addEnemiesWave(15, "normal", "smaller");
+        enemies_waves.start();
+        // showCompletedScreen();
     }
 }
