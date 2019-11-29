@@ -76,13 +76,22 @@ public class PauseScreen {
         quitBtn.setOnMouseExited(event -> quitBtn.setCursor(Cursor.DEFAULT));
 
         //TODO
-        backBtn.setOnMouseClicked(event -> System.out.println("-> Back"));
+        backBtn.setOnMouseClicked(event -> {
+            System.out.println("-> Back");
+
+        });
         resumeBtn.setOnMouseClicked(event -> {
             resumeGame();
             hidePauseMenu();
             pauseBtn.setVisible(true);
         });
         quitBtn.setOnMouseClicked(event -> System.out.println("-> Quit"));
+    }
+
+    public static void refreshPauseMenu() {
+        layout.getChildren().remove(pausePane);
+        layout.getChildren().remove(pauseBlack);
+        layout.getChildren().addAll(pauseBlack, pausePane);
     }
 
     public static void hidePauseMenu() {

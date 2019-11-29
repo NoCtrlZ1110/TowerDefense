@@ -3,34 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/16180b_10bc255b1b23418283f9dded5d699c88.jpg_srb_p_1277_959_75_22_0.50_1.20_0 (1).00_jpg_srb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5__.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5___.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/back.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +90,7 @@
       <workItem from="1574677756019" duration="1613000" />
       <workItem from="1574686300257" duration="10158000" />
       <workItem from="1575024208765" duration="2122000" />
-      <workItem from="1575030603647" duration="6561000" />
+      <workItem from="1575030603647" duration="9195000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />

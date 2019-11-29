@@ -200,6 +200,7 @@ public class GameField {
 
     public static void showCompletedScreen() {
         pauseGame(); // đề phòng các timer vẫn chạy, dễ sinh lỗi do running_wave = null
+        winMusic();
         System.out.println("You have cleared this map!");
     }
 

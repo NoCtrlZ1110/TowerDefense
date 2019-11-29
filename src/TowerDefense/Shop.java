@@ -63,7 +63,7 @@ public class Shop {
         // coin.setMaxWidth(70-27);
         coin.setAlignment(Pos.CENTER);
         // final Font AERIAL_FONT = new Font(PATH_FONT, 13);
-        coin.setFont(new Font("Aerial Regular", 13));
+        coin.setFont(new Font("Aerial", 13));
         shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin, selectedItem);
         layout.getChildren().add(shopPane);
         handleClickItem();

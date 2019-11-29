@@ -30,6 +30,7 @@ public class Sound {
     private static Media prepareMusic = new Media(new File("sound/Grasswalk.mp3").toURI().toString());
     private static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
     private static Media minion = new Media(new File("sound/Minions have spawned.mp3").toURI().toString());
+    private static Media winMusic = new Media(new File("sound/winwinwin.mp3").toURI().toString());
 
     private static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
     private static MediaPlayer minionSpawn = new MediaPlayer(minion);
@@ -38,6 +39,7 @@ public class Sound {
     private static MediaPlayer superCellPlayer = new MediaPlayer(supercellSound);
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
+    private static MediaPlayer winMusicPlayer = new MediaPlayer(winMusic);
 
     public static void mute() {
         combatMusicPlayer.setVolume(0);
@@ -83,13 +85,13 @@ public class Sound {
     }
 
     static Timeline gameScreenMusicTimeline;
-    public static void playGameScreenMusic()
-    {
-        gameScreenMusicTimeline = new Timeline(new KeyFrame(Duration.seconds(0), event ->  prepareMusicPlayer.play()),
+
+    public static void playGameScreenMusic() {
+        gameScreenMusicTimeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> prepareMusicPlayer.play()),
                 new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
-                new KeyFrame(Duration.seconds(PREPARE_TIME),new KeyValue(prepareMusicPlayer.volumeProperty(),1)),
-                new KeyFrame(Duration.seconds(PREPARE_TIME+2),new KeyValue(prepareMusicPlayer.volumeProperty(),0))     ,
-                new KeyFrame(Duration.seconds(PREPARE_TIME+2),event -> prepareMusicPlayer.stop())
+                new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
+                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)),
+                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );
         gameScreenMusicTimeline.play();
     }
@@ -114,6 +116,11 @@ public class Sound {
         buttonClickSoundPlayer.play();
     }
 
+    public static void winMusic() {
+        combatMusicPlayer.stop();
+        if (!isMuted) winMusicPlayer.play();
+    }
+
 
     public static void combatMusic() {
         Timeline timeline = new Timeline(
@@ -121,12 +128,10 @@ public class Sound {
                 new KeyFrame(Duration.millis(1400), event -> {
                     combatMusicPlayer.play();
                     combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
-                }), new KeyFrame(Duration.seconds(2),event -> prepareMusicPlayer.stop())
+                }), new KeyFrame(Duration.seconds(2), event -> prepareMusicPlayer.stop())
         );
         timeline.play();
     }
-
-
 
 
     static imageObject muteBtn = new imageObject("file:images/mute.png");
@@ -169,8 +174,6 @@ public class Sound {
             mute();
             showMuteBtn(layout);
         });
-
-
 
 
     }
