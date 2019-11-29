@@ -117,8 +117,8 @@ public abstract class Enemy extends GameCharacter {
 
     public String toString() {
         return String.format(
-                "Enemy[speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f,x=%d,y=%d",
-                speed, defense_point, killed_bonus, hp, hp_max, getLocation().getX(), getLocation().getY()
+            "Enemy[speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f,x=%d,y=%d",
+            speed, defense_point, killed_bonus, hp, hp_max, getLocation().getX(), getLocation().getY()
         );
     }
 

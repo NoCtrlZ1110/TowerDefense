@@ -52,7 +52,8 @@ public class GameWaves {
                     } else
                         complete();
                 } else {
-                    running_wave_enemies.forEach(e -> {
+                    ArrayList<Enemy> _running = new ArrayList<Enemy>(running_wave_enemies);
+                    _running.forEach(e -> {
                         e.displayHpBar();
                         e.harm();
                     });

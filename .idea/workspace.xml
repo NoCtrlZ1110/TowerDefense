@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWaves_LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves_LinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves_LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves_LinkedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="back-end" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,10 +65,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.GameStage" />
+=======
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="OOp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TowerDefense" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TowerDefense" />
+      <module name="OOp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GameStage" />
+        <item itemvalue="Application.TowerDefense" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GameStage" />
+        <item itemvalue="Application.Main" />
+>>>>>>> master
       </list>
     </recent_temporary>
   </component>

@@ -276,8 +276,8 @@ public class GameField {
             try {
                 FileWriter fo = new FileWriter("save.txt");
                 fo.write("MAP: <map directory>\n");
-                fo.write("ENEMIES: <all exists enemies' properties, using toString>\n");
                 fo.write("TOWERS: <all exists towers' properties, using toString>\n");
+                fo.write("GAME PROGRESS: <all waves + enemies' properties, using toString>\n");
                 fo.close();
             } catch (Exception e) {
                 e.printStackTrace();
