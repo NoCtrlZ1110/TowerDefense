@@ -139,7 +139,7 @@ public class GameField {
         layout.setOnMouseClicked(event -> {
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
-            if (!isPaused) { // isStarted &&
+            if (!isPaused && isStarted) { // isStarted &&
                 Point location = TowerBuildLocation(event);
                 if (location != null) {
                     border.setX(location.getX() + 33);

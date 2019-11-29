@@ -31,10 +31,10 @@ public class Bullet extends GameEntity {
     }
 
     private void createPath() {
-        int start_x = source.getPosition().getX() + TOWER_WIDTH/2;
-        int start_y = source.getPosition().getY() + TOWER_WIDTH/2;
-        int dest_x = target.getLocation().getX() + TILE_WIDTH/2;
-        int dest_y = target.getLocation().getY() + TILE_WIDTH/2;
+        double start_x = source.getPosition().getX() + TOWER_WIDTH/2;
+        double start_y = source.getPosition().getY() + TOWER_WIDTH/2;
+        double dest_x = target.getLocation().getX() + TILE_WIDTH*0.25;
+        double dest_y = target.getLocation().getY();// - TILE_WIDTH*0.75;
 
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
