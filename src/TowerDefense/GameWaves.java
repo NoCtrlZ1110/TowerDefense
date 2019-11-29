@@ -52,11 +52,18 @@ public class GameWaves {
                     } else
                         complete();
                 } else {
-                    ArrayList<Enemy> _running = new ArrayList<Enemy>(running_wave_enemies);
+                    ArrayList<Enemy> _running = new ArrayList<>(running_wave_enemies);
                     _running.forEach(e -> {
                         e.displayHpBar();
                         e.harm();
                     });
+                    /*
+                    running_wave_enemies = new ArrayList<>();
+                    for (Enemy e: _running) {
+                        if (e.exists())
+                            running_wave_enemies.add(e);
+                    }
+                    */
                 }
                 // towers.forEach(Tower::shoot);
                 if (!selling) layout.getChildren().remove(using_shovel);
