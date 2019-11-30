@@ -19,10 +19,12 @@ public abstract class Enemy extends GameCharacter {
     public Enemy(int x, int y, String imageUrl) {
         super(imageUrl);
         setLocation(x, y);
+        setHpBarXY(x, y-10);
     }
 
     protected Enemy(int x, int y, String imageUrl, double speed, double hp_max, double defense_point, int killed_bonus, int harm_point) {
         super(imageUrl, hp_max, 60, 5);
+        setHpBarXY(x, y-10);
         setLocation(x, y);
 
         this.speed = speed;

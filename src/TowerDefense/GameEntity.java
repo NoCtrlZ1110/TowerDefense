@@ -28,7 +28,7 @@ public abstract class GameEntity extends ImageView {
         setFitHeight(new_height);
     }
 
-    public void setLocation(int x, int y) {
+    public void setLocation(double x, double y) {
         setTranslateX(x);
         setTranslateY(y);
     }

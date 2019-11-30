@@ -8,6 +8,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.resetMap;
 import static TowerDefense.GameTile.setMapType;
+import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public class Tower extends GameEntity {
     private int price = 10;
@@ -96,6 +97,7 @@ public class Tower extends GameEntity {
         }
         if (!layout.getChildren().contains(this))
             layout.getChildren().add(this);
+        if (isPaused) refreshPauseMenu();
     }
 
     public void destroy() {
