@@ -1,5 +1,6 @@
 package TowerDefense;
 
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
 
@@ -78,14 +79,20 @@ public class PauseScreen {
         //TODO
         backBtn.setOnMouseClicked(event -> {
             System.out.println("-> Back");
-
+            // hỏi save trước khi back
         });
         resumeBtn.setOnMouseClicked(event -> {
             resumeGame();
             hidePauseMenu();
             pauseBtn.setVisible(true);
         });
-        quitBtn.setOnMouseClicked(event -> System.out.println("-> Quit"));
+        quitBtn.setOnMouseClicked(event -> {
+            System.out.println("-> Quit");
+            // hỏi save trước khi quit
+            // stage.close(); // tốt hơn 2 dòng dưới, tuy nhiên cần sửa code để GameField có property stage: Stage
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     public static void refreshPauseMenu() {
