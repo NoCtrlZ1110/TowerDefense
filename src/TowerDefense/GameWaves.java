@@ -100,6 +100,7 @@ public class GameWaves {
 
     public void start() {
         System.out.println("start...");
+        System.out.println(layout.getChildren());
         running_wave_id = 0;
         running_wave = waves.get(running_wave_id);
         running_wave_enemies = running_wave.getEnemies();
