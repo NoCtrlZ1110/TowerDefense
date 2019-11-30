@@ -14,10 +14,10 @@ import static TowerDefense.GameField.layout;
 public class GameCharacter extends GameEntity {
     protected double hp;
     protected double hp_max;
-    private double hp_bar_width = 0;
-    private double hp_bar_height = 0;
-    private double hp_bar_x = -100;
-    private double hp_bar_y = -100;
+    private double hp_bar_width;
+    private double hp_bar_height;
+    private double hp_bar_x;
+    private double hp_bar_y;
     private Rectangle hp_bar = new Rectangle();
     private Rectangle hp_max_bar = new Rectangle();
 
@@ -48,6 +48,12 @@ public class GameCharacter extends GameEntity {
     protected void setHpBarXY(double hp_bar_x, double hp_bar_y) {
         this.hp_bar_x = hp_bar_x;
         this.hp_bar_y = hp_bar_y;
+
+        hp_max_bar.setX(this.hp_bar_x);
+        hp_max_bar.setY(this.hp_bar_y);
+
+        hp_bar.setX(this.hp_bar_x);
+        hp_bar.setY(this.hp_bar_y);
     }
 
     public boolean isDead() {
@@ -59,8 +65,8 @@ public class GameCharacter extends GameEntity {
     }
 
     private void initHpBar() {
-        hp_max_bar = new Rectangle();
-        hp_bar = new Rectangle();
+        layout.getChildren().add(hp_max_bar);
+        layout.getChildren().add(hp_bar);
 
         hp_max_bar.setWidth(this.hp_bar_width);
         hp_max_bar.setHeight(this.hp_bar_height);
@@ -69,14 +75,14 @@ public class GameCharacter extends GameEntity {
         hp_bar.setWidth(this.hp_bar_width);
         hp_bar.setHeight(this.hp_bar_height);
         hp_bar.setFill(Color.DARKRED);
-
-        layout.getChildren().add(hp_max_bar);
-        layout.getChildren().add(hp_bar);
     }
 
     public void displayHpBar() {
         if (this.is_destroyed)
             return;
+
+        hp_max_bar.setVisible(true);
+        hp_bar.setVisible(true);
 
         hp_max_bar.setX(this.hp_bar_x);
         hp_max_bar.setY(this.hp_bar_y);

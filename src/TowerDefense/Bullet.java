@@ -10,7 +10,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 
 public class Bullet extends GameEntity {
-    private static final double MAX_TIME = 100;
+    private static final double MAX_TIME = 1000;
 
     private double speed;
     private double damage;
@@ -35,6 +35,9 @@ public class Bullet extends GameEntity {
         double start_y = source.getPosition().getY() + TOWER_WIDTH/2;
         double dest_x = target.getLocation().getX() + TILE_WIDTH*0.25;
         double dest_y = target.getLocation().getY();// - TILE_WIDTH*0.75;
+
+        setLocation(start_x, start_y);
+        setVisible(false);
 
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
@@ -76,7 +79,7 @@ public class Bullet extends GameEntity {
                 // BUG: di chuyển vẫn bị để lại vết đạn
                 move();
             }),
-            new KeyFrame(Duration.millis(MAX_TIME), event -> {
+            new KeyFrame(Duration.millis(100), event -> {
                 if (target != null)
                     target.beShotBy(this);
 
