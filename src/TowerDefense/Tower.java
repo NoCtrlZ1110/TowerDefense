@@ -34,6 +34,8 @@ public class Tower extends GameEntity {
         this.price = price;
     }
 
+    public int getRange() { return range; }
+
     public double getShootingSpeed() {
         return shootingSpeed;
     }
@@ -160,8 +162,8 @@ public class Tower extends GameEntity {
 
     public String toString() {
         return String.format(
-                "Tower[price=%d,range=%d,shootingSpeed=%f,shootingDamage=%f,x=%d,y=%d",
-                price, range, shootingSpeed, shootingDamage, position.getX(), position.getY()
+                "Tower[x=%d,y=%d,price=%d,range=%d,shootingSpeed=%f,shootingDamage=%f",
+                position.getX(), position.getY(), price, range, shootingSpeed, shootingDamage
         );
     }
 }

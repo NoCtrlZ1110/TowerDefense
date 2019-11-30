@@ -21,14 +21,9 @@ public class GameWaves {
     private ArrayList<EnemiesWave> waves = new ArrayList<>();
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave;
-    private Timeline wavesTimeline = new Timeline();
     private AnimationTimer timer;
 
     public GameWaves() {
-        wavesTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
-        wavesTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        wavesTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
-        wavesTimeline.setCycleCount(1);
     }
 
     private void setTimer() {
@@ -100,26 +95,20 @@ public class GameWaves {
 
     public void start() {
         System.out.println("start...");
-        System.out.println(layout.getChildren());
         running_wave_id = 0;
         running_wave = waves.get(running_wave_id);
         running_wave_enemies = running_wave.getEnemies();
 
         setTimer();
-        wavesTimeline.play();
         running_wave.start();
         timer.start();
     }
 
     public void pause() {
-        wavesTimeline.pause();
         running_wave.pause();
     }
 
     public void resume() {
-        if (wavesTimeline.getStatus() != Animation.Status.STOPPED)
-            wavesTimeline.play();
-
         running_wave.resume();
     }
 

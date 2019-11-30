@@ -38,7 +38,7 @@ public class GameField {
 
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
-    static Timeline shootTimeLine;
+    static Timeline gameTimeline, shootTimeLine;
 
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
@@ -58,22 +58,27 @@ public class GameField {
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
-
         path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
 
         for (int i = 0; i < ROAD_NUM; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
-        //-------------------------------
-        runEnemiesWaves();
-
         //-----------------------------
+        gameTimeline = new Timeline();
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
+        // gameTimeline.setCycleCount(1);
+
         // [Shoot timeline]
         shootTimeLine = new Timeline(new KeyFrame(Duration.millis(20), event -> {
             towers.forEach(Tower::shoot);
         }));
         shootTimeLine.setCycleCount(Animation.INDEFINITE);
         shootTimeLine.play();
+
+        //-------------------------------
+        runEnemiesWaves();
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
@@ -139,7 +144,7 @@ public class GameField {
         layout.setOnMouseClicked(event -> {
             // nếu vị trí click có tháp -> bán/upgrade
             //                  ko có tháp -> mua
-            if (!isPaused && isStarted) { // isStarted &&
+            if (isStarted && !isPaused) {
                 Point location = TowerBuildLocation(event);
                 if (location != null) {
                     border.setX(location.getX() + 33);
@@ -190,7 +195,9 @@ public class GameField {
 
         // ------------------------
         showShopBar();
+        gameTimeline.play();
         // ------------------------
+
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setScene(gameScene);
@@ -304,6 +311,7 @@ public class GameField {
         isPaused = true;
 
         gameScreenMusicTimeline.pause();
+        gameTimeline.pause();
         shootTimeLine.pause();
         game_waves.pause();
     }
@@ -313,6 +321,8 @@ public class GameField {
 
         if (gameScreenMusicTimeline.getStatus() != Animation.Status.STOPPED)
             gameScreenMusicTimeline.play();
+        if (gameTimeline.getStatus() != Animation.Status.STOPPED)
+            gameTimeline.play();
         shootTimeLine.play();
         game_waves.resume();
     }

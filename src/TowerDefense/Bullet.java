@@ -10,7 +10,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 
 public class Bullet extends GameEntity {
-    private static final double MAX_TIME = 1000;
+    private static final double MAX_TIME = 70;
 
     private double speed;
     private double damage;
@@ -31,13 +31,13 @@ public class Bullet extends GameEntity {
     }
 
     private void createPath() {
-        double start_x = source.getPosition().getX() + TOWER_WIDTH/2;
-        double start_y = source.getPosition().getY() + TOWER_WIDTH/2;
-        double dest_x = target.getLocation().getX() + TILE_WIDTH*0.25;
-        double dest_y = target.getLocation().getY();// - TILE_WIDTH*0.75;
+        double start_x = source.getPosition().getX() + TOWER_WIDTH/2.;
+        double start_y = source.getPosition().getY() + TOWER_WIDTH/2.;
+        double dest_x = target.getLocation().getX() + TILE_WIDTH*0.5;
+        double dest_y = target.getLocation().getY() + TILE_WIDTH*0.5;
 
-        setLocation(start_x, start_y);
-        setVisible(false);
+        setLocation(-100, -100); // cho không lòi viên đạn đâu đâu khi bắn,
+        // tuy nhiên đẩy toạ độ vào super thì không hiện đạn :v
 
         path = new Path();
         path.getElements().add(new MoveTo(start_x, start_y));
@@ -49,7 +49,6 @@ public class Bullet extends GameEntity {
     }
 
     private void move() {
-        //Creating a path transition
         PathTransition pathTransition = new PathTransition();
 
         //Điều chỉnh gia tốc lúc xuất phát và kết thúc.
@@ -74,12 +73,13 @@ public class Bullet extends GameEntity {
     }
 
     public void beShot() {
+        // System.out.println(layout.getChildren());
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
                 // BUG: di chuyển vẫn bị để lại vết đạn
                 move();
             }),
-            new KeyFrame(Duration.millis(100), event -> {
+            new KeyFrame(Duration.millis(MAX_TIME / speed), event -> {
                 if (target != null)
                     target.beShotBy(this);
 
@@ -87,5 +87,9 @@ public class Bullet extends GameEntity {
             })
         );
         timeline.play();
+    }
+
+    public String toString() {
+        return String.format("Bullet[x=%d,y=%d]", getLocation().getX(), getLocation().getY());
     }
 }
