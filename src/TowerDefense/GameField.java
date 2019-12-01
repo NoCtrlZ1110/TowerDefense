@@ -41,6 +41,7 @@ public class GameField {
 
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
+    final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     static Timeline gameTimeline, shootTimeLine;
 
     public static void gameScreen(Stage stage) {
@@ -55,8 +56,10 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        user = new GameCharacter(HP_MAX, 100, 10, 190, 50);
+        user = new GameCharacter(HP_MAX, 167, 13, 1030, 760);
         user.displayHpBar();
+        showUserHpBar();
+
         // drawMap();
         //--------------------------------
 
@@ -176,6 +179,7 @@ public class GameField {
                         if (selling) {
                             // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
                             r.sellPlacedTower();
+                            removeSound();
                             selling = false;
                         } else {
                             // upgrade: hiện dãy icon đại diện cho tháp
@@ -264,6 +268,13 @@ public class GameField {
         if (user.isDead()) {
             showGameOverScreen();
         }
+    }
+
+    public static void showUserHpBar()
+    {
+        if (!layout.getChildren().contains(HPBar)) layout.getChildren().add(HPBar);
+        HPBar.setLocation(1000,750);
+
     }
 
     public static boolean isGameOver() {

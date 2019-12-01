@@ -14,8 +14,6 @@ import java.io.File;
 
 //import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.PREPARE_TIME;
-import static TowerDefense.GameField.pauseGame;
-import static TowerDefense.GameField.road;
 
 public class Sound {
     static boolean isMuted = false;
@@ -26,11 +24,15 @@ public class Sound {
     private static Media buildingSound = new Media(new File("sound/building_construct.mp3").toURI().toString());
     private static Media buildingFinishSound = new Media(new File("sound/building_finished.mp3").toURI().toString());
     private static Media buttonClickSound = new Media(new File("sound/button_click.mp3").toURI().toString());
+    private static Media ClickSound = new Media(new File("sound/click.mp3").toURI().toString());
     //    private static Media archerSound = new Media(new File("sound/arrow_hit.mp3").toURI().toString());
     private static Media prepareMusic = new Media(new File("sound/Grasswalk.mp3").toURI().toString());
     private static Media combatMusic = new Media(new File("sound/combat.mp3").toURI().toString());
     private static Media minion = new Media(new File("sound/Minions have spawned.mp3").toURI().toString());
     private static Media winMusic = new Media(new File("sound/winwinwin.mp3").toURI().toString());
+    private static Media removeSound = new Media(new File("sound/removePlant.wav").toURI().toString());
+    private static Media plantSound = new Media(new File("sound/floop.wav").toURI().toString());
+    private static Media shovelSound = new Media(new File("sound/shovel3.mp3").toURI().toString());
 
     private static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
     private static MediaPlayer minionSpawn = new MediaPlayer(minion);
@@ -40,6 +42,7 @@ public class Sound {
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
     private static MediaPlayer winMusicPlayer = new MediaPlayer(winMusic);
+
 
     public static void mute() {
         combatMusicPlayer.setVolume(0);
@@ -61,6 +64,30 @@ public class Sound {
         loadingPlayer.setVolume(1);
         welcomePlayer.setVolume(1);
         winMusicPlayer.setVolume(1);
+    }
+
+    public static void plantSound()
+    {
+        playSound(ClickSound);
+    }
+
+    public static void removeSound() {
+        playSound(removeSound);
+    }
+
+
+    public static void shovelSound() {
+        playSound(shovelSound);
+    }
+
+
+    public static void playSound (Media sound)
+    {
+        if (!isMuted) {
+            MediaPlayer soundPlayer = new MediaPlayer(sound);
+            soundPlayer.play();
+        }
+
     }
 
     public static void playWelcomeMusic() {
@@ -93,8 +120,9 @@ public class Sound {
                 new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
                 //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
                 new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
-                    if (!isMuted) gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
-                })                ,
+                    if (!isMuted)
+                        gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
+                }),
                 new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );
         gameScreenMusicTimeline.play();
@@ -181,4 +209,6 @@ public class Sound {
 
 
     }
+
+
 }

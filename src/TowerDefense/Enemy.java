@@ -104,7 +104,7 @@ public abstract class Enemy extends GameCharacter {
     public boolean harm() {
         if (!is_destroyed && isReachedEndPoint()) {
             destroy(); // tránh "gây hại" nhiều lần
-            GameField.decreaseUserHP(harm_point * (hp / hp_max));
+            GameField.decreaseUserHP(10);//harm_point * (hp / hp_max));
             // System.out.println("ouch!");
             return true;
         }

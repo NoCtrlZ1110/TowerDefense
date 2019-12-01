@@ -2,22 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TowerDefense/Laser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shopBar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shovel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shovel_noback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Roadside.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Roadside.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="TowerDefense" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -136,6 +140,11 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TowerDefense/Sound.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
