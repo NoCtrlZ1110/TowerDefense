@@ -49,6 +49,7 @@ public class Sound {
         superCellPlayer.setVolume(0);
         loadingPlayer.setVolume(0);
         welcomePlayer.setVolume(0);
+        winMusicPlayer.setVolume(0);
     }
 
     public static void unMute() {
@@ -59,6 +60,7 @@ public class Sound {
         superCellPlayer.setVolume(1);
         loadingPlayer.setVolume(1);
         welcomePlayer.setVolume(1);
+        winMusicPlayer.setVolume(1);
     }
 
     public static void playWelcomeMusic() {
@@ -89,8 +91,10 @@ public class Sound {
     public static void playGameScreenMusic() {
         gameScreenMusicTimeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> prepareMusicPlayer.play()),
                 new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
-                new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
-                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)),
+                //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
+                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
+                    if (!isMuted) gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
+                })                ,
                 new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );
         gameScreenMusicTimeline.play();

@@ -55,7 +55,7 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        user = new GameCharacter(HP_MAX, 200, 10, 190, 50);
+        user = new GameCharacter(HP_MAX, 100, 10, 190, 50);
         user.displayHpBar();
         // drawMap();
         //--------------------------------

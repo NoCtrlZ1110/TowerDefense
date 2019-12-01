@@ -25,8 +25,8 @@ public class GameStage extends Application {
     public void start(Stage primaryStage) {
         importMap();
         importRoad();
-        welcomeScreen(primaryStage);
-        // gameScreen(primaryStage);
+//        welcomeScreen(primaryStage);
+         gameScreen(primaryStage);
     }
 
     public static void welcomeScreen(Stage stage) {
@@ -95,7 +95,7 @@ public class GameStage extends Application {
             })
         );
 
-        stage.setTitle("Tower Defense 1.5");
+        stage.setTitle("Tower Defense 1.6");
 
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));

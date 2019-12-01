@@ -26,7 +26,6 @@ public abstract class Enemy extends GameCharacter {
         super(imageUrl, hp_max, 60, 5);
         setHpBarXY(x, y-10);
         setLocation(x, y);
-
         this.speed = speed;
         this.defense_point = defense_point;
         this.killed_bonus = killed_bonus;

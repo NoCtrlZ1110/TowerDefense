@@ -94,7 +94,8 @@
       <workItem from="1574677756019" duration="1613000" />
       <workItem from="1574686300257" duration="10158000" />
       <workItem from="1575024208765" duration="2122000" />
-      <workItem from="1575030603647" duration="9195000" />
+      <workItem from="1575030603647" duration="9494000" />
+      <workItem from="1575102201917" duration="8546000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -124,5 +125,19 @@
         <option value="1" />
       </set>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/TowerDefense/GameCharacter.java</url>
+          <line>38</line>
+          <properties class="TowerDefense.GameCharacter" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
