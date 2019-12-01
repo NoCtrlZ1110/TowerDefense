@@ -10,14 +10,18 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 
 public class Bullet extends GameEntity {
-    private static final double MAX_TIME = 70;
+    private static final double MAX_TIME = 60;
 
-    private double speed;
-    private double damage;
-    private Tower source;
-    private Enemy target;
+    protected double speed;
+    protected double damage;
+    protected Tower source;
+    protected Enemy target;
 
     private Path path;
+
+    protected Bullet() {
+
+    }
 
     public Bullet(Tower source, Enemy target) {
         super(pathBullet);
@@ -73,7 +77,6 @@ public class Bullet extends GameEntity {
     }
 
     public void beShot() {
-        // System.out.println(layout.getChildren());
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
                 // BUG: di chuyển vẫn bị để lại vết đạn

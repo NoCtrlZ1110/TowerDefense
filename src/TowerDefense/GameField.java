@@ -1,9 +1,12 @@
 package TowerDefense;
 
 import javafx.animation.*;
+import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -153,16 +156,9 @@ public class GameField {
                     // => chọn loại tower (thêm tham số, có thể là string)
                     if (!selling) {
                         Roadside r = new Roadside(location.getX(), location.getY());
-                        if (currentItem == 1) {
-                            r.buyTower("normal");
-                            currentItem = 0;
-                            selectedItem.setVisible(false);
-                        } else if (currentItem == 2) {
-                            r.buyTower("sniper");
-                            currentItem = 0;
-                            selectedItem.setVisible(false);
-                        } else if (currentItem == 3) {
-                            r.buyTower("machinegun");
+                        if (1 <= currentItem && currentItem <= 3) {
+                            // <=> currentItem in [1, 2, 3]: có thể mua được
+                            r.buyTower();
                             currentItem = 0;
                             selectedItem.setVisible(false);
                         }
@@ -185,10 +181,24 @@ public class GameField {
                             // upgrade: hiện dãy icon đại diện cho tháp
                             // upgrade có thể có giá
                             r.upgradePlacedTower();
-                            selling = false;
                         }
                     } else if (isRoadPlaced(checkingPoint))
                         selling = false;
+                }
+            }
+        });
+
+        gameScene.setOnKeyPressed(ke -> {
+            if (ke.getCode() == KeyCode.ESCAPE) {
+                // System.out.println("escape!");
+                if (selling) {
+                    // huỷ bán
+                    layout.setCursor(Cursor.DEFAULT);
+                    cancelSelling();
+                } else if (buying) {
+                    // huỷ mua
+                    layout.setCursor(Cursor.DEFAULT);
+                    cancelBuying();
                 }
             }
         });
@@ -206,13 +216,13 @@ public class GameField {
     }
 
     public static void showCompletedScreen() {
-        pauseGame(); // đề phòng các timer vẫn chạy, dễ sinh lỗi do running_wave = null
+        // stopGame(); // đã stop trước khi showCompletedScreen()
         winMusic();
         System.out.println("You have cleared this map!");
     }
 
     public static void showGameOverScreen() {
-        pauseGame();
+        stopGame();
         System.out.println("Game over!");
     }
 
@@ -323,8 +333,18 @@ public class GameField {
             gameScreenMusicTimeline.play();
         if (gameTimeline.getStatus() != Animation.Status.STOPPED)
             gameTimeline.play();
-        shootTimeLine.play();
+        if (shootTimeLine.getStatus() != Animation.Status.STOPPED)
+            shootTimeLine.play();
         game_waves.resume();
+    }
+
+    public static void stopGame() {
+        isPaused = true;
+
+        gameScreenMusicTimeline.stop();
+        gameTimeline.stop();
+        shootTimeLine.stop();
+        game_waves.stop();
     }
 
     public static void runEnemiesWaves() {

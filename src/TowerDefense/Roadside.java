@@ -32,18 +32,16 @@ public class Roadside {
         return null;
     }
 
-    public void buyTower(String tower_type) {
+    public void buyTower() {
         Tower tower;
-        if (tower_type.equals("normal"))
+        if (Shop.getCurrentItem() == 1)  // tower_type.equals("normal"))
             tower = new NormalTower();
-        else if (tower_type.equals("sniper"))
+        else if (Shop.getCurrentItem() == 2)  // tower_type.equals("sniper"))
             tower = new SniperTower();
-        else if (tower_type.equals("machinegun"))
+        else if (Shop.getCurrentItem() == 3)  // tower_type.equals("machinegun"))
             tower = new MachineGunTower();
-        else {
-            // Tower tower = new Tower("file:images/Tower.png");
-            tower = new Tower("file:images/Archer_Tower17.png");
-        }
+        else
+            return; // mua thất bại
 
         if (getMoney() >= tower.getPrice()) {
             decreaseMoney(tower.getPrice());

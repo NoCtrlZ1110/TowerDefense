@@ -5,7 +5,6 @@
 package TowerDefense;
 
 import javafx.animation.*;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -16,14 +15,16 @@ import static TowerDefense.Shop.*;
 public class GameWaves {
     private static final int TIME_BETWEEN_2_WAVES = 2;
 
+    private int complete_bonus;
     private static int total_waves = 0;
     private static int running_wave_id = 0;
-    private ArrayList<EnemiesWave> waves = new ArrayList<>();
+    private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave;
     private AnimationTimer timer;
 
     public GameWaves() {
+        complete_bonus = 100;
     }
 
     private void setTimer() {
@@ -31,21 +32,18 @@ public class GameWaves {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                /*
-                BUG: Hình fire (bullet) và 1 thanh HP xuất hiện ở góc trên trái (0, 0) khi bắn,
-                bug chỉ xảy ra với wave != wave cuối
-                */
                 if (GameField.isGameOver()) {
-                    complete();
-                } else if (isWaveFinished()) {
+                    stop();
+                } else if (running_wave.isFinished()) {
                     running_wave_id++;
                     if (running_wave_id < waves.size()) {
                         System.out.println("next wave!");
                         running_wave = waves.get(running_wave_id);
                         running_wave_enemies = running_wave.getEnemies();
                         running_wave.start();
-                    } else
+                    } else {
                         complete();
+                    }
                 } else {
                     ArrayList<Enemy> _running = new ArrayList<>(running_wave_enemies);
                     _running.forEach(e -> {
@@ -81,10 +79,6 @@ public class GameWaves {
         return running_wave_enemies;
     }
 
-    private boolean isWaveFinished() {
-        return running_wave_enemies.size() == 0;
-    }
-
     public void removeEnemy(Enemy enemy) {
         running_wave.removeEnemy(enemy);
     }
@@ -112,8 +106,14 @@ public class GameWaves {
         running_wave.resume();
     }
 
-    public void complete() {
+    public void stop() {
+        running_wave.stop();
         timer.stop();
+    }
+
+    private void complete() {
+        stop();
+        GameField.increaseMoney(complete_bonus);
         showCompletedScreen();
     }
 }

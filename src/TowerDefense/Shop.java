@@ -20,6 +20,7 @@ public class Shop {
     static Rectangle selectedItem = new Rectangle(70, 94);
     static int currentItem = 0;
     static boolean selling = false;
+    static boolean buying = false;
 
     private static Pane shopPane = new Pane();
 
@@ -75,6 +76,8 @@ public class Shop {
         towerType1.setOnMouseClicked(event -> {
             if (isPaused) return;
 
+            cancelSelling();
+            buying = true;
             currentItem = 1;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 97);
@@ -91,10 +94,12 @@ public class Shop {
         towerType2.setOnMouseClicked(event -> {
             if (isPaused) return;
 
+            cancelSelling();
+            buying = true;
             currentItem = 2;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 197);
-            if (isStarted &&!layout.getChildren().contains(placingTower2))
+            if (isStarted && !layout.getChildren().contains(placingTower2))
                 layout.getChildren().add(placingTower2);
             layout.getChildren().remove(placingTower1);
             layout.getChildren().remove(placingTower3);
@@ -107,10 +112,12 @@ public class Shop {
         towerType3.setOnMouseClicked(event -> {
             if (isPaused) return;
 
+            cancelSelling();
+            buying = true;
             currentItem = 3;
             selectedItem.setVisible(true);
             selectedItem.setLayoutY(shopBar.getTranslateY() + 297);
-            if (isStarted &&!layout.getChildren().contains(placingTower3))
+            if (isStarted && !layout.getChildren().contains(placingTower3))
                 layout.getChildren().add(placingTower3);
             layout.getChildren().remove(placingTower1);
             layout.getChildren().remove(placingTower2);
@@ -124,9 +131,38 @@ public class Shop {
         shovel.setOnMouseClicked(event -> {
             if (isPaused) return;
 
+            cancelBuying();
             selling = true;
             using_shovel.setLocation((int) shovel.getTranslateX() + 30, (int) shovel.getTranslateY() - 40);
             if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
         });
+    }
+
+    public static void cancelBuying() {
+        if (!buying)
+            return;
+
+        buying = false;
+        selectedItem.setVisible(false);
+        if (currentItem == 1)
+            layout.getChildren().remove(placingTower1);
+        else if (currentItem == 2)
+            layout.getChildren().remove(placingTower2);
+        else if (currentItem == 3)
+            layout.getChildren().remove(placingTower3);
+
+        currentItem = 0;
+    }
+
+    public static void cancelSelling() {
+        if (!selling)
+            return;
+
+        selling = false;
+        layout.getChildren().remove(using_shovel);
+    }
+
+    public static int getCurrentItem() {
+        return currentItem;
     }
 }

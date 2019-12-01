@@ -21,12 +21,12 @@ public class EnemiesWave {
 
     public EnemiesWave(int pre_sec_delay, int total_enemies, String... enemy_type) {
         total_ms_before = pre_sec_delay * 1000;
-        addEnemies(total_enemies, enemy_type);
+        countWaveTotalEnemies = total_enemies;
+        generateEnemies(enemy_type);
     }
 
-    private void addEnemies(int total_enemies, String... enemy_type) {
+    private void generateEnemies(String... enemy_type) {
         countWaveCreatedEnemies = 0;
-        countWaveTotalEnemies = total_enemies;
         enemies = new ArrayList<>();
 
         Random randomizer = new Random();
@@ -37,14 +37,14 @@ public class EnemiesWave {
                 break;
             }
 
-        for (int i = 1; i <= total_enemies; i++) {
+        for (int i = 1; i <= countWaveTotalEnemies; i++) {
             // Enemy minion = new Enemy(-TILE_WIDTH, 720, pathRedEnemy);
             Enemy minion;
             while (true) {
                 int idx = randomizer.nextInt(enemy_type.length);
                 boolean is_boss_type = enemy_type[idx].equals("boss");
                 // if ((i == total_enemies && is_boss_type) || (i < total_enemies && !is_boss_type)) {
-                if (!has_boss_type || (i == total_enemies) == is_boss_type) {
+                if (!has_boss_type || (i == countWaveTotalEnemies) == is_boss_type) {
                     minion = Enemy.generateEnemyByType(enemy_type[idx], -TILE_WIDTH, 720);
                     break;
                 }
@@ -101,5 +101,9 @@ public class EnemiesWave {
             waveTimeline.play();
 
         enemies.forEach(Enemy::resumeMoving);
+    }
+
+    public void stop() {
+        waveTimeline.stop();
     }
 }

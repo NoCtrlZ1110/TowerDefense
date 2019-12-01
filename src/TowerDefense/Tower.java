@@ -17,7 +17,6 @@ public class Tower extends GameEntity {
     private double shootingDamage = 1;
     private Point position = null;
     private Circle rangeCircle = new Circle();
-    private Line line = new Line();
 
     public Tower(String imageUrl) {
         super(imageUrl);
@@ -106,7 +105,6 @@ public class Tower extends GameEntity {
         // khôi phục trạng thái cũ trước khi đặt tháp
         resetMap(this.position.getX() / TILE_WIDTH, this.position.getY() / TILE_WIDTH);
         removeRange();
-        layout.getChildren().remove(line);
         super.destroy();
     }
 
@@ -122,18 +120,7 @@ public class Tower extends GameEntity {
                 // min_distance = t.getDistance(e);
             }
         }
-        if (_target != null) {
-            Point t = new Point(position.getX()+TOWER_WIDTH/2,position.getY()+TOWER_WIDTH/2);
-            Point e = new Point(_target.getLocation().getX()+TILE_WIDTH/2,_target.getLocation().getY()+TILE_WIDTH/2);
-            line.setStartX(t.getX());
-            line.setEndX(e.getX());
-            line.setStartY(t.getY());
-            line.setEndY(e.getY());
-//            if (!layout.getChildren().contains(line))
-//                layout.getChildren().add(line);
-        } else
-            layout.getChildren().remove(line);
-
+        // line đã được đưa sang Laser
         return _target;
     }
 
