@@ -15,6 +15,8 @@ import java.io.FileInputStream;
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 import static TowerDefense.GameTile.*;
+import static TowerDefense.Sound.plantSound;
+import static TowerDefense.Sound.shovelSound;
 
 public class Shop {
     static Rectangle selectedItem = new Rectangle(70, 94);
@@ -26,16 +28,16 @@ public class Shop {
 
     static Label coin = new Label(Integer.toString(getMoney()));
 
-    private static imageObject shopBar = new imageObject("file:images/shopBar.png");
-    private static imageObject towerType1 = new imageObject("file:images/TowerType1.png");
-    private static imageObject towerType2 = new imageObject("file:images/TowerType2.png");
-    private static imageObject towerType3 = new imageObject("file:images/TowerType3.png");
-    private static imageObject shovel = new imageObject("file:images/shovel.png");
+    private static imageObject shopBar = new imageObject("file:images/Shop/shopBar.png");
+    private static imageObject towerType1 = new imageObject("file:images/Shop/TowerType1.png");
+    private static imageObject towerType2 = new imageObject("file:images/Shop/TowerType2.png");
+    private static imageObject towerType3 = new imageObject("file:images/Shop/TowerType3.png");
+    private static imageObject shovel = new imageObject("file:images/Shop/shovel.png");
 
     static imageObject placingTower1 = new imageObject(pathNormalTower);
     static imageObject placingTower2 = new imageObject(pathSniperTower);
     static imageObject placingTower3 = new imageObject(pathMachineGunTower);
-    static imageObject using_shovel = new imageObject("file:images/shovel_noback.png");
+    static imageObject using_shovel = new imageObject("file:images/Shop/shovel_noback.png");
 
     public static void showShopBar() {
         selectedItem.setVisible(false);
@@ -75,7 +77,7 @@ public class Shop {
         towerType1.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType1.setOnMouseClicked(event -> {
             if (isPaused) return;
-
+            plantSound();
             cancelSelling();
             buying = true;
             currentItem = 1;
@@ -93,7 +95,7 @@ public class Shop {
         towerType2.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType2.setOnMouseClicked(event -> {
             if (isPaused) return;
-
+            plantSound();
             cancelSelling();
             buying = true;
             currentItem = 2;
@@ -111,7 +113,7 @@ public class Shop {
         towerType3.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType3.setOnMouseClicked(event -> {
             if (isPaused) return;
-
+            plantSound();
             cancelSelling();
             buying = true;
             currentItem = 3;
@@ -130,7 +132,7 @@ public class Shop {
         shovel.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         shovel.setOnMouseClicked(event -> {
             if (isPaused) return;
-
+            shovelSound();
             cancelBuying();
             selling = true;
             using_shovel.setLocation((int) shovel.getTranslateX() + 30, (int) shovel.getTranslateY() - 40);

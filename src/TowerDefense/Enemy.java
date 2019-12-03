@@ -26,7 +26,6 @@ public abstract class Enemy extends GameCharacter {
         super(imageUrl, hp_max, 60, 5);
         setHpBarXY(x, y-10);
         setLocation(x, y);
-
         this.speed = speed;
         this.defense_point = defense_point;
         this.killed_bonus = killed_bonus;
@@ -105,7 +104,7 @@ public abstract class Enemy extends GameCharacter {
     public boolean harm() {
         if (!is_destroyed && isReachedEndPoint()) {
             destroy(); // tránh "gây hại" nhiều lần
-            GameField.decreaseUserHP(harm_point * (hp / hp_max));
+            GameField.decreaseUserHP(10);//harm_point * (hp / hp_max));
             // System.out.println("ouch!");
             return true;
         }

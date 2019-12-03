@@ -3,17 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/BossEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/BossEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TowerType3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shopBar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shovel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shovel_noback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/MachineGunTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalTower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SmallerEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SmallerEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SniperTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/TankerEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/TankerEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +98,8 @@
       <workItem from="1574677756019" duration="1613000" />
       <workItem from="1574686300257" duration="10158000" />
       <workItem from="1575024208765" duration="2122000" />
-      <workItem from="1575030603647" duration="9195000" />
+      <workItem from="1575030603647" duration="9494000" />
+      <workItem from="1575102201917" duration="8546000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -129,5 +129,24 @@
         <option value="1" />
       </set>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/TowerDefense/GameCharacter.java</url>
+          <line>38</line>
+          <properties class="TowerDefense.GameCharacter" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TowerDefense/Sound.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

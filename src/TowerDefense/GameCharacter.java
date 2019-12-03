@@ -23,7 +23,7 @@ public class GameCharacter extends GameEntity {
 
     public GameCharacter(String imageUrl) {
         super(imageUrl);
-        initHpBar();
+        //initHpBar();
     }
 
     public GameCharacter(double hp_max, double hp_bar_width, double hp_bar_height, double hp_bar_x, double hp_bar_y) {
