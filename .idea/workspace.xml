@@ -3,16 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shopBar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shovel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shovel_noback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/BossEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/BossEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameCharacter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/NormalEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/PauseScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SmallerEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SmallerEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/TankerEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/TankerEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Tower.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +48,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Documents\GitHub\NoCtrlZ1110-TowerDefense\saved_game" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -133,14 +141,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/TowerDefense/GameCharacter.java</url>
-          <line>38</line>
-          <properties class="TowerDefense.GameCharacter" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TowerDefense/Sound.java</url>
           <line>151</line>

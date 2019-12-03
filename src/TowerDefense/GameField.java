@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
@@ -23,24 +25,25 @@ import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
 public class GameField {
+    private static int HPBAR_X = 500;
+    private static int HPBAR_Y = 45;
+
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
-    private static GameWaves game_waves;
+    private static GameWaves game_waves = null;
 
     private static int money = 100;
-    private static final double HP_MAX = 100;
+    private static double HP_MAX = 100;
     private static GameCharacter user;
     public static boolean isPaused = false;
     public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
 
-    // thêm property stage: Stage
-
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
-    final static imageObject HPBar = new imageObject("file:images/HPBar.png");
-    static Timeline gameTimeline, shootTimeLine;
+    final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
+    static Timeline gameTimeline = new Timeline(), shootTimeLine;
 
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
@@ -54,10 +57,8 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        user = new GameCharacter(HP_MAX, 167, 13, 1030, 760);
-        user.displayHpBar();
+        loadGame();
         showUserHpBar();
-
         // drawMap();
         //--------------------------------
 
@@ -71,7 +72,10 @@ public class GameField {
         gameTimeline = new Timeline();
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> {
+            isStarted = true;
+            game_waves.start();
+        }));
         // gameTimeline.setCycleCount(1);
 
         // [Shoot timeline]
@@ -82,7 +86,7 @@ public class GameField {
         shootTimeLine.play();
 
         //-------------------------------
-        runEnemiesWaves();
+        // runEnemiesWaves();
 
         // [Hiện khung chọn vị trí xây tháp] ---
 
@@ -261,19 +265,22 @@ public class GameField {
         game_waves.removeEnemy(enemy);
     }
 
+    public static void showUserHpBar() {
+        // 500,45
+        user = new GameCharacter(HP_MAX, 164, 13, HPBAR_X+30, HPBAR_Y+10);
+        user.displayHpBar();
+
+        if (!layout.getChildren().contains(HPBar))
+            layout.getChildren().add(HPBar);
+        HPBar.setLocation(HPBAR_X, HPBAR_Y);
+    }
+
     public static void decreaseUserHP(double amount) {
         user.decreaseHP(amount);
         user.displayHpBar();
         if (user.isDead()) {
             showGameOverScreen();
         }
-    }
-
-    public static void showUserHpBar()
-    {
-        if (!layout.getChildren().contains(HPBar)) layout.getChildren().add(HPBar);
-        HPBar.setLocation(1000,750);
-
     }
 
     public static boolean isGameOver() {
@@ -299,11 +306,12 @@ public class GameField {
         coin.setText(Integer.toString(money));
     }
 
-    private static void saveGame() {
+    public static void saveGame() {
         if (isPaused) {
+            System.out.println("saving...");
             try {
-                FileWriter fo = new FileWriter("save.txt");
-                fo.write(String.format("USER: money=%d,hp=%f\n", money, user.hp));
+                FileWriter fo = new FileWriter("saved_game/save.txt");
+                fo.write(String.format("USER: money=%d,hp=%f,hp_max=%f\n", money, user.hp, user.hp_max));
                 // fo.write("MAP: <map directory>\n");
                 fo.write("TOWERS:\n");
                 for (Tower t: towers)
@@ -320,13 +328,42 @@ public class GameField {
 
     private static void loadGame() {
         try {
-            File file = new File("save.txt");
+            System.out.println("loading...");
+            File file = new File("saved_game/save.txt");
             Scanner fi = new Scanner(file);
-
+            StringBuilder temp = new StringBuilder();
             while (fi.hasNextLine()) {
                 String line = fi.nextLine() + "\n";
-                // code xử lí ở đây
+                temp.append(line);
             }
+            String content = temp.toString();
+            String[] splited = content.split("\n?(TOWERS|GAME PROGRESS):\n");
+            /*
+            splited[0]: USER: money=130,hp=100.000000
+            splited[1]: towers
+            splited[2]: waves
+            */
+            Matcher user_matcher = Pattern.compile("USER: money=(.+),hp=(.+),hp_max=(.+)").matcher(splited[0]);
+            if (user_matcher.find()) {
+                money = Integer.parseInt(user_matcher.group(1));
+                double hp = Double.parseDouble(user_matcher.group(2));
+                double hp_max = Double.parseDouble(user_matcher.group(3));
+                HP_MAX = hp_max;
+                showUserHpBar();
+                user.decreaseHP(hp_max - hp);
+                // System.out.println(money + " " + hp + " " + hp_max);
+            }
+
+            String[] towers_str = splited[1].split("\n");
+            for (String tower_str: towers_str) {
+                Tower tower = Tower.loadFromString(tower_str);
+                towers.add(tower);
+                // System.out.println(tower);
+                tower.showTower();
+            }
+            GameWaves _waves = new GameWaves(splited[2]);
+            game_waves = _waves;
+            // game_waves.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -363,10 +400,11 @@ public class GameField {
     }
 
     private static void runEnemiesWaves() {
-        game_waves = new GameWaves();
-        game_waves.addEnemiesWave(10, "normal");
-        game_waves.addEnemiesWave(10, "smaller");
-        game_waves.addEnemiesWave(15, "normal", "smaller");
-        game_waves.start();
+        if (game_waves == null) { // chưa được load
+            game_waves = new GameWaves();
+            game_waves.addEnemiesWave(10, "normal");
+            game_waves.addEnemiesWave(10, "smaller");
+            game_waves.addEnemiesWave(15, "normal", "smaller");
+        }
     }
 }

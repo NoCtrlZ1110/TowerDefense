@@ -78,8 +78,13 @@ public class PauseScreen {
 
         //TODO
         backBtn.setOnMouseClicked(event -> {
-            System.out.println("-> Back");
+            System.out.println("-> Home");
             // hỏi save trước khi back
+            boolean is_save = true;
+            if (is_save) {
+                GameField.saveGame();
+            }
+            GameStage.welcomeScreen();
         });
         resumeBtn.setOnMouseClicked(event -> {
             resumeGame();
@@ -89,9 +94,8 @@ public class PauseScreen {
         quitBtn.setOnMouseClicked(event -> {
             System.out.println("-> Quit");
             // hỏi save trước khi quit
-            // stage.close(); // tốt hơn 2 dòng dưới, tuy nhiên cần sửa code để GameField có property stage: Stage
-            Platform.exit();
-            System.exit(0);
+            // Platform.exit(); System.exit(0);
+            GameStage.closePrimaryStage();
         });
     }
 

@@ -17,19 +17,24 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.Sound.*;
 
 public class GameStage extends Application {
+    private static Stage primaryStage;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage _primaryStage) {
+        primaryStage = _primaryStage;
+
         importMap();
         importRoad();
-//        welcomeScreen(primaryStage);
-         gameScreen(primaryStage);
+        // welcomeScreen();
+        gameScreen(_primaryStage);
     }
 
-    public static void welcomeScreen(Stage stage) {
+    public static void welcomeScreen() {
+        Stage stage = primaryStage;
         Pane pane = new Pane();
 
         Scene scene = new Scene(pane, 960, 540);
@@ -96,13 +101,17 @@ public class GameStage extends Application {
         );
 
         stage.setTitle("Tower Defense 1.6");
-
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setResizable(true);
+        stage.centerOnScreen();
         stage.show();
 
         timeline.play();
         playWelcomeMusic();
+    }
+
+    public static void closePrimaryStage() {
+        primaryStage.close();
     }
 }

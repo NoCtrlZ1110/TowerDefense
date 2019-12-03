@@ -45,6 +45,15 @@ public class GameCharacter extends GameEntity {
         initHpBar();
     }
 
+    protected GameCharacter(String imageUrl, double hp, double hp_max, double hp_bar_width, double hp_bar_height) {
+        super(imageUrl);
+        this.hp = Math.min(hp, hp_max);
+        this.hp_max = hp_max;
+        this.hp_bar_width = hp_bar_width;
+        this.hp_bar_height = hp_bar_height;
+        initHpBar();
+    }
+
     protected void setHpBarXY(double hp_bar_x, double hp_bar_y) {
         this.hp_bar_x = hp_bar_x;
         this.hp_bar_y = hp_bar_y;
@@ -54,6 +63,10 @@ public class GameCharacter extends GameEntity {
 
         hp_bar.setX(this.hp_bar_x);
         hp_bar.setY(this.hp_bar_y);
+    }
+
+    protected void setHp(double hp) {
+        this.hp = hp;
     }
 
     public boolean isDead() {

@@ -28,6 +28,21 @@ public class GameWaves {
         complete_bonus = 100;
     }
 
+    public GameWaves(String str_info) {
+        String[] splited = str_info.split("\n?(WAVE \\d+):\n");
+        for (String str_wave: splited)
+            if (str_wave.length() > 0) {
+                total_waves++;
+                EnemiesWave new_wave = EnemiesWave.loadFromString(str_wave);
+                if (str_wave.equals("COMPLETED")) {
+                    running_wave_id++;
+                }
+                waves.add(new_wave);
+                // System.out.println(new_wave);
+                // System.out.println("------------");
+            }
+    }
+
     private void setTimer() {
         // [Hiện thanh máu liên tục theo thời gian]
         timer = new AnimationTimer() {
@@ -90,7 +105,6 @@ public class GameWaves {
 
     public void start() {
         System.out.println("start...");
-        running_wave_id = 0;
         running_wave = waves.get(running_wave_id);
         running_wave_enemies = running_wave.getEnemies();
 
@@ -123,10 +137,11 @@ public class GameWaves {
         if (isStopped) {
             return "COMPLETED";
         }
-        StringBuilder res = new StringBuilder("WAVE(S)\n:");
+        // StringBuilder res = new StringBuilder("WAVE(S):\n");
+        StringBuilder res = new StringBuilder("");
         for (int i = 0; i < waves.size(); i++) {
-            res.append(String.format("WAVE %d", i));
-            res.append(waves.get(i).toString()).append("\n");
+            res.append(String.format("WAVE %d:\n", i));
+            res.append(waves.get(i).toString());
         }
         return res.toString();
     }
