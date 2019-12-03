@@ -1,12 +1,10 @@
 package TowerDefense;
 
 import javafx.animation.*;
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -118,7 +116,8 @@ public class GameField {
                 }
 
                 if (selling) {
-                    if (!layout.getChildren().contains(using_shovel)) layout.getChildren().add(using_shovel);
+                    if (!layout.getChildren().contains(using_shovel))
+                        layout.getChildren().add(using_shovel);
                     using_shovel.setLocation((int) event.getSceneX() - 5, (int) event.getSceneY() - 82);
                 } else {
                     layout.getChildren().remove(using_shovel);
@@ -152,9 +151,7 @@ public class GameField {
                 if (location != null) {
                     border.setX(location.getX() + 33);
                     border.setY(location.getY() + 33);
-                    // mua: hiện dãy icon đại diện cho tháp
-                    // => chọn loại tower (thêm tham số, có thể là string)
-                    if (!selling) {
+                    if (buying) { // !selling
                         Roadside r = new Roadside(location.getX(), location.getY());
                         if (1 <= currentItem && currentItem <= 3) {
                             // <=> currentItem in [1, 2, 3]: có thể mua được
@@ -182,8 +179,10 @@ public class GameField {
                             // upgrade có thể có giá
                             r.upgradePlacedTower();
                         }
-                    } else if (isRoadPlaced(checkingPoint))
+                    } else if (isRoadPlaced(checkingPoint)) {
+                        buying = false;
                         selling = false;
+                    }
                 }
             }
         });
@@ -293,9 +292,14 @@ public class GameField {
         if (isPaused) {
             try {
                 FileWriter fo = new FileWriter("save.txt");
-                fo.write("MAP: <map directory>\n");
-                fo.write("TOWERS: <all exists towers' properties, using toString>\n");
-                fo.write("GAME PROGRESS: <all waves + enemies' properties, using toString>\n");
+                fo.write(String.format("USER: money=%d,hp=%f\n", money, user.hp));
+                // fo.write("MAP: <map directory>\n");
+                fo.write("TOWERS:\n");
+                for (Tower t: towers)
+                    fo.write(t.toString() + "\n");
+
+                fo.write("GAME PROGRESS:\n");
+                fo.write(game_waves.toString() + "\n");
                 fo.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -347,7 +351,7 @@ public class GameField {
         game_waves.stop();
     }
 
-    public static void runEnemiesWaves() {
+    private static void runEnemiesWaves() {
         game_waves = new GameWaves();
         game_waves.addEnemiesWave(10, "normal");
         game_waves.addEnemiesWave(10, "smaller");

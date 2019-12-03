@@ -144,6 +144,7 @@ public class Shop {
 
         buying = false;
         selectedItem.setVisible(false);
+        // layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
         if (currentItem == 1)
             layout.getChildren().remove(placingTower1);
         else if (currentItem == 2)

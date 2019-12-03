@@ -22,6 +22,7 @@ public class GameWaves {
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave;
     private AnimationTimer timer;
+    private boolean isStopped = false;
 
     public GameWaves() {
         complete_bonus = 100;
@@ -112,8 +113,21 @@ public class GameWaves {
     }
 
     private void complete() {
+        isStopped = true;
         stop();
         GameField.increaseMoney(complete_bonus);
         showCompletedScreen();
+    }
+
+    public String toString() {
+        if (isStopped) {
+            return "COMPLETED";
+        }
+        StringBuilder res = new StringBuilder("WAVE(S)\n:");
+        for (int i = 0; i < waves.size(); i++) {
+            res.append(String.format("WAVE %d", i));
+            res.append(waves.get(i).toString()).append("\n");
+        }
+        return res.toString();
     }
 }

@@ -106,4 +106,14 @@ public class EnemiesWave {
     public void stop() {
         waveTimeline.stop();
     }
+
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        if (!isFinished()) {
+            for (Enemy e: enemies)
+                res.append(e.toString()).append("\n");
+        } else
+            res = new StringBuilder("COMPLETED\n");
+        return res.toString();
+    }
 }
