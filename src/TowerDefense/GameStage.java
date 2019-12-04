@@ -23,10 +23,8 @@ public class GameStage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        importMap();
-        importRoad();
-//        welcomeScreen(primaryStage);
-         gameScreen(primaryStage);
+        welcomeScreen(primaryStage);
+//         gameScreen(primaryStage);
     }
 
     public static void welcomeScreen(Stage stage) {

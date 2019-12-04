@@ -39,26 +39,32 @@ public class GameField {
 
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
+    final static imageObject logo = new imageObject("file:images/transparent_logo.png");
     final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     static Timeline gameTimeline, shootTimeLine;
 
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
+        importMap();
+        importRoad();
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         road.setOpacity(0);
-        layout.getChildren().addAll(background, road);
+        logo.setOpacity(0);
+        logo.setLocation(430,250);
+        logo.scaleTo(420,165);
+        layout.getChildren().addAll(background,logo, road);
         playGameScreenMusic();
 
         user = new GameCharacter(HP_MAX, 167, 13, 1030, 760);
         user.displayHpBar();
         showUserHpBar();
 
-        // drawMap();
+//         drawMap();
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
@@ -69,9 +75,12 @@ public class GameField {
 
         //-----------------------------
         gameTimeline = new Timeline();
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> isStarted = true));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), new KeyValue(logo.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(logo.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> isStarted = true));
         // gameTimeline.setCycleCount(1);
 
         // [Shoot timeline]
@@ -210,6 +219,10 @@ public class GameField {
         showShopBar();
         gameTimeline.play();
         // ------------------------
+
+
+
+
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));

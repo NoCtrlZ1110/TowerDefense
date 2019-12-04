@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/map/map2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/SelectRoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/TowerType3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shopBar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shovel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shovel_noback.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,6 +96,10 @@
       <workItem from="1575024208765" duration="2122000" />
       <workItem from="1575030603647" duration="9494000" />
       <workItem from="1575102201917" duration="8546000" />
+      <workItem from="1575273746168" duration="663000" />
+      <workItem from="1575386445552" duration="1846000" />
+      <workItem from="1575431381763" duration="4184000" />
+      <workItem from="1575467172754" duration="1630000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />

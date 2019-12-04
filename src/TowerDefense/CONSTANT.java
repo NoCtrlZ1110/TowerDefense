@@ -2,6 +2,7 @@ package TowerDefense;
 
 public class CONSTANT {
     public static final String pathMap = "map/map.txt";
+    public static final String pathMap2 = "map/map.txt";
     public static final String pathTileType = "map/tileType.txt";
     public static final String pathTile = "file:images/";
     public static final String pathRoad = "file:images/road.png";
