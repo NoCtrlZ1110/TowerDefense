@@ -97,7 +97,7 @@ public class EnemiesWave {
     }
 
     public double getWaveRate() {
-        return countWaveCreatedEnemies / (countWaveTotalEnemies * 1.0);
+        return (countWaveTotalEnemies - enemies.size()) / (countWaveTotalEnemies * 1.0);
     }
 
     public void start() {
@@ -118,6 +118,7 @@ public class EnemiesWave {
 
     public void stop() {
         waveTimeline.stop();
+        enemies.forEach(Enemy::stopMoving);
     }
 
     public String toString() {

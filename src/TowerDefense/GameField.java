@@ -57,7 +57,7 @@ public class GameField {
         layout.getChildren().addAll(background, road);
         playGameScreenMusic();
 
-        loadGame();
+        runEnemiesWaves();
         showUserHpBar();
         // drawMap();
         //--------------------------------
@@ -400,9 +400,10 @@ public class GameField {
     }
 
     private static void runEnemiesWaves() {
+        // loadGame();
         if (game_waves == null) { // chưa được load
             game_waves = new GameWaves();
-            game_waves.addEnemiesWave(10, "normal");
+            game_waves.addEnemiesWave(15, "normal");
             game_waves.addEnemiesWave(10, "smaller");
             game_waves.addEnemiesWave(15, "normal", "smaller");
         }

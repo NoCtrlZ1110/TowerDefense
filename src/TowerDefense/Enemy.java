@@ -81,6 +81,10 @@ public abstract class Enemy extends GameCharacter {
         pathTransition.play();
     }
 
+    public void stopMoving() {
+        pathTransition.stop();
+    }
+
     public void beShotBy(Bullet b) {
         if (exists()) { // trường hợp enemy ra khỏi map lúc chưa chết (chỉ bị destroy)
             decreaseHP(b.getDamage());

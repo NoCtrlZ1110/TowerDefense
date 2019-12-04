@@ -122,8 +122,8 @@ public class GameWaves {
     }
 
     public void stop() {
-        running_wave.stop();
         timer.stop();
+        running_wave.stop();
     }
 
     private void complete() {
