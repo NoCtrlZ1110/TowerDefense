@@ -2,10 +2,11 @@ package TowerDefense;
 
 public class CONSTANT {
     public static final String pathMap = "map/map.txt";
-    public static final String pathMap2 = "map/map.txt";
+    public static final String pathMap2 = "map/map2.txt";
     public static final String pathTileType = "map/tileType.txt";
     public static final String pathTile = "file:images/";
     public static final String pathRoad = "file:images/road.png";
+    public static final String pathRoad2 = "file:images/road.png";
     public static final String pathRedEnemy = "file:images/LoLminion.gif";
     public static final String pathTankerEnemy = "file:images/bat.png";
     public static final String pathSmallerEnemy = "file:images/penguin.png";
@@ -15,11 +16,13 @@ public class CONSTANT {
     public static final String pathMachineGunTower = "file:images/Tower3.png";
     public static final String pathBullet = "file:images/bullet.png";
     public static final String pathTransition = "map/roadPath.txt";
+    public static final String pathTransition2 = "map/roadPath2.txt";
     public static final String PATH_FONT = "file:font/Aerial.ttf";
 
     public static final int COL_NUM = 16;
     public static final int ROW_NUM = 10;
     public static final int ROAD_NUM = 15;
+    public static final int ROAD_NUM2 = 23;
 
     public static final int TILE_WIDTH = 80;
     public static final int TOWER_WIDTH = TILE_WIDTH * 2;
