@@ -86,8 +86,6 @@ public class GameField {
         shootTimeLine.play();
 
         //-------------------------------
-        // runEnemiesWaves();
-
         // [Hiện khung chọn vị trí xây tháp] ---
 
         border.setStroke(Color.WHITESMOKE);
@@ -404,7 +402,7 @@ public class GameField {
         if (game_waves == null) { // chưa được load
             game_waves = new GameWaves();
             game_waves.addEnemiesWave(15, "normal");
-            game_waves.addEnemiesWave(10, "smaller");
+            game_waves.addEnemiesWave(15, "smaller");
             game_waves.addEnemiesWave(15, "normal", "smaller");
         }
     }

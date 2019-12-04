@@ -16,12 +16,12 @@ public class EnemiesWave {
     private int total_ms_before;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private int countWaveTotalEnemies = 0;
-    private int countWaveCreatedEnemies = 0;
     private Timeline waveTimeline = new Timeline();
     private boolean is_pre_delaying = true;
 
-    private EnemiesWave(int pre_sec_delay) {
+    private EnemiesWave(int pre_sec_delay, int total_enemies) {
         total_ms_before = pre_sec_delay * 1000;
+        countWaveTotalEnemies = total_enemies;
     }
 
     public EnemiesWave(int pre_sec_delay, int total_enemies, String... enemy_type) {
@@ -56,7 +56,6 @@ public class EnemiesWave {
             // minion.setSpeed(1.2);
             addEnemy(minion);
 
-            countWaveCreatedEnemies++;
         }
         // System.out.println(total_enemies + " " + total_waves + " " + enemies);
     }
@@ -124,6 +123,7 @@ public class EnemiesWave {
     public String toString() {
         StringBuilder res = new StringBuilder();
         if (!isFinished()) {
+            res.append(String.format("TOTAL ENMIES: %d\n", countWaveTotalEnemies));
             res.append(String.format(
                 "PRE-LOAD TIMES (S): %d\n",
                 (is_pre_delaying ? total_ms_before / 1000 : 0)
@@ -137,13 +137,14 @@ public class EnemiesWave {
     }
 
     public static EnemiesWave loadFromString(String str) {
-        EnemiesWave res = new EnemiesWave(0);
+        EnemiesWave res = new EnemiesWave(0, 0);
         if (!str.equals("COMPLETED")) {
             String[] lines = str.split("\n");
-            int pre_sec_delay = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
-            res = new EnemiesWave(pre_sec_delay);
+            int total_enemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
+            int pre_sec_delay = Integer.parseInt(lines[1].substring(lines[1].indexOf(": ") + 2));
+            res = new EnemiesWave(pre_sec_delay, total_enemies);
 
-            for (int i = 1; i < lines.length; i++) {
+            for (int i = 2; i < lines.length; i++) {
                 String str_enemy = lines[i];
                 if (str_enemy.length() > 0) {
                     Enemy enemy = Enemy.loadFromString(str_enemy);
