@@ -20,7 +20,7 @@ public class GameWaves {
     private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
-    private EnemiesWave running_wave;
+    private EnemiesWave running_wave = null;
     private AnimationTimer timer;
     private boolean isStopped = false;
 
@@ -114,16 +114,19 @@ public class GameWaves {
     }
 
     public void pause() {
-        running_wave.pause();
+        if (running_wave != null)
+            running_wave.pause();
     }
 
     public void resume() {
-        running_wave.resume();
+        if (running_wave != null)
+            running_wave.resume();
     }
 
     public void stop() {
         timer.stop();
-        running_wave.stop();
+        if (running_wave != null)
+            running_wave.stop();
     }
 
     private void complete() {

@@ -65,11 +65,11 @@ public class Roadside {
                 buildingSound();
                 building.scaleTo(TILE_WIDTH, TILE_WIDTH);
                 building.setLocation(x+TILE_WIDTH/2, y+TILE_WIDTH/2);
-                layout.getChildren().add(building);
+                GameField.layout.getChildren().add(building);
 
                 tower.setPosition(new Point(x, y));
             }), new KeyFrame(Duration.millis(1800), event -> {
-                layout.getChildren().remove(building);
+                GameField.layout.getChildren().remove(building);
                 tower.showTower();
                 // tower.showRange();
                 GameField.addTower(tower);

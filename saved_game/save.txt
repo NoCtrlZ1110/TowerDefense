@@ -1,17 +1,58 @@
-USER: money=230,hp=99.000000,hp_max=100.000000
+USER: money=100,hp=100.000000,hp_max=100.000000
 TOWERS:
-SniperTower[x=400,y=480]
 GAME PROGRESS:
 WAVE 0:
-COMPLETED
+TOTAL ENMIES: 15
+PRE-LOAD TIMES (S): 22
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
 WAVE 1:
-COMPLETED
+TOTAL ENMIES: 15
+PRE-LOAD TIMES (S): 2
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
 WAVE 2:
-TOTAL ENEMIES: 15
-PRE-LOAD TIMES (S): 0
-NormalEnemy[x=208,y=565,hp=90.000000]
-NormalEnemy[x=130,y=565,hp=100.000000]
-NormalEnemy[x=85,y=598,hp=100.000000]
-NormalEnemy[x=85,y=675,hp=100.000000]
-NormalEnemy[x=55,y=725,hp=100.000000]
+TOTAL ENMIES: 15
+PRE-LOAD TIMES (S): 2
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
 

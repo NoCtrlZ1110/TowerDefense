@@ -1,6 +1,5 @@
 package TowerDefense;
 
-import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
@@ -9,12 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
-import static TowerDefense.GameTile.*;
 import static TowerDefense.Sound.plantSound;
 import static TowerDefense.Sound.shovelSound;
 

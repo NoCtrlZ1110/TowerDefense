@@ -3,46 +3,22 @@ package TowerDefense;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static TowerDefense.GameTile.importMap;
-import static TowerDefense.GameTile.importRoad;
-import static TowerDefense.GameField.*;
 import static TowerDefense.Sound.*;
 
-public class GameStage extends Application {
-    private static Stage primaryStage;
+public class WelcomeScreen extends Screen {
+    private Timeline timeline;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage _primaryStage) {
-        primaryStage = _primaryStage;
-
-        importMap();
-        importRoad();
-        // welcomeScreen();
-        gameScreen(_primaryStage);
-    }
-
-    public static void welcomeScreen() {
-        Stage stage = primaryStage;
-        Pane pane = new Pane();
-
-        Scene scene = new Scene(pane, 960, 540);
+    public WelcomeScreen(Stage stage) {
+        super(stage, 960, 540);
 
         imageObject welcomScr = new imageObject("file:images/welcome1.png");
         welcomScr.scaleTo(960, 540);
 
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
                 imageObject blackScr = new imageObject("file:images/black.png");
                 blackScr.scaleTo(960, 540);
@@ -85,34 +61,27 @@ public class GameStage extends Application {
 
                 startBtn.setOnMouseEntered(event1 -> {
                     startBtn.setOpacity(1);
-                    scene.setCursor(Cursor.HAND);
+                    welcomScr.setCursor(Cursor.HAND);
                 });
 
                 startBtn.setOnMouseExited(event1 -> {
                     startBtn.setOpacity(0);
-                    scene.setCursor(Cursor.DEFAULT);
+                    welcomScr.setCursor(Cursor.DEFAULT);
                 });
 
                 startBtn.setOnMouseClicked(event1 -> {
                     clickSound();
-                    gameScreen(stage);
+                    // GameStage.closePrimaryStage();
+                    GameStage.startGameScreen();
                 });
             })
         );
+    }
 
-        stage.setTitle("Tower Defense 1.6");
-        stage.setScene(scene);
-        stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setResizable(true);
-        stage.centerOnScreen();
-        stage.show();
+    public void active() {
+        super.active();
 
         timeline.play();
         playWelcomeMusic();
-    }
-
-    public static void closePrimaryStage() {
-        // Platform.exit(); System.exit(0);
-        primaryStage.close();
     }
 }

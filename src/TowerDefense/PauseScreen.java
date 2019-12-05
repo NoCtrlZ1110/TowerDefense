@@ -78,13 +78,10 @@ public class PauseScreen {
 
         //TODO
         backBtn.setOnMouseClicked(event -> {
-            System.out.println("-> Home");
-            // hỏi save trước khi back
-            boolean is_save = true;
-            if (is_save) {
+            System.out.println("-> Save");
+            if (isStarted)
                 GameField.saveGame();
-            }
-            GameStage.welcomeScreen();
+            // GameStage.welcomeScreen();
         });
         resumeBtn.setOnMouseClicked(event -> {
             resumeGame();
@@ -94,7 +91,9 @@ public class PauseScreen {
         quitBtn.setOnMouseClicked(event -> {
             System.out.println("-> Quit");
             // hỏi save trước khi quit
-            // Platform.exit(); System.exit(0);
+            boolean is_save = true;
+            if (isStarted && is_save)
+                GameField.saveGame();
             GameStage.closePrimaryStage();
         });
     }

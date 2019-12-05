@@ -2,7 +2,6 @@ package TowerDefense;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

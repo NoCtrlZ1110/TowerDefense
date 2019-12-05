@@ -1,13 +1,19 @@
 package TowerDefense;
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,12 +25,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static TowerDefense.CONSTANT.*;
+import static TowerDefense.CONSTANT.TILE_WIDTH;
 import static TowerDefense.GameTile.*;
 import static TowerDefense.PauseScreen.showPauseBtn;
 import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
+import static TowerDefense.Sound.gameScreenMusicTimeline;
 
-public class GameField {
+public class GameScreen2 extends Screen {
     private static int HPBAR_X = 500;
     private static int HPBAR_Y = 45;
 
@@ -39,17 +47,17 @@ public class GameField {
     public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
+    static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
     final static imageObject road = new imageObject("file:images/road.png");
-    final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
+    private final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
     private static Timeline gameTimeline = new Timeline();
     private static Timeline shootTimeline;
 
-    public static void gameScreen(Stage stage) {
+    public GameScreen2(Stage stage) {
+        super(stage, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         pauseWelcomeMusic();
-        stage.close();
-        Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
@@ -212,13 +220,6 @@ public class GameField {
         // ------------------------
         showShopBar();
         gameTimeline.play();
-        // ------------------------
-
-        // [Thêm icon cho game] ---
-        stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setScene(gameScene);
-        stage.centerOnScreen();
-        stage.show();
     }
 
     public static void showCompletedScreen() {
@@ -373,8 +374,7 @@ public class GameField {
         gameScreenMusicTimeline.pause();
         gameTimeline.pause();
         shootTimeline.pause();
-        if (game_waves != null)
-            game_waves.pause();
+        game_waves.pause();
     }
 
     public static void resumeGame() {
@@ -386,8 +386,7 @@ public class GameField {
             gameTimeline.play();
         if (shootTimeline.getStatus() != Animation.Status.STOPPED)
             shootTimeline.play();
-        if (game_waves != null)
-            game_waves.resume();
+        game_waves.resume();
     }
 
     public static void stopGame() {
@@ -396,8 +395,7 @@ public class GameField {
         gameScreenMusicTimeline.stop();
         gameTimeline.stop();
         shootTimeline.stop();
-        if (game_waves != null)
-            game_waves.stop();
+        game_waves.stop();
     }
 
     private static void createNewGame() {
