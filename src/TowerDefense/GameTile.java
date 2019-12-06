@@ -10,7 +10,7 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.*;
 
 public class GameTile {
-    static Map map = new Map(ROW_NUM, COL_NUM);
+    private static Map map = new Map(ROW_NUM, COL_NUM);
     private static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
@@ -19,11 +19,10 @@ public class GameTile {
     // Mảng lưu trữ các vị trí cụ thể của đường đi (path)
 
     public GameTile() {
-
     }
 
     public static void importMap() {
-        if (map_select == 1)
+        if (world_select == 1)
             getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
         else
             getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap2);
@@ -32,15 +31,17 @@ public class GameTile {
     }
 
     public static void importRoad() {
-        if (map_select == 1)
+        if (world_select == 1)
             getData(roadLocation, ROAD_NUM, 2, pathTransition);
         else
             getData(roadLocation, ROAD_NUM2, 2, pathTransition2);
     }
 
     public static Point getEndPointOfRoad() {
-        if (map_select == 1)return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
-        else return new Point(roadLocation[ROAD_NUM2-1][0], roadLocation[ROAD_NUM2-1][1]);
+        if (world_select == 1)
+            return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
+        else
+            return new Point(roadLocation[ROAD_NUM2-1][0], roadLocation[ROAD_NUM2-1][1]);
     }
 
     public static String getTileType(int x, int y) {

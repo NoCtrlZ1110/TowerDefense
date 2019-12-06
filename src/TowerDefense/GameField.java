@@ -48,13 +48,14 @@ public class GameField {
     // final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     private static Timeline gameTimeline = new Timeline();
     private static Timeline shootTimeline;
-    static int map_select = 1; // = 0;
-    // CHỌN MAP BẰNG CÁCH THAY ĐỔI BIẾN "map_select"
+    static int world_select = 1; // = 0;
+    // CHỌN WORLD BẰNG CÁCH THAY ĐỔI BIẾN "world_select"
 
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
-        if (map_select == 1) {
+
+        if (world_select == 1) {
             road = new imageObject("file:images/road.png");
             roadLocation = new int[ROAD_NUM][2];
         } else {
@@ -82,13 +83,15 @@ public class GameField {
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
-        if (map_select == 1)
+        if (world_select == 1)
             path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
         else
             path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
         int roadnum;
-        if (map_select == 1) roadnum = ROAD_NUM;
-        else roadnum = ROAD_NUM2;
+        if (world_select == 1)
+            roadnum = ROAD_NUM;
+        else
+            roadnum = ROAD_NUM2;
 
         for (int i = 0; i < roadnum; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
@@ -229,18 +232,6 @@ public class GameField {
     public static void showGameOverScreen() {
         stopGame();
         System.out.println("Game over!");
-    }
-
-    public static void drawMap() {
-        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
-
-        for (int i = 0; i < ROW_NUM; i++)
-            for (int j = 0; j < COL_NUM; j++) {
-                tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
-                tiled[i][j].scaleTo(TILE_WIDTH, TILE_WIDTH);
-                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
-                layout.getChildren().add(tiled[i][j]);
-            }
     }
 
     public static void addTower(Tower tower) {
