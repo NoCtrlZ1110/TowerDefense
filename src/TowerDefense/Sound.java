@@ -43,7 +43,6 @@ public class Sound {
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
     private static MediaPlayer winMusicPlayer = new MediaPlayer(winMusic);
 
-
     public static void mute() {
         combatMusicPlayer.setVolume(0);
         minionSpawn.setVolume(0);
@@ -75,31 +74,29 @@ public class Sound {
         playSound(removeSound);
     }
 
-
     public static void shovelSound() {
         playSound(shovelSound);
     }
 
-
-    public static void playSound (Media sound)
-    {
+    public static void playSound(Media sound) {
         if (!isMuted) {
             MediaPlayer soundPlayer = new MediaPlayer(sound);
             soundPlayer.play();
         }
-
     }
 
     public static void playWelcomeMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(200), event -> {
-                    superCellPlayer.play();
-                }), new KeyFrame(Duration.millis(1800), event -> {
-            loadingPlayer.play();
-        }), new KeyFrame(Duration.millis(4500), event -> {
-            welcomePlayer.play();
-            welcomePlayer.setCycleCount(Animation.INDEFINITE);
-        }));
+            new KeyFrame(Duration.millis(200), event -> {
+                superCellPlayer.play();
+            }),
+            new KeyFrame(Duration.millis(1800), event -> {
+                loadingPlayer.play();
+            }), new KeyFrame(Duration.millis(4500), event -> {
+                welcomePlayer.play();
+                welcomePlayer.setCycleCount(Animation.INDEFINITE);
+            })
+        );
         timeline.play();
     }
 
@@ -108,38 +105,41 @@ public class Sound {
         // welcomePlayer.pause();
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(2),
-                        new KeyValue(welcomePlayer.volumeProperty(), 0)), new KeyFrame(Duration.seconds(2), e -> welcomePlayer.stop()));
+            new KeyFrame(Duration.seconds(2), new KeyValue(welcomePlayer.volumeProperty(), 0)),
+            new KeyFrame(Duration.seconds(2), e -> welcomePlayer.stop())
+        );
         timeline.play();
     }
 
     static Timeline gameScreenMusicTimeline;
 
     public static void playGameScreenMusic() {
-        gameScreenMusicTimeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> prepareMusicPlayer.play()),
-                new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
-                //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
-                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
-                    if (!isMuted)
-                        gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
-                }),
-                new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
+        gameScreenMusicTimeline = new Timeline(
+            new KeyFrame(Duration.seconds(0), event -> prepareMusicPlayer.play()),
+            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
+            //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
+            new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
+                if (!isMuted)
+                    gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
+            }),
+            new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );
         gameScreenMusicTimeline.play();
     }
 
     public static void buildingSound() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> {
-                    MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
-                    if (isMuted) buildingSoundPlayer.setVolume(0);
-                    buildingSoundPlayer.play();
-
-                }), new KeyFrame(Duration.millis(1800), event -> {
-            MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
-            if (isMuted) buildingFinishSoundPlayer.setVolume(0);
-            buildingFinishSoundPlayer.play();
-        }));
+            new KeyFrame(Duration.millis(0), event -> {
+                MediaPlayer buildingSoundPlayer = new MediaPlayer(buildingSound);
+                if (isMuted) buildingSoundPlayer.setVolume(0);
+                buildingSoundPlayer.play();
+            }),
+            new KeyFrame(Duration.millis(1800), event -> {
+                MediaPlayer buildingFinishSoundPlayer = new MediaPlayer(buildingFinishSound);
+                if (isMuted) buildingFinishSoundPlayer.setVolume(0);
+                buildingFinishSoundPlayer.play();
+            })
+        );
         timeline.play();
     }
 
@@ -153,22 +153,19 @@ public class Sound {
         if (!isMuted) winMusicPlayer.play();
     }
 
-
     public static void combatMusic() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
-                new KeyFrame(Duration.millis(1400), event -> {
-                    combatMusicPlayer.play();
-                    combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
-                }), new KeyFrame(Duration.seconds(2), event -> prepareMusicPlayer.stop())
+            new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
+            new KeyFrame(Duration.millis(1400), event -> {
+                combatMusicPlayer.play();
+                combatMusicPlayer.setCycleCount(Animation.INDEFINITE);
+            }), new KeyFrame(Duration.seconds(2), event -> prepareMusicPlayer.stop())
         );
         timeline.play();
     }
 
-
     static imageObject muteBtn = new imageObject("file:images/mute.png");
     static imageObject speakerBtn = new imageObject("file:images/speaker.png");
-
 
     static void showMuteBtn(Pane layout) {
         muteBtn.setLocation((int) layout.getWidth() - 70, 30);
@@ -176,7 +173,6 @@ public class Sound {
 
         muteBtn.scaleTo(40, 40);
         speakerBtn.scaleTo(40, 40);
-
 
         if (!layout.getChildren().contains(muteBtn)) layout.getChildren().add(muteBtn);
         if (!layout.getChildren().contains(speakerBtn)) layout.getChildren().add(speakerBtn);
@@ -195,7 +191,6 @@ public class Sound {
         speakerBtn.setOnMouseEntered(event -> speakerBtn.setCursor(Cursor.HAND));
         speakerBtn.setOnMouseExited(event -> speakerBtn.setCursor(Cursor.DEFAULT));
 
-
         muteBtn.setOnMouseClicked(event -> {
             isMuted = false;
             unMute();
@@ -206,9 +201,5 @@ public class Sound {
             mute();
             showMuteBtn(layout);
         });
-
-
     }
-
-
 }

@@ -1,19 +1,24 @@
 package TowerDefense;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
-import static TowerDefense.Sound.plantSound;
-import static TowerDefense.Sound.shovelSound;
+import static TowerDefense.Sound.*;
 
 public class Shop {
+    private static final double SELL_RATE = 0.8;
+
     static Rectangle selectedItem = new Rectangle(70, 94);
     static int currentItem = 0;
     static boolean selling = false;
@@ -135,12 +140,43 @@ public class Shop {
         });
     }
 
+    public static void showIconWithMouse(MouseEvent event) {
+        if (currentItem == 1) {
+            if (!layout.getChildren().contains(placingTower1))
+                layout.getChildren().add(placingTower1);
+            placingTower1.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+        }
+        else if (currentItem == 2) {
+            if (!layout.getChildren().contains(placingTower2))
+                layout.getChildren().add(placingTower2);
+            placingTower2.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+        }
+        else if (currentItem == 3) {
+            if (!layout.getChildren().contains(placingTower3))
+                layout.getChildren().add(placingTower3);
+            placingTower3.setLocation((int) event.getSceneX(), (int) event.getSceneY());
+        }
+        else {
+            layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
+        }
+
+        if (selling) {
+            if (!layout.getChildren().contains(using_shovel))
+                layout.getChildren().add(using_shovel);
+            using_shovel.setLocation((int) event.getSceneX() - 5, (int) event.getSceneY() - 82);
+        } else {
+            layout.getChildren().remove(using_shovel);
+        }
+    }
+
+    public static int getCurrentItem() {
+        return currentItem;
+    }
+
     public static void cancelBuying() {
         if (!buying)
             return;
 
-        buying = false;
-        selectedItem.setVisible(false);
         // layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
         if (currentItem == 1)
             layout.getChildren().remove(placingTower1);
@@ -149,6 +185,8 @@ public class Shop {
         else if (currentItem == 3)
             layout.getChildren().remove(placingTower3);
 
+        buying = false;
+        selectedItem.setVisible(false);
         currentItem = 0;
     }
 
@@ -160,7 +198,57 @@ public class Shop {
         layout.getChildren().remove(using_shovel);
     }
 
-    public static int getCurrentItem() {
-        return currentItem;
+    public static void sellTowerAt(int x, int y) {
+        Tower tower = GameField.getTowerPlacedAt(x, y);
+        if (tower != null) {
+            increaseMoney((int)(tower.getPrice() * SELL_RATE));
+            GameField.removeTower(tower);
+            tower.destroy();
+
+            removeSound();
+            cancelSelling();
+        }
+    }
+
+    public static void buyTowerAt(int x, int y) {
+        Tower tower;
+        if (getCurrentItem() == 1)  // tower_type.equals("normal"))
+            tower = new NormalTower();
+        else if (getCurrentItem() == 2)  // tower_type.equals("sniper"))
+            tower = new SniperTower();
+        else if (getCurrentItem() == 3)  // tower_type.equals("machinegun"))
+            tower = new MachineGunTower();
+        else
+            return; // mua thất bại
+
+        int price = tower.getPrice();
+        if (getMoney() >= price) {
+            x = x - x % TILE_WIDTH;
+            y = y - y % TILE_WIDTH;
+
+            decreaseMoney(price);
+            placeTowerAt(tower, x, y);
+            cancelBuying();
+        }
+    }
+
+    private static void placeTowerAt(Tower tower, int x, int y) {
+        imageObject building = new imageObject("file:images/white_building.gif");
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.millis(0), event -> {
+                buildingSound();
+                building.scaleTo(TILE_WIDTH, TILE_WIDTH);
+                building.setLocation(x+TILE_WIDTH/2, y+TILE_WIDTH/2);
+                layout.getChildren().add(building);
+
+                tower.setPosition(new Point(x, y));
+            }), new KeyFrame(Duration.millis(1800), event -> {
+                layout.getChildren().remove(building);
+                tower.showTower();
+                // tower.showRange();
+                GameField.addTower(tower);
+            })
+        );
+        timeline.play();
     }
 }

@@ -79,8 +79,7 @@ public class PauseScreen {
         //TODO
         backBtn.setOnMouseClicked(event -> {
             System.out.println("-> Save");
-            if (isStarted)
-                GameField.saveGame();
+            SaveScreen.showSaveMenu();
             // GameStage.welcomeScreen();
         });
         resumeBtn.setOnMouseClicked(event -> {
@@ -91,10 +90,11 @@ public class PauseScreen {
         quitBtn.setOnMouseClicked(event -> {
             System.out.println("-> Quit");
             // hỏi save trước khi quit
-            boolean is_save = true;
-            if (isStarted && is_save)
-                GameField.saveGame();
-            GameStage.closePrimaryStage();
+            if (isStarted) {
+                SaveScreen.showSaveMenu();
+                if (SaveScreen.isCanceled())
+                    GameStage.closePrimaryStage();
+            }
         });
     }
 

@@ -52,7 +52,6 @@ public class GameField {
     // CHỌN MAP BẰNG CÁCH THAY ĐỔI BIẾN "map_select"
 
     public static void gameScreen(Stage stage) {
-
         pauseWelcomeMusic();
         stage.close();
         if (map_select == 1) {
@@ -130,34 +129,10 @@ public class GameField {
 
         layout.setOnMouseMoved(event -> {
             if (isStarted && !isPaused) {
+                Shop.showIconWithMouse(event);
+
                 Point location = TowerBuildLocation(event);
                 Point point = getLocationFromMouseEvent(event);
-
-                if (currentItem == 0) {
-                    layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
-                } else if (currentItem == 1) {
-                    if (!layout.getChildren().contains(placingTower1))
-                        layout.getChildren().add(placingTower1);
-                    placingTower1.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-
-                } else if (currentItem == 2) {
-                    if (!layout.getChildren().contains(placingTower2))
-                        layout.getChildren().add(placingTower2);
-                    placingTower2.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-
-                } else if (currentItem == 3) {
-                    if (!layout.getChildren().contains(placingTower3))
-                        layout.getChildren().add(placingTower3);
-                    placingTower3.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-                }
-
-                if (selling) {
-                    if (!layout.getChildren().contains(using_shovel))
-                        layout.getChildren().add(using_shovel);
-                    using_shovel.setLocation((int) event.getSceneX() - 5, (int) event.getSceneY() - 82);
-                } else {
-                    layout.getChildren().remove(using_shovel);
-                }
 
                 if (location != null) {
                     layout.setCursor(Cursor.HAND);
@@ -168,9 +143,7 @@ public class GameField {
                 } else {
                     layout.setCursor(Cursor.DEFAULT);
                 }
-                // System.out.println(point);
                 towers.forEach(t -> {
-                    // if (isTowerPlaced(point) && t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
                     if (t.isInTower((int) event.getSceneX(), (int) event.getSceneY()))
                         t.showRange();
                     else
@@ -187,14 +160,9 @@ public class GameField {
                 if (location != null) {
                     border.setX(location.getX() + 33);
                     border.setY(location.getY() + 33);
-                    if (buying) { // !selling
-                        Roadside r = new Roadside(location.getX(), location.getY());
-                        if (1 <= currentItem && currentItem <= 3) {
-                            // <=> currentItem in [1, 2, 3]: có thể mua được
-                            r.buyTower();
-                            currentItem = 0;
-                            selectedItem.setVisible(false);
-                        }
+                    if (buying) {
+                        Shop.buyTowerAt(location.getX(), location.getY());
+                        // các dòng hiệu ứng khác đã đưa vào trong hàm trên
                     }
                     selling = false;
                 } else {
@@ -205,20 +173,20 @@ public class GameField {
 
                         int x = (int) event.getSceneX();
                         int y = (int) event.getSceneY();
-                        Roadside r = new Roadside(x, y);
                         if (selling) {
                             // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                            r.sellPlacedTower();
-                            removeSound();
-                            selling = false;
+                            Shop.sellTowerAt(x, y);
+                            // các dòng hiệu ứng khác đã đưa vào trong hàm trên
                         } else {
                             // upgrade: hiện dãy icon đại diện cho tháp
                             // upgrade có thể có giá
-                            r.upgradePlacedTower();
+                            Tower tower = getTowerPlacedAt(x, y);
+                            if (tower != null)
+                                tower.upgrade();
                         }
                     } else if (isRoadPlaced(checkingPoint)) {
-                        buying = false;
-                        selling = false;
+                        Shop.cancelBuying();
+                        Shop.cancelSelling();
                     }
                 }
             }
@@ -275,16 +243,24 @@ public class GameField {
             }
     }
 
-    public static ArrayList<Tower> getTowers() {
-        return towers;
-    }
-
     public static void addTower(Tower tower) {
         towers.add(tower);
     }
 
     public static void removeTower(Tower tower) {
         towers.remove(tower);
+    }
+
+    public static Tower getTowerPlacedAt(int x, int y) {
+        // x = x - x % TILE_WIDTH;
+        // y = y - y % TILE_WIDTH;
+
+        for (Tower t: towers) {
+            if (t.isInTower(x, y)) {
+                return t;
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Enemy> getEnemies() {
@@ -296,7 +272,7 @@ public class GameField {
     }
 
     private static void showUserHpBar() {
-        // 500,45
+        // 500,45; origin: 1000,750
         user = new GameCharacter(hp_max, 164, 13, HPBAR_X+30, HPBAR_Y+10);
         user.displayHpBar();
 
@@ -341,7 +317,7 @@ public class GameField {
             System.out.println("saving...");
             try {
                 FileWriter fo = new FileWriter("saved_game/save.txt");
-                fo.write(String.format("USER: money=%d,hp=%f,hp_max=%f\n", money, user.hp, user.hp_max));
+                fo.write(String.format("USER: money=%d,%s\n", money, user.toString()));
                 // fo.write("MAP: <map directory>\n");
                 fo.write("TOWERS:\n");
                 for (Tower t : towers)

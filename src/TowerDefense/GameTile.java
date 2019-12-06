@@ -24,18 +24,18 @@ public class GameTile {
 
     public static void importMap() {
         if (map_select == 1)
-        getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
+            getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
         else
-        getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap2);
+            getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap2);
         map.backup();
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
     public static void importRoad() {
         if (map_select == 1)
-        getData(roadLocation, ROAD_NUM, 2, pathTransition);
+            getData(roadLocation, ROAD_NUM, 2, pathTransition);
         else
-        getData(roadLocation, ROAD_NUM2, 2, pathTransition2);
+            getData(roadLocation, ROAD_NUM2, 2, pathTransition2);
     }
 
     public static Point getEndPointOfRoad() {

@@ -29,10 +29,4 @@ public class CONSTANT {
     public static final int ENEMY_WIDTH = 70;
     public static final int BORDER_WIDTH = 100;
     public static final int PREPARE_TIME = 22;
-
-    public static final double SELL_RATE = 0.8;
-
-
-
 }
-

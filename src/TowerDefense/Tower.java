@@ -111,6 +111,11 @@ public class Tower extends GameEntity {
         super.destroy();
     }
 
+    public void upgrade() {
+        // decreaseMoney(...);
+        System.out.println("waiting for updating...");
+    }
+
     public Enemy findTarget() {
         Enemy _target = null;
         double min_distance = range;

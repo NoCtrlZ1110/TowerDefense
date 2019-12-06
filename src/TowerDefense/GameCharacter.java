@@ -120,4 +120,8 @@ public class GameCharacter extends GameEntity {
         deleteHpBar();
         super.destroy();
     }
+
+    public String toString() {
+        return String.format("hp=%f,hp_max=%f", hp, hp_max);
+    }
 }
