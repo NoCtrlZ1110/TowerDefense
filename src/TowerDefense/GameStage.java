@@ -27,10 +27,10 @@ public class GameStage extends Application {
     public void start(Stage _primaryStage) {
         primaryStage = _primaryStage;
 
-        importMap();
-        importRoad();
-        // welcomeScreen();
-        gameScreen(_primaryStage);
+        // importMap();
+        // importRoad();
+        welcomeScreen();
+        // gameScreen(_primaryStage);
     }
 
     public static void welcomeScreen() {

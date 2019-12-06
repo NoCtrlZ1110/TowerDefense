@@ -14,24 +14,33 @@ public class GameTile {
     private static int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
 
-    static int[][] roadLocation = new int[ROAD_NUM][2];
+    static int[][] roadLocation;
+
     // Mảng lưu trữ các vị trí cụ thể của đường đi (path)
 
     public GameTile() {
+
     }
 
     public static void importMap() {
+        if (map_select == 1)
         getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
+        else
+        getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap2);
         map.backup();
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
     public static void importRoad() {
+        if (map_select == 1)
         getData(roadLocation, ROAD_NUM, 2, pathTransition);
+        else
+        getData(roadLocation, ROAD_NUM2, 2, pathTransition2);
     }
 
     public static Point getEndPointOfRoad() {
-        return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
+        if (map_select == 1)return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
+        else return new Point(roadLocation[ROAD_NUM2-1][0], roadLocation[ROAD_NUM2-1][1]);
     }
 
     public static String getTileType(int x, int y) {

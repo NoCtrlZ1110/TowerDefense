@@ -32,7 +32,7 @@ public class GameField {
     private static ArrayList<Tower> towers = new ArrayList<>();
     private static GameWaves game_waves = null;
 
-    private static int money = 100;
+    private static int money = 20;
     private static double hp_max = 100;
     private static GameCharacter user;
     public static boolean isPaused = false;
@@ -41,21 +41,40 @@ public class GameField {
     public static Pane layout = new Pane();
 
     final static Path path = new Path();
-    final static imageObject road = new imageObject("file:images/road.png");
+    final static imageObject logo = new imageObject("file:images/transparent_logo.png");
+    // final static imageObject road = new imageObject("file:images/road.png");
+    static imageObject road;
     final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
+    // final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     private static Timeline gameTimeline = new Timeline();
     private static Timeline shootTimeline;
+    static int map_select = 1; // = 0;
+    // CHỌN MAP BẰNG CÁCH THAY ĐỔI BIẾN "map_select"
 
     public static void gameScreen(Stage stage) {
+
         pauseWelcomeMusic();
         stage.close();
+        if (map_select == 1) {
+            road = new imageObject("file:images/road.png");
+            roadLocation = new int[ROAD_NUM][2];
+        } else {
+            road = new imageObject("file:images/road2.png");
+            roadLocation = new int[ROAD_NUM2][2];
+        }
+        importMap();
+        importRoad();
+
         Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         road.setOpacity(0);
-        layout.getChildren().addAll(background, road);
+        logo.setOpacity(0);
+        logo.setLocation(430, 250);
+        logo.scaleTo(420, 165);
+        layout.getChildren().addAll(background, logo, road);
         playGameScreenMusic();
 
         createNewGame();
@@ -64,16 +83,27 @@ public class GameField {
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
-        path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
+        if (map_select == 1)
+            path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
+        else
+            path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
+        int roadnum;
+        if (map_select == 1) roadnum = ROAD_NUM;
+        else roadnum = ROAD_NUM2;
 
-        for (int i = 0; i < ROAD_NUM; i++)
+        for (int i = 0; i < roadnum; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
 
         //-----------------------------
+        // Animation ------------------
         gameTimeline = new Timeline();
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(road.opacityProperty(), 0)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), event -> {
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), new KeyValue(logo.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(logo.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(logo.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> {
             isStarted = true;
             game_waves.start();
         }));
@@ -214,6 +244,7 @@ public class GameField {
         gameTimeline.play();
         // ------------------------
 
+
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setScene(gameScene);
@@ -313,7 +344,7 @@ public class GameField {
                 fo.write(String.format("USER: money=%d,hp=%f,hp_max=%f\n", money, user.hp, user.hp_max));
                 // fo.write("MAP: <map directory>\n");
                 fo.write("TOWERS:\n");
-                for (Tower t: towers)
+                for (Tower t : towers)
                     fo.write(t.toString() + "\n");
 
                 fo.write("GAME PROGRESS:\n");

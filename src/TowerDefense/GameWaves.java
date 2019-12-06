@@ -48,6 +48,7 @@ public class GameWaves {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+//                System.out.println(running_wave.getWaveRate()+"%");
                 if (GameField.isGameOver()) {
                     stop();
                 } else if (running_wave.isFinished()) {
