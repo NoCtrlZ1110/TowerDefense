@@ -66,7 +66,7 @@ public class Sound {
         winMusicPlayer.setVolume(1);
     }
 
-    public static void plantSound()
+    public static void chooseSound()
     {
         playSound(ClickSound);
     }
