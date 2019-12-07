@@ -28,8 +28,8 @@ import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
 public class GameField {
-    private static int HPBAR_X = 500;
-    private static int HPBAR_Y = 45;
+    private static int HPBAR_X = 1030;
+    private static int HPBAR_Y = 760;
 
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
