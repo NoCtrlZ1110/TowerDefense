@@ -29,18 +29,22 @@ public class GameWaves {
     }
 
     public GameWaves(String str_info) {
-        String[] splited = str_info.split("\n?(WAVE \\d+):\n");
-        for (String str_wave: splited)
-            if (str_wave.length() > 0) {
-                total_waves++;
-                EnemiesWave new_wave = EnemiesWave.loadFromString(str_wave);
-                if (str_wave.equals("COMPLETED")) {
-                    running_wave_id++;
+        if (str_info.startsWith("COMPLETED")) {
+            // completed
+        } else {
+            String[] splited = str_info.split("\n?(WAVE \\d+):\n");
+            for (String str_wave : splited)
+                if (str_wave.length() > 0) {
+                    total_waves++;
+                    EnemiesWave new_wave = EnemiesWave.loadFromString(str_wave);
+                    if (str_wave.equals("COMPLETED")) {
+                        running_wave_id++;
+                    }
+                    waves.add(new_wave);
+                    // System.out.println(new_wave);
+                    // System.out.println("------------");
                 }
-                waves.add(new_wave);
-                // System.out.println(new_wave);
-                // System.out.println("------------");
-            }
+        }
     }
 
     private void setTimer() {
@@ -106,12 +110,16 @@ public class GameWaves {
 
     public void start() {
         System.out.println("start...");
-        running_wave = waves.get(running_wave_id);
-        running_wave_enemies = running_wave.getEnemies();
+        if (running_wave_id < waves.size()) {
+            running_wave = waves.get(running_wave_id);
+            running_wave_enemies = running_wave.getEnemies();
 
-        setTimer();
-        running_wave.start();
-        timer.start();
+            setTimer();
+            timer.start();
+            if (running_wave != null)
+                running_wave.start();
+        } else
+            complete();
     }
 
     public void pause() {

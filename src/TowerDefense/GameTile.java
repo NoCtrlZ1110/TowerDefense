@@ -115,4 +115,16 @@ public class GameTile {
         return new Point((int)(event.getSceneX() / TILE_WIDTH),
                 (int)(event.getSceneY() / TILE_WIDTH));
     }
+
+    public static void drawMap() {
+        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
+
+        for (int i = 0; i < ROW_NUM; i++)
+            for (int j = 0; j < COL_NUM; j++) {
+                tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
+                tiled[i][j].scaleTo(TILE_WIDTH, TILE_WIDTH);
+                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
+                layout.getChildren().add(tiled[i][j]);
+            }
+    }
 }

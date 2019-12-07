@@ -1,6 +1,7 @@
 package TowerDefense;
 
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,12 +9,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -307,7 +310,10 @@ public class GameField {
         if (isPaused) {
             System.out.println("saving...");
             try {
-                FileWriter fo = new FileWriter("saved_game/save.txt");
+                Date date_now = new Date();
+                long time_now = date_now.getTime();
+
+                FileWriter fo = new FileWriter(String.format("saved_game/save_%d.txt", time_now));
                 fo.write(String.format("USER: money=%d,%s\n", money, user.toString()));
                 // fo.write("MAP: <map directory>\n");
                 fo.write("TOWERS:\n");
@@ -326,8 +332,15 @@ public class GameField {
     private static void loadGame() {
         try {
             System.out.println("loading...");
-            File file = new File("saved_game/save.txt");
-            Scanner fi = new Scanner(file);
+
+            FileChooser fileChooser = new FileChooser();
+            configureFileChooser(fileChooser);
+            Platform.setImplicitExit(false); // https://stackoverflow.com/a/21308629
+            File chosen_file = fileChooser.showOpenDialog(layout.getScene().getWindow());
+            Platform.setImplicitExit(true); // chống lag
+            // File chosen_file = new File("saved_game/save.txt");
+            // System.out.println(chosen_file);
+            Scanner fi = new Scanner(chosen_file);
             StringBuilder temp = new StringBuilder();
             while (fi.hasNextLine()) {
                 String line = fi.nextLine() + "\n";
@@ -350,19 +363,28 @@ public class GameField {
                 // System.out.println(money + " " + hp + " " + hp_max);
             }
 
-            String[] towers_str = splited[1].split("\n");
-            for (String tower_str: towers_str) {
-                Tower tower = Tower.loadFromString(tower_str);
-                towers.add(tower);
-                // System.out.println(tower);
-                tower.showTower();
+            if (!splited[2].startsWith("COMPLETED")) {
+                String[] towers_str = splited[1].split("\n");
+                for (String tower_str : towers_str) {
+                    Tower tower = Tower.loadFromString(tower_str);
+                    towers.add(tower);
+                    // System.out.println(tower);
+                    tower.showTower();
+                }
+                game_waves = new GameWaves(splited[2]);
+                // game_waves.start();
             }
-            GameWaves _waves = new GameWaves(splited[2]);
-            game_waves = _waves;
-            // game_waves.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void configureFileChooser(FileChooser f) {
+        f.setTitle("Open saved game");
+        f.setInitialDirectory(new File("saved_game/"));
+        f.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Text file", "*.txt")
+        );
     }
 
     public static void pauseGame() {
@@ -399,7 +421,7 @@ public class GameField {
     }
 
     private static void createNewGame() {
-        // loadGame();
+        loadGame();
         if (game_waves == null) { // chưa được load
             game_waves = new GameWaves();
             game_waves.addEnemiesWave(15, "normal");
