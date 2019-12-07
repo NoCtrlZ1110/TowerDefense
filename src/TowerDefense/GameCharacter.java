@@ -9,7 +9,9 @@ GameCharacter
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import static TowerDefense.GameField.isPaused;
 import static TowerDefense.GameField.layout;
+import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public class GameCharacter extends GameEntity {
     protected double hp;
@@ -65,6 +67,13 @@ public class GameCharacter extends GameEntity {
         hp_bar.setY(this.hp_bar_y);
     }
 
+    public void setHpMax(double hp_max) {
+        if (Math.abs(this.hp - this.hp_max) < 1e-7)
+            this.hp = hp_max;
+
+        this.hp_max = hp_max;
+    }
+
     protected void setHp(double hp) {
         this.hp = hp;
     }
@@ -78,8 +87,8 @@ public class GameCharacter extends GameEntity {
     }
 
     private void initHpBar() {
-        layout.getChildren().add(hp_max_bar);
-        layout.getChildren().add(hp_bar);
+        // layout.getChildren().add(hp_max_bar);
+        // layout.getChildren().add(hp_bar);
 
         hp_max_bar.setWidth(this.hp_bar_width);
         hp_max_bar.setHeight(this.hp_bar_height);
@@ -93,6 +102,11 @@ public class GameCharacter extends GameEntity {
     public void displayHpBar() {
         if (this.is_destroyed)
             return;
+
+        if (!layout.getChildren().contains(hp_max_bar))
+            layout.getChildren().add(hp_max_bar);
+        if (!layout.getChildren().contains(hp_bar))
+            layout.getChildren().add(hp_bar);
 
         hp_max_bar.setVisible(true);
         hp_bar.setVisible(true);
@@ -114,6 +128,11 @@ public class GameCharacter extends GameEntity {
         // hp_max_bar.setVisible(false);
         layout.getChildren().remove(hp_max_bar);
         hp_max_bar = null;
+    }
+
+    public void show() {
+        displayHpBar();
+        super.show();
     }
 
     public void destroy() {

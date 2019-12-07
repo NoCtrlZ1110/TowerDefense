@@ -6,7 +6,6 @@ import javafx.scene.layout.Pane;
 
 import static TowerDefense.CONSTANT.COL_NUM;
 import static TowerDefense.CONSTANT.TILE_WIDTH;
-import static TowerDefense.GameField.pauseGame;
 import static TowerDefense.GameField.*;
 
 public class PauseScreen {
@@ -80,6 +79,7 @@ public class PauseScreen {
             System.out.println("-> Save");
             SaveScreen.showSaveMenu();
             // GameStage.welcomeScreen();
+            pauseBtn.setVisible(true);
         });
         resumeBtn.setOnMouseClicked(event -> {
             resumeGame();
@@ -91,7 +91,7 @@ public class PauseScreen {
             // hỏi save trước khi quit
             if (isStarted) {
                 SaveScreen.showSaveMenu();
-                if (SaveScreen.isCanceled())
+                if (SaveScreen.isYesNo())
                     GameStage.closePrimaryStage();
             }
         });

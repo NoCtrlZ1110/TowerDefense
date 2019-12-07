@@ -13,10 +13,10 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.Shop.*;
 
 public class GameWaves {
-    private static final int TIME_BETWEEN_2_WAVES = 2;
+    public static final int TIME_BETWEEN_2_WAVES = 2;
 
     private int complete_bonus;
-    private static int total_waves = 0;
+    private int total_waves;
     private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
@@ -26,20 +26,29 @@ public class GameWaves {
 
     public GameWaves() {
         complete_bonus = 100;
+        total_waves = 0;
+        running_wave_id = 0;
     }
 
     public GameWaves(String str_info) {
+        total_waves = 0;
+        running_wave_id = 0;
+
         if (str_info.startsWith("COMPLETED")) {
             // completed
         } else {
             String[] splited = str_info.split("\n?(WAVE \\d+):\n");
-            for (String str_wave : splited)
+            for (String str_wave: splited)
                 if (str_wave.length() > 0) {
-                    total_waves++;
-                    EnemiesWave new_wave = EnemiesWave.loadFromString(str_wave);
-                    if (str_wave.equals("COMPLETED")) {
+                    EnemiesWave new_wave = new EnemiesWave(
+                        total_waves == 0 ? PREPARE_TIME : TIME_BETWEEN_2_WAVES,
+                        str_wave
+                    );
+                    if (!str_wave.equals("COMPLETED")) {
+                        total_waves++;
+                    } else
                         running_wave_id++;
-                    }
+
                     waves.add(new_wave);
                     // System.out.println(new_wave);
                     // System.out.println("------------");
@@ -96,8 +105,17 @@ public class GameWaves {
         waves.add(wave);
     }
 
+    public int getTotalWaves() {
+        return total_waves;
+    }
+
     public ArrayList<Enemy> getRunningWaveEnemies() {
         return running_wave_enemies;
+    }
+
+    public void show() {
+        for (EnemiesWave wave: waves)
+            wave.show();
     }
 
     public void removeEnemy(Enemy enemy) {

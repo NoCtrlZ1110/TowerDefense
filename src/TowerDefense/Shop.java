@@ -14,8 +14,7 @@ import javafx.util.Duration;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
-import static TowerDefense.Sound.chooseSound;
-import static TowerDefense.Sound.shovelSound;
+import static TowerDefense.Sound.*;
 
 public class Shop {
     private static final double SELL_RATE = 0.8;
@@ -245,7 +244,7 @@ public class Shop {
                 tower.setPosition(new Point(x, y));
             }), new KeyFrame(Duration.millis(1800), event -> {
                 layout.getChildren().remove(building);
-                tower.showTower();
+                tower.show();
                 // tower.showRange();
                 GameField.addTower(tower);
             })

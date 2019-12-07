@@ -93,13 +93,8 @@ public class Tower extends GameEntity {
         layout.getChildren().remove(rangeCircle);
     }
 
-    public void showTower() {
-        if (is_destroyed) {
-            layout.getChildren().remove(this);
-            return;
-        }
-        if (!layout.getChildren().contains(this))
-            layout.getChildren().add(this);
+    public void show() {
+        super.show();
         if (isPaused)
             refreshPauseMenu();
     }

@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static TowerDefense.GameField.*;
+import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public abstract class Enemy extends GameCharacter {
     private double speed;

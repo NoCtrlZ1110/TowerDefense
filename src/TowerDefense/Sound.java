@@ -120,7 +120,10 @@ public class Sound {
             //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
             new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
                 if (!isMuted)
-                    gameScreenMusicTimeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)), new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0)));
+                    gameScreenMusicTimeline.getKeyFrames().addAll(
+                        new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
+                        new KeyFrame(Duration.seconds(PREPARE_TIME + 2), new KeyValue(prepareMusicPlayer.volumeProperty(), 0))
+                    );
             }),
             new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );

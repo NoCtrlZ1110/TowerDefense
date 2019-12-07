@@ -8,7 +8,7 @@ import static TowerDefense.GameField.layout;
 import static TowerDefense.PauseScreen.hidePauseMenu;
 
 public class SaveScreen {
-    private static boolean is_canceled = false;
+    private static boolean is_yesno_clicked = false;
     private static Pane savePane = new Pane();
     private static imageObject saveMenu = new imageObject("file:images/PauseMenu/frame.png");
     private static imageObject yesBtn = new imageObject("file:images/PauseMenu/resume.png");
@@ -41,25 +41,25 @@ public class SaveScreen {
             System.out.println("-> yes");
             if (isStarted)
                 GameField.saveGame();
-            is_canceled = false;
+            is_yesno_clicked = true;
             hideSaveMenu();
             hidePauseMenu();
         });
         noBtn.setOnMouseClicked(event -> {
             System.out.println("-> no");
-            is_canceled = false;
+            is_yesno_clicked = true;
             hideSaveMenu();
             hidePauseMenu();
         });
         cancelBtn.setOnMouseClicked(event -> {
             System.out.println("-> cancel");
-            is_canceled = true;
+            is_yesno_clicked = false;
             hideSaveMenu();
         });
     }
 
-    public static boolean isCanceled() {
-        return is_canceled;
+    public static boolean isYesNo() {
+        return is_yesno_clicked;
     }
 
     private static void hideSaveMenu() {

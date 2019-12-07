@@ -28,8 +28,9 @@ import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
 public class GameField {
-    private static int HPBAR_X = 1030;
-    private static int HPBAR_Y = 760;
+    // 500,45
+    private static int HPBAR_X = 500; // 1030;
+    private static int HPBAR_Y = 45; // 760;
 
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
@@ -37,18 +38,17 @@ public class GameField {
 
     private static int money = 20;
     private static double hp_max = 100;
-    private static GameCharacter user;
+    private static Player user = null;
     public static boolean isPaused = false;
     public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
+    public static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
     final static imageObject logo = new imageObject("file:images/transparent_logo.png");
     // final static imageObject road = new imageObject("file:images/road.png");
     static imageObject road;
-    // final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
-    // final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
     static int world_select = 0; // = 1;
@@ -68,8 +68,6 @@ public class GameField {
         importMap();
         importRoad();
 
-        Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
@@ -81,7 +79,6 @@ public class GameField {
         playGameScreenMusic();
 
         createNewGame();
-        showUserHpBar();
         // drawMap();
         //--------------------------------
 
@@ -110,7 +107,7 @@ public class GameField {
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> {
             isStarted = true;
-            game_waves.start();
+            showExistedItems();
         }));
         // gameTimeline.setCycleCount(1);
 
@@ -218,7 +215,6 @@ public class GameField {
         gameTimeline.play();
         // ------------------------
 
-
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setTitle("Tower Defense 2.0");
@@ -266,16 +262,6 @@ public class GameField {
         game_waves.removeEnemy(enemy);
     }
 
-    private static void showUserHpBar() {
-        // 500,45; origin: 1000,750
-        user = new GameCharacter(hp_max, 164, 13, HPBAR_X+30, HPBAR_Y+10);
-        user.displayHpBar();
-
-        if (!layout.getChildren().contains(HPBar))
-            layout.getChildren().add(HPBar);
-        HPBar.setLocation(HPBAR_X, HPBAR_Y);
-    }
-
     public static void decreaseUserHP(double amount) {
         user.decreaseHP(amount);
         user.displayHpBar();
@@ -316,7 +302,7 @@ public class GameField {
 
                 FileWriter fo = new FileWriter(String.format("saved_game/save_%d.txt", time_now));
                 fo.write(String.format("USER: money=%d,%s\n", money, user.toString()));
-                // fo.write("MAP: <map directory>\n");
+                fo.write(String.format("WORLD: %d\n", world_select));
                 fo.write("TOWERS:\n");
                 for (Tower t : towers)
                     fo.write(t.toString() + "\n");
@@ -330,17 +316,20 @@ public class GameField {
         }
     }
 
-    private static void loadGame() {
+    public static boolean loadGame() {
         try {
             System.out.println("loading...");
 
             FileChooser fileChooser = new FileChooser();
             configureFileChooser(fileChooser);
             Platform.setImplicitExit(false); // https://stackoverflow.com/a/21308629
-            File chosen_file = fileChooser.showOpenDialog(layout.getScene().getWindow());
+            File chosen_file = fileChooser.showOpenDialog(SelectRoad.getMasterWindow());
             Platform.setImplicitExit(true); // chống lag
             // File chosen_file = new File("saved_game/save.txt");
             // System.out.println(chosen_file);
+            if (chosen_file == null) // thoát select file mà không chọn
+                return false;
+
             Scanner fi = new Scanner(chosen_file);
             StringBuilder temp = new StringBuilder();
             while (fi.hasNextLine()) {
@@ -348,36 +337,40 @@ public class GameField {
                 temp.append(line);
             }
             String content = temp.toString();
-            String[] splited = content.split("\n?(TOWERS|GAME PROGRESS):\n");
+            String[] splited = content.split("\n?(WORLD|TOWERS|GAME PROGRESS):\\s");
             /*
-            splited[0]: USER: money=130,hp=100.000000
-            splited[1]: towers
-            splited[2]: waves
+            splited[0]: USER: money=130,hp=100.000000,hp_max=100.000000
+            splited[1]: world_select
+            splited[2]: towers
+            splited[3]: waves
             */
-            Matcher user_matcher = Pattern.compile("USER: money=(.+),hp=(.+),hp_max=(.+)").matcher(splited[0]);
-            if (user_matcher.find()) {
-                money = Integer.parseInt(user_matcher.group(1));
-                double hp = Double.parseDouble(user_matcher.group(2));
-                hp_max = Double.parseDouble(user_matcher.group(3));
-                showUserHpBar();
-                user.decreaseHP(hp_max - hp);
-                // System.out.println(money + " " + hp + " " + hp_max);
-            }
-
-            if (!splited[2].startsWith("COMPLETED")) {
-                String[] towers_str = splited[1].split("\n");
-                for (String tower_str : towers_str) {
+            if (!splited[3].startsWith("COMPLETED")) {
+                Matcher user_matcher = Pattern.compile("USER: money=(.+),hp=(.+),hp_max=(.+)").matcher(splited[0]);
+                if (user_matcher.find()) {
+                    money = Integer.parseInt(user_matcher.group(1));
+                    double hp = Double.parseDouble(user_matcher.group(2));
+                    hp_max = Double.parseDouble(user_matcher.group(3));
+                    user = new Player(hp, hp_max);
+                    // System.out.println(money + " " + hp + " " + hp_max);
+                }
+                Matcher world_matcher = Pattern.compile("WORLD: (\\d+)").matcher(splited[1]);
+                if (world_matcher.find()) {
+                    world_select = Integer.parseInt(user_matcher.group(1));
+                }
+                String[] towers_str = splited[2].split("\n");
+                for (String tower_str: towers_str) {
                     Tower tower = Tower.loadFromString(tower_str);
                     towers.add(tower);
                     // System.out.println(tower);
-                    tower.showTower();
+                    // tower.show();
                 }
-                game_waves = new GameWaves(splited[2]);
+                game_waves = new GameWaves(splited[3]);
                 // game_waves.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return (game_waves != null);
     }
 
     private static void configureFileChooser(FileChooser f) {
@@ -386,6 +379,15 @@ public class GameField {
         f.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("Text file", "*.txt")
         );
+    }
+
+    private static void showExistedItems() {
+        user.show();
+
+        for (Tower tower: towers)
+            tower.show();
+
+        game_waves.show();
     }
 
     public static void pauseGame() {
@@ -422,12 +424,15 @@ public class GameField {
     }
 
     private static void createNewGame() {
-        loadGame();
         if (game_waves == null) { // chưa được load
+            user = new Player(hp_max, hp_max);
+
             game_waves = new GameWaves();
             game_waves.addEnemiesWave(15, "normal");
             game_waves.addEnemiesWave(15, "smaller");
             game_waves.addEnemiesWave(15, "normal", "smaller");
         }
+        user.show();
+        game_waves.start();
     }
 }

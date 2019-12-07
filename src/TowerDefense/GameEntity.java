@@ -1,6 +1,7 @@
 package TowerDefense;
 
 import static TowerDefense.GameField.layout;
+
 import javafx.scene.image.ImageView;
 
 public abstract class GameEntity extends ImageView {
@@ -47,6 +48,17 @@ public abstract class GameEntity extends ImageView {
 
     public double GetY() {
         return this.getTranslateY();
+    }
+
+    public void show() {
+        if (is_destroyed) {
+            layout.getChildren().remove(this);
+            return;
+        }
+        if (!layout.getChildren().contains(this))
+            layout.getChildren().add(this);
+
+        // if (isPaused) refreshPauseMenu();
     }
 
     public void destroy() {

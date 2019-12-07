@@ -17,11 +17,30 @@ public class EnemiesWave {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private int countWaveTotalEnemies = 0;
     private Timeline waveTimeline = new Timeline();
-    private boolean is_pre_delaying = true;
 
     private EnemiesWave(int pre_sec_delay, int total_enemies) {
         total_ms_before = pre_sec_delay * 1000;
         countWaveTotalEnemies = total_enemies;
+    }
+
+    public EnemiesWave(int pre_sec_delay, String str) {
+        total_ms_before = pre_sec_delay * 1000;
+        countWaveTotalEnemies = 0;
+        if (!str.equals("COMPLETED")) {
+            String[] lines = str.split("\n");
+            countWaveTotalEnemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
+
+            for (int i = 2; i < lines.length; i++) {
+                String str_enemy = lines[i];
+                if (str_enemy.length() > 0) {
+                    Enemy enemy = Enemy.loadFromString(str_enemy);
+                    // System.out.println(str_enemy);
+                    // System.out.println("-> " + enemy);
+                    addEnemy(enemy);
+                }
+            }
+            addTimelineEvents();
+        }
     }
 
     public EnemiesWave(int pre_sec_delay, int total_enemies, String... enemy_type) {
@@ -61,18 +80,11 @@ public class EnemiesWave {
     }
 
     private void addTimelineEvents() {
-        waveTimeline.getKeyFrames().add(new KeyFrame(
-            Duration.millis(total_ms_before),
-            event -> is_pre_delaying = true
-        ));
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
             KeyFrame moveEnemy = new KeyFrame(
                 Duration.millis(total_ms_before + i * 800),
-                event -> {
-                    is_pre_delaying = false;
-                    e.move(path);
-                }
+                event -> e.move(path)
             );
             waveTimeline.getKeyFrames().add(moveEnemy);
         }
@@ -86,9 +98,14 @@ public class EnemiesWave {
         return enemies;
     }
 
+    public void show() {
+        for (Enemy enemy: enemies)
+            enemy.show();
+    }
+
     private void addEnemy(Enemy enemy) {
         enemies.add(enemy);
-        layout.getChildren().add(enemy);
+        // layout.getChildren().add(enemy);
     }
 
     public void removeEnemy(Enemy enemy) {
@@ -123,12 +140,7 @@ public class EnemiesWave {
     public String toString() {
         StringBuilder res = new StringBuilder();
         if (!isFinished()) {
-            res.append(String.format("TOTAL ENMIES: %d\n", countWaveTotalEnemies));
-            res.append(String.format(
-                "PRE-LOAD TIMES (S): %d\n",
-                (is_pre_delaying ? total_ms_before / 1000 : 0)
-            ));
-
+            res.append(String.format("TOTAL ENEMIES: %d\n", countWaveTotalEnemies));
             for (Enemy e: enemies)
                 res.append(e.toString()).append("\n");
         } else
