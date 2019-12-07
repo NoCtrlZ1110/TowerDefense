@@ -42,14 +42,14 @@ public class GameField {
     final static imageObject HPBar = new imageObject("file:images/HPBar.png");
     static imageObject road;
     static Timeline gameTimeline, shootTimeLine;
-    static int map_select = 1; // = 0;
+    static int world_select = 0; // = 1;
     // CHỌN MAP BẰNG CÁCH THAY ĐỔI BIẾN "map_select"
 
     public static void gameScreen(Stage stage) {
 
         pauseWelcomeMusic();
         stage.close();
-        if (map_select == 1) {
+        if (world_select == 1) {
             road = new imageObject("file:images/road.png");
             roadLocation = new int[ROAD_NUM][2];
         } else {
@@ -80,12 +80,12 @@ public class GameField {
         //--------------------------------
 
         // [Tạo đường đi cho lính] -------
-        if (map_select == 1)
+        if (world_select == 1)
             path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
         else
             path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
         int roadnum;
-        if (map_select == 1) roadnum = ROAD_NUM;
+        if (world_select == 1) roadnum = ROAD_NUM;
         else roadnum = ROAD_NUM2;
 
         for (int i = 0; i < roadnum; i++)
@@ -243,6 +243,7 @@ public class GameField {
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
+        stage.setTitle("Tower Defense 2.0");
         stage.setScene(gameScene);
         stage.centerOnScreen();
         stage.show();
