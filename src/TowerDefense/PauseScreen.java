@@ -76,7 +76,6 @@ public class PauseScreen {
         quitBtn.setOnMouseEntered(event -> quitBtn.setCursor(Cursor.HAND));
         quitBtn.setOnMouseExited(event -> quitBtn.setCursor(Cursor.DEFAULT));
 
-        //TODO
         backBtn.setOnMouseClicked(event -> {
             System.out.println("-> Save");
             SaveScreen.showSaveMenu();
