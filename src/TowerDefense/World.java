@@ -1,4 +1,3 @@
-/*
 package TowerDefense;
 
 import javafx.scene.input.MouseEvent;
@@ -122,4 +121,3 @@ public class World {
             }
     }
 }
-*/
