@@ -51,7 +51,7 @@ public class GameField {
     static imageObject road;
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
-    static int world_select = 0; // = 1;
+    static int world_select = 1; // = 1;
     // CHỌN WORLD BẰNG CÁCH THAY ĐỔI BIẾN "world_select"
 
     public static void gameScreen(Stage stage) {
@@ -113,7 +113,8 @@ public class GameField {
 
         // [Shoot timeline]
         shootTimeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
-            towers.forEach(Tower::shoot);
+            if (isStarted)
+                towers.forEach(Tower::shoot);
         }));
         shootTimeline.setCycleCount(Animation.INDEFINITE);
         shootTimeline.play();
@@ -355,6 +356,7 @@ public class GameField {
                 }
                 Matcher world_matcher = Pattern.compile("WORLD: (\\d+)").matcher(splited[1]);
                 if (world_matcher.find()) {
+                    // TODO: xử lí xong xuôi world select (lập world + ...)
                     world_select = Integer.parseInt(user_matcher.group(1));
                 }
                 String[] towers_str = splited[2].split("\n");

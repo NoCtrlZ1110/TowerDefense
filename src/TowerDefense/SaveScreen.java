@@ -6,9 +6,9 @@ import javafx.scene.layout.Pane;
 import static TowerDefense.GameField.isStarted;
 import static TowerDefense.GameField.layout;
 import static TowerDefense.PauseScreen.hidePauseMenu;
+import static TowerDefense.PauseScreen.is_quit;
 
 public class SaveScreen {
-    private static boolean is_yesno_clicked = false;
     private static Pane savePane = new Pane();
     private static imageObject saveMenu = new imageObject("file:images/PauseMenu/frame.png");
     private static imageObject yesBtn = new imageObject("file:images/PauseMenu/resume.png");
@@ -41,25 +41,25 @@ public class SaveScreen {
             System.out.println("-> yes");
             if (isStarted)
                 GameField.saveGame();
-            is_yesno_clicked = true;
+
             hideSaveMenu();
-            hidePauseMenu();
+            if (is_quit)
+                GameStage.closePrimaryStage();
+            else
+                hidePauseMenu();
         });
         noBtn.setOnMouseClicked(event -> {
             System.out.println("-> no");
-            is_yesno_clicked = true;
             hideSaveMenu();
-            hidePauseMenu();
+            if (is_quit)
+                GameStage.closePrimaryStage();
+            else
+                hidePauseMenu();
         });
         cancelBtn.setOnMouseClicked(event -> {
             System.out.println("-> cancel");
-            is_yesno_clicked = false;
             hideSaveMenu();
         });
-    }
-
-    public static boolean isYesNo() {
-        return is_yesno_clicked;
     }
 
     private static void hideSaveMenu() {

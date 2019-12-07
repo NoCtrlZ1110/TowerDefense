@@ -9,6 +9,8 @@ import static TowerDefense.CONSTANT.TILE_WIDTH;
 import static TowerDefense.GameField.*;
 
 public class PauseScreen {
+    static boolean is_quit = false;
+
     static imageObject playBtn = new imageObject("file:images/play.png");
     static imageObject pauseBtn = new imageObject("file:images/pause.png");
 
@@ -76,24 +78,26 @@ public class PauseScreen {
         quitBtn.setOnMouseExited(event -> quitBtn.setCursor(Cursor.DEFAULT));
 
         backBtn.setOnMouseClicked(event -> {
+            is_quit = false;
             System.out.println("-> Save");
             SaveScreen.showSaveMenu();
             // GameStage.welcomeScreen();
             pauseBtn.setVisible(true);
         });
         resumeBtn.setOnMouseClicked(event -> {
+            is_quit = false;
             resumeGame();
             hidePauseMenu();
             pauseBtn.setVisible(true);
         });
         quitBtn.setOnMouseClicked(event -> {
             System.out.println("-> Quit");
+            is_quit = true;
             // hỏi save trước khi quit
             if (isStarted) {
                 SaveScreen.showSaveMenu();
-                if (SaveScreen.isYesNo())
-                    GameStage.closePrimaryStage();
-            }
+            } else
+                GameStage.closePrimaryStage();
         });
     }
 

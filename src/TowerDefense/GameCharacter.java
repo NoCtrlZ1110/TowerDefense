@@ -87,9 +87,6 @@ public class GameCharacter extends GameEntity {
     }
 
     private void initHpBar() {
-        // layout.getChildren().add(hp_max_bar);
-        // layout.getChildren().add(hp_bar);
-
         hp_max_bar.setWidth(this.hp_bar_width);
         hp_max_bar.setHeight(this.hp_bar_height);
         hp_max_bar.setFill(Color.ALICEBLUE);
