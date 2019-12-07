@@ -14,7 +14,8 @@ import javafx.util.Duration;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
-import static TowerDefense.Sound.*;
+import static TowerDefense.Sound.chooseSound;
+import static TowerDefense.Sound.shovelSound;
 
 public class Shop {
     private static final double SELL_RATE = 0.8;
@@ -77,7 +78,7 @@ public class Shop {
         towerType1.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType1.setOnMouseClicked(event -> {
             if (isPaused) return;
-            plantSound();
+            chooseSound();
             cancelSelling();
             buying = true;
             currentItem = 1;
@@ -95,7 +96,7 @@ public class Shop {
         towerType2.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType2.setOnMouseClicked(event -> {
             if (isPaused) return;
-            plantSound();
+            chooseSound();
             cancelSelling();
             buying = true;
             currentItem = 2;
@@ -113,7 +114,7 @@ public class Shop {
         towerType3.setOnMouseExited(event -> shopPane.setCursor(Cursor.DEFAULT));
         towerType3.setOnMouseClicked(event -> {
             if (isPaused) return;
-            plantSound();
+            chooseSound();
             cancelSelling();
             buying = true;
             currentItem = 3;

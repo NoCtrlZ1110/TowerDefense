@@ -12,9 +12,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
-import static TowerDefense.GameTile.importMap;
-import static TowerDefense.GameTile.importRoad;
-import static TowerDefense.GameField.*;
+
+import static TowerDefense.SelectRoad.selectScreen;
 import static TowerDefense.Sound.*;
 
 public class GameStage extends Application {
@@ -96,16 +95,17 @@ public class GameStage extends Application {
 
                 startBtn.setOnMouseClicked(event1 -> {
                     clickSound();
-                    gameScreen(stage);
+//                    gameScreen(stage);
+                    selectScreen(stage);
                 });
             })
         );
 
-        stage.setTitle("Tower Defense 1.6");
+        stage.setTitle("Tower Defense 2.0");
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));
-        stage.setResizable(true);
-        stage.centerOnScreen();
+        // stage.setResizable(true);
+        // stage.centerOnScreen();
         stage.show();
 
         timeline.play();

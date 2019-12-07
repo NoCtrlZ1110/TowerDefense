@@ -47,11 +47,11 @@ public class GameField {
     final static imageObject logo = new imageObject("file:images/transparent_logo.png");
     // final static imageObject road = new imageObject("file:images/road.png");
     static imageObject road;
-    final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
+    // final static imageObject HPBar = new imageObject("file:images/HPBar2.png");
     // final static imageObject HPBar = new imageObject("file:images/HPBar.png");
-    private static Timeline gameTimeline = new Timeline();
+    private static Timeline gameTimeline;
     private static Timeline shootTimeline;
-    static int world_select = 1; // = 0;
+    static int world_select = 0; // = 1;
     // CHỌN WORLD BẰNG CÁCH THAY ĐỔI BIẾN "world_select"
 
     public static void gameScreen(Stage stage) {
@@ -221,6 +221,7 @@ public class GameField {
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
+        stage.setTitle("Tower Defense 2.0");
         stage.setScene(gameScene);
         stage.centerOnScreen();
         stage.show();

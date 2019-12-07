@@ -65,7 +65,7 @@ public class Sound {
         winMusicPlayer.setVolume(1);
     }
 
-    public static void plantSound()
+    public static void chooseSound()
     {
         playSound(ClickSound);
     }
@@ -167,15 +167,15 @@ public class Sound {
     static imageObject muteBtn = new imageObject("file:images/mute.png");
     static imageObject speakerBtn = new imageObject("file:images/speaker.png");
 
-    static void showMuteBtn(Pane layout) {
-        muteBtn.setLocation((int) layout.getWidth() - 70, 30);
-        speakerBtn.setLocation((int) layout.getWidth() - 70, 30);
+    static void showMuteBtn(Pane pane) {
+        muteBtn.setLocation((int) pane.getWidth() - 70, 30);
+        speakerBtn.setLocation((int) pane.getWidth() - 70, 30);
 
         muteBtn.scaleTo(40, 40);
         speakerBtn.scaleTo(40, 40);
 
-        if (!layout.getChildren().contains(muteBtn)) layout.getChildren().add(muteBtn);
-        if (!layout.getChildren().contains(speakerBtn)) layout.getChildren().add(speakerBtn);
+        if (!pane.getChildren().contains(muteBtn)) pane.getChildren().add(muteBtn);
+        if (!pane.getChildren().contains(speakerBtn)) pane.getChildren().add(speakerBtn);
 
         if (isMuted) {
             mute();
@@ -194,12 +194,12 @@ public class Sound {
         muteBtn.setOnMouseClicked(event -> {
             isMuted = false;
             unMute();
-            showMuteBtn(layout);
+            showMuteBtn(pane);
         });
         speakerBtn.setOnMouseClicked(event -> {
             isMuted = true;
             mute();
-            showMuteBtn(layout);
+            showMuteBtn(pane);
         });
     }
 }
