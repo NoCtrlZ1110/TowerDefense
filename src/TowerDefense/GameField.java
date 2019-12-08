@@ -399,11 +399,12 @@ public class GameField {
             user = new Player(hp_max, hp_max);
 
             game_waves = new GameWaves();
-            // game_waves.addEnemiesWave(15, "normal");
-            // game_waves.addEnemiesWave(15, "smaller");
-            // game_waves.addEnemiesWave(15, "normal", "smaller");
-            // game_waves.addEnemiesWave(15, "normal", "tanker");
-            game_waves.addEnemiesWave(15, "tanker", "boss");
+            game_waves.addEnemiesWave(15, "normal");
+            game_waves.addEnemiesWave(15, "smaller");
+            game_waves.addEnemiesWave(15, "normal", "smaller");
+            game_waves.addEnemiesWave(15, "normal", "tanker");
+            game_waves.addEnemiesWave(10, "tanker");
+            game_waves.addEnemiesWave(1, "boss");
         }
         user.show();
         game_waves.start();
