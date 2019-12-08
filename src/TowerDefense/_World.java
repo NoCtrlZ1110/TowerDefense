@@ -1,81 +1,79 @@
 package TowerDefense;
 
-import javafx.scene.input.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-import static TowerDefense.GameField.*;
 import static TowerDefense.CONSTANT.*;
+import static TowerDefense.GameField.*;
+import static TowerDefense.GameTile.getData;
+import static TowerDefense.GameTile.getTileType;
 
-public class GameTile {
-    private static Map map = new Map(ROW_NUM, COL_NUM);
-    private static int[][] tileType = new int[ROW_NUM][COL_NUM];
+public class _World {
+    private static final String[] PATH_ROAD = {"file:images/road2.png", "file:images/road.png"};
+    private static final int[] _ROAD_NUM = {ROAD_NUM2, ROAD_NUM};
+    private static final String[] PATH_MAP = {pathMap2, pathMap};
+    private static final String[] PATH_TRANSITION = {pathTransition2, pathTransition};
+
+    private int world_select;
+    private imageObject road;
+    private int roadnum;
+
+    private Map map = new Map(ROW_NUM, COL_NUM);
+    private int[][] tileType = new int[ROW_NUM][COL_NUM];
     // Mảng tileType lưu loại tile để load ảnh phù hợp tạo nên 1 bản đồ
+    private int[][] roadLocation;
+    private final static Path path = new Path();
 
-    static int[][] roadLocation;
+    public _World(int world_select) {
+        this.world_select = world_select;
+        roadnum = _ROAD_NUM[world_select];
 
-    // Mảng lưu trữ các vị trí cụ thể của đường đi (path)
+        road = new imageObject(PATH_ROAD[world_select]);
+        roadLocation = new int[roadnum][2];
 
-    public GameTile() {
+        importMap();
+        importRoad();
+        generatePath();
     }
 
-    public static void importMap() {
-        if (world_select == 1)
-            getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap);
-        else
-            getData(map.getCoreTable(), ROW_NUM, COL_NUM, pathMap2);
+    private void importMap() {
+        getData(map.getCoreTable(), ROW_NUM, COL_NUM, PATH_MAP[world_select]);
         map.backup();
         getData(tileType, ROW_NUM, COL_NUM, pathTileType);
     }
 
-    public static void importRoad() {
+    private void importRoad() {
+        getData(roadLocation, roadnum, 2, PATH_TRANSITION[world_select]);
+    }
+
+    private void generatePath() {
         if (world_select == 1)
-            getData(roadLocation, ROAD_NUM, 2, pathTransition);
+            path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
         else
-            getData(roadLocation, ROAD_NUM2, 2, pathTransition2);
+            path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
+
+        for (int i = 0; i < roadnum; i++)
+            path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
     }
 
-    public static Point getEndPointOfRoad() {
-        if (world_select == 1)
-            return new Point(roadLocation[ROAD_NUM-1][0], roadLocation[ROAD_NUM-1][1]);
-        else
-            return new Point(roadLocation[ROAD_NUM2-1][0], roadLocation[ROAD_NUM2-1][1]);
+    public Point getEndPointOfRoad() {
+        return new Point(roadLocation[roadnum-1][0], roadLocation[roadnum-1][1]);
     }
 
-    public static String getTileType(int x, int y) {
-        return Integer.toString(tileType[x][y]);
-    }
-
-    public static String getMapType(int x, int y) {
+    public String getMapType(int x, int y) {
         return map.getType(x, y);
     }
 
-    public static void setMapType(int x, int y, int n) {
+    public void setMapType(int x, int y, int n) {
         map.setType(x, y, n);
-    }
-
-    public static void getData(int[][] arr, int height, int width, String fileDir) {
-        try {
-            FileInputStream MapIn = new FileInputStream(fileDir);
-            Scanner sc = new Scanner(MapIn);
-            for (int i = 0; i < height; i++) {
-                String temp = sc.nextLine(); // doc dong mang trong file
-                //System.out.println(temp);
-                String[] items = temp.split(" "); // tach chuoi thanh cac phan tu chuoi
-                for (int j = 0; j < width; j++)
-                    arr[i][j] = Integer.parseInt(items[j]);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     // Kiểm tra xem vị trí được truyền vào có xây được tháp không (1 tháp chiếm 2x2)
     // Nếu có trả về vị trí để xây tháp
 
-    public static Point TowerBuildLocation(MouseEvent event) {
+    public Point TowerBuildLocation(MouseEvent event) {
         int point_x = (int) event.getSceneX() / TILE_WIDTH;
         int point_y = (int) event.getSceneY() / TILE_WIDTH;
         String s = map.getType(point_x, point_y);
@@ -99,21 +97,16 @@ public class GameTile {
         }
     }
 
-    public static boolean isTowerPlaced(Point point) {
+    public boolean isTowerPlaced(Point point) {
         return map.isTowerPlacedAt(point.getX(), point.getY());
     }
 
-    public static boolean isRoadPlaced(Point point) {
+    public boolean isRoadPlaced(Point point) {
         return map.isRoadPlacedAt(point.getX(), point.getY());
     }
 
-    public static void resetMap(int x, int y) {
+    public void resetMap(int x, int y) {
         map.reset(x, y);
-    }
-
-    public static Point getLocationFromMouseEvent(MouseEvent event) {
-        return new Point((int)(event.getSceneX() / TILE_WIDTH),
-                (int)(event.getSceneY() / TILE_WIDTH));
     }
 
     public static void drawMap() {

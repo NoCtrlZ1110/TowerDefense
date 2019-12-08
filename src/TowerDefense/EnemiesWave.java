@@ -14,21 +14,43 @@ import static TowerDefense.GameField.path;
 
 public class EnemiesWave {
     private int total_ms_before;
-    private ArrayList<Enemy> enemies;
-    private int countWaveTotalEnemies;
-    private int countWaveCreatedEnemies;
+    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private int countWaveTotalEnemies = 0;
     private Timeline waveTimeline = new Timeline();
+
+    private EnemiesWave(int pre_sec_delay, int total_enemies) {
+        total_ms_before = pre_sec_delay * 1000;
+        countWaveTotalEnemies = total_enemies;
+    }
+
+    public EnemiesWave(int pre_sec_delay, String str) {
+        total_ms_before = pre_sec_delay * 1000;
+        countWaveTotalEnemies = 0;
+        if (!str.equals("COMPLETED")) {
+            String[] lines = str.split("\n");
+            countWaveTotalEnemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
+
+            for (int i = 2; i < lines.length; i++) {
+                String str_enemy = lines[i];
+                if (str_enemy.length() > 0) {
+                    Enemy enemy = Enemy.loadFromString(str_enemy);
+                    // System.out.println(str_enemy);
+                    // System.out.println("-> " + enemy);
+                    addEnemy(enemy);
+                }
+            }
+            addTimelineEvents();
+        }
+    }
 
     public EnemiesWave(int pre_sec_delay, int total_enemies, String... enemy_type) {
         total_ms_before = pre_sec_delay * 1000;
         countWaveTotalEnemies = total_enemies;
         generateEnemies(enemy_type);
+        addTimelineEvents();
     }
 
     private void generateEnemies(String... enemy_type) {
-        countWaveCreatedEnemies = 0;
-        enemies = new ArrayList<>();
-
         Random randomizer = new Random();
         boolean has_boss_type = false;
         for (String t: enemy_type)
@@ -45,19 +67,16 @@ public class EnemiesWave {
                 boolean is_boss_type = enemy_type[idx].equals("boss");
                 // if ((i == total_enemies && is_boss_type) || (i < total_enemies && !is_boss_type)) {
                 if (!has_boss_type || (i == countWaveTotalEnemies) == is_boss_type) {
-                    minion = Enemy.generateEnemyByType(enemy_type[idx], -TILE_WIDTH, 720);
+                    minion = Enemy.generateByType(enemy_type[idx], -TILE_WIDTH, 720);
                     break;
                 }
             }
             // minion.scaleTo(70, 70);
             // minion.setSpeed(1.2);
-            enemies.add(minion);
-            layout.getChildren().add(minion);
+            addEnemy(minion);
 
-            countWaveCreatedEnemies++;
         }
         // System.out.println(total_enemies + " " + total_waves + " " + enemies);
-        addTimelineEvents();
     }
 
     private void addTimelineEvents() {
@@ -79,12 +98,22 @@ public class EnemiesWave {
         return enemies;
     }
 
+    public void show() {
+        for (Enemy enemy: enemies)
+            enemy.show();
+    }
+
+    private void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+        // layout.getChildren().add(enemy);
+    }
+
     public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
     }
 
     public double getWaveRate() {
-        return countWaveCreatedEnemies / (countWaveTotalEnemies * 1.0);
+        return (countWaveTotalEnemies - enemies.size()) / (countWaveTotalEnemies * 1.0);
     }
 
     public void start() {
@@ -105,15 +134,39 @@ public class EnemiesWave {
 
     public void stop() {
         waveTimeline.stop();
+        enemies.forEach(Enemy::stopMoving);
     }
 
     public String toString() {
         StringBuilder res = new StringBuilder();
         if (!isFinished()) {
+            res.append(String.format("TOTAL ENEMIES: %d\n", countWaveTotalEnemies));
             for (Enemy e: enemies)
                 res.append(e.toString()).append("\n");
         } else
             res = new StringBuilder("COMPLETED\n");
         return res.toString();
+    }
+
+    public static EnemiesWave loadFromString(String str) {
+        EnemiesWave res = new EnemiesWave(0, 0);
+        if (!str.equals("COMPLETED")) {
+            String[] lines = str.split("\n");
+            int total_enemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
+            int pre_sec_delay = Integer.parseInt(lines[1].substring(lines[1].indexOf(": ") + 2));
+            res = new EnemiesWave(pre_sec_delay, total_enemies);
+
+            for (int i = 2; i < lines.length; i++) {
+                String str_enemy = lines[i];
+                if (str_enemy.length() > 0) {
+                    Enemy enemy = Enemy.loadFromString(str_enemy);
+                    // System.out.println(str_enemy);
+                    // System.out.println("-> " + enemy);
+                    res.addEnemy(enemy);
+                }
+            }
+            res.addTimelineEvents();
+        }
+        return res;
     }
 }

@@ -2,7 +2,9 @@ package TowerDefense;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
@@ -91,14 +93,10 @@ public class Tower extends GameEntity {
         layout.getChildren().remove(rangeCircle);
     }
 
-    public void showTower() {
-        if (is_destroyed) {
-            layout.getChildren().remove(this);
-            return;
-        }
-        if (!layout.getChildren().contains(this))
-            layout.getChildren().add(this);
-        if (isPaused) refreshPauseMenu();
+    public void show() {
+        super.show();
+        if (isPaused)
+            refreshPauseMenu();
     }
 
     public void destroy() {
@@ -106,6 +104,11 @@ public class Tower extends GameEntity {
         resetMap(this.position.getX() / TILE_WIDTH, this.position.getY() / TILE_WIDTH);
         removeRange();
         super.destroy();
+    }
+
+    public void upgrade() {
+        // decreaseMoney(...);
+        System.out.println("waiting for updating...");
     }
 
     public Enemy findTarget() {
@@ -149,8 +152,43 @@ public class Tower extends GameEntity {
 
     public String toString() {
         return String.format(
-                "Tower[x=%d,y=%d,price=%d,range=%d,shootingSpeed=%f,shootingDamage=%f",
-                position.getX(), position.getY(), price, range, shootingSpeed, shootingDamage
+            "Tower[x=%d,y=%d,price=%d,range=%d,shootingSpeed=%f,shootingDamage=%f",
+            position.getX(), position.getY(), price, range, shootingSpeed, shootingDamage
         );
+    }
+
+    public static Tower generateByType(String tower_type, int x, int y) {
+        Tower res = null;
+        switch (tower_type.toLowerCase()) {
+            case "normal":
+                res = new NormalTower();
+                res.setPosition(new Point(x, y));
+                break;
+            case "sniper":
+                res = new SniperTower();
+                res.setPosition(new Point(x, y));
+                break;
+            case "machinegun":
+                res = new MachineGunTower();
+                res.setPosition(new Point(x, y));
+                break;
+            default:
+                break;
+        }
+        return res;
+    }
+
+    public static Tower loadFromString(String str) {
+        // ...Tower[x=-80,y=720]
+        Tower res = null;
+        Matcher toStr_matcher = Pattern.compile("(\\w+)Tower\\[x=(.+),y=(.+)]").matcher(str);
+        if (toStr_matcher.find()) {
+            String tower_type = toStr_matcher.group(1);
+            int x = Integer.parseInt(toStr_matcher.group(2));
+            int y = Integer.parseInt(toStr_matcher.group(3));
+            // System.out.println(tower_type + " " + x + " " + y);
+            res = Tower.generateByType(tower_type, x, y);
+        }
+        return res;
     }
 }

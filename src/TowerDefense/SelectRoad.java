@@ -6,22 +6,22 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 
 import static TowerDefense.GameField.*;
 import static TowerDefense.Sound.*;
 
 public class SelectRoad {
-
     public static Pane selectWorldLayout;
 
     public static void selectScreen(Stage stage) {
         stage.close();
-        stage.setTitle("Choose World Map");
+        stage.setTitle("Choose _World Map");
         stage.centerOnScreen();
 
         selectWorldLayout = new Pane();
-        Scene selectScence = new Scene(selectWorldLayout, 800, 540);
+        Scene selectScene = new Scene(selectWorldLayout, 800, 540);
 
         Rectangle selectedWorld = new Rectangle(330, 200);
 
@@ -31,7 +31,6 @@ public class SelectRoad {
         selectedWorld.setStrokeWidth(3);
         selectedWorld.setArcHeight(10);
         selectedWorld.setArcWidth(10);
-
 
         imageObject world = new imageObject("file:images/SelectScreen/SelectScreen.png");
         imageObject selectBtn = new imageObject("file:images/SelectScreen/SelectBtn.png");
@@ -47,24 +46,23 @@ public class SelectRoad {
         loadgameBtn.setOnMouseEntered(event -> loadgameBtn.setCursor(Cursor.HAND));
         loadgameBtn.setOnMouseExited(event -> loadgameBtn.setCursor(Cursor.DEFAULT));
         loadgameBtn.setOnMouseClicked(event -> {
-
-            //TODO - Load Game Here!
             System.out.println("-> Load Game");
+            boolean load_ok = GameField.loadGame();
+            // System.out.println(load_ok);
+            if (load_ok) {
+                gameScreen(stage);
+            }
             chooseSound();
-
         });
-
 
         world1.setOnMouseEntered(event -> world1.setCursor(Cursor.HAND));
         world1.setOnMouseExited(event -> world1.setCursor(Cursor.DEFAULT));
         world1.setOnMouseClicked(event -> {
-
             chooseSound();
             selectedWorld.setVisible(true);
             selectedWorld.setLayoutX(42);
             selectedWorld.setLayoutY(195);
             world_select = 1;
-
         });
 
         world2.setOnMouseEntered(event -> world2.setCursor(Cursor.HAND));
@@ -77,7 +75,6 @@ public class SelectRoad {
             world_select = 2;
         });
 
-
         selectBtn.setOnMouseEntered(event -> selectBtn.setCursor(Cursor.HAND));
         selectBtn.setOnMouseExited(event -> selectBtn.setCursor(Cursor.DEFAULT));
         selectBtn.setOnMouseClicked(event -> {
@@ -87,10 +84,11 @@ public class SelectRoad {
             }
         });
 
-
-
-        stage.setScene(selectScence);
-
+        stage.setScene(selectScene);
         stage.show();
+    }
+
+    public static Window getMasterWindow() {
+        return selectWorldLayout.getScene().getWindow();
     }
 }

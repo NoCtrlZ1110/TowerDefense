@@ -10,7 +10,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameField.*;
 
 public class Bullet extends GameEntity {
-    private static final double MAX_TIME = 60;
+    private static final double MAX_TIME = 50;
 
     protected double speed;
     protected double damage;

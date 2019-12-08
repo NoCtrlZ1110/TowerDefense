@@ -9,7 +9,9 @@ GameCharacter
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import static TowerDefense.GameField.isPaused;
 import static TowerDefense.GameField.layout;
+import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public class GameCharacter extends GameEntity {
     protected double hp;
@@ -45,6 +47,15 @@ public class GameCharacter extends GameEntity {
         initHpBar();
     }
 
+    protected GameCharacter(String imageUrl, double hp, double hp_max, double hp_bar_width, double hp_bar_height) {
+        super(imageUrl);
+        this.hp = Math.min(hp, hp_max);
+        this.hp_max = hp_max;
+        this.hp_bar_width = hp_bar_width;
+        this.hp_bar_height = hp_bar_height;
+        initHpBar();
+    }
+
     protected void setHpBarXY(double hp_bar_x, double hp_bar_y) {
         this.hp_bar_x = hp_bar_x;
         this.hp_bar_y = hp_bar_y;
@@ -56,6 +67,17 @@ public class GameCharacter extends GameEntity {
         hp_bar.setY(this.hp_bar_y);
     }
 
+    public void setHpMax(double hp_max) {
+        if (Math.abs(this.hp - this.hp_max) < 1e-7)
+            this.hp = hp_max;
+
+        this.hp_max = hp_max;
+    }
+
+    protected void setHp(double hp) {
+        this.hp = hp;
+    }
+
     public boolean isDead() {
         return (hp <= 0);
     }
@@ -65,9 +87,6 @@ public class GameCharacter extends GameEntity {
     }
 
     private void initHpBar() {
-        layout.getChildren().add(hp_max_bar);
-        layout.getChildren().add(hp_bar);
-
         hp_max_bar.setWidth(this.hp_bar_width);
         hp_max_bar.setHeight(this.hp_bar_height);
         hp_max_bar.setFill(Color.ALICEBLUE);
@@ -80,6 +99,11 @@ public class GameCharacter extends GameEntity {
     public void displayHpBar() {
         if (this.is_destroyed)
             return;
+
+        if (!layout.getChildren().contains(hp_max_bar))
+            layout.getChildren().add(hp_max_bar);
+        if (!layout.getChildren().contains(hp_bar))
+            layout.getChildren().add(hp_bar);
 
         hp_max_bar.setVisible(true);
         hp_bar.setVisible(true);
@@ -103,8 +127,17 @@ public class GameCharacter extends GameEntity {
         hp_max_bar = null;
     }
 
+    public void show() {
+        displayHpBar();
+        super.show();
+    }
+
     public void destroy() {
         deleteHpBar();
         super.destroy();
+    }
+
+    public String toString() {
+        return String.format("hp=%f,hp_max=%f", hp, hp_max);
     }
 }

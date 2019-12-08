@@ -1,15 +1,15 @@
 package TowerDefense;
 
-import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
 
 import static TowerDefense.CONSTANT.COL_NUM;
 import static TowerDefense.CONSTANT.TILE_WIDTH;
-import static TowerDefense.GameField.pauseGame;
 import static TowerDefense.GameField.*;
 
 public class PauseScreen {
+    static boolean is_quit = false;
+
     static imageObject playBtn = new imageObject("file:images/play.png");
     static imageObject pauseBtn = new imageObject("file:images/pause.png");
 
@@ -47,7 +47,7 @@ public class PauseScreen {
     static Pane pausePane = new Pane();
     static imageObject pauseMenu = new imageObject("file:images/PauseMenu/frame.png");
     static imageObject pauseBlack = new imageObject("file:images/PauseMenu/Black.png");
-    static imageObject backBtn = new imageObject("file:images/PauseMenu/back.png");
+    static imageObject saveBtn = new imageObject("file:images/PauseMenu/save.png");
     static imageObject resumeBtn = new imageObject("file:images/PauseMenu/resume.png");
     static imageObject quitBtn = new imageObject("file:images/PauseMenu/quit.png");
 
@@ -57,41 +57,46 @@ public class PauseScreen {
         pauseMenu.setLocation(pausePane.getLayoutX(), pausePane.getLayoutY());
         pauseBlack.setLocation(0, 0);
         pauseBlack.setOpacity(0.5);
-        backBtn.setLocation(pausePane.getLayoutX() + 125, pausePane.getLayoutY() + 160);
+        saveBtn.setLocation(pausePane.getLayoutX() + 125, pausePane.getLayoutY() + 160);
         resumeBtn.setLocation(pausePane.getLayoutX() + 258, pausePane.getLayoutY() + 145);
         quitBtn.setLocation(pausePane.getLayoutX() + 415, pausePane.getLayoutY() + 160);
 
         if (!layout.getChildren().contains(pauseBlack)) layout.getChildren().add(pauseBlack);
         if (!pausePane.getChildren().contains(pauseMenu)) pausePane.getChildren().add(pauseMenu);
-        if (!pausePane.getChildren().contains(backBtn)) pausePane.getChildren().add(backBtn);
+        if (!pausePane.getChildren().contains(saveBtn)) pausePane.getChildren().add(saveBtn);
         if (!pausePane.getChildren().contains(resumeBtn)) pausePane.getChildren().add(resumeBtn);
         if (!pausePane.getChildren().contains(quitBtn)) pausePane.getChildren().add(quitBtn);
 
         if (!layout.getChildren().contains(pausePane)) layout.getChildren().add(pausePane);
 
-        backBtn.setOnMouseEntered(event -> backBtn.setCursor(Cursor.HAND));
-        backBtn.setOnMouseExited(event -> backBtn.setCursor(Cursor.DEFAULT));
+        saveBtn.setOnMouseEntered(event -> saveBtn.setCursor(Cursor.HAND));
+        saveBtn.setOnMouseExited(event -> saveBtn.setCursor(Cursor.DEFAULT));
         resumeBtn.setOnMouseEntered(event -> resumeBtn.setCursor(Cursor.HAND));
         resumeBtn.setOnMouseExited(event -> resumeBtn.setCursor(Cursor.DEFAULT));
         quitBtn.setOnMouseEntered(event -> quitBtn.setCursor(Cursor.HAND));
         quitBtn.setOnMouseExited(event -> quitBtn.setCursor(Cursor.DEFAULT));
 
-        //TODO
-        backBtn.setOnMouseClicked(event -> {
-            System.out.println("-> Back");
-            // hỏi save trước khi back
+        saveBtn.setOnMouseClicked(event -> {
+            is_quit = false;
+            System.out.println("-> Save");
+            SaveScreen.showSaveMenu();
+            // GameStage.welcomeScreen();
+            pauseBtn.setVisible(true);
         });
         resumeBtn.setOnMouseClicked(event -> {
+            is_quit = false;
             resumeGame();
             hidePauseMenu();
             pauseBtn.setVisible(true);
         });
         quitBtn.setOnMouseClicked(event -> {
             System.out.println("-> Quit");
+            is_quit = true;
             // hỏi save trước khi quit
-            // stage.close(); // tốt hơn 2 dòng dưới, tuy nhiên cần sửa code để GameField có property stage: Stage
-            Platform.exit();
-            System.exit(0);
+            if (isStarted) {
+                SaveScreen.showSaveMenu();
+            } else
+                GameStage.closePrimaryStage();
         });
     }
 

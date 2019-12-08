@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 
@@ -16,17 +17,24 @@ import static TowerDefense.SelectRoad.selectScreen;
 import static TowerDefense.Sound.*;
 
 public class GameStage extends Application {
+    private static Stage primaryStage;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        welcomeScreen(primaryStage);
-//         gameScreen(primaryStage);
+    public void start(Stage _primaryStage) {
+        primaryStage = _primaryStage;
+
+        // importMap();
+        // importRoad();
+        welcomeScreen();
+        // gameScreen(_primaryStage);
     }
 
-    public static void welcomeScreen(Stage stage) {
+    public static void welcomeScreen() {
+        Stage stage = primaryStage;
         Pane pane = new Pane();
 
         Scene scene = new Scene(pane, 960, 540);
@@ -94,14 +102,22 @@ public class GameStage extends Application {
         );
 
         stage.setTitle("Tower Defense 2.0");
-
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:images/love.jpg"));
-        //stage.setResizable(true);
-
+        // stage.setResizable(true);
+        // stage.centerOnScreen();
         stage.show();
 
         timeline.play();
         playWelcomeMusic();
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void closePrimaryStage() {
+        // Platform.exit(); System.exit(0);
+        primaryStage.close();
     }
 }

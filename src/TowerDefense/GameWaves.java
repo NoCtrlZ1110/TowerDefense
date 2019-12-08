@@ -13,19 +13,47 @@ import static TowerDefense.GameField.*;
 import static TowerDefense.Shop.*;
 
 public class GameWaves {
-    private static final int TIME_BETWEEN_2_WAVES = 2;
+    public static final int TIME_BETWEEN_2_WAVES = 2;
 
     private int complete_bonus;
-    private static int total_waves = 0;
+    private int total_waves;
     private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
-    private EnemiesWave running_wave;
+    private EnemiesWave running_wave = null;
     private AnimationTimer timer;
     private boolean isStopped = false;
 
     public GameWaves() {
         complete_bonus = 100;
+        total_waves = 0;
+        running_wave_id = 0;
+    }
+
+    public GameWaves(String str_info) {
+        total_waves = 0;
+        running_wave_id = 0;
+
+        if (str_info.startsWith("COMPLETED")) {
+            // completed
+        } else {
+            String[] splited = str_info.split("\n?(WAVE \\d+):\n");
+            for (String str_wave: splited)
+                if (str_wave.length() > 0) {
+                    EnemiesWave new_wave = new EnemiesWave(
+                        total_waves == 0 ? PREPARE_TIME : TIME_BETWEEN_2_WAVES,
+                        str_wave
+                    );
+                    if (!str_wave.equals("COMPLETED")) {
+                        total_waves++;
+                    } else
+                        running_wave_id++;
+
+                    waves.add(new_wave);
+                    // System.out.println(new_wave);
+                    // System.out.println("------------");
+                }
+        }
     }
 
     private void setTimer() {
@@ -49,8 +77,10 @@ public class GameWaves {
                 } else {
                     ArrayList<Enemy> _running = new ArrayList<>(running_wave_enemies);
                     _running.forEach(e -> {
-                        e.displayHpBar();
-                        e.harm();
+                        if (isStarted) {
+                            e.displayHpBar();
+                            e.harm();
+                        }
                     });
                     /*
                     running_wave_enemies = new ArrayList<>();
@@ -77,8 +107,17 @@ public class GameWaves {
         waves.add(wave);
     }
 
+    public int getTotalWaves() {
+        return total_waves;
+    }
+
     public ArrayList<Enemy> getRunningWaveEnemies() {
         return running_wave_enemies;
+    }
+
+    public void show() {
+        for (EnemiesWave wave: waves)
+            wave.show();
     }
 
     public void removeEnemy(Enemy enemy) {
@@ -91,26 +130,32 @@ public class GameWaves {
 
     public void start() {
         System.out.println("start...");
-        running_wave_id = 0;
-        running_wave = waves.get(running_wave_id);
-        running_wave_enemies = running_wave.getEnemies();
+        if (running_wave_id < waves.size()) {
+            running_wave = waves.get(running_wave_id);
+            running_wave_enemies = running_wave.getEnemies();
 
-        setTimer();
-        running_wave.start();
-        timer.start();
+            setTimer();
+            timer.start();
+            if (running_wave != null)
+                running_wave.start();
+        } else
+            complete();
     }
 
     public void pause() {
-        running_wave.pause();
+        if (running_wave != null)
+            running_wave.pause();
     }
 
     public void resume() {
-        running_wave.resume();
+        if (running_wave != null)
+            running_wave.resume();
     }
 
     public void stop() {
-        running_wave.stop();
         timer.stop();
+        if (running_wave != null)
+            running_wave.stop();
     }
 
     private void complete() {
@@ -124,10 +169,11 @@ public class GameWaves {
         if (isStopped) {
             return "COMPLETED";
         }
-        StringBuilder res = new StringBuilder("WAVE(S)\n:");
+        // StringBuilder res = new StringBuilder("WAVE(S):\n");
+        StringBuilder res = new StringBuilder("");
         for (int i = 0; i < waves.size(); i++) {
-            res.append(String.format("WAVE %d", i));
-            res.append(waves.get(i).toString()).append("\n");
+            res.append(String.format("WAVE %d:\n", i));
+            res.append(waves.get(i).toString());
         }
         return res.toString();
     }

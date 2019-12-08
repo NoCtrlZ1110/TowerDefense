@@ -2,12 +2,14 @@ package TowerDefense;
 
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static TowerDefense.GameField.*;
+import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public abstract class Enemy extends GameCharacter {
     private double speed;
@@ -80,6 +82,10 @@ public abstract class Enemy extends GameCharacter {
         pathTransition.play();
     }
 
+    public void stopMoving() {
+        pathTransition.stop();
+    }
+
     public void beShotBy(Bullet b) {
         if (exists()) { // trường hợp enemy ra khỏi map lúc chưa chết (chỉ bị destroy)
             decreaseHP(b.getDamage());
@@ -118,12 +124,12 @@ public abstract class Enemy extends GameCharacter {
 
     public String toString() {
         return String.format(
-            "Enemy[x=%d,y=%d,speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f",
+            "Enemy[x=%d,y=%d,speed=%f,defense_point=%f,killed_bonus=%d,hp=%f,hp_max=%f]",
             getLocation().getX(), getLocation().getY(), speed, defense_point, killed_bonus, hp, hp_max
         );
     }
 
-    public static Enemy generateEnemyByType(String enemy_type, int x, int y) {
+    public static Enemy generateByType(String enemy_type, int x, int y) {
         switch (enemy_type.toLowerCase()) {
             case "normal":
                 return new NormalEnemy(x, y);
@@ -136,5 +142,23 @@ public abstract class Enemy extends GameCharacter {
             default:
                 return null;
         }
+    }
+
+    public static Enemy loadFromString(String str) {
+        // ...Enemy[x=-80,y=720,hp=50.000000]
+        // setHp
+        Enemy res = null;
+        Matcher toStr_matcher = Pattern.compile("(\\w+)Enemy\\[x=(.+),y=(.+),hp=(.+)]").matcher(str);
+        if (toStr_matcher.find()) {
+            String enemy_type = toStr_matcher.group(1);
+            int x = Integer.parseInt(toStr_matcher.group(2));
+            int y = Integer.parseInt(toStr_matcher.group(3));
+            double hp = Double.parseDouble(toStr_matcher.group(4));
+            res = Enemy.generateByType(enemy_type, x, y);
+            // System.out.println(enemy_type + " " + x + " " + y + " " + hp);
+            if (res != null)
+                res.setHp(hp);
+        }
+        return res;
     }
 }

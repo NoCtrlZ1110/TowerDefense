@@ -1,6 +1,7 @@
 package TowerDefense;
 
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,13 +9,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameTile.*;
@@ -25,73 +30,44 @@ import static TowerDefense.Sound.*;
 public class GameField {
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
-    private static GameWaves game_waves;
+    private static GameWaves game_waves = null;
 
     private static int money = 20;
-    private static final double HP_MAX = 100;
-    private static GameCharacter user;
+    private static double hp_max = 100;
+    private static Player user = null;
     public static boolean isPaused = false;
     public static boolean isStarted = false;
 
     public static Pane layout = new Pane();
-
-    // thêm property stage: Stage
+    public static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
     final static imageObject logo = new imageObject("file:images/transparent_logo.png");
-    final static imageObject HPBar = new imageObject("file:images/HPBar.png");
+    // final static imageObject road = new imageObject("file:images/road.png");
     static imageObject road;
-    static Timeline gameTimeline, shootTimeLine;
-    static int world_select = 0; // = 1;
-    // CHỌN MAP BẰNG CÁCH THAY ĐỔI BIẾN "map_select"
+    private static Timeline gameTimeline;
+    private static Timeline shootTimeline;
+    static int world_select = 0; // = 0;
+    // CHỌN WORLD BẰNG CÁCH THAY ĐỔI BIẾN "world_select"
 
     public static void gameScreen(Stage stage) {
-
         pauseWelcomeMusic();
         stage.close();
-        if (world_select == 1) {
-            road = new imageObject("file:images/road.png");
-            roadLocation = new int[ROAD_NUM][2];
-        } else {
-            road = new imageObject("file:images/road2.png");
-            roadLocation = new int[ROAD_NUM2][2];
-        }
-        importMap();
-        importRoad();
-
-
-        Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-        road.setOpacity(0);
         logo.setOpacity(0);
         logo.setLocation(430, 250);
         logo.scaleTo(420, 165);
-        layout.getChildren().addAll(background, logo, road);
+        layout.getChildren().addAll(background, logo);
+
+        World.setupWorld();
         playGameScreenMusic();
-
-        user = new GameCharacter(HP_MAX, 167, 13, 1030, 760);
-        user.displayHpBar();
-        showUserHpBar();
-
-//         drawMap();
-        //--------------------------------
-
-        // [Tạo đường đi cho lính] -------
-        if (world_select == 1)
-            path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
-        else
-            path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
-        int roadnum;
-        if (world_select == 1) roadnum = ROAD_NUM;
-        else roadnum = ROAD_NUM2;
-
-        for (int i = 0; i < roadnum; i++)
-            path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
-
         //-----------------------------
+        createNewGame();
+        // drawMap();
+        //--------------------------------
         // Animation ------------------
         gameTimeline = new Timeline();
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), new KeyValue(logo.opacityProperty(), 0)));
@@ -100,19 +76,21 @@ public class GameField {
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> isStarted = true));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> {
+            isStarted = true;
+            showExistedItems();
+        }));
         // gameTimeline.setCycleCount(1);
 
         // [Shoot timeline]
-        shootTimeLine = new Timeline(new KeyFrame(Duration.millis(20), event -> {
-            towers.forEach(Tower::shoot);
+        shootTimeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
+            if (isStarted)
+                towers.forEach(Tower::shoot);
         }));
-        shootTimeLine.setCycleCount(Animation.INDEFINITE);
-        shootTimeLine.play();
+        shootTimeline.setCycleCount(Animation.INDEFINITE);
+        shootTimeline.play();
 
         //-------------------------------
-        runEnemiesWaves();
-
         // [Hiện khung chọn vị trí xây tháp] ---
 
         border.setStroke(Color.WHITESMOKE);
@@ -126,34 +104,10 @@ public class GameField {
 
         layout.setOnMouseMoved(event -> {
             if (isStarted && !isPaused) {
+                Shop.showIconWithMouse(event);
+
                 Point location = TowerBuildLocation(event);
                 Point point = getLocationFromMouseEvent(event);
-
-                if (currentItem == 0) {
-                    layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
-                } else if (currentItem == 1) {
-                    if (!layout.getChildren().contains(placingTower1))
-                        layout.getChildren().add(placingTower1);
-                    placingTower1.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-
-                } else if (currentItem == 2) {
-                    if (!layout.getChildren().contains(placingTower2))
-                        layout.getChildren().add(placingTower2);
-                    placingTower2.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-
-                } else if (currentItem == 3) {
-                    if (!layout.getChildren().contains(placingTower3))
-                        layout.getChildren().add(placingTower3);
-                    placingTower3.setLocation((int) event.getSceneX(), (int) event.getSceneY());
-                }
-
-                if (selling) {
-                    if (!layout.getChildren().contains(using_shovel))
-                        layout.getChildren().add(using_shovel);
-                    using_shovel.setLocation((int) event.getSceneX() - 5, (int) event.getSceneY() - 82);
-                } else {
-                    layout.getChildren().remove(using_shovel);
-                }
 
                 if (location != null) {
                     layout.setCursor(Cursor.HAND);
@@ -164,9 +118,7 @@ public class GameField {
                 } else {
                     layout.setCursor(Cursor.DEFAULT);
                 }
-                // System.out.println(point);
                 towers.forEach(t -> {
-                    // if (isTowerPlaced(point) && t.isInTower((int)event.getSceneX(), (int)event.getSceneY()))
                     if (t.isInTower((int) event.getSceneX(), (int) event.getSceneY()))
                         t.showRange();
                     else
@@ -183,14 +135,9 @@ public class GameField {
                 if (location != null) {
                     border.setX(location.getX() + 33);
                     border.setY(location.getY() + 33);
-                    if (buying) { // !selling
-                        Roadside r = new Roadside(location.getX(), location.getY());
-                        if (1 <= currentItem && currentItem <= 3) {
-                            // <=> currentItem in [1, 2, 3]: có thể mua được
-                            r.buyTower();
-                            currentItem = 0;
-                            selectedItem.setVisible(false);
-                        }
+                    if (buying) {
+                        Shop.buyTowerAt(location.getX(), location.getY());
+                        // các dòng hiệu ứng khác đã đưa vào trong hàm trên
                     }
                     selling = false;
                 } else {
@@ -201,20 +148,20 @@ public class GameField {
 
                         int x = (int) event.getSceneX();
                         int y = (int) event.getSceneY();
-                        Roadside r = new Roadside(x, y);
                         if (selling) {
                             // bán: bán với giá = x% giá mua (có lẽ chỉ 80% thôi)
-                            r.sellPlacedTower();
-                            removeSound();
-                            selling = false;
+                            Shop.sellTowerAt(x, y);
+                            // các dòng hiệu ứng khác đã đưa vào trong hàm trên
                         } else {
                             // upgrade: hiện dãy icon đại diện cho tháp
                             // upgrade có thể có giá
-                            r.upgradePlacedTower();
+                            Tower tower = getTowerPlacedAt(x, y);
+                            if (tower != null)
+                                tower.upgrade();
                         }
                     } else if (isRoadPlaced(checkingPoint)) {
-                        buying = false;
-                        selling = false;
+                        Shop.cancelBuying();
+                        Shop.cancelSelling();
                     }
                 }
             }
@@ -240,7 +187,6 @@ public class GameField {
         gameTimeline.play();
         // ------------------------
 
-
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));
         stage.setTitle("Tower Defense 2.0");
@@ -260,28 +206,24 @@ public class GameField {
         System.out.println("Game over!");
     }
 
-    public static void drawMap() {
-        imageObject[][] tiled = new imageObject[ROW_NUM][COL_NUM];
-
-        for (int i = 0; i < ROW_NUM; i++)
-            for (int j = 0; j < COL_NUM; j++) {
-                tiled[i][j] = new imageObject(pathTile + getTileType(i, j) + ".png");
-                tiled[i][j].scaleTo(TILE_WIDTH, TILE_WIDTH);
-                tiled[i][j].setLocation(j * TILE_WIDTH, i * TILE_WIDTH);
-                layout.getChildren().add(tiled[i][j]);
-            }
-    }
-
-    public static ArrayList<Tower> getTowers() {
-        return towers;
-    }
-
     public static void addTower(Tower tower) {
         towers.add(tower);
     }
 
     public static void removeTower(Tower tower) {
         towers.remove(tower);
+    }
+
+    public static Tower getTowerPlacedAt(int x, int y) {
+        // x = x - x % TILE_WIDTH;
+        // y = y - y % TILE_WIDTH;
+
+        for (Tower t: towers) {
+            if (t.isInTower(x, y)) {
+                return t;
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Enemy> getEnemies() {
@@ -298,12 +240,6 @@ public class GameField {
         if (user.isDead()) {
             showGameOverScreen();
         }
-    }
-
-    public static void showUserHpBar() {
-        if (!layout.getChildren().contains(HPBar)) layout.getChildren().add(HPBar);
-        HPBar.setLocation(1000, 750);
-
     }
 
     public static boolean isGameOver() {
@@ -329,12 +265,16 @@ public class GameField {
         coin.setText(Integer.toString(money));
     }
 
-    private static void saveGame() {
+    public static void saveGame() {
         if (isPaused) {
+            System.out.println("saving...");
             try {
-                FileWriter fo = new FileWriter("save.txt");
-                fo.write(String.format("USER: money=%d,hp=%f\n", money, user.hp));
-                // fo.write("MAP: <map directory>\n");
+                Date date_now = new Date();
+                long time_now = date_now.getTime();
+
+                FileWriter fo = new FileWriter(String.format("saved_game/save_%d.txt", time_now));
+                fo.write(String.format("USER: money=%d,%s\n", money, user.toString()));
+                fo.write(String.format("WORLD: %d\n", world_select));
                 fo.write("TOWERS:\n");
                 for (Tower t : towers)
                     fo.write(t.toString() + "\n");
@@ -348,18 +288,77 @@ public class GameField {
         }
     }
 
-    private static void loadGame() {
+    public static boolean loadGame() {
         try {
-            File file = new File("save.txt");
-            Scanner fi = new Scanner(file);
+            System.out.println("loading...");
 
+            FileChooser fileChooser = new FileChooser();
+            configureFileChooser(fileChooser);
+            Platform.setImplicitExit(false); // https://stackoverflow.com/a/21308629
+            File chosen_file = fileChooser.showOpenDialog(SelectRoad.getMasterWindow());
+            Platform.setImplicitExit(true); // chống lag
+            // File chosen_file = new File("saved_game/save.txt");
+            // System.out.println(chosen_file);
+            if (chosen_file == null) // thoát select file mà không chọn
+                return false;
+
+            Scanner fi = new Scanner(chosen_file);
+            StringBuilder temp = new StringBuilder();
             while (fi.hasNextLine()) {
                 String line = fi.nextLine() + "\n";
-                // code xử lí ở đây
+                temp.append(line);
+            }
+            String content = temp.toString();
+            String[] splited = content.split("\n?(WORLD|TOWERS|GAME PROGRESS):\\s");
+            /*
+            splited[0]: USER: money=130,hp=100.000000,hp_max=100.000000
+            splited[1]: world_select
+            splited[2]: towers
+            splited[3]: waves
+            */
+            if (!splited[3].startsWith("COMPLETED")) {
+                Matcher user_matcher = Pattern.compile("USER: money=(.+),hp=(.+),hp_max=(.+)").matcher(splited[0]);
+                if (user_matcher.find()) {
+                    money = Integer.parseInt(user_matcher.group(1));
+                    double hp = Double.parseDouble(user_matcher.group(2));
+                    hp_max = Double.parseDouble(user_matcher.group(3));
+                    user = new Player(hp, hp_max);
+                    // System.out.println(money + " " + hp + " " + hp_max);
+                }
+                world_select = Integer.parseInt(splited[1]);
+                // System.out.println(world_select);
+
+                String[] towers_str = splited[2].split("\n");
+                for (String tower_str: towers_str) {
+                    Tower tower = Tower.loadFromString(tower_str);
+                    towers.add(tower);
+                    // System.out.println(tower);
+                    // tower.show();
+                }
+                game_waves = new GameWaves(splited[3]);
+                // game_waves.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return (game_waves != null);
+    }
+
+    private static void configureFileChooser(FileChooser f) {
+        f.setTitle("Open saved game");
+        f.setInitialDirectory(new File("saved_game/"));
+        f.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Text file", "*.txt")
+        );
+    }
+
+    private static void showExistedItems() {
+        user.show();
+
+        for (Tower tower: towers)
+            tower.show();
+
+        game_waves.show();
     }
 
     public static void pauseGame() {
@@ -367,8 +366,9 @@ public class GameField {
 
         gameScreenMusicTimeline.pause();
         gameTimeline.pause();
-        shootTimeLine.pause();
-        game_waves.pause();
+        shootTimeline.pause();
+        if (game_waves != null)
+            game_waves.pause();
     }
 
     public static void resumeGame() {
@@ -378,9 +378,10 @@ public class GameField {
             gameScreenMusicTimeline.play();
         if (gameTimeline.getStatus() != Animation.Status.STOPPED)
             gameTimeline.play();
-        if (shootTimeLine.getStatus() != Animation.Status.STOPPED)
-            shootTimeLine.play();
-        game_waves.resume();
+        if (shootTimeline.getStatus() != Animation.Status.STOPPED)
+            shootTimeline.play();
+        if (game_waves != null)
+            game_waves.resume();
     }
 
     public static void stopGame() {
@@ -388,15 +389,24 @@ public class GameField {
 
         gameScreenMusicTimeline.stop();
         gameTimeline.stop();
-        shootTimeLine.stop();
-        game_waves.stop();
+        shootTimeline.stop();
+        if (game_waves != null)
+            game_waves.stop();
     }
 
-    private static void runEnemiesWaves() {
-        game_waves = new GameWaves();
-        game_waves.addEnemiesWave(10, "normal");
-        game_waves.addEnemiesWave(10, "smaller");
-        game_waves.addEnemiesWave(15, "normal", "smaller");
+    private static void createNewGame() {
+        if (game_waves == null) { // chưa được load
+            user = new Player(hp_max, hp_max);
+
+            game_waves = new GameWaves();
+            game_waves.addEnemiesWave(15, "normal");
+            game_waves.addEnemiesWave(15, "smaller");
+            game_waves.addEnemiesWave(15, "normal", "smaller");
+            game_waves.addEnemiesWave(15, "normal", "tanker");
+            game_waves.addEnemiesWave(10, "tanker");
+            game_waves.addEnemiesWave(1, "boss");
+        }
+        user.show();
         game_waves.start();
     }
 }

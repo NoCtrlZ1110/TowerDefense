@@ -1,0 +1,43 @@
+USER: money=65,hp=95.000000,hp_max=100.000000
+WORLD: 1
+TOWERS:
+SniperTower[x=400,y=480]
+NormalTower[x=240,y=160]
+GAME PROGRESS:
+WAVE 0:
+COMPLETED
+WAVE 1:
+TOTAL ENEMIES: 15
+SmallerEnemy[x=-106,y=725,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+WAVE 2:
+TOTAL ENEMIES: 15
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+
