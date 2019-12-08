@@ -10,17 +10,17 @@ import static TowerDefense.PauseScreen.is_quit;
 
 public class SaveScreen {
     private static Pane savePane = new Pane();
-    private static imageObject saveMenu = new imageObject("file:images/PauseMenu/frame.png");
-    private static imageObject yesBtn = new imageObject("file:images/PauseMenu/resume.png");
-    private static imageObject noBtn = new imageObject("file:images/PauseMenu/quit.png");
-    private static imageObject cancelBtn = new imageObject("file:images/PauseMenu/back.png");
+    private static imageObject saveMenu = new imageObject("file:images/SaveMenu/frame.png");
+    private static imageObject yesBtn = new imageObject("file:images/SaveMenu/yes.png");
+    private static imageObject noBtn = new imageObject("file:images/SaveMenu/no.png");
+    private static imageObject cancelBtn = new imageObject("file:images/SaveMenu/cancel.png");
 
     public static void showSaveMenu() {
         savePane.setLayoutX(180);
         savePane.setLayoutY(100);
         saveMenu.setLocation(savePane.getLayoutX(), savePane.getLayoutY());
         yesBtn.setLocation(savePane.getLayoutX() + 125, savePane.getLayoutY() + 160);
-        noBtn.setLocation(savePane.getLayoutX() + 258, savePane.getLayoutY() + 145);
+        noBtn.setLocation(savePane.getLayoutX() + 270, savePane.getLayoutY() + 160);
         cancelBtn.setLocation(savePane.getLayoutX() + 415, savePane.getLayoutY() + 160);
 
         if (!savePane.getChildren().contains(saveMenu)) savePane.getChildren().add(saveMenu);

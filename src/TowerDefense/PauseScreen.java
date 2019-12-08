@@ -1,6 +1,5 @@
 package TowerDefense;
 
-import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
 
@@ -48,7 +47,7 @@ public class PauseScreen {
     static Pane pausePane = new Pane();
     static imageObject pauseMenu = new imageObject("file:images/PauseMenu/frame.png");
     static imageObject pauseBlack = new imageObject("file:images/PauseMenu/Black.png");
-    static imageObject backBtn = new imageObject("file:images/PauseMenu/back.png");
+    static imageObject saveBtn = new imageObject("file:images/PauseMenu/save.png");
     static imageObject resumeBtn = new imageObject("file:images/PauseMenu/resume.png");
     static imageObject quitBtn = new imageObject("file:images/PauseMenu/quit.png");
 
@@ -58,26 +57,26 @@ public class PauseScreen {
         pauseMenu.setLocation(pausePane.getLayoutX(), pausePane.getLayoutY());
         pauseBlack.setLocation(0, 0);
         pauseBlack.setOpacity(0.5);
-        backBtn.setLocation(pausePane.getLayoutX() + 125, pausePane.getLayoutY() + 160);
+        saveBtn.setLocation(pausePane.getLayoutX() + 125, pausePane.getLayoutY() + 160);
         resumeBtn.setLocation(pausePane.getLayoutX() + 258, pausePane.getLayoutY() + 145);
         quitBtn.setLocation(pausePane.getLayoutX() + 415, pausePane.getLayoutY() + 160);
 
         if (!layout.getChildren().contains(pauseBlack)) layout.getChildren().add(pauseBlack);
         if (!pausePane.getChildren().contains(pauseMenu)) pausePane.getChildren().add(pauseMenu);
-        if (!pausePane.getChildren().contains(backBtn)) pausePane.getChildren().add(backBtn);
+        if (!pausePane.getChildren().contains(saveBtn)) pausePane.getChildren().add(saveBtn);
         if (!pausePane.getChildren().contains(resumeBtn)) pausePane.getChildren().add(resumeBtn);
         if (!pausePane.getChildren().contains(quitBtn)) pausePane.getChildren().add(quitBtn);
 
         if (!layout.getChildren().contains(pausePane)) layout.getChildren().add(pausePane);
 
-        backBtn.setOnMouseEntered(event -> backBtn.setCursor(Cursor.HAND));
-        backBtn.setOnMouseExited(event -> backBtn.setCursor(Cursor.DEFAULT));
+        saveBtn.setOnMouseEntered(event -> saveBtn.setCursor(Cursor.HAND));
+        saveBtn.setOnMouseExited(event -> saveBtn.setCursor(Cursor.DEFAULT));
         resumeBtn.setOnMouseEntered(event -> resumeBtn.setCursor(Cursor.HAND));
         resumeBtn.setOnMouseExited(event -> resumeBtn.setCursor(Cursor.DEFAULT));
         quitBtn.setOnMouseEntered(event -> quitBtn.setCursor(Cursor.HAND));
         quitBtn.setOnMouseExited(event -> quitBtn.setCursor(Cursor.DEFAULT));
 
-        backBtn.setOnMouseClicked(event -> {
+        saveBtn.setOnMouseClicked(event -> {
             is_quit = false;
             System.out.println("-> Save");
             SaveScreen.showSaveMenu();
