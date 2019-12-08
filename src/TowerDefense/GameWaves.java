@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import static TowerDefense.CONSTANT.PREPARE_TIME;
 import static TowerDefense.GameField.*;
 import static TowerDefense.Shop.*;
+import static TowerDefense.WinnerScreen.showCompletedScreen;
 
 public class GameWaves {
     public static final int TIME_BETWEEN_2_WAVES = 2;

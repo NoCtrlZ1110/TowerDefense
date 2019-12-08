@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static TowerDefense.CONSTANT.*;
+import static TowerDefense.GameOverScreen.showGameOverScreen;
 import static TowerDefense.GameTile.*;
 import static TowerDefense.PauseScreen.showPauseBtn;
 import static TowerDefense.Shop.*;
@@ -195,16 +196,9 @@ public class GameField {
         stage.show();
     }
 
-    public static void showCompletedScreen() {
-        // stopGame(); // đã stop trước khi showCompletedScreen()
-        winMusic();
-        System.out.println("You have cleared this map!");
-    }
 
-    public static void showGameOverScreen() {
-        stopGame();
-        System.out.println("Game over!");
-    }
+
+
 
     public static void addTower(Tower tower) {
         towers.add(tower);
