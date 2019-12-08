@@ -1,4 +1,5 @@
 USER: money=325,hp=100.000000,hp_max=100.000000
+WORLD: 1
 TOWERS:
 SniperTower[x=400,y=480]
 GAME PROGRESS:

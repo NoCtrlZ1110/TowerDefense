@@ -28,10 +28,6 @@ import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
 public class GameField {
-    // 500,45
-    private static int HPBAR_X = 500; // 1030;
-    private static int HPBAR_Y = 45; // 760;
-
     static Rectangle border = new Rectangle(BORDER_WIDTH, BORDER_WIDTH);
     private static ArrayList<Tower> towers = new ArrayList<>();
     private static GameWaves game_waves = null;
@@ -51,52 +47,27 @@ public class GameField {
     static imageObject road;
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
-    static int world_select = 1; // = 1;
+    static int world_select = 0; // = 0;
     // CHỌN WORLD BẰNG CÁCH THAY ĐỔI BIẾN "world_select"
 
     public static void gameScreen(Stage stage) {
         pauseWelcomeMusic();
         stage.close();
 
-        if (world_select == 1) {
-            road = new imageObject("file:images/road.png");
-            roadLocation = new int[ROAD_NUM][2];
-        } else {
-            road = new imageObject("file:images/road2.png");
-            roadLocation = new int[ROAD_NUM2][2];
-        }
-        importMap();
-        importRoad();
-
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
-        road.setOpacity(0);
         logo.setOpacity(0);
         logo.setLocation(430, 250);
         logo.scaleTo(420, 165);
-        layout.getChildren().addAll(background, logo, road);
-        playGameScreenMusic();
+        layout.getChildren().addAll(background, logo);
 
+        World.setupWorld();
+        playGameScreenMusic();
+        //-----------------------------
         createNewGame();
         // drawMap();
         //--------------------------------
-
-        // [Tạo đường đi cho lính] -------
-        if (world_select == 1)
-            path.getElements().add(new MoveTo(-TILE_WIDTH, 760));
-        else
-            path.getElements().add(new MoveTo(-TILE_WIDTH, 600));
-        int roadnum;
-        if (world_select == 1)
-            roadnum = ROAD_NUM;
-        else
-            roadnum = ROAD_NUM2;
-
-        for (int i = 0; i < roadnum; i++)
-            path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
-
-        //-----------------------------
         // Animation ------------------
         gameTimeline = new Timeline();
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), new KeyValue(logo.opacityProperty(), 0)));
@@ -354,11 +325,9 @@ public class GameField {
                     user = new Player(hp, hp_max);
                     // System.out.println(money + " " + hp + " " + hp_max);
                 }
-                Matcher world_matcher = Pattern.compile("WORLD: (\\d+)").matcher(splited[1]);
-                if (world_matcher.find()) {
-                    // TODO: xử lí xong xuôi world select (lập world + ...)
-                    world_select = Integer.parseInt(user_matcher.group(1));
-                }
+                world_select = Integer.parseInt(splited[1]);
+                // System.out.println(world_select);
+
                 String[] towers_str = splited[2].split("\n");
                 for (String tower_str: towers_str) {
                     Tower tower = Tower.loadFromString(tower_str);
@@ -430,9 +399,11 @@ public class GameField {
             user = new Player(hp_max, hp_max);
 
             game_waves = new GameWaves();
-            game_waves.addEnemiesWave(15, "normal");
-            game_waves.addEnemiesWave(15, "smaller");
-            game_waves.addEnemiesWave(15, "normal", "smaller");
+            // game_waves.addEnemiesWave(15, "normal");
+            // game_waves.addEnemiesWave(15, "smaller");
+            // game_waves.addEnemiesWave(15, "normal", "smaller");
+            // game_waves.addEnemiesWave(15, "normal", "tanker");
+            game_waves.addEnemiesWave(15, "tanker", "boss");
         }
         user.show();
         game_waves.start();

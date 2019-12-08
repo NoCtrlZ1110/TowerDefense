@@ -1,5 +1,5 @@
 USER: money=65,hp=95.000000,hp_max=100.000000
-WORLD: 0
+WORLD: 1
 TOWERS:
 SniperTower[x=400,y=480]
 NormalTower[x=240,y=160]

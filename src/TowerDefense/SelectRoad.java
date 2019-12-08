@@ -17,7 +17,7 @@ public class SelectRoad {
 
     public static void selectScreen(Stage stage) {
         stage.close();
-        stage.setTitle("Choose World Map");
+        stage.setTitle("Choose _World Map");
         stage.centerOnScreen();
 
         selectWorldLayout = new Pane();
@@ -48,7 +48,7 @@ public class SelectRoad {
         loadgameBtn.setOnMouseClicked(event -> {
             System.out.println("-> Load Game");
             boolean load_ok = GameField.loadGame();
-            System.out.println(load_ok);
+            // System.out.println(load_ok);
             if (load_ok) {
                 gameScreen(stage);
             }
