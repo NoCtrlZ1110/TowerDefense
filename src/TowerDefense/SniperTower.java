@@ -4,7 +4,7 @@ import static TowerDefense.CONSTANT.pathSniperTower;
 
 public class SniperTower extends Tower {
     public SniperTower() {
-        super(pathSniperTower, 225, 0.3, 1.8, 20);
+        super(pathSniperTower, 225, 0.4, 1.1, 20);
     }
 
     public String toString() {
