@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TowerDefense/GameOverScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TowerDefense/WinnerScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Linh tinh/pause.psd" beforeDir="false" afterPath="$PROJECT_DIR$/images/Linh tinh/pause.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SaveScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SaveScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Sound.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +52,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" />
   </component>
   <component name="RecentsManager">
@@ -136,6 +129,7 @@
       <workItem from="1575705706745" duration="119000" />
       <workItem from="1575705835856" duration="8192000" />
       <workItem from="1575793577982" duration="2973000" />
+      <workItem from="1575875938387" duration="3613000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
