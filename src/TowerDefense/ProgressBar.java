@@ -19,8 +19,8 @@ public class ProgressBar {
             layout.getChildren().add(progress);
         if (!layout.getChildren().contains(progressPane))
             layout.getChildren().add(progressPane);
-        progressPane.setLayoutX(1080);
-        progressPane.setLayoutY(725);
+        progressPane.setLayoutX(500); // 1080
+        progressPane.setLayoutY(30); // 725
         progress.setX(progressPane.getLayoutX()+6);
         progress.setY(progressPane.getLayoutY()+45);
         progress.setHeight(12);
@@ -29,7 +29,7 @@ public class ProgressBar {
 //        head.setLocation(progressPane.getLayoutX()+6,progess.getWidth());
         progressPane.getChildren().add(progressBar);
         progressPane.getChildren().add(head);
-        head.setLayoutY(762);
+        head.setLayoutY(progressPane.getLayoutY()+37);
         head.setLayoutX(progress.getX()+45);
         if (!layout.getChildren().contains(head))
             layout.getChildren().add(head);

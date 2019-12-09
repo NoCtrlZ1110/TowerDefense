@@ -43,10 +43,6 @@ public class Shop {
     static imageObject using_shovel = new imageObject("file:images/Shop/shovel_noback.png");
 
     public static void showShopBar() {
-
-
-
-
         selectedItem.setVisible(false);
         selectedItem.setFill(Color.TRANSPARENT);
         selectedItem.setStroke(Color.WHITESMOKE);
@@ -75,9 +71,10 @@ public class Shop {
         // final Font AERIAL_FONT = new Font(PATH_FONT, 13);
         coin.setFont(new Font("Aerial", 13));
 
-        outOfMoney1.setVisible(false);
-        outOfMoney2.setVisible(false);
-        outOfMoney3.setVisible(false);
+        // outOfMoney1.setVisible(false);
+        // outOfMoney2.setVisible(false);
+        // outOfMoney3.setVisible(false);
+        checkPrice(); // đầu tiên có 20 xu < giá tháp 3
 
         outOfMoney1.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 100);
         outOfMoney1.scaleTo(67, 90);
@@ -91,13 +88,21 @@ public class Shop {
         handleClickItem();
     }
 
-    static void checkPrice()
-    {
-        if (getMoney()<10) outOfMoney1.setVisible(true); else  outOfMoney1.setVisible(false);
-        if (getMoney()<20) outOfMoney2.setVisible(true); else  outOfMoney2.setVisible(false);
-        if (getMoney()<30) outOfMoney3.setVisible(true); else  outOfMoney3.setVisible(false);
+    static void checkPrice() {
+        if (getMoney() < 10)
+            outOfMoney1.setVisible(true);
+        else
+            outOfMoney1.setVisible(false);
 
+        if (getMoney() < 20)
+            outOfMoney2.setVisible(true);
+        else
+            outOfMoney2.setVisible(false);
 
+        if (getMoney() < 30)
+            outOfMoney3.setVisible(true);
+        else
+            outOfMoney3.setVisible(false);
     }
 
     private static void handleClickItem() {
@@ -255,6 +260,7 @@ public class Shop {
             y = y - y % TILE_WIDTH;
 
             decreaseMoney(price);
+            checkPrice();
             placeTowerAt(tower, x, y);
             cancelBuying();
         }
