@@ -120,7 +120,7 @@ public class Sound {
     public static void playGameScreenMusic() {
         gameScreenMusicTimeline = new Timeline(
             new KeyFrame(Duration.seconds(0), event -> prepareMusicPlayer.play()),
-            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> combatMusic()),
+            new KeyFrame(Duration.seconds(PREPARE_TIME), event -> playCombatMusic()),
             //new KeyFrame(Duration.seconds(PREPARE_TIME), new KeyValue(prepareMusicPlayer.volumeProperty(), 1)),
             new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> {
                 if (!isMuted)
@@ -160,12 +160,12 @@ public class Sound {
         buttonClickSoundPlayer.play();
     }
 
-    public static void winMusic() {
+    public static void playWinMusic() {
         combatMusicPlayer.stop();
         if (!isMuted) winMusicPlayer.play();
     }
 
-    public static void combatMusic() {
+    public static void playCombatMusic() {
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> minionSpawn.play()),
             new KeyFrame(Duration.millis(1400), event -> {

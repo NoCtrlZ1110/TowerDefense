@@ -12,18 +12,13 @@ import static TowerDefense.GameTile.resetMap;
 import static TowerDefense.GameTile.setMapType;
 import static TowerDefense.PauseScreen.refreshPauseMenu;
 
-public class Tower extends GameEntity {
+public abstract class Tower extends GameEntity {
     private int price = 10;
     private int range = 200;
     private double shootingSpeed = 1;
     private double shootingDamage = 1;
     private Point position = null;
     private Circle rangeCircle = new Circle();
-
-    public Tower(String imageUrl) {
-        super(imageUrl);
-        scaleTo(TOWER_WIDTH, TOWER_WIDTH);
-    }
 
     protected Tower(String imageUrl, int range, double shootingSpeed, double shootingDamage, int price) {
         super(imageUrl);

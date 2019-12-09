@@ -2,16 +2,14 @@ package TowerDefense;
 
 /*
 GameCharacter
-- bao gồm User và Enemy
+- bao gồm Player và Enemy
 - (chỉ) quản lý hp
 */
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import static TowerDefense.GameField.isPaused;
 import static TowerDefense.GameField.layout;
-import static TowerDefense.PauseScreen.refreshPauseMenu;
 
 public class GameCharacter extends GameEntity {
     protected double hp;

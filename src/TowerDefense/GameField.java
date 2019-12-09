@@ -44,7 +44,7 @@ public class GameField {
     public static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
-    final static imageObject logo = new imageObject("file:images/transparent_logo.png");
+    private final static imageObject logo = new imageObject("file:images/transparent_logo.png");
     // final static imageObject road = new imageObject("file:images/road.png");
     static imageObject road = null;
     private static Timeline gameTimeline;
@@ -200,10 +200,6 @@ public class GameField {
         stage.centerOnScreen();
         stage.show();
     }
-
-
-
-
 
     public static void addTower(Tower tower) {
         towers.add(tower);

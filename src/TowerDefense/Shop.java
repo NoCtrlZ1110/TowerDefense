@@ -212,11 +212,11 @@ public class Shop {
 
     public static void buyTowerAt(int x, int y) {
         Tower tower;
-        if (getCurrentItem() == 1)  // tower_type.equals("normal"))
+        if (currentItem == 1)  // tower_type.equals("normal"))
             tower = new NormalTower();
-        else if (getCurrentItem() == 2)  // tower_type.equals("sniper"))
+        else if (currentItem == 2)  // tower_type.equals("sniper"))
             tower = new SniperTower();
-        else if (getCurrentItem() == 3)  // tower_type.equals("machinegun"))
+        else if (currentItem == 3)  // tower_type.equals("machinegun"))
             tower = new MachineGunTower();
         else
             return; // mua thất bại
