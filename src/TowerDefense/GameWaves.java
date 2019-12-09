@@ -8,10 +8,9 @@ import javafx.animation.*;
 
 import java.util.ArrayList;
 
-import static TowerDefense.CONSTANT.PREPARE_TIME;
 import static TowerDefense.GameField.*;
 import static TowerDefense.ProgressBar.initProgessBar;
-import static TowerDefense.ProgressBar.updateProgessBar;
+import static TowerDefense.ProgressBar.updateProgressBar;
 import static TowerDefense.Shop.*;
 import static TowerDefense.WinnerScreen.showCompletedScreen;
 
@@ -20,7 +19,7 @@ public class GameWaves {
 
     private int complete_bonus;
     private static int total_waves;
-    static int running_wave_id = 0;
+    private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave = null;
@@ -64,7 +63,7 @@ public class GameWaves {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                updateProgessBar(running_wave);
+                updateProgressBar(running_wave);
 
                 if (GameField.isGameOver()) {
                     stop();
@@ -113,6 +112,10 @@ public class GameWaves {
 
     public static int getTotalWaves() {
         return total_waves;
+    }
+
+    public static int getRunningWaveId() {
+        return running_wave_id;
     }
 
     public ArrayList<Enemy> getRunningWaveEnemies() {

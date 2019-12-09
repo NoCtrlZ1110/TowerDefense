@@ -80,7 +80,7 @@ public class EnemiesWave {
             Enemy e = enemies.get(i);
             int added_ms = 0;
             int x = e.getLocation().getX(), y = e.getLocation().getY();
-            if (x == -TILE_WIDTH && y == 720) {
+            if (count_not_moving > 0 || (x == -TILE_WIDTH && y == 720)) {
                 added_ms = count_not_moving * 800;
                 count_not_moving++;
             }
