@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/CONSTANT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/EnemiesWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/SelectRoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/SelectRoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerDefense/_World.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/ProgressBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/ProgressBar.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,8 +93,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.GameStage" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameStage" />
@@ -135,6 +134,8 @@
       <workItem from="1575705706745" duration="119000" />
       <workItem from="1575705835856" duration="8192000" />
       <workItem from="1575793577982" duration="2973000" />
+      <workItem from="1575890615451" duration="679000" />
+      <workItem from="1575898203502" duration="5689000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -164,16 +165,5 @@
         <option value="1" />
       </set>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TowerDefense/Sound.java</url>
-          <line>154</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

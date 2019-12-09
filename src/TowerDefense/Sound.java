@@ -33,6 +33,7 @@ public class Sound {
     private static Media removeSound = new Media(new File("sound/removePlant.wav").toURI().toString());
     private static Media plantSound = new Media(new File("sound/floop.wav").toURI().toString());
     private static Media shovelSound = new Media(new File("sound/shovel3.mp3").toURI().toString());
+    private static Media failSound = new Media(new File("sound/battle_lost.mp3").toURI().toString());
 
     private static MediaPlayer combatMusicPlayer = new MediaPlayer(combatMusic);
     private static MediaPlayer minionSpawn = new MediaPlayer(minion);
@@ -42,6 +43,7 @@ public class Sound {
     private static MediaPlayer loadingPlayer = new MediaPlayer(loadingSound);
     private static MediaPlayer welcomePlayer = new MediaPlayer(welcomeMusic);
     private static MediaPlayer winMusicPlayer = new MediaPlayer(winMusic);
+    private static MediaPlayer failSoundPlayer = new MediaPlayer(failSound);
 
     public static void mute() {
         combatMusicPlayer.setVolume(0);
@@ -52,6 +54,7 @@ public class Sound {
         loadingPlayer.setVolume(0);
         welcomePlayer.setVolume(0);
         winMusicPlayer.setVolume(0);
+        failSoundPlayer.setVolume(0);
     }
 
     public static void unMute() {
@@ -63,6 +66,7 @@ public class Sound {
         loadingPlayer.setVolume(1);
         welcomePlayer.setVolume(1);
         winMusicPlayer.setVolume(1);
+        failSoundPlayer.setVolume(1);
     }
 
     public static void chooseSound()
@@ -128,6 +132,11 @@ public class Sound {
             new KeyFrame(Duration.seconds(PREPARE_TIME + 2), event -> prepareMusicPlayer.stop())
         );
         gameScreenMusicTimeline.play();
+    }
+
+    public static void playGameOverSound()
+    {
+        if (!isMuted) failSoundPlayer.play();
     }
 
     public static void buildingSound() {

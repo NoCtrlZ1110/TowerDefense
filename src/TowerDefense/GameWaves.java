@@ -10,14 +10,17 @@ import java.util.ArrayList;
 
 import static TowerDefense.CONSTANT.PREPARE_TIME;
 import static TowerDefense.GameField.*;
+import static TowerDefense.ProgressBar.initProgessBar;
+import static TowerDefense.ProgressBar.updateProgessBar;
 import static TowerDefense.Shop.*;
+import static TowerDefense.WinnerScreen.showCompletedScreen;
 
 public class GameWaves {
     public static final int TIME_BETWEEN_2_WAVES = 2;
 
     private int complete_bonus;
-    private int total_waves;
-    private static int running_wave_id = 0;
+    private static int total_waves;
+    static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
     private ArrayList<Enemy> running_wave_enemies = new ArrayList<>();
     private EnemiesWave running_wave = null;
@@ -61,7 +64,8 @@ public class GameWaves {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-//                System.out.println(running_wave.getWaveRate()+"%");
+                updateProgessBar(running_wave);
+
                 if (GameField.isGameOver()) {
                     stop();
                 } else if (running_wave.isFinished()) {
@@ -107,7 +111,7 @@ public class GameWaves {
         waves.add(wave);
     }
 
-    public int getTotalWaves() {
+    public static int getTotalWaves() {
         return total_waves;
     }
 
@@ -134,6 +138,7 @@ public class GameWaves {
             running_wave = waves.get(running_wave_id);
             running_wave_enemies = running_wave.getEnemies();
 
+            initProgessBar();
             setTimer();
             timer.start();
             if (running_wave != null)

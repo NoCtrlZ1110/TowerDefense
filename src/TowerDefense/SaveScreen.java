@@ -45,16 +45,14 @@ public class SaveScreen {
             hideSaveMenu();
             if (is_quit)
                 GameStage.closePrimaryStage();
-            else
-                hidePauseMenu();
+            //else hidePauseMenu(); ---> Không hide vì còn để cho người chơi chơi tiếp
         });
         noBtn.setOnMouseClicked(event -> {
             System.out.println("-> no");
             hideSaveMenu();
             if (is_quit)
                 GameStage.closePrimaryStage();
-            else
-                hidePauseMenu();
+            //else hidePauseMenu();  ---> Chỗ này cũng thế
         });
         cancelBtn.setOnMouseClicked(event -> {
             System.out.println("-> cancel");
