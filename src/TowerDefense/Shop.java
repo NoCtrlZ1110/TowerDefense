@@ -32,6 +32,9 @@ public class Shop {
     private static imageObject towerType1 = new imageObject("file:images/Shop/TowerType1.png");
     private static imageObject towerType2 = new imageObject("file:images/Shop/TowerType2.png");
     private static imageObject towerType3 = new imageObject("file:images/Shop/TowerType3.png");
+    private static imageObject outOfMoney1 = new imageObject("file:images/Shop/OutOfMoney1.png");
+    private static imageObject outOfMoney2 = new imageObject("file:images/Shop/OutOfMoney2.png");
+    private static imageObject outOfMoney3 = new imageObject("file:images/Shop/OutOfMoney3.png");
     private static imageObject shovel = new imageObject("file:images/Shop/shovel.png");
 
     static imageObject placingTower1 = new imageObject(pathNormalTower);
@@ -40,6 +43,10 @@ public class Shop {
     static imageObject using_shovel = new imageObject("file:images/Shop/shovel_noback.png");
 
     public static void showShopBar() {
+
+
+
+
         selectedItem.setVisible(false);
         selectedItem.setFill(Color.TRANSPARENT);
         selectedItem.setStroke(Color.WHITESMOKE);
@@ -67,9 +74,30 @@ public class Shop {
         coin.setAlignment(Pos.CENTER);
         // final Font AERIAL_FONT = new Font(PATH_FONT, 13);
         coin.setFont(new Font("Aerial", 13));
-        shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin, selectedItem);
+
+        outOfMoney1.setVisible(false);
+        outOfMoney2.setVisible(false);
+        outOfMoney3.setVisible(false);
+
+        outOfMoney1.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 100);
+        outOfMoney1.scaleTo(67, 90);
+        outOfMoney2.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 200);
+        outOfMoney2.scaleTo(67, 90);
+        outOfMoney3.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 300);
+        outOfMoney3.scaleTo(67, 90);
+
+        shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin, selectedItem,outOfMoney1,outOfMoney2,outOfMoney3);
         layout.getChildren().add(shopPane);
         handleClickItem();
+    }
+
+    static void checkPrice()
+    {
+        if (getMoney()<10) outOfMoney1.setVisible(true); else  outOfMoney1.setVisible(false);
+        if (getMoney()<20) outOfMoney2.setVisible(true); else  outOfMoney2.setVisible(false);
+        if (getMoney()<30) outOfMoney3.setVisible(true); else  outOfMoney3.setVisible(false);
+
+
     }
 
     private static void handleClickItem() {

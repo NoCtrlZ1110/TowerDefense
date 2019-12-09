@@ -98,6 +98,7 @@ public class GameWaves {
                 if (!selling) layout.getChildren().remove(using_shovel);
                 if (currentItem == 0)
                     layout.getChildren().removeAll(placingTower1, placingTower2, placingTower3);
+                checkPrice();
             }
         };
     }
