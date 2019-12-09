@@ -1,0 +1,87 @@
+USER: money=5,hp=100.000000,hp_max=100.000000
+WORLD: 1
+TOWERS:
+NormalTower[x=320,y=160]
+SniperTower[x=400,y=480]
+GAME PROGRESS:
+WAVE 0:
+TOTAL ENEMIES: 15
+NormalEnemy[x=205,y=85,hp=25.000000]
+NormalEnemy[x=165,y=121,hp=57.000000]
+NormalEnemy[x=165,y=202,hp=88.000000]
+NormalEnemy[x=165,y=278,hp=100.000000]
+NormalEnemy[x=196,y=325,hp=100.000000]
+NormalEnemy[x=275,y=325,hp=56.800000]
+NormalEnemy[x=353,y=325,hp=53.200000]
+NormalEnemy[x=431,y=325,hp=100.000000]
+NormalEnemy[x=509,y=325,hp=100.000000]
+NormalEnemy[x=565,y=348,hp=100.000000]
+NormalEnemy[x=565,y=426,hp=100.000000]
+NormalEnemy[x=565,y=504,hp=100.000000]
+WAVE 1:
+TOTAL ENEMIES: 15
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+WAVE 2:
+TOTAL ENEMIES: 15
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+SmallerEnemy[x=-80,y=720,hp=50.000000]
+WAVE 3:
+TOTAL ENEMIES: 15
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+NormalEnemy[x=-80,y=720,hp=100.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+WAVE 4:
+TOTAL ENEMIES: 10
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+TankerEnemy[x=-80,y=720,hp=200.000000]
+WAVE 5:
+TOTAL ENEMIES: 1
+BossEnemy[x=-80,y=720,hp=400.000000]
+

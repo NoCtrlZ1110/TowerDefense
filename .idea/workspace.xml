@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad76482-6fd0-43b9-afa2-16766d31d0c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/TowerDefense/ProgressBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/HPBar.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/HPBar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ProcessBar/FlagMeter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ProcessBar/FlagMeterLevelProgress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/boss.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/boss.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerDefense/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerDefense/Player.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +58,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/TowerDefense/GameWaves.java" />
   </component>
   <component name="RecentsManager">
@@ -93,8 +99,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.GameStage" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.GameStage" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameStage" />
@@ -129,7 +140,8 @@
       <workItem from="1575705706745" duration="119000" />
       <workItem from="1575705835856" duration="8192000" />
       <workItem from="1575793577982" duration="2973000" />
-      <workItem from="1575875938387" duration="3613000" />
+      <workItem from="1575890615451" duration="679000" />
+      <workItem from="1575898203502" duration="5689000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -159,16 +171,5 @@
         <option value="1" />
       </set>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TowerDefense/Sound.java</url>
-          <line>163</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
