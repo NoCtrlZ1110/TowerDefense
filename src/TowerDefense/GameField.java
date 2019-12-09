@@ -37,6 +37,7 @@ public class GameField {
     private static Player user = null;
     public static boolean isPaused = false;
     public static boolean isStarted = false;
+    private static boolean isPreparing = true;
 
     public static Pane layout = new Pane();
     public static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
@@ -54,16 +55,18 @@ public class GameField {
         pauseWelcomeMusic();
         stage.close();
 
-        createNewGame();
-        // drawMap();
-        //-----------------------------
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         logo.setOpacity(0);
         logo.setLocation(430, 250);
         logo.scaleTo(420, 165);
-        layout.getChildren().addAll(background, logo, road);
+        layout.getChildren().addAll(background, logo);
+
+        createNewGame();
+        // drawMap();
+
+        layout.getChildren().add(road);
         playGameScreenMusic();
         //--------------------------------
         // Animation ------------------
@@ -74,13 +77,19 @@ public class GameField {
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> showExistedItems()));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME), event -> isStarted = true));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> {
+            isStarted = true;
+            showExistedItems();
+        }));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME+2), event -> {
+            isPreparing = false;
+            game_waves.start();
+        }));
         // gameTimeline.setCycleCount(1);
 
         // [Shoot timeline]
         shootTimeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
-            if (isStarted)
+            if (isStarted && !isPreparing)
                 towers.forEach(Tower::shoot);
         }));
         shootTimeline.setCycleCount(Animation.INDEFINITE);
@@ -407,6 +416,5 @@ public class GameField {
             game_waves.addEnemiesWave(1, "boss");
         }
         user.show();
-        game_waves.start();
     }
 }

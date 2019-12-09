@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static TowerDefense.CONSTANT.TILE_WIDTH;
-import static TowerDefense.GameField.layout;
 import static TowerDefense.GameField.path;
 
 public class EnemiesWave {
@@ -17,11 +16,6 @@ public class EnemiesWave {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private int countWaveTotalEnemies = 0;
     private Timeline waveTimeline = new Timeline();
-
-    private EnemiesWave(int pre_sec_delay, int total_enemies) {
-        total_ms_before = pre_sec_delay * 1000;
-        countWaveTotalEnemies = total_enemies;
-    }
 
     public EnemiesWave(int pre_sec_delay, String str) {
         total_ms_before = pre_sec_delay * 1000;
@@ -155,27 +149,5 @@ public class EnemiesWave {
         } else
             res = new StringBuilder("COMPLETED\n");
         return res.toString();
-    }
-
-    public static EnemiesWave loadFromString(String str) {
-        EnemiesWave res = new EnemiesWave(0, 0);
-        if (!str.equals("COMPLETED")) {
-            String[] lines = str.split("\n");
-            int total_enemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
-            int pre_sec_delay = Integer.parseInt(lines[1].substring(lines[1].indexOf(": ") + 2));
-            res = new EnemiesWave(pre_sec_delay, total_enemies);
-
-            for (int i = 2; i < lines.length; i++) {
-                String str_enemy = lines[i];
-                if (str_enemy.length() > 0) {
-                    Enemy enemy = Enemy.loadFromString(str_enemy);
-                    // System.out.println(str_enemy);
-                    // System.out.println("-> " + enemy);
-                    res.addEnemy(enemy);
-                }
-            }
-            res.addTimelineEvents();
-        }
-        return res;
     }
 }

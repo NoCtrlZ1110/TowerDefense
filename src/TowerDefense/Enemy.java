@@ -58,7 +58,7 @@ public abstract class Enemy extends GameCharacter {
 
     public void changePathByStartPoint() {
         int x = getLocation().getX(), y = getLocation().getY();
-        System.out.println(x + " " + y);
+        // System.out.println(x + " " + y);
         if (x == -TILE_WIDTH && y == 720)
             return;
 
@@ -79,7 +79,7 @@ public abstract class Enemy extends GameCharacter {
                 for (int j = i; j < roadLocation.length; j++)
                     this.path.getElements().add(new LineTo(roadLocation[j][0], roadLocation[j][1]));
 
-                System.out.println(this.path.getElements());
+                // System.out.println(this.path.getElements());
                 return;
             }
             prev_x = roadLocation[i][0];

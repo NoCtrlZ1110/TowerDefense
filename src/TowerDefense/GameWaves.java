@@ -41,7 +41,7 @@ public class GameWaves {
             for (String str_wave: splited)
                 if (str_wave.length() > 0) {
                     EnemiesWave new_wave = new EnemiesWave(
-                        total_waves == 0 ? PREPARE_TIME : TIME_BETWEEN_2_WAVES,
+                        total_waves == 0 ? 0 : TIME_BETWEEN_2_WAVES,
                         str_wave
                     );
                     if (!str_wave.equals("COMPLETED")) {
@@ -100,7 +100,7 @@ public class GameWaves {
 
     public void addEnemiesWave(int total_enemies, String... enemy_type) {
         EnemiesWave wave = new EnemiesWave(
-            total_waves == 0 ? PREPARE_TIME : TIME_BETWEEN_2_WAVES,
+            total_waves == 0 ? 0 : TIME_BETWEEN_2_WAVES,
             total_enemies, enemy_type
         );
         total_waves++;

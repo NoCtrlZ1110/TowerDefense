@@ -17,7 +17,7 @@ public class SelectRoad {
 
     public static void selectScreen(Stage stage) {
         stage.close();
-        stage.setTitle("Choose _World Map");
+        stage.setTitle("Choose World Map");
         stage.centerOnScreen();
 
         selectWorldLayout = new Pane();
