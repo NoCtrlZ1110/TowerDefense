@@ -30,10 +30,11 @@ public class EnemiesWave {
             String[] lines = str.split("\n");
             countWaveTotalEnemies = Integer.parseInt(lines[0].substring(lines[0].indexOf(": ") + 2));
 
-            for (int i = 2; i < lines.length; i++) {
+            for (int i = 1; i < lines.length; i++) {
                 String str_enemy = lines[i];
                 if (str_enemy.length() > 0) {
                     Enemy enemy = Enemy.loadFromString(str_enemy);
+                    enemy.changePathByStartPoint();
                     // System.out.println(str_enemy);
                     // System.out.println("-> " + enemy);
                     addEnemy(enemy);
@@ -80,10 +81,18 @@ public class EnemiesWave {
     }
 
     private void addTimelineEvents() {
+        int count_not_moving = 0;
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
+            int added_ms = 0;
+            int x = e.getLocation().getX(), y = e.getLocation().getY();
+            if (x == -TILE_WIDTH && y == 720) {
+                added_ms = count_not_moving * 800;
+                count_not_moving++;
+            }
+
             KeyFrame moveEnemy = new KeyFrame(
-                Duration.millis(total_ms_before + i * 800),
+                Duration.millis(total_ms_before + added_ms),
                 event -> e.move(path)
             );
             waveTimeline.getKeyFrames().add(moveEnemy);

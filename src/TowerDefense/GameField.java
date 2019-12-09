@@ -44,7 +44,7 @@ public class GameField {
     final static Path path = new Path();
     final static imageObject logo = new imageObject("file:images/transparent_logo.png");
     // final static imageObject road = new imageObject("file:images/road.png");
-    static imageObject road;
+    static imageObject road = null;
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
     static int world_select = 0; // = 0;
@@ -54,19 +54,17 @@ public class GameField {
         pauseWelcomeMusic();
         stage.close();
 
+        createNewGame();
+        // drawMap();
+        //-----------------------------
         imageObject background = new imageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         logo.setOpacity(0);
         logo.setLocation(430, 250);
         logo.scaleTo(420, 165);
-        layout.getChildren().addAll(background, logo);
-
-        World.setupWorld();
+        layout.getChildren().addAll(background, logo, road);
         playGameScreenMusic();
-        //-----------------------------
-        createNewGame();
-        // drawMap();
         //--------------------------------
         // Animation ------------------
         gameTimeline = new Timeline();
@@ -76,10 +74,8 @@ public class GameField {
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), new KeyValue(road.opacityProperty(), 1)));
-        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> {
-            isStarted = true;
-            showExistedItems();
-        }));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(8), event -> showExistedItems()));
+        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(PREPARE_TIME), event -> isStarted = true));
         // gameTimeline.setCycleCount(1);
 
         // [Shoot timeline]
@@ -327,10 +323,12 @@ public class GameField {
                 }
                 world_select = Integer.parseInt(splited[1]);
                 // System.out.println(world_select);
+                World.setupWorld();
 
                 String[] towers_str = splited[2].split("\n");
                 for (String tower_str: towers_str) {
                     Tower tower = Tower.loadFromString(tower_str);
+
                     towers.add(tower);
                     // System.out.println(tower);
                     // tower.show();
@@ -396,6 +394,8 @@ public class GameField {
 
     private static void createNewGame() {
         if (game_waves == null) { // chưa được load
+            World.setupWorld();
+
             user = new Player(hp_max, hp_max);
 
             game_waves = new GameWaves();

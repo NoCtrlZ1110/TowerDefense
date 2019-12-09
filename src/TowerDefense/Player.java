@@ -3,7 +3,7 @@ package TowerDefense;
 public class Player extends GameCharacter {
     // 500,45
     private static int HPBAR_X = 500; // 1030; // 500;
-    private static int HPBAR_Y = 45; // 760; // 45;
+    private static int HPBAR_Y = 40; // 760; // 45;
     private static final String pathHpBar = "file:images/HPBar2.png";
     // "file:images/HPBar.png";
     public Player(double hp, double hp_max) {

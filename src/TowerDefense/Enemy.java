@@ -2,20 +2,25 @@ package TowerDefense;
 
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static TowerDefense.CONSTANT.ENEMY_WIDTH;
+import static TowerDefense.CONSTANT.TILE_WIDTH;
 import static TowerDefense.GameField.*;
-import static TowerDefense.PauseScreen.refreshPauseMenu;
+import static TowerDefense.GameTile.roadLocation;
 
 public abstract class Enemy extends GameCharacter {
     private double speed;
     private double defense_point = 0;
     private int killed_bonus = 10;
     private int harm_point = 1;
+    private Path path = null;
     private PathTransition pathTransition = new PathTransition();
 
     public Enemy(int x, int y, String imageUrl) {
@@ -51,6 +56,37 @@ public abstract class Enemy extends GameCharacter {
         super.displayHpBar();
     }
 
+    public void changePathByStartPoint() {
+        int x = getLocation().getX(), y = getLocation().getY();
+        System.out.println(x + " " + y);
+        if (x == -TILE_WIDTH && y == 720)
+            return;
+
+        x += ENEMY_WIDTH/2;
+        y += ENEMY_WIDTH/2;
+        // System.out.println("-> " + x + " " + y);
+        int prev_x = -TILE_WIDTH, prev_y = (world_select == 1 ? 760 : 600);
+
+        for (int i = 0; i < roadLocation.length; i++) {
+            // System.out.println(prev_x + " " + prev_y + " " + roadLocation[i][0] + " " + roadLocation[i][1]);
+            boolean is_in_subpath = (prev_x == x && (x - prev_y) * (y - roadLocation[i][1]) <= 0) ||
+                    (prev_y == y && (x - prev_x) * (x - roadLocation[i][0]) <= 0);
+
+            if (is_in_subpath) {
+                this.path = new Path();
+                this.path.getElements().add(new MoveTo(x, y));
+
+                for (int j = i; j < roadLocation.length; j++)
+                    this.path.getElements().add(new LineTo(roadLocation[j][0], roadLocation[j][1]));
+
+                System.out.println(this.path.getElements());
+                return;
+            }
+            prev_x = roadLocation[i][0];
+            prev_y = roadLocation[i][1];
+        }
+    }
+
     // [Hàm di chuyển theo path được truyền vào]
     public void move(Path path) {
         //Điều chỉnh gia tốc lúc xuất phát và kết thúc.
@@ -62,7 +98,7 @@ public abstract class Enemy extends GameCharacter {
         pathTransition.setNode(this);
 
         //Setting the path
-        pathTransition.setPath(path);
+        pathTransition.setPath((this.path == null ? GameField.path : this.path));
 
         //Setting the orientation of the path
         //pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);

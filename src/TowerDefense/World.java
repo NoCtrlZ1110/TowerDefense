@@ -18,7 +18,7 @@ public class World {
             setupWorld2();
 
         road.setOpacity(0);
-        layout.getChildren().add(road);
+        // layout.getChildren().add(road);
     }
 
     private static void setupWorld1() {
@@ -48,6 +48,4 @@ public class World {
         for (int i = 0; i < roadnum; i++)
             path.getElements().add(new LineTo(roadLocation[i][0], roadLocation[i][1]));
     }
-
-
 }
