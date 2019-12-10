@@ -1,6 +1,5 @@
 package TowerDefense;
 
-import javafx.animation.Timeline;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 
@@ -24,7 +23,7 @@ public class World {
     private static void setupWorld1() {
         int roadnum = ROAD_NUM;
 
-        road = new imageObject("file:images/road.png");
+        road = new ImageObject("file:images/road.png");
         roadLocation = new int[roadnum][2];
         importMap();
         importRoad();
@@ -38,7 +37,7 @@ public class World {
     private static void setupWorld2() {
         int roadnum = ROAD_NUM2;
 
-        road = new imageObject("file:images/road2.png");
+        road = new ImageObject("file:images/road2.png");
         roadLocation = new int[roadnum][2];
         importMap();
         importRoad();

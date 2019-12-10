@@ -5,15 +5,14 @@ import javafx.scene.layout.Pane;
 
 import static TowerDefense.GameField.isStarted;
 import static TowerDefense.GameField.layout;
-import static TowerDefense.PauseScreen.hidePauseMenu;
 import static TowerDefense.PauseScreen.is_quit;
 
 public class SaveScreen {
     private static Pane savePane = new Pane();
-    private static imageObject saveMenu = new imageObject("file:images/SaveMenu/frame.png");
-    private static imageObject yesBtn = new imageObject("file:images/SaveMenu/yes.png");
-    private static imageObject noBtn = new imageObject("file:images/SaveMenu/no.png");
-    private static imageObject cancelBtn = new imageObject("file:images/SaveMenu/cancel.png");
+    private static ImageObject saveMenu = new ImageObject("file:images/SaveMenu/frame.png");
+    private static ImageObject yesBtn = new ImageObject("file:images/SaveMenu/yes.png");
+    private static ImageObject noBtn = new ImageObject("file:images/SaveMenu/no.png");
+    private static ImageObject cancelBtn = new ImageObject("file:images/SaveMenu/cancel.png");
 
     public static void showSaveMenu() {
         savePane.setLayoutX(180);

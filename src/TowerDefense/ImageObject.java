@@ -1,7 +1,7 @@
 package TowerDefense;
 
-public class imageObject extends GameEntity {
-    public imageObject(String path) {
+public class ImageObject extends GameEntity {
+    public ImageObject(String path) {
         super(path);
     }
 

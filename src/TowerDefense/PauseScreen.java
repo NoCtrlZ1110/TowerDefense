@@ -10,8 +10,8 @@ import static TowerDefense.GameField.*;
 public class PauseScreen {
     static boolean is_quit = false;
 
-    static imageObject playBtn = new imageObject("file:images/play.png");
-    static imageObject pauseBtn = new imageObject("file:images/pause.png");
+    static ImageObject playBtn = new ImageObject("file:images/play.png");
+    static ImageObject pauseBtn = new ImageObject("file:images/pause.png");
 
     public static void showPauseBtn() {
         playBtn.setLocation(TILE_WIDTH * COL_NUM - 70, 80);
@@ -45,11 +45,11 @@ public class PauseScreen {
     }
 
     static Pane pausePane = new Pane();
-    static imageObject pauseMenu = new imageObject("file:images/PauseMenu/frame.png");
-    static imageObject pauseBlack = new imageObject("file:images/PauseMenu/Black.png");
-    static imageObject saveBtn = new imageObject("file:images/PauseMenu/save.png");
-    static imageObject resumeBtn = new imageObject("file:images/PauseMenu/resume.png");
-    static imageObject quitBtn = new imageObject("file:images/PauseMenu/quit.png");
+    static ImageObject pauseMenu = new ImageObject("file:images/PauseMenu/frame.png");
+    static ImageObject pauseBlack = new ImageObject("file:images/PauseMenu/Black.png");
+    static ImageObject saveBtn = new ImageObject("file:images/PauseMenu/save.png");
+    static ImageObject resumeBtn = new ImageObject("file:images/PauseMenu/resume.png");
+    static ImageObject quitBtn = new ImageObject("file:images/PauseMenu/quit.png");
 
     public static void showPauseMenu() {
         pausePane.setLayoutX(180);
@@ -111,7 +111,7 @@ public class PauseScreen {
         layout.getChildren().remove(pauseBlack);
     }
     /*
-    imageObject background = new imageObject("file:images/black_background.png");
+    ImageObject background = new ImageObject("file:images/black_background.png");
     background.setLocation(0, 0);
     background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
     layout.getChildren().add(background);

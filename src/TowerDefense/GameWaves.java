@@ -15,9 +15,9 @@ import static TowerDefense.Shop.*;
 import static TowerDefense.WinnerScreen.showCompletedScreen;
 
 public class GameWaves {
-    public static final int TIME_BETWEEN_2_WAVES = 2;
+    private static final int TIME_BETWEEN_2_WAVES = 2;
 
-    private int complete_bonus;
+    private int complete_bonus = 100;
     private static int total_waves;
     private static int running_wave_id = 0;
     private ArrayList<EnemiesWave> waves = new ArrayList<>(); // cần tối ưu bộ nhớ
@@ -27,7 +27,6 @@ public class GameWaves {
     private boolean isStopped = false;
 
     public GameWaves() {
-        complete_bonus = 100;
         total_waves = 0;
         running_wave_id = 0;
     }

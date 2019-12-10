@@ -32,11 +32,11 @@ public class SelectRoad {
         selectedWorld.setArcHeight(10);
         selectedWorld.setArcWidth(10);
 
-        imageObject world = new imageObject("file:images/SelectScreen/SelectScreen.png");
-        imageObject selectBtn = new imageObject("file:images/SelectScreen/SelectBtn.png");
-        imageObject loadgameBtn = new imageObject("file:images/SelectScreen/loadgameBtn.png");
-        imageObject world1 = new imageObject("file:images/SelectScreen/world1.png");
-        imageObject world2 = new imageObject("file:images/SelectScreen/world2.png");
+        ImageObject world = new ImageObject("file:images/SelectScreen/SelectScreen.png");
+        ImageObject selectBtn = new ImageObject("file:images/SelectScreen/SelectBtn.png");
+        ImageObject loadgameBtn = new ImageObject("file:images/SelectScreen/loadgameBtn.png");
+        ImageObject world1 = new ImageObject("file:images/SelectScreen/world1.png");
+        ImageObject world2 = new ImageObject("file:images/SelectScreen/world2.png");
         selectWorldLayout.getChildren().addAll(world, selectBtn, world1, world2, selectedWorld, loadgameBtn);
         showMuteBtn(selectWorldLayout);
 

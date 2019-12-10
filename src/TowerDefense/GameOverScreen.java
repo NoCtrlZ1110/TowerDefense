@@ -8,7 +8,7 @@ import static TowerDefense.PauseScreen.pauseBlack;
 import static TowerDefense.Sound.playGameOverSound;
 
 public class GameOverScreen {
-    private static imageObject gameOver = new imageObject("file:images/GameOver/gameover.png");
+    private static ImageObject gameOver = new ImageObject("file:images/GameOver/gameover.png");
 
     public static void showGameOverScreen() {
         playGameOverSound();
@@ -20,7 +20,4 @@ public class GameOverScreen {
         stopGame();
         System.out.println("Game over!");
     }
-
-
-
 }
