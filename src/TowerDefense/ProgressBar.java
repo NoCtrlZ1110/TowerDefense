@@ -17,7 +17,7 @@ public class ProgressBar {
     public static ImageObject head = new ImageObject("file:images/ProgressBar/head.png");
     public static Rectangle progress = new Rectangle();
 
-    public static void initProgessBar() {
+    public static void initProgressBar() {
         if (!layout.getChildren().contains(progress))
             layout.getChildren().add(progress);
         if (!layout.getChildren().contains(progressPane))
@@ -33,13 +33,13 @@ public class ProgressBar {
         progressPane.getChildren().add(progressBar);
         progressPane.getChildren().add(head);
         head.setLayoutY(progressPane.getLayoutY()+37);
-        head.setLayoutX(progressPane.getLayoutY()+90);
+        head.setLayoutX(progress.getX()+progress.getWidth()-10);
         if (!layout.getChildren().contains(head))
             layout.getChildren().add(head);
     }
 
     public static void updateProgressBar(EnemiesWave running) {
-        progress.setWidth((getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30);
-        head.setLayoutX(progress.getX()+progress.getWidth()-5);
+        progress.setWidth((getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30>=0? (getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30:0);
+        head.setLayoutX(progress.getX()+progress.getWidth()-10>=0? progress.getX()+progress.getWidth()-10:progress.getX()+progress.getWidth());
     }
 }
