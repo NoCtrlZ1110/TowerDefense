@@ -13,8 +13,8 @@ public class ProgressBar {
     private static final int PROGRESSBAR_Y = 30; // 725
 
     public static Pane progressPane = new Pane();
-    public static imageObject progressBar = new imageObject("file:images/ProgressBar/levelProgress.png");
-    public static imageObject head = new imageObject("file:images/ProgressBar/head.png");
+    public static ImageObject progressBar = new ImageObject("file:images/ProgressBar/levelProgress.png");
+    public static ImageObject head = new ImageObject("file:images/ProgressBar/head.png");
     public static Rectangle progress = new Rectangle();
 
     public static void initProgessBar() {

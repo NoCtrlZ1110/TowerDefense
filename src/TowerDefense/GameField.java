@@ -44,8 +44,8 @@ public class GameField {
     private static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
-    private final static imageObject logo = new imageObject("file:images/transparent_logo.png");
-    static imageObject road = null;
+    private final static ImageObject logo = new ImageObject("file:images/transparent_logo.png");
+    static ImageObject road = null;
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
     static int world_select = 0; // = 0;
@@ -55,7 +55,7 @@ public class GameField {
         pauseWelcomeMusic();
         stage.close();
 
-        imageObject background = new imageObject("file:images/back.png");
+        ImageObject background = new ImageObject("file:images/back.png");
         background.setLocation(0, 0);
         background.scaleTo(TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
         logo.setOpacity(0);

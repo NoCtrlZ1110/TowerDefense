@@ -30,19 +30,19 @@ public class Shop {
 
     static Label coin = new Label(Integer.toString(getMoney()));
 
-    private static imageObject shopBar = new imageObject("file:images/Shop/shopBar.png");
-    private static imageObject towerType1 = new imageObject("file:images/Shop/TowerType1.png");
-    private static imageObject towerType2 = new imageObject("file:images/Shop/TowerType2.png");
-    private static imageObject towerType3 = new imageObject("file:images/Shop/TowerType3.png");
-    private static imageObject outOfMoney1 = new imageObject("file:images/Shop/OutOfMoney1.png");
-    private static imageObject outOfMoney2 = new imageObject("file:images/Shop/OutOfMoney2.png");
-    private static imageObject outOfMoney3 = new imageObject("file:images/Shop/OutOfMoney3.png");
-    private static imageObject shovel = new imageObject("file:images/Shop/shovel.png");
+    private static ImageObject shopBar = new ImageObject("file:images/Shop/shopBar.png");
+    private static ImageObject towerType1 = new ImageObject("file:images/Shop/TowerType1.png");
+    private static ImageObject towerType2 = new ImageObject("file:images/Shop/TowerType2.png");
+    private static ImageObject towerType3 = new ImageObject("file:images/Shop/TowerType3.png");
+    private static ImageObject outOfMoney1 = new ImageObject("file:images/Shop/OutOfMoney1.png");
+    private static ImageObject outOfMoney2 = new ImageObject("file:images/Shop/OutOfMoney2.png");
+    private static ImageObject outOfMoney3 = new ImageObject("file:images/Shop/OutOfMoney3.png");
+    private static ImageObject shovel = new ImageObject("file:images/Shop/shovel.png");
 
-    static imageObject placingTower1 = new imageObject(pathNormalTower);
-    static imageObject placingTower2 = new imageObject(pathSniperTower);
-    static imageObject placingTower3 = new imageObject(pathMachineGunTower);
-    static imageObject using_shovel = new imageObject("file:images/Shop/shovel_noback.png");
+    static ImageObject placingTower1 = new ImageObject(pathNormalTower);
+    static ImageObject placingTower2 = new ImageObject(pathSniperTower);
+    static ImageObject placingTower3 = new ImageObject(pathMachineGunTower);
+    static ImageObject using_shovel = new ImageObject("file:images/Shop/shovel_noback.png");
 
     public static void showShopBar() {
         selectedItem.setVisible(false);
@@ -269,7 +269,7 @@ public class Shop {
     }
 
     private static void placeTowerAt(Tower tower, int x, int y) {
-        imageObject building = new imageObject("file:images/white_building.gif");
+        ImageObject building = new ImageObject("file:images/white_building.gif");
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
                 buildingSound();

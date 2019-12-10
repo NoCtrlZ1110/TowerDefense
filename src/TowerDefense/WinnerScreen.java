@@ -8,7 +8,7 @@ import static TowerDefense.PauseScreen.pauseBlack;
 import static TowerDefense.Sound.playWinMusic;
 
 public class WinnerScreen {
-    static imageObject winner = new imageObject("file:images/CompleteScreen/Winner.png");
+    static ImageObject winner = new ImageObject("file:images/CompleteScreen/Winner.png");
 
     public static void showCompletedScreen() {
         playWinMusic();

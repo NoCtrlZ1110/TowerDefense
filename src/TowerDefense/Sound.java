@@ -176,8 +176,8 @@ public class Sound {
         timeline.play();
     }
 
-    static imageObject muteBtn = new imageObject("file:images/mute.png");
-    static imageObject speakerBtn = new imageObject("file:images/speaker.png");
+    static ImageObject muteBtn = new ImageObject("file:images/mute.png");
+    static ImageObject speakerBtn = new ImageObject("file:images/speaker.png");
 
     static void showMuteBtn(Pane pane) {
         muteBtn.setLocation((int) pane.getWidth() - 70, 30);

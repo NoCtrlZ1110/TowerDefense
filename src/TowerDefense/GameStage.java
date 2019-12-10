@@ -37,17 +37,17 @@ public class GameStage extends Application {
 
         Scene scene = new Scene(pane, 960, 540);
 
-        imageObject welcomScr = new imageObject("file:images/welcome1.png");
+        ImageObject welcomScr = new ImageObject("file:images/welcome1.png");
         welcomScr.scaleTo(960, 540);
 
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(0), event -> {
-                imageObject blackScr = new imageObject("file:images/black.png");
+                ImageObject blackScr = new ImageObject("file:images/black.png");
                 blackScr.scaleTo(960, 540);
                 pane.getChildren().add(blackScr);
             }),
             new KeyFrame(Duration.millis(850), event -> {
-                imageObject logoScr = new imageObject("file:images/logo.png");
+                ImageObject logoScr = new ImageObject("file:images/logo.png");
                 logoScr.scaleTo(960, 540);
                 pane.getChildren().add(logoScr);
                 //showMuteBtn(pane);
@@ -74,7 +74,7 @@ public class GameStage extends Application {
                 showMuteBtn(pane);
             }),
             new KeyFrame(Duration.seconds(3), event -> {
-                imageObject startBtn = new imageObject("file:images/startBtn.png");
+                ImageObject startBtn = new ImageObject("file:images/startBtn.png");
                 startBtn.setLocation(73, 437);
                 startBtn.scaleTo(184, 56);
                 startBtn.setOpacity(0);
