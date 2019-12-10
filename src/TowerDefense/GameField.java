@@ -25,6 +25,7 @@ import static TowerDefense.CONSTANT.*;
 import static TowerDefense.GameOverScreen.showGameOverScreen;
 import static TowerDefense.GameTile.*;
 import static TowerDefense.PauseScreen.showPauseBtn;
+import static TowerDefense.ProgressBar.initProgessBar;
 import static TowerDefense.Shop.*;
 import static TowerDefense.Sound.*;
 
@@ -73,6 +74,7 @@ public class GameField {
         gameTimeline = new Timeline();
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), new KeyValue(logo.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), new KeyValue(logo.opacityProperty(), 1)));
+//        gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),event -> initProgessBar()));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5), new KeyValue(logo.opacityProperty(), 1)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(6), new KeyValue(logo.opacityProperty(), 0)));
         gameTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(7), new KeyValue(road.opacityProperty(), 0)));
@@ -191,6 +193,7 @@ public class GameField {
         showShopBar();
         gameTimeline.play();
         // ------------------------
+        initProgessBar();
 
         // [Thêm icon cho game] ---
         stage.getIcons().add(new Image("file:images/love.jpg"));

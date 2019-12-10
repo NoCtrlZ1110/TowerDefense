@@ -4,7 +4,7 @@ import static TowerDefense.CONSTANT.pathBossEnemy;
 
 public class BossEnemy extends Enemy {
     public BossEnemy(int x, int y) {
-        super(x, y, pathBossEnemy, 0.5, 400, 1.6, 100, 1000);
+        super(x, y, pathBossEnemy, 0.5, 400, 1.6, 100, 100000);
         scaleTo(70, 70);
     }
 

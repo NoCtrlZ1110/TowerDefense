@@ -9,8 +9,8 @@ import static TowerDefense.GameWaves.getRunningWaveId;
 import static javafx.scene.paint.Color.GREENYELLOW;
 
 public class ProgressBar {
-    private static final int PROGRESSBAR_X = 500; // 1080
-    private static final int PROGRESSBAR_Y = 30; // 725
+    private static final int PROGRESSBAR_X = 1080; // 1080
+    private static final int PROGRESSBAR_Y = 725; // 725
 
     public static Pane progressPane = new Pane();
     public static ImageObject progressBar = new ImageObject("file:images/ProgressBar/levelProgress.png");
@@ -33,13 +33,13 @@ public class ProgressBar {
         progressPane.getChildren().add(progressBar);
         progressPane.getChildren().add(head);
         head.setLayoutY(progressPane.getLayoutY()+37);
-        head.setLayoutX(progressPane.getLayoutY()+90);
+        head.setLayoutX(progress.getX()+progress.getWidth()-10);
         if (!layout.getChildren().contains(head))
             layout.getChildren().add(head);
     }
 
     public static void updateProgressBar(EnemiesWave running) {
-        progress.setWidth((getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30);
-        head.setLayoutX(progress.getX()+progress.getWidth()-5);
+        progress.setWidth((getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30>=0? (getTotalWaves()-getRunningWaveId()-1)*29-running.getWaveRate()*30:0);
+        head.setLayoutX(progress.getX()+progress.getWidth()-10>=0? progress.getX()+progress.getWidth()-10:progress.getX()+progress.getWidth());
     }
 }

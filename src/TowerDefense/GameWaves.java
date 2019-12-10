@@ -141,7 +141,7 @@ public class GameWaves {
             running_wave = waves.get(running_wave_id);
             running_wave_enemies = running_wave.getEnemies();
 
-            initProgessBar();
+
             setTimer();
             timer.start();
             if (running_wave != null)
