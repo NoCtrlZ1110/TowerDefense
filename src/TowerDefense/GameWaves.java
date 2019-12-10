@@ -9,7 +9,7 @@ import javafx.animation.*;
 import java.util.ArrayList;
 
 import static TowerDefense.GameField.*;
-import static TowerDefense.ProgressBar.initProgessBar;
+import static TowerDefense.ProgressBar.initProgressBar;
 import static TowerDefense.ProgressBar.updateProgressBar;
 import static TowerDefense.Shop.*;
 import static TowerDefense.WinnerScreen.showCompletedScreen;
@@ -141,7 +141,7 @@ public class GameWaves {
             running_wave = waves.get(running_wave_id);
             running_wave_enemies = running_wave.getEnemies();
 
-            initProgessBar();
+            initProgressBar();
             setTimer();
             timer.start();
             if (running_wave != null)

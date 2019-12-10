@@ -116,6 +116,9 @@ public class EnemiesWave {
     }
 
     public double getWaveRate() {
+        if (countWaveTotalEnemies == 0)
+            return 1;
+
         return (countWaveTotalEnemies - enemies.size()) / (countWaveTotalEnemies * 1.0);
     }
 
