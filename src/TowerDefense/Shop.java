@@ -18,8 +18,10 @@ import static TowerDefense.Sound.*;
 
 public class Shop {
     private static final double SELL_RATE = 0.8;
+    private static final int SHOPBAR_X = 20;
+    private static final int SHOPBAR_Y = 30;
 
-    static Rectangle selectedItem = new Rectangle(70, 94);
+    private static Rectangle selectedItem = new Rectangle(70, 94);
     static int currentItem = 0;
     static boolean selling = false;
     static boolean buying = false;
@@ -52,19 +54,19 @@ public class Shop {
         selectedItem.setArcWidth(5);
 
         layout.getChildren().add(shopBar);
-        shopBar.setLocation(20, 30);
+        shopBar.setLocation(SHOPBAR_X, SHOPBAR_Y);
         //+15,+100
-        towerType1.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 100);
+        towerType1.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 100);
         towerType1.scaleTo(67, 90);
-        towerType2.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 200);
+        towerType2.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 200);
         towerType2.scaleTo(67, 90);
-        towerType3.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 300);
+        towerType3.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 300);
         towerType3.scaleTo(67, 90);
-        shovel.setLocation((int) shopBar.getTranslateX() + 13, (int) shopBar.getTranslateY() + 398);
+        shovel.setLocation(SHOPBAR_X + 13, SHOPBAR_Y + 398);
         shovel.scaleTo(70, 70);
 
-        coin.setTranslateX(shopBar.getTranslateX() + 33);
-        coin.setTranslateY(shopBar.getTranslateY() + 69);
+        coin.setTranslateX(SHOPBAR_X + 33);
+        coin.setTranslateY(SHOPBAR_Y + 69);
         // coin.setMinWidth(70-27);
         // coin.setMaxWidth(70-27);
         coin.setAlignment(Pos.CENTER);
@@ -76,11 +78,11 @@ public class Shop {
         // outOfMoney3.setVisible(false);
         checkPrice(); // đầu tiên có 20 xu < giá tháp 3
 
-        outOfMoney1.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 100);
+        outOfMoney1.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 100);
         outOfMoney1.scaleTo(67, 90);
-        outOfMoney2.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 200);
+        outOfMoney2.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 200);
         outOfMoney2.scaleTo(67, 90);
-        outOfMoney3.setLocation((int) shopBar.getTranslateX() + 14, (int) shopBar.getTranslateY() + 300);
+        outOfMoney3.setLocation(SHOPBAR_X + 14, SHOPBAR_Y + 300);
         outOfMoney3.scaleTo(67, 90);
 
         shopPane.getChildren().addAll(towerType1, towerType2, towerType3, shovel, coin, selectedItem,outOfMoney1,outOfMoney2,outOfMoney3);

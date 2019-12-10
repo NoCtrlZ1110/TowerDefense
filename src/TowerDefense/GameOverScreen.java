@@ -20,7 +20,4 @@ public class GameOverScreen {
         stopGame();
         System.out.println("Game over!");
     }
-
-
-
 }

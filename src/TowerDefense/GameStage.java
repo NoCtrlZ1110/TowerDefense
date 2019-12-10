@@ -9,9 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
-
 
 import static TowerDefense.SelectRoad.selectScreen;
 import static TowerDefense.Sound.*;
@@ -95,7 +93,7 @@ public class GameStage extends Application {
 
                 startBtn.setOnMouseClicked(event1 -> {
                     clickSound();
-//                    gameScreen(stage);
+                    // gameScreen(stage);
                     selectScreen(stage);
                 });
             })
@@ -110,10 +108,6 @@ public class GameStage extends Application {
 
         timeline.play();
         playWelcomeMusic();
-    }
-
-    public static Stage getPrimaryStage() {
-        return primaryStage;
     }
 
     public static void closePrimaryStage() {

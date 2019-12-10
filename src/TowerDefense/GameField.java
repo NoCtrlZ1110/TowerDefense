@@ -41,11 +41,10 @@ public class GameField {
     private static boolean isPreparing = true;
 
     public static Pane layout = new Pane();
-    public static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
+    private static Scene gameScene = new Scene(layout, TILE_WIDTH * COL_NUM, TILE_WIDTH * ROW_NUM);
 
     final static Path path = new Path();
     private final static imageObject logo = new imageObject("file:images/transparent_logo.png");
-    // final static imageObject road = new imageObject("file:images/road.png");
     static imageObject road = null;
     private static Timeline gameTimeline;
     private static Timeline shootTimeline;
@@ -400,9 +399,9 @@ public class GameField {
             game_waves = new GameWaves();
             game_waves.addEnemiesWave(15, "normal");
             game_waves.addEnemiesWave(15, "smaller");
-            game_waves.addEnemiesWave(15, "normal", "smaller");
-            game_waves.addEnemiesWave(15, "normal", "tanker");
-            game_waves.addEnemiesWave(10, "tanker");
+            game_waves.addEnemiesWave(25, "normal", "smaller");
+            game_waves.addEnemiesWave(25, "normal", "tanker");
+            game_waves.addEnemiesWave(15, "tanker");
             game_waves.addEnemiesWave(1, "boss");
         }
         user.show();

@@ -9,6 +9,9 @@ import static TowerDefense.GameWaves.getRunningWaveId;
 import static javafx.scene.paint.Color.GREENYELLOW;
 
 public class ProgressBar {
+    private static final int PROGRESSBAR_X = 500; // 1080
+    private static final int PROGRESSBAR_Y = 30; // 725
+
     public static Pane progressPane = new Pane();
     public static imageObject progressBar = new imageObject("file:images/ProgressBar/levelProgress.png");
     public static imageObject head = new imageObject("file:images/ProgressBar/head.png");
@@ -19,8 +22,8 @@ public class ProgressBar {
             layout.getChildren().add(progress);
         if (!layout.getChildren().contains(progressPane))
             layout.getChildren().add(progressPane);
-        progressPane.setLayoutX(500); // 1080
-        progressPane.setLayoutY(30); // 725
+        progressPane.setLayoutX(PROGRESSBAR_X);
+        progressPane.setLayoutY(PROGRESSBAR_Y);
         progress.setX(progressPane.getLayoutX()+6);
         progress.setY(progressPane.getLayoutY()+45);
         progress.setHeight(12);
@@ -30,7 +33,7 @@ public class ProgressBar {
         progressPane.getChildren().add(progressBar);
         progressPane.getChildren().add(head);
         head.setLayoutY(progressPane.getLayoutY()+37);
-        head.setLayoutX(progress.getX()+45);
+        head.setLayoutX(progressPane.getLayoutY()+90);
         if (!layout.getChildren().contains(head))
             layout.getChildren().add(head);
     }
