@@ -15,7 +15,7 @@ public class EnemiesWave {
     private int total_ms_before;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private int countWaveTotalEnemies = 0;
-    private Timeline waveTimeline = new Timeline();
+    private Timeline waveTimeline;
 
     public EnemiesWave(int pre_sec_delay, String str) {
         total_ms_before = pre_sec_delay * 1000;
@@ -75,6 +75,7 @@ public class EnemiesWave {
     }
 
     private void addTimelineEvents() {
+        waveTimeline = new Timeline();
         int count_not_moving = 0;
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
@@ -84,10 +85,13 @@ public class EnemiesWave {
                 added_ms = count_not_moving * 800;
                 count_not_moving++;
             }
-
+            // System.out.println(e + " " + added_ms);
             KeyFrame moveEnemy = new KeyFrame(
                 Duration.millis(total_ms_before + added_ms),
-                event -> e.move(path)
+                event -> {
+                    System.out.println("move...");
+                    e.move(path);
+                }
             );
             waveTimeline.getKeyFrames().add(moveEnemy);
         }
@@ -120,6 +124,7 @@ public class EnemiesWave {
     }
 
     public void start() {
+        System.out.println("playing...");
         waveTimeline.play();
     }
 

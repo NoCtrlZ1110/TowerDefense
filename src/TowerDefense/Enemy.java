@@ -20,7 +20,7 @@ public abstract class Enemy extends GameCharacter {
     private double defense_point = 0;
     private int killed_bonus = 10;
     private int harm_point = 1;
-    private Path path = null;
+    private Path _path = null;
     private PathTransition pathTransition = new PathTransition();
 
     public Enemy(int x, int y, String imageUrl) {
@@ -73,13 +73,13 @@ public abstract class Enemy extends GameCharacter {
                     (prev_y == y && (x - prev_x) * (x - roadLocation[i][0]) <= 0);
 
             if (is_in_subpath) {
-                this.path = new Path();
-                this.path.getElements().add(new MoveTo(x, y));
+                this._path = new Path();
+                this._path.getElements().add(new MoveTo(x, y));
 
                 for (int j = i; j < roadLocation.length; j++)
-                    this.path.getElements().add(new LineTo(roadLocation[j][0], roadLocation[j][1]));
+                    this._path.getElements().add(new LineTo(roadLocation[j][0], roadLocation[j][1]));
 
-                // System.out.println(this.path.getElements());
+                // System.out.println(this._path.getElements());
                 return;
             }
             prev_x = roadLocation[i][0];
@@ -98,7 +98,7 @@ public abstract class Enemy extends GameCharacter {
         pathTransition.setNode(this);
 
         //Setting the path
-        pathTransition.setPath((this.path == null ? GameField.path : this.path));
+        pathTransition.setPath((this._path != null ? this._path : path));
 
         //Setting the orientation of the path
         //pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);

@@ -17,7 +17,7 @@ public class ProgressBar {
     public static ImageObject head = new ImageObject("file:images/ProgressBar/head.png");
     public static Rectangle progress = new Rectangle();
 
-    public static void initProgessBar() {
+    public static void initProgressBar() {
         if (!layout.getChildren().contains(progress))
             layout.getChildren().add(progress);
         if (!layout.getChildren().contains(progressPane))
